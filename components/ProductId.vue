@@ -17,7 +17,7 @@
                 color=""
                 fab
                 nuxt
-                target="_blank"
+
                 :to="{
                   name: 'published',
                   params: { published: published },
@@ -38,7 +38,7 @@
                 color=""
                 fab
                 nuxt
-                target="_blank"
+
                 :to="{
                   name: 'products-movieid-preview',
                   params: { movieid: movie.id },
