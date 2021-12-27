@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    preview for {{$route.params.movieid}}
+    published for {{$route.params.movieid}}
 
     <v-row>
 
