@@ -55,7 +55,24 @@
 
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn color="" v-bind="attrs" v-on="on" icon>
+              <v-btn @click="onCopy"  color="" v-bind="attrs" v-on="on" icon>
+
+                <v-snackbar
+                  v-model="snackbar"
+                  :timeout="timeout"
+                  :value="true"
+                  absolute
+                  left
+                  shaped
+
+                >
+                  {{ snack }}
+
+
+                </v-snackbar>
+
+
+
                 <v-icon>mdi-share-variant</v-icon>
               </v-btn>
             </template>
@@ -789,6 +806,14 @@ import axios from "axios";
 
 export default {
   data: () => ({
+
+    //snackbar
+    snackbar: false,
+    snack: 'Url  copied.',
+    timeout: 2000,
+
+
+
     movie: "",
     dialog: false,
     dialog1: false,
@@ -932,6 +957,12 @@ export default {
   },
 
   methods: {
+
+    //Copy
+    onCopy() {
+
+      this.$copyText("localhost:3000/published")
+    },
     addItem(item) {
       const removed = this.items.splice(0, 1);
       this.items.push(...this.more.splice(this.more.indexOf(item), 1));
