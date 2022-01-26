@@ -17,7 +17,6 @@
                 color=""
                 fab
                 nuxt
-
                 :to="{
                   name: 'published',
                   params: { published: published },
@@ -38,7 +37,6 @@
                 color=""
                 fab
                 nuxt
-
                 :to="{
                   name: 'products-movieid-preview',
                   params: { movieid: movie.id },
