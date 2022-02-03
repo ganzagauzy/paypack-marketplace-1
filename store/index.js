@@ -1,9 +1,31 @@
 export const state = () => ({
-  counter: 0
+  
+  products: [],
+  
 })
 
+export const getters = {
+  
+  products(state) {
+    return state.products
+  },
+
+  
+}
+
 export const mutations = {
-  increment(state) {
-    state.counter++
-  }
+  
+  setProducts(state, data) {
+    state.products = data
+  },
+
+ 
+}
+
+export const actions = {
+  
+  fetchProducts(vuexContext, products) {
+    vuexContext.commit('setProducts', products)
+  },
+
 }

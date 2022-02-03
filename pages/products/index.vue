@@ -3,13 +3,13 @@
 
   <div class="fixed-bar top">
     <div class="fixed-bar">
-            <v-system-bar justify="end" class=""
+            <v-system-bar  class=""
                       window
                       dark
                       color=""
                     >
                       <v-icon>mdi-dropbox </v-icon>
-                      <span>Products &mdash;5</span>
+                      <span>Products &mdash;n</span>
                       <v-spacer></v-spacer>
                       <!-- <v-icon>mdi-minus</v-icon>
                       <v-icon>mdi-checkbox-blank-outline</v-icon>
@@ -17,7 +17,7 @@
                     </v-system-bar>
 
                     <v-row class=""
-                    justify=""
+                   
                     color="#d1dbec"
                     >
                       <v-col
@@ -26,305 +26,13 @@
                         md="4">
 
                       </v-col>
-                      <v-col
-                        >
-
-                          <v-card
-                              color="#d1dbec"
-                              flat
-                              height="45px"
-                              tile
-                            >
-                              <v-toolbar dense
-                              >
-                                <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-                                <v-toolbar-title>Title</v-toolbar-title> -->
-                                <v-btn icon>
-                                  <v-icon>mdi-filter-menu</v-icon>
-                                </v-btn>
-
-                                <v-spacer></v-spacer>
-
-                                <!-- <v-btn icon>
-                                  <v-icon>mdi-magnify</v-icon>
-                                </v-btn>
-
-                                <v-btn icon>
-                                  <v-icon>mdi-heart</v-icon>
-                                </v-btn> -->
-
-                                <v-row justify="end">
-                                  <v-dialog
-                                    v-model="dialog"
-
-                                    max-width="400px"
-                                  >
-                                    <template v-slot:activator="{ on, attrs }">
-                                      <v-btn
-                                        color="dark"
-                                        dark
-                                        v-bind="attrs"
-                                        v-on="on"
-                                      >
-                                        <v-icon>mdi-plus</v-icon>New Product
-                                      </v-btn>
-                                    </template>
-
-                                      <v-card>
-                                        <v-card-title
-                                        color="#d1dbec"
-                                        dark>
-                                          <span class="text">New Product</span>
-                                        </v-card-title>
-                                        <v-card-text>
-                                          <v-container>
-                                            <v-row>
-                                              <v-col
-
-                                              >
-                                                <v-text-field
-
-                                                  label=" Product name*"
-                                                  v-model="product.name"
-                                                  required
-                                                ></v-text-field>
-                                              </v-col>
-                                              {{product.name}}
-                                              <!-- <v-col
-                                                cols="12"
-                                                sm="6"
-                                                md="4"
-                                              >
-                                                <v-text-field
-                                                  label=""
-                                                  hint="example of helper text only on focus"
-                                                ></v-text-field>
-                                              </v-col> -->
-
-
-                                              <v-col cols="12">
-                                                <v-textarea
-                                                  clearable
-                                                  clear-icon="mdi-close-circle"
-                                                  label="Description*"
-                                                  v-model="product.description"
-                                                  type="text"
-                                                  required
-                                                ></v-textarea>
-                                                {{product.description}}
-                                              </v-col>
-                                                <v-col
-                                                cols="12"
-
-                                              >
-                                                <v-select
-                                                  :items="['Rwf', 'SSD']"
-                                                  label="Currency*"
-                                                  v-model="product.currency"
-                                                  required
-                                                ></v-select>
-                                              </v-col>
-                                              {{product.currency}}
-
-                                              <v-col
-                                                cols="12"
-
-                                              >
-                                                <v-autocomplete
-                                                  :items="['Limited', 'Unlimited', ]"
-                                                  label="Quantity"
-                                                  v-model="product.quantity"
-                                                  multiple
-                                                ></v-autocomplete>
-                                              </v-col>
-                                              {{product.quantity}}
-                                              <v-col
-
-                                              >
-                                                <v-text-field
-                                                  label="Price*"
-                                                  v-model="product.price"
-                                                  type="number"
-
-
-                                                  required
-                                                ></v-text-field>
-                                              </v-col>
-                                              {{product.price}}
-
-                                              <v-col cols="12">
-                                                <p class="text-center">Upload Pictures (Images)</p>
-
-                                                <div id="my-strictly-unique-vue-upload-multiple-image" style="display: flex; justify-content: center;">
-
-                                                  <vue-upload-multiple-image
-                                                    @upload-success="uploadImageSuccess"
-                                                    @before-remove="beforeRemove"
-                                                    @edit-image="editImage"
-                                                    :data-images="images"
-                                                    idUpload="myIdUpload"
-                                                    editUpload="myIdEdit"
-                                                    primary-text="Default"
-                                                    :max-image=20
-                                                    browse-text="Browse picture(s)"
-                                                    drag-text="Drag pictures"
-                                                    mark-is-primary-text="Set as default"
-                                                    popup-text="This image will be displayed as default"
-
-                                                    ></vue-upload-multiple-image>
-                                                </div>
-                                              </v-col>
-
-                                              <!-- <v-col cols="12">
-                                                <v-file-input
-                                                  label="File input*"
-                                                  filled
-                                                  prepend-icon="mdi-camera"
-                                                  required
-                                                ></v-file-input>
-                                              </v-col> -->
-                                            </v-row>
-                                          </v-container>
-                                          <small class="pt-5 text-center">*indicates required field</small>
-                                        </v-card-text>
-                                        <v-card-actions>
-                                          <v-spacer></v-spacer>
-                                          <v-btn
-                                            color="secondary"
-                                            text
-                                            @click="dialog = false"
-                                          >
-                                            Close
-                                          </v-btn>
-                                          <v-btn
-                                            color="dark"
-                                            text
-                                            @click="save"
-
-                                          >
-
-
-                                            Save
-
-
-
-
-                                          </v-btn>
-                                        </v-card-actions>
-                                      </v-card>
-
-                                  </v-dialog>
-                                </v-row>
-
-
-
-
-                                <!-- <v-btn
-                                dark
-                                color="dark"
-                                to="/newproducts" nuxt>
-                                  <v-icon>mdi-plus</v-icon>New Product
-                                </v-btn> -->
-                              </v-toolbar>
-                            </v-card>
-
-                      </v-col>
+                      
                     </v-row>
     </div>
 
   </div>
 
-  <div class="home">
-    <!-- Hero -->
-    <Hero />
-
-
-
-    <!-- search box -->
-    <div class="container search">
-      <input v-model.lazy="searchInput" type="text" placeholder="Search" @keyup.enter="$fetch">
-      <v-btn icon v-show="searchInput !='' " class="button" @click="clearSearch"><v-icon>mdi-close</v-icon></v-btn>
-    </div>
-
-    <!-- Loading -->
-    <Loading v-if="$fetchState.pending" />
-
-    <!-- Movies -->
-    <div v-else class="container movies">
-      <!-- Searched movies -->
-      <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
-        <div v-for="(movie, index) in searchedMovies" :key="index" class="movie">
-          <div class="movie-img">
-            <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
-            <img :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt="">
-            <p class="review">{{ movie.vote_average }}</p>
-            <!-- <p class="overview">{{ movie.overview }}</p> -->
-          </div>
-          <div class="info">
-            <p class="title h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
-            </p>
-            <!-- <p class="release">
-              Released:
-              {{
-                new Date(movie.release_date).toLocaleString('en-us', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })
-              }}
-            </p> -->
-            <v-btn class="py-3"
-                color=""
-                width="100%"
-                 :to="{ name: 'products-movieid', params: {movieid: movie.id} }" nuxt>
-                  Read More
-              </v-btn>
-            <!-- <NuxtLink class="button button-light" :to= "`/products/${movie.id}`">
-              Get More Info
-            </NuxtLink> -->
-          </div>
-        </div>
-      </div>
-      <!-- Now streaming -->
-      <div v-else id="movie-grid" class="movies-grid">
-        <div v-for="(movie, index) in movies" :key="index" class="movie">
-          <div class="movie-img">
-            <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
-            <img :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt="">
-            <p class="review">{{ movie.vote_average }}</p>
-            <!-- <p class="overview">{{ movie.overview }}</p> -->
-          </div>
-          <div class="info1">
-            <p class="title text-sm-h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
-            </p>
-            <!-- <p class="release">
-              Released:
-              {{
-                new Date(movie.release_date).toLocaleString('en-us', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })
-              }}
-            </p> -->
-
-             <v-btn class="py-3 top"
-                color=""
-                width="100%"
-                :to="{ name: 'products-movieid', params: {movieid: movie.id} }" nuxt>
-                  Read More
-              </v-btn>
-
-            <!-- <NuxtLink class="button button-light" :to="{ name: 'movies-movieid', params: {movieid: movie.id} }">
-              Get More Info
-            </NuxtLink> -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  
 
   <!-- <div class="pt-16">
     <v-card>
@@ -362,6 +70,158 @@
 
   </div> -->
 
+  
+
+  <v-card>
+    <v-toolbar
+      
+      fixed
+      color="#d1dbec"
+      
+    >
+      <v-toolbar-title>MY PRODUCTS</v-toolbar-title>
+    </v-toolbar>
+
+    <v-tabs >
+      <v-tab>
+        <v-icon left>
+          mdi-grid
+        </v-icon>
+        
+      </v-tab>
+      <v-tab>
+        <v-icon left>
+          mdi-playlist-edit
+        </v-icon>
+        
+      </v-tab>
+    
+      <v-tab-item>
+        <v-card flat>
+          <div class="home">
+              <!-- Hero -->
+              <!-- <Hero /> -->
+
+
+
+              <!-- search box -->
+              <div class="container search">
+                <input v-model.lazy="searchInput" type="text" placeholder="Search" @keyup.enter="$fetch">
+                <v-btn icon v-show="searchInput !='' " class="button" @click="clearSearch"><v-icon>mdi-close</v-icon></v-btn>
+              </div>
+
+              <!-- <div v-for="(product, index) in products" :key="index" class="">
+                <p>{{ product.images}}</p>
+              </div> -->
+
+              <!-- <div  id="movie-grid" class="movies-grid">
+                  <div v-for="(product, index) in products" :key="index" class="movie">
+                    <div class="movie-img"> -->
+                      <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
+                      <!-- <img :src="product.images[0]" alt=""> -->
+                      <!-- <p class="review">{{ movie.vote_average }}</p> -->
+                      <!-- <p class="overview">{{ movie.overview }}</p> -->
+                    <!-- </div>
+                    
+                  </div>
+              </div> -->
+
+
+
+     
+
+              <!-- Loading -->
+              <!-- <Loading v-if="$fetchState.pending" /> -->
+
+              
+
+              <!-- Movies -->
+              <div  class="container movies">
+                <!-- Searched movies -->
+                <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
+                  <div v-for="(movie, index) in searchedMovies" :key="index" class="movie">
+                    <div class="movie-img">
+                      <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
+                      <img :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt="">
+                      <p class="review">{{ movie.vote_average }}</p>
+                      <!-- <p class="overview">{{ movie.overview }}</p> -->
+                    </div>
+                    <div class="">
+                      <p class="title h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
+                      </p>
+                      <!-- <p class="release">
+                        Released:
+                        {{
+                          new Date(movie.release_date).toLocaleString('en-us', {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric',
+                          })
+                        }}
+                      </p> -->
+                      <v-btn class="py-3"
+                          color=""
+                          width="100%"
+                          :to="{ name: 'products-movieid', params: {movieid: movie.id} }" nuxt>
+                            Read More
+                        </v-btn>
+                      <!-- <NuxtLink class="button button-light" :to= "`/products/${movie.id}`">
+                        Get More Info
+                      </NuxtLink> -->
+                    </div>
+                  </div>
+                </div>
+                <!-- Now streaming -->
+                <div v-else id="movie-grid" class="movies-grid">
+                  <div v-for="(product, index) in products" :key="index" class="movie">
+                    <div class="movie-img">
+                      <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
+                      <img :src="product.images[0]" alt="">
+                      <!-- <p class="review">{{ movie.vote_average }}</p> -->
+                      <!-- <p class="overview">{{ movie.overview }}</p> -->
+                    </div>
+                    <div class="info1">
+                      <!-- <p class="title text-sm-h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
+                      </p> -->
+                      <!-- <p class="release">
+                        Released:
+                        {{
+                          new Date(movie.release_date).toLocaleString('en-us', {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric',
+                          })
+                        }}
+                      </p> -->
+
+                      <v-btn class="py-3 top"
+                          color=""
+                          width="100%"
+                          :to="{ name: 'products-movieid', params: {movieid: product.id} }" nuxt>
+                            Read More
+                        </v-btn>
+
+                      <!-- <NuxtLink class="button button-light" :to="{ name: 'movies-movieid', params: {movieid: movie.id} }">
+                        Get More Info
+                      </NuxtLink> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
+            </div>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-card flat>
+          <product-table/>
+        </v-card>
+      </v-tab-item>
+     
+    </v-tabs>
+  </v-card>
+
 
 
 
@@ -376,6 +236,14 @@
 import VueUploadMultipleImage from 'vue-upload-multiple-image'
 import axios from 'axios'
 import {mapState} from 'vuex'
+import ProductTable from '../../components/ProductTable.vue'
+
+import firebase from "firebase/compat/app";
+// import 'firebase/compat/auth';
+import "firebase/compat/firestore";
+// import db from "../plugins/firebase";
+
+
 export default {
   data() {
     return {
@@ -386,65 +254,101 @@ export default {
       images: [],
       show: false,
       products: [],
-      product: {
-        name: '',
-        description: '',
-      },
+      // product: {
+      //   name: '',
+      //   description: '',
+      // },
 
     }
   },
 
   components: {
-    VueUploadMultipleImage
+    VueUploadMultipleImage,
+    ProductTable
   },
-  computed: {
-    ...mapState([
-      'products'
-    ])
-  },
+  // computed: {
+  //   products() {
+  //     return this.$store.getters.products;
+  //   },
+  // },
+
+ 
+
+
   async fetch() {
     if(this.searchInput === ''){
-      await this.getMovies();
+      // await this.getMovies();
       return
     }
-    await this.searchMovies()
+    // await this.searchMovies()
   },
 
+  created() {
+    this.readData();
+  },
+
+
   methods: {
-    async getMovies() {
-      const data = axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1'
-      )
-      // eslint-disable-next-line no-unused-vars
-      const result = await data
-      result.data.results.forEach(movie => {
-        this.movies.push(movie)
 
-      })
-      // eslint-disable-next-line no-console
-      console.log('hi')
-    },
-    async searchMovies() {
-      const data = axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1&query=${this.searchInput}`
-      )
-      const result = await data
-       result.data.results.forEach(movie => {
-        this.searchedMovies.push(movie)
-
-      })
-      // eslint-disable-next-line no-console
-      // console.log(this.searchedMovies)
+    initialize() {
+      this.products = [];
     },
 
-    async save() {
-        const product = {}
-        product.name = this.product.name
-    },
+    // async getMovies() {
+    //   const data = axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1'
+    //   )
+    //   eslint-disable-next-line no-unused-vars
+    //   const result = await data
+    //   result.data.results.forEach(movie => {
+    //     this.movies.push(movie)
 
-    clearSearch() {
-      this.searchInput = ''
-      this.searchedMovies = []
-    },
+    //   })
+    //   // eslint-disable-next-line no-console
+    //   console.log('hi')
+    // },
+    // async searchMovies() {
+    //   const data = axios.get(
+    //     `https://api.themoviedb.org/3/search/movie?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1&query=${this.searchInput}`
+    //   )
+    //   const result = await data
+    //    result.data.results.forEach(movie => {
+    //     this.searchedMovies.push(movie)
+
+    //   })
+    //   eslint-disable-next-line no-console
+    //   console.log(this.searchedMovies)
+    // },
+
+    async readData() {
+    //   db.collection("desserts2").get().then((querySnapshot) =>{
+    //   querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, "=>",doc.data());
+    //     this.products = doc.data();
+    //     this.products.push(doc.data())
+    //   })
+    // })
+
+    var productsRef = await firebase.firestore().collection("products");
+
+    productsRef.onSnapshot((snap) => {
+      this.products = [];
+      snap.forEach((doc) => {
+        var product = doc.data();
+        product.id = doc.id;
+        this.products.push(product);
+      });
+    });
+  },
+
+    // async save() {
+    //     const product = {}
+    //     product.name = this.product.name
+    // },
+
+  clearSearch() {
+    this.searchInput = ''
+    this.searchedMovies = []
+  },
 
     uploadImageSuccess(formData, index, fileList) {
       console.log('data', formData, index, fileList)
@@ -464,6 +368,9 @@ export default {
     editImage (formData, index, fileList) {
       console.log('edit data', formData, index, fileList)
     },
+
+
+
 
 
 

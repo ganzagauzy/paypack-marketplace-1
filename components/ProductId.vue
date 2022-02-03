@@ -18,9 +18,10 @@
                 fab
                 nuxt
                 :to="{
-                  name: 'published',
-                  params: { published: published },
+                  name: 'products-movieid-publish',
+                  
                 }"
+                exact
                 v-bind="attrs"
                 v-on="on"
                 icon
@@ -39,8 +40,9 @@
                 nuxt
                 :to="{
                   name: 'products-movieid-preview',
-                  params: { movieid: movie.id },
+                  
                 }"
+                exact
                 v-bind="attrs"
                 v-on="on"
                 icon
@@ -224,7 +226,7 @@
 
                   </v-col>
                   <v-col md="6" cols="12">
-                    <div class="search">
+                    <!-- <div class="search">
                       <input
                         v-model.lazy="searchInput"
                         type="text"
@@ -238,7 +240,7 @@
                         @click="clearSearch"
                         ><v-icon>mdi-close</v-icon></v-btn
                       >
-                    </div>
+                    </div> -->
                   </v-col>
                   <v-spacer></v-spacer>
                   <v-col md="">
@@ -260,6 +262,10 @@
                     Revenue
                   </p>
                   RWF {{movie.revenue}}
+
+                  <div v-for="(product, index) in products" :key="index" class="movie">
+                    <p>{{ product.id}}</p>
+                  </div>
 
                 </div>
               </v-col>
@@ -583,12 +589,14 @@
                     :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`"
                   ></v-img> -->
 
-                  <v-carousel :show-arrows="true" hide-delimiters>
+                  <v-carousel :show-arrows="true" hide-delimiters
+                    v-for="(product, index) in products" :key="index"
+                    >
                     <v-carousel-item
                       class="center"
-                      v-for="(image, i) in images"
+                      v-for="(image, i) in product.images"
                       :key="i"
-                      :src="image.src"
+                      :src="`${image}`"
                       max-height="400"
                       max-width="400"
                       cover
@@ -605,16 +613,21 @@
                   <v-container>
                     <h4>Description</h4>
                     <br />
-                    <p class="overview">{{ movie.overview }}</p>
+                    <div v-for="(product, index) in products" :key="index" class="movie">
+                    <!-- <p>{{ product.id}}</p> -->
+                    <p class="overview">{{ product.description }}</p>
+                    
+                  </div>
+                    
 
-                    <v-row justify=" center">
+                    <v-row class="py-5">
                       <v-dialog v-model="dialog1" persistent max-width="600px">
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn color="#d1dbec" v-bind="attrs" v-on="on">
                             Edit
                           </v-btn>
                         </template>
-                        <v-card justify="end">
+                        <v-card >
                           <v-card-title>
                             <span class="text-h5">User Profile</span>
                           </v-card-title>
@@ -679,7 +692,7 @@
 
           <!-- tab4 start -->
           <v-tab-item class="py-5">
-            <v-row justify="center" class="py-5">
+            <v-row  class="py-5">
               <v-card class="py-5 px-5">
                 <v-container>
                   <h4>Delivery Fields</h4>
@@ -726,7 +739,7 @@
 
           <!-- tab5 start -->
           <v-tab-item class="py-5">
-            <v-row justify="center" class="py-5">
+            <v-row  class="py-5">
               <v-card class="py-5 px-5">
                 <v-row>
                   <v-col cols="12" sm="10" md="10">
@@ -771,8 +784,12 @@
                 <v-row>
                   <v-col cols="12" sm="10" md="10">
                     <h4>Lorem ipsum dolor sit.</h4>
+                    <div v-for="(product, index) in products" :key="index" class="movie">
+                      <p>{{ product.id}}</p>
+                    </div>
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      
                     </p>
                   </v-col>
                   <v-spacer />
@@ -802,6 +819,13 @@
 <script>
 import axios from "axios";
 
+import firebase from "firebase/compat/app";
+// import 'firebase/compat/auth';
+import "firebase/compat/firestore";
+import db from "../plugins/firebase";
+import 'firebase/compat/storage'
+import { onSnapshot } from '@firebase/firestore';
+
 export default {
   data: () => ({
 
@@ -813,6 +837,9 @@ export default {
 
 
     movie: "",
+    products: [],
+    
+    product: "",
     dialog: false,
     dialog1: false,
     // crud table
@@ -918,9 +945,9 @@ export default {
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   }),
 
-  async fetch() {
-    await this.getSingleMovie();
-  },
+  // async fetch() {
+  //   await this.getSingleMovie();
+  // },
   head() {
     return {
       title: this.movie.title,
@@ -952,9 +979,43 @@ export default {
 
   created() {
     this.initialize();
+    this.readSingleData();
   },
 
   methods: {
+    async readSingleData() {
+      //   db.collection("desserts2").get().then((querySnapshot) =>{
+      //   querySnapshot.forEach((doc) => {
+      //     console.log(doc.id, "=>",doc.data());
+      //     this.products = doc.data();
+      //     this.products.push(doc.data())
+      //   })
+      // })
+      const id = this.$route.params.movieid
+      console.log(id);
+      var docRef = await db.collection("products").doc(id);
+
+      onSnapshot(docRef, (doc) => {
+          if (doc.exists) {
+            this.products = [];
+            var product = doc.data()
+            product.id = doc.id
+            this.products.push(product);
+            console.log(product);
+            
+            console.log("Document data:", doc.data());
+            console.log("Document data:", doc.id);
+          } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+          }
+          }).catch((error) => {
+          onsole.log("Error getting document:", error);
+          });
+
+     
+    },
+
 
     //Copy
     onCopy() {
@@ -970,13 +1031,13 @@ export default {
       });
     },
 
-    async getSingleMovie() {
-      const data = axios.get(
-        `https://api.themoviedb.org/3/movie/${this.$route.params.movieid}?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US`
-      );
-      const result = await data;
-      this.movie = result.data;
-    },
+    // async getSingleMovie() {
+    //   const data = axios.get(
+    //     `https://api.themoviedb.org/3/movie/${this.$route.params.movieid}?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US`
+    //   );
+    //   const result = await data;
+    //   this.movie = result.data;
+    // },
 
     switchTheme(theme) {
       localStorage.setItem("theme-color", theme);
@@ -1006,15 +1067,8 @@ export default {
     },
 
     initialize() {
-      this.desserts = [
-        {
-          name: "Jordan Air",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-        },
-      ];
+      
+      this.products = [];
     },
 
     editItem(item) {
@@ -1059,6 +1113,12 @@ export default {
       this.close();
     },
   },
+
+  // clearSearch() {
+  //   this.searchInput = ''
+  //   this.searchedMovies = []
+  // },
+
 };
 </script>
 
@@ -1157,12 +1217,3 @@ nuxt-link {
 
 </style>
 
-// export default { // data: () => ({ // isLoading: false, // items: [], //
-model: null, // search: null, // tab: null, // }), // watch: { // model (val) {
-// if (val != null) this.tab = 0 // else this.tab = null // }, // search (val) {
-// // Items have already been loaded // if (this.items.length > 0) return //
-this.isLoading = true // // Lazily load input items //
-fetch('https://api.coingecko.com/api/v3/coins/list') // .then(res =>
-res.clone().json()) // .then(res => { // this.items = res // }) // .catch(err =>
-{ // console.log(err) // }) // .finally(() => (this.isLoading = false)) // }, //
-}, // }
