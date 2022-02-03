@@ -181,8 +181,8 @@
                       <!-- <p class="overview">{{ movie.overview }}</p> -->
                     </div>
                     <div class="info1">
-                      <!-- <p class="title text-sm-h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
-                      </p> -->
+                      <p class="title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
+                      </p>
                       <!-- <p class="release">
                         Released:
                         {{
