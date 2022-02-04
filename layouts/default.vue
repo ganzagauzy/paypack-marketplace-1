@@ -69,7 +69,7 @@
         <v-icon>mdi-minus</v-icon>
       </v-btn>
 
-      <v-toolbar-title-center v-text="title"  class=""/>
+      <div v-text="title"  class=""/>
       <v-spacer />
 
     <div class="">
@@ -82,6 +82,7 @@
           v-bind="attrs"
           v-on="on"
           color="#d1dbec"
+          class="d-flex justify-end"
         >
           <v-icon>mdi-account</v-icon>
         </v-btn>

@@ -1020,7 +1020,7 @@ export default {
     //Copy
     onCopy() {
 
-      this.$copyText("localhost:3000/published")
+      this.$copyText("localhost:3000/products/Cn1BJ4rT9qHItBoYOfSU/publish")
     },
     addItem(item) {
       const removed = this.items.splice(0, 1);

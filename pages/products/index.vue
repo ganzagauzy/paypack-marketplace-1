@@ -9,7 +9,7 @@
                       color=""
                     >
                       <v-icon>mdi-dropbox </v-icon>
-                      <span>Products &mdash;n</span>
+                      <span>Products &mdash;{{ size }}</span>
                       <v-spacer></v-spacer>
                       <!-- <v-icon>mdi-minus</v-icon>
                       <v-icon>mdi-checkbox-blank-outline</v-icon>
@@ -105,10 +105,10 @@
 
 
               <!-- search box -->
-              <div class="container search">
+              <!-- <div class="container search">
                 <input v-model.lazy="searchInput" type="text" placeholder="Search" @keyup.enter="$fetch">
                 <v-btn icon v-show="searchInput !='' " class="button" @click="clearSearch"><v-icon>mdi-close</v-icon></v-btn>
-              </div>
+              </div> -->
 
               <!-- <div v-for="(product, index) in products" :key="index" class="">
                 <p>{{ product.images}}</p>
@@ -139,16 +139,16 @@
               <div  class="container movies">
                 <!-- Searched movies -->
                 <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
-                  <div v-for="(movie, index) in searchedMovies" :key="index" class="movie">
+                  <div v-for="(product, index) in searchProducts" :key="index" class="movie">
                     <div class="movie-img">
                       <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
-                      <img :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt="">
-                      <p class="review">{{ movie.vote_average }}</p>
+                      <img :src="product.images[0]" alt="">
+                      <!-- <p class="review">{{ movie.vote_average }}</p> -->
                       <!-- <p class="overview">{{ movie.overview }}</p> -->
                     </div>
                     <div class="">
-                      <p class="title h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
-                      </p>
+                      <!-- <p class="title h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
+                      </p> -->
                       <!-- <p class="release">
                         Released:
                         {{
@@ -159,12 +159,12 @@
                           })
                         }}
                       </p> -->
-                      <v-btn class="py-3"
+                      <!-- <v-btn class="py-3"
                           color=""
                           width="100%"
                           :to="{ name: 'products-movieid', params: {movieid: movie.id} }" nuxt>
                             Read More
-                        </v-btn>
+                        </v-btn> -->
                       <!-- <NuxtLink class="button button-light" :to= "`/products/${movie.id}`">
                         Get More Info
                       </NuxtLink> -->
@@ -249,11 +249,13 @@ export default {
     return {
       movies: [],
       searchedMovies: [],
+      searchProducts: [],
       searchInput: '',
       dialog: false,
       images: [],
       show: false,
       products: [],
+      size: ''
       // product: {
       //   name: '',
       //   description: '',
@@ -278,9 +280,11 @@ export default {
   async fetch() {
     if(this.searchInput === ''){
       // await this.getMovies();
+      await this.getProducts();
       return
     }
     // await this.searchMovies()
+    await this.searchProducts()
   },
 
   created() {
@@ -293,8 +297,25 @@ export default {
     initialize() {
       this.products = [];
     },
+    
+    async getProducts() {
+      // getMovies()
 
-    // async getMovies() {
+      var productsRef = await firebase.firestore().collection("products");
+
+        productsRef.onSnapshot((snap) => {
+          // this.size = snap.size
+          // console.log(this.size);
+          this.products = [];
+          snap.forEach((doc) => {
+            var product = doc.data();
+            product.id = doc.id;
+            this.products.push(product);
+          });
+        });
+      },
+
+
     //   const data = axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1'
     //   )
     //   eslint-disable-next-line no-unused-vars
@@ -306,19 +327,20 @@ export default {
     //   // eslint-disable-next-line no-console
     //   console.log('hi')
     // },
-    // async searchMovies() {
-    //   const data = axios.get(
-    //     `https://api.themoviedb.org/3/search/movie?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1&query=${this.searchInput}`
-    //   )
-    //   const result = await data
-    //    result.data.results.forEach(movie => {
-    //     this.searchedMovies.push(movie)
+    async searchMovies() {
+      db.collection('products').where('name', '==', this.searchInput).get().then((snap) => {
+        this.products = [];
+        snap.forEach((doc) => {
+          var product = doc.data();
+          product.id = doc.id;
+          this.products.push(product);
+        });
 
-    //   })
-    //   eslint-disable-next-line no-console
-    //   console.log(this.searchedMovies)
-    // },
 
+      })
+      
+    },
+    
     async readData() {
     //   db.collection("desserts2").get().then((querySnapshot) =>{
     //   querySnapshot.forEach((doc) => {
@@ -331,6 +353,8 @@ export default {
     var productsRef = await firebase.firestore().collection("products");
 
     productsRef.onSnapshot((snap) => {
+      this.size = snap.size
+      // console.log(this.size);
       this.products = [];
       snap.forEach((doc) => {
         var product = doc.data();
@@ -368,15 +392,12 @@ export default {
     editImage (formData, index, fileList) {
       console.log('edit data', formData, index, fileList)
     },
+  }
 
 
-
-
-
-
-
-  },
 }
+
+
 </script>
 
 <style lang="scss" >
