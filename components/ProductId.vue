@@ -459,7 +459,8 @@
                   }"
                 >
                   <div class="rounded-circle">
-                    <v-btn>
+                    <v-btn >
+                      <v-icon>mdi-palette</v-icon>
                       <input
                       type="color"
                       name=""
@@ -1122,9 +1123,9 @@ nuxt-link {
 }
 .rounded-circle {
   padding: 3px;
-  height: 40px;
-  width: 40px;
-  border-radius: 25px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
   cursor: pointer;
 }
 </style>
