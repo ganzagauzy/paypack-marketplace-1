@@ -19,7 +19,6 @@
                 nuxt
                 :to="{
                   name: 'products-movieid-publish',
-                  
                 }"
                 exact
                 v-bind="attrs"
@@ -40,7 +39,6 @@
                 nuxt
                 :to="{
                   name: 'products-movieid-preview',
-                  
                 }"
                 exact
                 v-bind="attrs"
@@ -55,8 +53,7 @@
 
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn @click="onCopy"  color="" v-bind="attrs" v-on="on" icon>
-
+              <v-btn @click="onCopy" color="" v-bind="attrs" v-on="on" icon>
                 <v-snackbar
                   v-model="snackbar"
                   :timeout="timeout"
@@ -64,14 +61,9 @@
                   absolute
                   left
                   shaped
-
                 >
                   {{ snack }}
-
-
                 </v-snackbar>
-
-
 
                 <v-icon>mdi-share-variant</v-icon>
               </v-btn>
@@ -135,26 +127,22 @@
               <v-col>
                 <v-row>
                   <v-col md="">
-
-
                     <div class="text-cetern">
                       <v-menu
                         v-model="menu5"
                         :close-on-content-click="false"
                         :nudge-width="200"
                         offset-y
-
                       >
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn
                             color=""
-                            style="text-transform:none"
-
+                            style="text-transform: none"
                             right
                             v-bind="attrs"
                             v-on="on"
                           >
-                             Filter
+                            Filter
                           </v-btn>
 
                           <!-- <v-btn
@@ -171,8 +159,6 @@
                               mdi-menu-down
                             </v-icon>
                           </v-btn> -->
-
-
                         </template>
 
                         <v-card>
@@ -184,10 +170,8 @@
                               dense
                               outlined
                             ></v-select>
-                            Order Date
-
-                            Delivery Date
-                             <v-select
+                            Order Date Delivery Date
+                            <v-select
                               :items="items1"
                               label=""
                               dense
@@ -195,21 +179,13 @@
                             ></v-select>
                           </div>
 
-
                           <v-card-actions>
                             <v-spacer></v-spacer>
 
-                            <v-btn
-                              text
-                              @click="menu = false"
-                            >
-                              Reset
-                            </v-btn>
+                            <v-btn text @click="menu = false"> Reset </v-btn>
                             <v-btn
                               color="#d1dbec"
-
-                              style="text-transform:none"
-
+                              style="text-transform: none"
                               @click="menu = false"
                             >
                               Filter
@@ -218,12 +194,6 @@
                         </v-card>
                       </v-menu>
                     </div>
-
-
-
-
-
-
                   </v-col>
                   <v-col md="6" cols="12">
                     <!-- <div class="search">
@@ -244,29 +214,31 @@
                   </v-col>
                   <v-spacer></v-spacer>
                   <v-col md="">
-                    <v-btn
-                    style="text-transform:none">Export</v-btn>
+                    <v-btn style="text-transform: none">Export</v-btn>
                   </v-col>
                 </v-row>
                 <div class="bottom">
                   <h4 class="text-center">No orders yet</h4>
-                  <p class="px-5">This is where you'll see and manage orders as they come in.</p>
+                  <p class="px-5">
+                    This is where you'll see and manage orders as they come in.
+                  </p>
                 </div>
               </v-col>
 
               <v-col cols="12" md="6" class="bg-dark">
                 <div class="px-5 py-16">
-                 <p> Unit solid</p>
+                  <p>Unit solid</p>
                   {{ movie.vote_average }}
-                  <p class="py-5">
-                    Revenue
-                  </p>
-                  RWF {{movie.revenue}}
+                  <p class="py-5">Revenue</p>
+                  RWF {{ movie.revenue }}
 
-                  <div v-for="(product, index) in products" :key="index" class="movie">
-                    <p>{{ product.id}}</p>
+                  <div
+                    v-for="(product, index) in products"
+                    :key="index"
+                    class="movie"
+                  >
+                    <p>{{ product.id }}</p>
                   </div>
-
                 </div>
               </v-col>
             </v-row>
@@ -353,7 +325,13 @@
                                             v-if="images && images.length > 0"
                                           >
                                             <ul
-                                              class="attached-photos p-30 bg-gray d-table list-unstyled"
+                                              class="
+                                                attached-photos
+                                                p-30
+                                                bg-gray
+                                                d-table
+                                                list-unstyled
+                                              "
                                             >
                                               <li
                                                 class="attached-photo mt-sm-30"
@@ -372,7 +350,10 @@
                                                   style="cursor: pointer"
                                                   @click="removeImage(image.id)"
                                                   ><i
-                                                    class="fa fa-times text-danger"
+                                                    class="
+                                                      fa fa-times
+                                                      text-danger
+                                                    "
                                                   ></i
                                                 ></span>
                                               </li>
@@ -471,114 +452,24 @@
           <v-tab-item class="py-5">
             <v-row>
               <v-col cols="12" sm="6" md="7">
-                <v-card id="app" v-bind:class="currentTheme">
-                  <div class="py-2 px-3">
-                    <v-menu
-                      v-model="menu"
-                      :close-on-content-click="false"
-                      :nudge-width="200"
-                      offset-x
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="" v-bind="attrs" v-on="on">
-                          <v-icon>mdi-palette</v-icon>
-                        </v-btn>
-                      </template>
-
-                      <v-card color="#d1dbec">
-                        <v-list>
-                          <v-list-item>
-                            <v-list-item-action>
-                              <div class="theme-options">
-                                <div
-                                  id="theme-white"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-white',
-                                  }"
-                                  v-on:click="switchTheme('theme-white')"
-                                  @click="menu = false"
-                                ></div>
-
-                                <div
-                                  id="theme-blue"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-blue',
-                                  }"
-                                  v-on:click="switchTheme('theme-blue')"
-                                  @click="menu = false"
-                                ></div>
-
-                                <div
-                                  id="theme-orange"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-orange',
-                                  }"
-                                  v-on:click="switchTheme('theme-orange')"
-                                  @click="menu = false"
-                                ></div>
-
-                                <div
-                                  id="theme-purple"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-purple',
-                                  }"
-                                  v-on:click="switchTheme('theme-purple')"
-                                  @click="menu = false"
-                                ></div>
-                                <div
-                                  id="theme-green"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-green',
-                                  }"
-                                  v-on:click="switchTheme('theme-green')"
-                                  @click="menu = false"
-                                ></div>
-                                <div
-                                  id="theme-black"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-black',
-                                  }"
-                                  v-on:click="switchTheme('theme-black')"
-                                  @click="menu = false"
-                                ></div>
-
-                                <!-- <div id="theme-blue" class="p1"></div>
-                              <div id="theme-orange" class="p1"></div>
-                              <div id="theme-purple" class="p1"></div>
-                              <div id="theme-green" class="p1"></div>
-                              <div id="theme-black" class="p1"></div> -->
-                              </div>
-                            </v-list-item-action>
-                          </v-list-item>
-                        </v-list>
-
-                        <!-- <v-divider></v-divider> -->
-
-                        <!-- <v-card-actions>
-                        <v-spacer></v-spacer>
-
-                        <v-btn
-                          text
-                          @click="menu = false"
-                        >
-                          Cancel
-                        </v-btn>
-                        <v-btn
-                          color="primary"
-                          text
-                          @click="menu = false"
-                        >
-                          Save
-                        </v-btn>
-                      </v-card-actions> -->
-                      </v-card>
-                    </v-menu>
+                <v-card
+                  id="app"
+                  :style="{
+                    backgroundColor: prodBackgroundColor,
+                  }"
+                >
+                  <div class="rounded-circle">
+                    <v-btn>
+                      <input
+                      type="color"
+                      name=""
+                      style="border-radius:50%"
+                      id=""
+                      class="rounded-circle"
+                      v-model="prodBackgroundColor"
+                    />
+                    </v-btn>
+                    
                   </div>
 
                   <!-- <v-img
@@ -589,9 +480,12 @@
                     :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`"
                   ></v-img> -->
 
-                  <v-carousel :show-arrows="true" hide-delimiters
-                    v-for="(product, index) in products" :key="index"
-                    >
+                  <v-carousel
+                    :show-arrows="true"
+                    hide-delimiters
+                    v-for="(product, index) in products"
+                    :key="index"
+                  >
                     <v-carousel-item
                       class="center"
                       v-for="(image, i) in product.images"
@@ -613,12 +507,14 @@
                   <v-container>
                     <h4>Description</h4>
                     <br />
-                    <div v-for="(product, index) in products" :key="index" class="movie">
-                    <!-- <p>{{ product.id}}</p> -->
-                    <p class="overview">{{ product.description }}</p>
-                    
-                  </div>
-                    
+                    <div
+                      v-for="(product, index) in products"
+                      :key="index"
+                      class="movie"
+                    >
+                      <!-- <p>{{ product.id}}</p> -->
+                      <p class="overview">{{ product.description }}</p>
+                    </div>
 
                     <v-row class="py-5">
                       <v-dialog v-model="dialog1" persistent max-width="600px">
@@ -627,7 +523,7 @@
                             Edit
                           </v-btn>
                         </template>
-                        <v-card >
+                        <v-card>
                           <v-card-title>
                             <span class="text-h5">User Profile</span>
                           </v-card-title>
@@ -692,7 +588,7 @@
 
           <!-- tab4 start -->
           <v-tab-item class="py-5">
-            <v-row  class="py-5">
+            <v-row class="py-5">
               <v-card class="py-5 px-5">
                 <v-container>
                   <h4>Delivery Fields</h4>
@@ -739,7 +635,7 @@
 
           <!-- tab5 start -->
           <v-tab-item class="py-5">
-            <v-row  class="py-5">
+            <v-row class="py-5">
               <v-card class="py-5 px-5">
                 <v-row>
                   <v-col cols="12" sm="10" md="10">
@@ -784,12 +680,15 @@
                 <v-row>
                   <v-col cols="12" sm="10" md="10">
                     <h4>Lorem ipsum dolor sit.</h4>
-                    <div v-for="(product, index) in products" :key="index" class="movie">
-                      <p>{{ product.id}}</p>
+                    <div
+                      v-for="(product, index) in products"
+                      :key="index"
+                      class="movie"
+                    >
+                      <p>{{ product.id }}</p>
                     </div>
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      
                     </p>
                   </v-col>
                   <v-spacer />
@@ -823,22 +722,21 @@ import firebase from "firebase/compat/app";
 // import 'firebase/compat/auth';
 import "firebase/compat/firestore";
 import db from "../plugins/firebase";
-import 'firebase/compat/storage'
-import { onSnapshot } from '@firebase/firestore';
+import "firebase/compat/storage";
+import { onSnapshot } from "@firebase/firestore";
 
 export default {
   data: () => ({
-
     //snackbar
     snackbar: false,
-    snack: 'Url  copied.',
+    snack: "Url  copied.",
     timeout: 2000,
 
-
+    prodBackgroundColor: "#fff",
 
     movie: "",
     products: [],
-    
+
     product: "",
     dialog: false,
     dialog1: false,
@@ -857,17 +755,21 @@ export default {
 
     menu5: false,
 
-
     //date
-    formData:{
-    eventtimeSpecific: new Date(),
-   },
+    formData: {
+      eventtimeSpecific: new Date(),
+    },
 
     //selection
-    items: ['Show all', 'Order delivered', 'Order not delivered', 'Order cancelled'],
-    items1: ['All the time', 'Specfic time',],
+    items: [
+      "Show all",
+      "Order delivered",
+      "Order not delivered",
+      "Order cancelled",
+    ],
+    items1: ["All the time", "Specfic time"],
 
-  // drop menu
+    // drop menu
     fav: true,
     menu: false,
     message: false,
@@ -963,9 +865,14 @@ export default {
   },
 
   //date mounted
-  mounted () {
-  const today = new Date()
-  this.formData.eventtimeSpecific.setHours(today.getHours(), today.getMinutes(), 0, 0)
+  mounted() {
+    const today = new Date();
+    this.formData.eventtimeSpecific.setHours(
+      today.getHours(),
+      today.getMinutes(),
+      0,
+      0
+    );
   },
 
   watch: {
@@ -991,36 +898,32 @@ export default {
       //     this.products.push(doc.data())
       //   })
       // })
-      const id = this.$route.params.movieid
+      const id = this.$route.params.movieid;
       console.log(id);
       var docRef = await db.collection("products").doc(id);
 
       onSnapshot(docRef, (doc) => {
-          if (doc.exists) {
-            this.products = [];
-            var product = doc.data()
-            product.id = doc.id
-            this.products.push(product);
-            console.log(product);
-            
-            console.log("Document data:", doc.data());
-            console.log("Document data:", doc.id);
-          } else {
-              // doc.data() will be undefined in this case
-              console.log("No such document!");
-          }
-          }).catch((error) => {
-          onsole.log("Error getting document:", error);
-          });
+        if (doc.exists) {
+          this.products = [];
+          var product = doc.data();
+          product.id = doc.id;
+          this.products.push(product);
+          console.log(product);
 
-     
+          console.log("Document data:", doc.data());
+          console.log("Document data:", doc.id);
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }).catch((error) => {
+        onsole.log("Error getting document:", error);
+      });
     },
-
 
     //Copy
     onCopy() {
-
-      this.$copyText("localhost:3000/products/Cn1BJ4rT9qHItBoYOfSU/publish")
+      this.$copyText("localhost:3000/products/Cn1BJ4rT9qHItBoYOfSU/publish");
     },
     addItem(item) {
       const removed = this.items.splice(0, 1);
@@ -1040,8 +943,13 @@ export default {
     // },
 
     switchTheme(theme) {
+      console.log(theme);
       localStorage.setItem("theme-color", theme);
       this.currentTheme = localStorage.getItem("theme-color");
+    },
+
+    colorChanged(e) {
+      console.log(e);
     },
 
     // crud methods
@@ -1067,7 +975,6 @@ export default {
     },
 
     initialize() {
-      
       this.products = [];
     },
 
@@ -1118,7 +1025,6 @@ export default {
   //   this.searchInput = ''
   //   this.searchedMovies = []
   // },
-
 };
 </script>
 
@@ -1212,8 +1118,14 @@ nuxt-link {
   background: rgb(241, 241, 241);
 }
 .bottom {
-  padding-top:55%;
+  padding-top: 55%;
 }
-
+.rounded-circle {
+  padding: 3px;
+  height: 40px;
+  width: 40px;
+  border-radius: 25px;
+  cursor: pointer;
+}
 </style>
 

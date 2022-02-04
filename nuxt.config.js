@@ -44,7 +44,9 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    'nuxt-clipboard2'
+    'nuxt-clipboard2',
+    'nuxt-sweetalert2',
+    '@nuxtjs/toast',
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
