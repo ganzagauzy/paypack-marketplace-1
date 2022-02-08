@@ -720,7 +720,7 @@
 import axios from "axios";
 
 import firebase from "firebase/compat/app";
-// import 'firebase/compat/auth';
+import 'firebase/compat/auth';
 import "firebase/compat/firestore";
 import db from "../plugins/firebase";
 import "firebase/compat/storage";
@@ -733,7 +733,7 @@ export default {
     snack: "Url  copied.",
     timeout: 2000,
 
-    prodBackgroundColor: "#fff",
+    prodBackgroundColor: "#111",
 
     movie: "",
     products: [],

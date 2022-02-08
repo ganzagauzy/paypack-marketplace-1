@@ -16,7 +16,11 @@
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title class="text-h5">
-                AGASOKO
+                <p>AGASOKO</p>
+                <v-subheader>{{ user.email }}</v-subheader>
+                <!-- <p class="small">{{user.email}}</p> -->
+                <!-- <small class="small">{{ user.email }}</small> -->
+                
               </v-list-item-title>
               <v-list-item-subtitle>
 
@@ -24,6 +28,7 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
+          <hr class="">
 
 
         <v-list-item
@@ -74,7 +79,7 @@
 
     <div class="">
       <v-divider></v-divider>
-    <v-menu >
+    <!-- <v-menu >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
 
@@ -96,7 +101,17 @@
         <v-list-item-title class="cursor-pointer">{{ menu.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu> -->
+    <v-btn v-if="user" @click="signout"
+    color="dark"
+    dark>signout</v-btn>
+
+    <v-btn v-if="!user" @click="signout"
+    color="dark"
+    dark>signin</v-btn>
+    
+
+
   </div>
 
 
@@ -142,12 +157,19 @@
 </template>
 
 <script>
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
+
 export default {
   data () {
     return {
       clipped: false,
       drawer: false,
       fixed: false,
+      user: '',
       menus: [
         { title: 'Click Me' },
         { title: 'Click Me' },
@@ -181,6 +203,27 @@ export default {
       rightDrawer: false,
       title: ''
     }
-  }
+  },
+
+  mounted() {
+    firebase.auth().onAuthStateChanged(user => {
+      console.log(user);
+      this.user = user
+    })
+  },
+
+  methods: {
+    signout() {
+      firebase.auth().signOut().then(res => {
+        console.log(res);
+        this.user = ''
+        this.$router.push('/auth/signin')
+      })
+    }
+  },
+
 }
 </script>
+
+
+

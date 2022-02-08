@@ -185,7 +185,7 @@
 import { doc, deleteDoc } from "firebase/firestore";
 
 import firebase from "firebase/compat/app";
-// import 'firebase/compat/auth';
+import 'firebase/compat/auth';
 import "firebase/compat/firestore";
 import db from "../plugins/firebase";
 import 'firebase/compat/storage'
@@ -219,7 +219,8 @@ export default {
       currency: "",
       quantity: "",
       price: '',
-      images: []
+      images: [],
+      
       // calories: 0,
       // fat: 0,
       // carbs: 0,
@@ -258,6 +259,7 @@ export default {
     this.initialize();
     this.readData();
   },
+ 
 
   methods: {
     initialize() {
@@ -313,7 +315,7 @@ export default {
       //   })
       // })
 
-      var productsRef = await firebase.firestore().collection("products");
+      var productsRef = await firebase.firestore().collection("products").where("userId", "==", firebase.auth().currentUser.uid );
 
       productsRef.onSnapshot((snap) => {
         this.products = [];
@@ -470,13 +472,18 @@ export default {
       
 
 
-        
+        // const userId =firebase.auth().currentUser.uid
+        // console.log(userId);
         product.name = this.editedItem.name,
         product.description = this.editedItem.description,
         product.currency = this.editedItem.currency,
         product.quantity = this.editedItem.quantity,
         product.price = this.editedItem.price
         product.images = this.editedItem.images
+        product.userId = firebase.auth().currentUser.uid
+
+        
+       
         // product.calories = this.editedItem.calories,
         // product.fat = this.editedItem.fat,
         // product.carbs = this.editedItem.carbs,
@@ -489,6 +496,7 @@ export default {
           .add(product)
           .then(() => {
             console.log("added to db");
+            
           });
         this.products.push(this.editedItem)
       }

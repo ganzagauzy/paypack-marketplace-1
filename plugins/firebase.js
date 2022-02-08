@@ -4,7 +4,7 @@
 // import 'firebase/firestore';
 // import "firebase/database";
 import firebase from 'firebase/compat/app';
-// import 'firebase/compat/auth';
+import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 

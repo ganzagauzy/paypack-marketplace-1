@@ -42,12 +42,28 @@ export default {
     '@nuxtjs/vuetify',
   ],
 
+  
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     'nuxt-clipboard2',
     'nuxt-sweetalert2',
     '@nuxtjs/toast',
   ],
+
+  //authentication 
+
+  auth: {
+    persistence: 'local', // default
+    initialize: {
+      // onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
+      onAuthStateChangedAction: 'onAuthStateChangedAction',
+      subscribeManually: false
+    },
+    ssr: false, // default
+    // emulatorPort: 9099,
+    // emulatorHost: 'http://localhost',
+  },
+
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

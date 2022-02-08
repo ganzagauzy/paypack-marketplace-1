@@ -88,3 +88,5 @@ sw.*
 
 # Vim swap files
 *.swp
+# firebase-admin sdk
+nuxttodo-b8d04-firebase-adminsdk-cv9ky-e1f62693aa.json

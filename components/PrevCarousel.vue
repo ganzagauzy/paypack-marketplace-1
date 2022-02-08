@@ -5,114 +5,29 @@
     <v-row>
 
            <v-col cols="" sm="12" md="9">
-                <v-card id="app" v-bind:class="currentTheme">
+                <v-card id="app" :style="{
+                    backgroundColor: prodBackgroundColor,
+                  }">
+                <!-- <v-card id="app" v-bind:class="currentTheme"> -->
                   <div class="py-2 px-3">
-                    <v-menu
-                      v-model="menu"
-                      :close-on-content-click="false"
-                      :nudge-width="200"
-                      offset-x
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="" v-bind="attrs" v-on="on">
-                          <v-icon>mdi-palette</v-icon>
-                        </v-btn>
-                      </template>
 
-                      <v-card color="#d1dbec">
-                        <v-list>
-                          <v-list-item>
-                            <v-list-item-action>
-                              <div class="theme-options">
-                                <div
-                                  id="theme-white"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-white',
-                                  }"
-                                  v-on:click="switchTheme('theme-white')"
-                                  @click="menu = false"
-                                ></div>
+                    <div class="rounded-circle">
+                    <v-btn >
+                      <v-icon>mdi-palette</v-icon>
+                      <input
+                      type="color"
+                      name=""
+                      style="border-radius:50%"
+                      id=""
+                      class="rounded-circle"
+                      v-model="prodBackgroundColor"
+                    />
+                    </v-btn>
+                    
+                  </div>
+                    
 
-                                <div
-                                  id="theme-blue"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-blue',
-                                  }"
-                                  v-on:click="switchTheme('theme-blue')"
-                                  @click="menu = false"
-                                ></div>
-
-                                <div
-                                  id="theme-orange"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-orange',
-                                  }"
-                                  v-on:click="switchTheme('theme-orange')"
-                                  @click="menu = false"
-                                ></div>
-
-                                <div
-                                  id="theme-purple"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-purple',
-                                  }"
-                                  v-on:click="switchTheme('theme-purple')"
-                                  @click="menu = false"
-                                ></div>
-                                <div
-                                  id="theme-green"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-green',
-                                  }"
-                                  v-on:click="switchTheme('theme-green')"
-                                  @click="menu = false"
-                                ></div>
-                                <div
-                                  id="theme-black"
-                                  class="p1"
-                                  v-bind:class="{
-                                    active: currentTheme === 'theme-black',
-                                  }"
-                                  v-on:click="switchTheme('theme-black')"
-                                  @click="menu = false"
-                                ></div>
-
-                                <!-- <div id="theme-blue" class="p1"></div>
-                              <div id="theme-orange" class="p1"></div>
-                              <div id="theme-purple" class="p1"></div>
-                              <div id="theme-green" class="p1"></div>
-                              <div id="theme-black" class="p1"></div> -->
-                              </div>
-                            </v-list-item-action>
-                          </v-list-item>
-                        </v-list>
-
-                        <!-- <v-divider></v-divider> -->
-
-                        <!-- <v-card-actions>
-                        <v-spacer></v-spacer>
-
-                        <v-btn
-                          text
-                          @click="menu = false"
-                        >
-                          Cancel
-                        </v-btn>
-                        <v-btn
-                          color="primary"
-                          text
-                          @click="menu = false"
-                        >
-                          Save
-                        </v-btn>
-                      </v-card-actions> -->
-                      </v-card>
-                    </v-menu>
+                  
                   </div>
 
                   <!-- <v-img
@@ -195,7 +110,8 @@
 
 import "firebase/compat/firestore";
 import db from "../plugins/firebase";
-import 'firebase/compat/storage'
+import 'firebase/compat/storage';
+import 'firebase/compat/auth';
 import { onSnapshot } from '@firebase/firestore';
 
 
@@ -206,37 +122,16 @@ export default {
   data () {
     return {
 
-  colors: [
-    {
-      hex: '#194d33',
-      hex8: '#194D33A8',
-      hsl: { h: 150, s: 0.5, l: 0.2, a: 1 },
-      hsv: { h: 150, s: 0.66, v: 0.30, a: 1 },
-      rgba: { r: 25, g: 77, b: 51, a: 1 },
-      a: 1
-    }
-  ],
+  
 
   products: [],
     
   product: "",
 
+  prodBackgroundColor: "#111",
 
-  images: [
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-          },
-        ],
 
+ 
 
   menu:false,
   currentTheme: localStorage.getItem("theme-color"),

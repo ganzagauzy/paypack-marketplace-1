@@ -239,7 +239,7 @@ import {mapState} from 'vuex'
 import ProductTable from '../../components/ProductTable.vue'
 
 import firebase from "firebase/compat/app";
-// import 'firebase/compat/auth';
+import 'firebase/compat/auth';
 import "firebase/compat/firestore";
 // import db from "../plugins/firebase";
 
@@ -277,19 +277,29 @@ export default {
  
 
 
-  async fetch() {
-    if(this.searchInput === ''){
-      // await this.getMovies();
-      await this.getProducts();
-      return
-    }
-    // await this.searchMovies()
-    await this.searchProducts()
-  },
+  // async fetch() {
+  //   if(this.searchInput === ''){
+  //     await this.getMovies();
+  //     await this.getProducts();
+  //     return
+  //   }
+  //   await this.searchMovies()
+  //   await this.searchProducts()
+  // },
 
   created() {
     this.readData();
   },
+  // mounted() {
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     console.log(user);
+  //     this.user = user
+
+  //     if(!this.user) {
+  //       this.$router.push('/auth/signin')
+  //     }
+  //   })
+  // },
 
 
   methods: {
@@ -298,22 +308,22 @@ export default {
       this.products = [];
     },
     
-    async getProducts() {
-      // getMovies()
+    // async getProducts() {
+    //   getMovies()
 
-      var productsRef = await firebase.firestore().collection("products");
+    //   var productsRef = await firebase.firestore().collection("products");
 
-        productsRef.onSnapshot((snap) => {
-          // this.size = snap.size
-          // console.log(this.size);
-          this.products = [];
-          snap.forEach((doc) => {
-            var product = doc.data();
-            product.id = doc.id;
-            this.products.push(product);
-          });
-        });
-      },
+    //     productsRef.onSnapshot((snap) => {
+    //       this.size = snap.size
+    //       console.log(this.size);
+    //       this.products = [];
+    //       snap.forEach((doc) => {
+    //         var product = doc.data();
+    //         product.id = doc.id;
+    //         this.products.push(product);
+    //       });
+    //     });
+    //   },
 
 
     //   const data = axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1'
@@ -327,19 +337,19 @@ export default {
     //   // eslint-disable-next-line no-console
     //   console.log('hi')
     // },
-    async searchMovies() {
-      db.collection('products').where('name', '==', this.searchInput).get().then((snap) => {
-        this.products = [];
-        snap.forEach((doc) => {
-          var product = doc.data();
-          product.id = doc.id;
-          this.products.push(product);
-        });
+    // async searchMovies() {
+    //   db.collection('products').where('name', '==', this.searchInput).get().then((snap) => {
+    //     this.products = [];
+    //     snap.forEach((doc) => {
+    //       var product = doc.data();
+    //       product.id = doc.id;
+    //       this.products.push(product);
+    //     });
 
 
-      })
+    //   })
       
-    },
+    // },
     
     async readData() {
     //   db.collection("desserts2").get().then((querySnapshot) =>{
@@ -351,10 +361,11 @@ export default {
     // })
 
     var productsRef = await firebase.firestore().collection("products");
-
-    productsRef.onSnapshot((snap) => {
+    const uid = firebase.auth().currentUser.uid
+    console.log(uid);
+    
+      productsRef.where("userId", "==", firebase.auth().currentUser.uid).onSnapshot((snap) => {
       this.size = snap.size
-      // console.log(this.size);
       this.products = [];
       snap.forEach((doc) => {
         var product = doc.data();
@@ -362,6 +373,9 @@ export default {
         this.products.push(product);
       });
     });
+
+  
+
   },
 
     // async save() {
