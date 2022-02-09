@@ -274,6 +274,23 @@ export default {
   //   },
   // },
 
+  mounted() {
+  firebase.auth().onAuthStateChanged(user => {
+    this.user = user
+    window.localStorage.setItem('userId', user.uid)
+    
+    // console.log(user.uid);
+    
+
+    if(!this.user) {
+      this.$router.push('/auth/signin')
+    }
+  })
+  },
+
+ 
+
+
  
 
 
@@ -361,10 +378,11 @@ export default {
     // })
 
     var productsRef = await firebase.firestore().collection("products");
-    const uid = firebase.auth().currentUser.uid
-    console.log(uid);
-    
-      productsRef.where("userId", "==", firebase.auth().currentUser.uid).onSnapshot((snap) => {
+
+    const uid = sessionStorage.getItem("user_id")
+
+       
+      productsRef.where("userId", "==", uid).onSnapshot((snap) => {
       this.size = snap.size
       this.products = [];
       snap.forEach((doc) => {

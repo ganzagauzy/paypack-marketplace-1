@@ -91,15 +91,15 @@ export default {
     }
   },
 
-  mounted() {
-    firebase.auth().onAuthStateChanged(user => {
-      console.log(user);
-      this.user = user
+  // mounted() {
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     console.log(user);
+  //     this.user = user
 
-      if(!this.user) {
-        this.$router.push('/auth/signin')
-      }
-    })
-  },
+  //     if(!this.user) {
+  //       this.$router.push('/auth/signin')
+  //     }
+  //   })
+  // },
 }
 </script>
