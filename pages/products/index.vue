@@ -195,7 +195,8 @@
                       </p> -->
 
                       <v-btn class="py-3 top"
-                          color=""
+                          color="dark"
+                          dark
                           width="100%"
                           :to="{ name: 'products-movieid', params: {movieid: product.id} }" nuxt>
                             Read More
@@ -442,6 +443,7 @@ export default {
 .home {
   .top {
     padding-top: 30px;
+    
   }
   .loading {
     padding-top: 120px;

@@ -58,13 +58,24 @@
                       cols="12"
 
                     >
-                      <v-autocomplete
+                      <v-select
+                        :items="['Limited', 'Unlimited']"
+                        label="Quantity*"
+                        v-model="editedItem.quantity"
+                      ></v-select>
+                    </v-col>
+
+                    <!-- <v-col
+                      cols="12"
+
+                    >
+                      <v-select
                         :items="['Limited', 'Unlimited', ]"
                         label="Quantity"
                         v-model="editedItem.quantity"
                         multiple
-                      ></v-autocomplete>
-                    </v-col>
+                      ></v-select>
+                    </v-col> -->
 
                     <v-col
                     cols="12"
@@ -73,6 +84,16 @@
                           label="Price*"
                           v-model="editedItem.price"
                           type="number"
+                        ></v-text-field>
+                      </v-col>
+
+                    <v-col
+                    cols="12"
+                      >
+                        <v-text-field
+                          label="Category*"
+                          v-model="editedItem.category"
+                          
                         ></v-text-field>
                       </v-col>
 
@@ -201,10 +222,11 @@ export default {
         sortable: false,
         value: "name",
       },
-      { text: "Description", value: "description" },
+      
       { text: "Currency", value: "currency" },
       { text: "Quantity", value: "quantity" },
       { text: "Price", value: "price" },
+      { text: "Category", value: "category" },
       // { text: "Calories", value: "calories" },
       // { text: "Fat (g)", value: "fat" },
       // { text: "Carbs (g)", value: "carbs" },
@@ -219,6 +241,7 @@ export default {
       currency: "",
       quantity: "",
       price: '',
+      category: '',
       images: [],
       
       // calories: 0,
@@ -232,6 +255,7 @@ export default {
       currency: '',
       quantity: '',
       price: '',
+      category: '',
       // calories: '',
       // fat: '',
       // carbs: '',
@@ -400,6 +424,7 @@ export default {
         currency: this.editedItem.currency,
         quantity: this.editedItem.quantity,
         price: this.editedItem.price,
+        category: this.editedItem.category,
         images: this.editedItem.images,
         // calories: this.editedItem.calories,
         // fat: this.editedItem.fat,
@@ -428,6 +453,7 @@ export default {
         product.currency = this.editedItem.currency,
         product.quantity = this.editedItem.quantity,
         product.price = this.editedItem.price
+        product.category = this.editedItem.category
         product.images = this.editedItem.images
 
         if (this.editedIndex > -1) {
@@ -479,6 +505,7 @@ export default {
         product.currency = this.editedItem.currency,
         product.quantity = this.editedItem.quantity,
         product.price = this.editedItem.price
+        product.category = this.editedItem.category
         product.images = this.editedItem.images
         product.userId = firebase.auth().currentUser.uid
 

@@ -91,8 +91,10 @@
         <p>{{ product.description}}</p>
       </div>
       <v-btn
-      color="primary"
-      class="px-16 current-theme">Buy Now</v-btn>
+      :style="{
+                    backgroundColor: prodBackgroundColor,
+                  }"
+      class="px-16 ">Buy Now</v-btn>
       </v-col>
     </v-row>
 

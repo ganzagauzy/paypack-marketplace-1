@@ -13,7 +13,7 @@
             label="Email"
             type="email"
           ></v-text-field>
-          <v-divider class="my-2"></v-divider>
+          
 
           <v-text-field
             v-model="password"
@@ -22,18 +22,19 @@
           ></v-text-field>
         </v-card-text>
 
-        <v-divider></v-divider>
-        <br />
-        <a @click="forgotPassword">Forgot Pasword?</a>
+        
+        
+        
         {{ errors }}
 
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="" dark @click="submit"> Signin </v-btn>
         </v-card-actions>
-        <p class="py-3">
+        <p class="p-1">
           Don't have account? <NuxtLink to="/auth/signup">Sign up</NuxtLink>
         </p>
+        <a @click="forgotPassword">Forgot Pasword?</a>
       </v-card>
     </div>
     </v-container>

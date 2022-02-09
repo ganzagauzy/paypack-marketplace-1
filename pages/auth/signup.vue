@@ -19,13 +19,13 @@
                       label="Name"
                       type="text"
                     ></v-text-field>
-                <v-divider class="my-2"></v-divider>
+                
                 <v-text-field
                       v-model="email"
                       label="Email"
                       type="email"
                     ></v-text-field>
-                <v-divider class="my-2"></v-divider>
+                
 
                 <v-text-field
                       v-model="password"
