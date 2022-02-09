@@ -15,7 +15,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="text-h5">
-              <p>AGASOKO</p>
+              <h6>AGASOKO</h6>
               <v-subheader v-if="user">{{ user.email }}</v-subheader>
               <!-- <p class="small">{{user.email}}</p> -->
               <!-- <small class="small">{{ user.email }}</small> -->
@@ -176,6 +176,7 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       // console.log(user);
       this.user = user;
+      
     });
   },
 

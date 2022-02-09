@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="center">
+    <v-container>
+      <div class="center">
       <v-card width="500" class="">
         <v-toolbar flat color="" dark class="">
           <v-toolbar-title>SIGNIN</v-toolbar-title>
@@ -35,6 +36,7 @@
         </p>
       </v-card>
     </div>
+    </v-container>
   </div>
 </template>
 

@@ -255,7 +255,8 @@ export default {
       images: [],
       show: false,
       products: [],
-      size: ''
+      size: '',
+      user: "",
       // product: {
       //   name: '',
       //   description: '',
@@ -275,17 +276,14 @@ export default {
   // },
 
   mounted() {
-  firebase.auth().onAuthStateChanged(user => {
-    this.user = user
-    window.localStorage.setItem('userId', user.uid)
-    
-    // console.log(user.uid);
-    
-
-    if(!this.user) {
-      this.$router.push('/auth/signin')
-    }
-  })
+    firebase.auth().onAuthStateChanged(user => {
+      this.user = user
+      window.localStorage.setItem('userId', user.uid)
+      // console.log(user.uid);
+      if(!this.user) 
+      this.$router.push("/auth/signin");
+      
+    })
   },
 
  

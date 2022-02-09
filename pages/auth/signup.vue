@@ -1,6 +1,7 @@
 <template>
   <div>
-      <div class="center">
+      <v-container>
+        <div class="center">
           <v-card width="500"
             class="">
                 <v-toolbar
@@ -48,6 +49,7 @@
                 <p class="py-3">Already have account? <NuxtLink to="/auth/signin">Sign in</NuxtLink></p>
             </v-card>
       </div>
+      </v-container>
   </div>
 </template>
 
