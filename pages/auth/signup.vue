@@ -96,3 +96,10 @@ import 'firebase/compat/firestore';
     layout: "empty",
   }
 </script>
+<style scoped>
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
