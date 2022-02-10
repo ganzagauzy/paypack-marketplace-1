@@ -491,6 +491,7 @@
                       class="center"
                       v-for="(image, i) in product.images"
                       :key="i"
+                      :aspect-ratio="16/9"
                       :src="`${image}`"
                       max-height="400"
                       max-width="400"

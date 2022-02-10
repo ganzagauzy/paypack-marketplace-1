@@ -199,7 +199,9 @@
     <v-snackbar
       v-model="snackbar"
       shaped
+      color="success"
       right
+      top
     >
       <v-icon>{{ icon }}</v-icon> {{ text }}
 
@@ -278,6 +280,7 @@ export default {
       quantity: '',
       price: '',
       category: '',
+      images: [],
       // calories: '',
       // fat: '',
       // carbs: '',
@@ -304,6 +307,10 @@ export default {
   created() {
     this.initialize();
     this.readData();
+    this.$nuxt.$on('my-custom-event', () => {
+      this.text = "Document successfully deleted!"
+      this.snackbar = true
+   })
   },
  
 
@@ -395,6 +402,7 @@ export default {
     // });
 
       this.dialog = true;
+      
     },
 
     deleteItem(item) {
@@ -413,13 +421,13 @@ export default {
         .then(function () {
           
           console.log("Document successfully deleted!");
+          $nuxt.$emit('my-custom-event')
           
         })
         .catch(function (error) {
           console.error("Error removing document: ", error);
         });
-        this.text = "Document successfully deleted!"
-        this.snackbar = true
+        
       this.closeDelete();
       
     },
