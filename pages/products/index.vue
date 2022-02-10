@@ -174,7 +174,8 @@
                 <!-- Now streaming -->
                 <div v-else id="movie-grid" class="movies-grid">
                   <div v-for="(product, index) in products" :key="index" class="movie">
-                    <div class="movie-img">
+                    <NuxtLink  :to="{ name: 'products-movieid', params: {movieid: product.id} }">
+                      <div class="movie-img">
                       <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
                       <img :src="product.images[0]" alt="">
                       <!-- <p class="review">{{ movie.vote_average }}</p> -->
@@ -194,18 +195,19 @@
                         }}
                       </p> -->
 
-                      <v-btn class="py-3 top"
+                      <!-- <v-btn class="py-3 top"
                           color="dark"
                           dark
                           width="100%"
                           :to="{ name: 'products-movieid', params: {movieid: product.id} }" nuxt>
                             Read More
-                        </v-btn>
+                        </v-btn> -->
 
                       <!-- <NuxtLink class="button button-light" :to="{ name: 'movies-movieid', params: {movieid: movie.id} }">
                         Get More Info
                       </NuxtLink> -->
                     </div>
+                    </NuxtLink>
                   </div>
                 </div>
               </div>

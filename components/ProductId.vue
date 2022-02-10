@@ -460,7 +460,7 @@
                 >
                   <div class="rounded-circle">
                     <v-btn >
-                      <v-icon>mdi-palette</v-icon>
+                      <!-- <v-icon>mdi-palette</v-icon> -->
                       <input
                       type="color"
                       name=""

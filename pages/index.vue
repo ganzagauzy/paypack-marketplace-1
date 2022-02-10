@@ -72,6 +72,59 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+
+      <v-hover v-slot="{ hover }">
+        <v-card
+      class="mx-auto"
+      color="grey lighten-4"
+      max-width="600"
+    >
+      <v-img
+        :aspect-ratio="16/9"
+        src="https://cdn.vuetifyjs.com/images/cards/kitchen.png"
+      >
+        <v-expand-transition>
+          <div
+            v-if="hover"
+            class="d-flex transition-fast-in-fast-out grey darken-2 v-card--reveal text-h20 white--text"
+            style="height: 100%;"
+          >
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas sunt minus sed vitae explicabo! Soluta iure reprehenderit perferendis ullam ex culpa
+            Lorem ipsum dolor sit amet consectetur <br>
+            <v-btn
+            color="dark"
+            nuxt
+            to="/inspire"
+          >
+            Continue
+          </v-btn>
+          </div>
+        </v-expand-transition>
+      </v-img>
+      <v-card-text
+        class="pt-6"
+        style="position: relative;"
+      >
+        
+        <div class="font-weight-light grey--text text-h6 mb-2">
+          For the perfect meal
+        </div>
+        <h3 class="text-h5 font-weight-light orange--text mb-2">
+          QW cooking utensils
+        </h3>
+        
+      </v-card-text>
+      <v-btn
+            color="dark"
+            nuxt
+            to="/inspire"
+          >
+            Continue
+          </v-btn>
+    </v-card>
+  </v-hover>
+
+
     </v-col>
   </v-row>
 </template>
@@ -103,3 +156,15 @@ export default {
   // },
 }
 </script>
+
+<style scoped>
+
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .5;
+  position: absolute;
+  width: 100%;
+}
+</style>

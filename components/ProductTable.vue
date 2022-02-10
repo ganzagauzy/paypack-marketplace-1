@@ -196,6 +196,25 @@
       </template>
     </v-data-table>
 
+    <v-snackbar
+      v-model="snackbar"
+      shaped
+      right
+    >
+      <v-icon>{{ icon }}</v-icon> {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="success"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
     <!-- <div v-for="(product, index) in products" :key="index" class="movie">
       <p>{{ product}}</p>
     </div> -->
@@ -215,6 +234,9 @@ export default {
   data: () => ({
     dialog: false,
     dialogDelete: false,
+    snackbar: false,
+    text: '',
+    icon: "mdi-checkbox-marked-circle",
     headers: [
       {
         text: "Product Name",
@@ -389,13 +411,17 @@ export default {
         .doc(itemID)
         .delete()
         .then(function () {
+          
           console.log("Document successfully deleted!");
+          
         })
         .catch(function (error) {
           console.error("Error removing document: ", error);
         });
-
+        this.text = "Document successfully deleted!"
+        this.snackbar = true
       this.closeDelete();
+      
     },
 
     close() {
@@ -403,6 +429,7 @@ export default {
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
+        
       });
     },
 
@@ -433,6 +460,8 @@ export default {
         })
         .then(() => {
             console.log("Document successfully updated!");
+            this.text = "Document successfully updated!"
+            this.snackbar = true
         })
         .catch((error) => {
             
@@ -522,7 +551,10 @@ export default {
         db.collection("products")
           .add(product)
           .then(() => {
+
             console.log("added to db");
+            this.text = "sucessfully added to db"
+            this.snackbar = true
             
           });
         this.products.push(this.editedItem)
