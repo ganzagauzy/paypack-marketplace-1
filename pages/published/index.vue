@@ -1,0 +1,604 @@
+<template>
+  <div>
+
+  <div class="fixed-bar top">
+    <div class="fixed-bar">
+            <v-system-bar  class=""
+                      window
+                      dark
+                      color=""
+                    >
+                      <v-icon>mdi-dropbox </v-icon>
+                      <span>Products &mdash;{{ size }}</span>
+                      <v-spacer></v-spacer>
+                      <!-- <v-icon>mdi-minus</v-icon>
+                      <v-icon>mdi-checkbox-blank-outline</v-icon>
+                      <v-icon>mdi-close</v-icon> -->
+                    </v-system-bar>
+
+                    <v-row class=""
+                   
+                    color="#d1dbec"
+                    >
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+
+                      </v-col>
+                      
+                    </v-row>
+    </div>
+
+  </div>
+
+  
+
+  <!-- <div class="pt-16">
+    <v-card>
+    <v-tabs
+        color="dark"
+        right
+      >
+        <v-tab><v-icon>mdi-grid</v-icon></v-tab>
+        <v-tab><v-icon>mdi-grid</v-icon></v-tab>
+        <v-tab><v-icon>mdi-grid</v-icon></v-tab>
+
+        <v-tab-item
+          v-for="n in 3"
+          :key="n"
+        >
+          <v-container fluid>
+            <v-row>
+              <v-col
+                v-for="i in 12"
+                :key="i"
+                cols="12"
+                md="4"
+              >
+                <v-img
+                  :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
+                  :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
+                  aspect-ratio="1"
+                ></v-img>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-tab-item>
+      </v-tabs>
+    </v-card>
+
+  </div> -->
+
+  
+
+  <v-card>
+      
+    <v-toolbar
+      
+      fixed
+      color="#d1dbec"
+      
+    >
+    
+    <v-toolbar-title>
+    <v-row justify-between>
+        <v-col
+        md="">
+            <div v-for="(product, index) in products" :key="index" class="movie d-flex">
+            {{product.shopname}}'s Shop
+            <v-spacer></v-spacer>
+        </div>
+        </v-col>
+        <v-spacer></v-spacer>
+       <v-col justify-end>
+           
+       </v-col>
+    </v-row>
+    </v-toolbar-title>
+    </v-toolbar>
+
+    
+        <v-card flat>
+          <div class="home">
+
+              
+            <div class="menu px-3">
+                <div class="nav">
+                   <ul>
+                        <li>
+                            <a href="#">li</a>
+                            <ul>
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                            </ul>
+                        </li>
+                   </ul>
+                </div>
+            </div>
+              <!-- Hero -->
+              <!-- <Hero /> -->
+
+
+
+              <!-- search box -->
+              <!-- <div class="container search">
+                <input v-model.lazy="searchInput" type="text" placeholder="Search" @keyup.enter="$fetch">
+                <v-btn icon v-show="searchInput !='' " class="button" @click="clearSearch"><v-icon>mdi-close</v-icon></v-btn>
+              </div> -->
+
+              <!-- <div v-for="(product, index) in products" :key="index" class="">
+                <p>{{ product.images}}</p>
+              </div> -->
+
+              <!-- <div  id="movie-grid" class="movies-grid">
+                  <div v-for="(product, index) in products" :key="index" class="movie">
+                    <div class="movie-img"> -->
+                      <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
+                      <!-- <img :src="product.images[0]" alt=""> -->
+                      <!-- <p class="review">{{ movie.vote_average }}</p> -->
+                      <!-- <p class="overview">{{ movie.overview }}</p> -->
+                    <!-- </div>
+                    
+                  </div>
+              </div> -->
+
+
+
+     
+
+              <!-- Loading -->
+              <!-- <Loading v-if="$fetchState.pending" /> -->
+
+              
+
+              <!-- Movies -->
+              <div  class="container movies">
+                <!-- Searched movies -->
+                <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
+                  <div v-for="(product, index) in searchProducts" :key="index" class="movie">
+                    <div class="movie-img">
+                      <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
+                      <img :src="product.images[0]" alt="">
+                      <!-- <p class="review">{{ movie.vote_average }}</p> -->
+                      <!-- <p class="overview">{{ movie.overview }}</p> -->
+                    </div>
+                    <div class="">
+                      <!-- <p class="title h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
+                      </p> -->
+                      <!-- <p class="release">
+                        Released:
+                        {{
+                          new Date(movie.release_date).toLocaleString('en-us', {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric',
+                          })
+                        }}
+                      </p> -->
+                      <!-- <v-btn class="py-3"
+                          color=""
+                          width="100%"
+                          :to="{ name: 'products-movieid', params: {movieid: movie.id} }" nuxt>
+                            Read More
+                        </v-btn> -->
+                      <!-- <NuxtLink class="button button-light" :to= "`/products/${movie.id}`">
+                        Get More Info
+                      </NuxtLink> -->
+                    </div>
+                  </div>
+                </div>
+                <!-- Now streaming -->
+                <div v-else id="movie-grid" class="movies-grid">
+                  <div v-for="(product, index) in products" :key="index" class="movie">
+                    <NuxtLink  :to="{ name: 'products-movieid', params: {movieid: product.id} }">
+                      <v-hover v-slot="{ hover }">
+                        <v-card
+                      class="mx-auto"
+                      color="grey lighten-4"
+                      max-width="600"
+                    >
+                      <div class="movie-img">
+                        <v-img
+                        :aspect-ratio="16/14"
+                        :src="product.images[0]"
+                      >
+                        <v-expand-transition>
+                          <div
+                            v-if="hover"
+                            class="d-flex transition-fast-in-fast-out blue darken-2 v-card--reveal text-h3 white--text"
+                            style="height: 100%;"
+                          >
+                            More
+                          </div>
+                        </v-expand-transition>
+                      </v-img>
+                      </div>
+                      
+                          
+                          <!-- <p class="text-h5 font-weight-light orange--text mb-2 title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span></p> -->
+                      <div class="info1 py-1 px-2">
+                        <!-- <p class="title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
+                        </p> -->
+                      </div>
+                      <p class="text-h6 px-2 py-1 font-weight-light blue--text mb-2">
+                        {{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
+                      </p>
+                          
+                          
+                       
+
+                    </v-card>
+                  </v-hover>
+                    </NuxtLink>
+                  </div>
+                </div>
+              </div>
+              
+
+            </div>
+        </v-card>
+      
+  </v-card>
+
+
+
+
+
+
+
+  </div>
+</template>
+
+
+<script>
+import VueUploadMultipleImage from 'vue-upload-multiple-image'
+import axios from 'axios'
+import {mapState} from 'vuex'
+import ProductTable from '../../components/ProductTable.vue'
+
+import firebase from "firebase/compat/app";
+import 'firebase/compat/auth';
+import "firebase/compat/firestore";
+// import db from "../plugins/firebase";
+
+
+export default {
+  data() {
+    return {
+      movies: [],
+      searchedMovies: [],
+      searchProducts: [],
+      searchInput: '',
+      dialog: false,
+      images: [],
+      show: false,
+      products: [],
+      size: '',
+      user: "",
+      // product: {
+      //   name: '',
+      //   description: '',
+      // },
+
+    }
+  },
+
+  components: {
+    VueUploadMultipleImage,
+    ProductTable
+  },
+ 
+//   created() {
+//     this.readData();
+//   },
+
+  methods: {
+
+    initialize() {
+      this.products = [];
+    },
+    
+    // async getProducts() {
+    //   getMovies()
+
+    //   var productsRef = await firebase.firestore().collection("products");
+
+    //     productsRef.onSnapshot((snap) => {
+    //       this.size = snap.size
+    //       console.log(this.size);
+    //       this.products = [];
+    //       snap.forEach((doc) => {
+    //         var product = doc.data();
+    //         product.id = doc.id;
+    //         this.products.push(product);
+    //       });
+    //     });
+    //   },
+
+
+    //   const data = axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1'
+    //   )
+    //   eslint-disable-next-line no-unused-vars
+    //   const result = await data
+    //   result.data.results.forEach(movie => {
+    //     this.movies.push(movie)
+
+    //   })
+    //   // eslint-disable-next-line no-console
+    //   console.log('hi')
+    // },
+    // async searchMovies() {
+    //   db.collection('products').where('name', '==', this.searchInput).get().then((snap) => {
+    //     this.products = [];
+    //     snap.forEach((doc) => {
+    //       var product = doc.data();
+    //       product.id = doc.id;
+    //       this.products.push(product);
+    //     });
+
+
+    //   })
+      
+    // },
+    
+    async readData() {
+    //   db.collection("desserts2").get().then((querySnapshot) =>{
+    //   querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, "=>",doc.data());
+    //     this.products = doc.data();
+    //     this.products.push(doc.data())
+    //   })
+    // })
+
+    var productsRef = await firebase.firestore().collection("published");
+
+    // const uid = sessionStorage.getItem("user_id")
+
+       
+      productsRef.onSnapshot((snap) => {
+      this.size = snap.size
+      this.products = [];
+      snap.forEach((doc) => {
+        var product = doc.data();
+        product.id = doc.id;
+        this.products.push(product);
+      });
+    });
+
+  
+
+  },
+
+  clearSearch() {
+    this.searchInput = ''
+    this.searchedMovies = []
+  },
+}
+
+
+}
+
+
+</script>
+
+<style lang="scss" >
+
+.fixed-bar {
+  position: sticky;
+  position: -webkit-sticky; /* for Safari */
+  top: 3.9em;
+  z-index: 2;
+}
+
+.home {
+  .top {
+    padding-top: 30px;
+    
+  }
+  .loading {
+    padding-top: 120px;
+    align-items: flex-start;
+  }
+  .search {
+    display: flex;
+    padding: 32px 16px;
+    input {
+      max-width: 350px;
+      width: 100%;
+      color: #111;
+      padding: 5px 5px;
+      font-size: 14px;
+      border-bottom: 1px solid #111;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+  }
+  .movies {
+    padding: 32px 16px;
+    .movies-grid {
+      display: grid;
+      column-gap: 32px;
+      row-gap: 64px;
+      grid-template-columns: 1fr;
+      @media (min-width: 500px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (min-width: 750px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media (min-width: 1100px) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .movie {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        .movie-img {
+          position: relative;
+          overflow: hidden;
+          &:hover {
+            .overview {
+              transform: translateY(0);
+            }
+          }
+          img {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+          .review {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #c92502;
+            color: #fff;
+            border-radius: 0 0 16px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          }
+          .overview {
+            line-height: 1.5;
+            position: absolute;
+            bottom: 0;
+            background-color: rgba(201, 38, 2, 0.9);
+            padding: 12px;
+            color: #fff;
+            transform: translateY(100%);
+            transition: 0.3s ease-in-out all;
+          }
+        }
+        .info1 {
+          margin-top: auto;
+          .title {
+            margin-top: 8px;
+            color: #111;
+            font-size: 20px;
+          }
+          .release {
+            margin-top: 8px;
+            color: #c9c9c9;
+          }
+
+        }
+      }
+    }
+  }
+}
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .5;
+  position: absolute;
+  width: 100%;
+}
+.v-card--reveal2 {
+  align-items: right;
+  bottom: 0;
+  justify-content: right;
+  opacity: .9;
+  position: absolute;
+  width: 100%;
+}
+.munu {
+    position: absolute;
+    width: 100%;
+    background: rgba(255, 255, 255, 255.5);
+    padding: 0 10px;
+}
+.nav {
+    position: relative;
+    
+}
+.nav ul  {
+    margin: 0;
+    padding: 0;
+    
+}
+.nav ul li {
+    list-style: none;
+}
+.nav ul li a:hover {
+    background: #184771;
+    color: #fff;
+}
+.nav ul li ul {
+    display: block;
+    background:  rgba(255, 255, 255, 255.5);
+    min-width: 250px;
+    position: absolute;
+    margin-top: 1px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transition: .5s;
+    transform: translateY(40px);
+
+}
+
+.nav ul li:hover ul {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // export default {
+  //   data: () => ({
+  //     isLoading: false,
+  //     items: [],
+  //     model: null,
+  //     search: null,
+  //     tab: null,
+  //   }),
+
+  //   watch: {
+  //     model (val) {
+  //       if (val != null) this.tab = 0
+  //       else this.tab = null
+  //     },
+  //     search (val) {
+  //       // Items have already been loaded
+  //       if (this.items.length > 0) return
+
+  //       this.isLoading = true
+
+  //       // Lazily load input items
+  //       fetch('https://api.coingecko.com/api/v3/coins/list')
+  //         .then(res => res.clone().json())
+  //         .then(res => {
+  //           this.items = res
+  //         })
+  //         .catch(err => {
+  //           console.log(err)
+  //         })
+  //         .finally(() => (this.isLoading = false))
+  //     },
+  //   },
+  // }

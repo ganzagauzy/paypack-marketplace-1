@@ -13,57 +13,102 @@
           <v-toolbar-title></v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="400px">
+          <v-dialog v-model="dialog" max-width="800px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="" dark class="mb-2" v-bind="attrs" v-on="on">
                 New Product
               </v-btn>
             </template>
             <v-card>
-              <v-card-title>
-                <span class="text-h5">{{ formTitle }}</span>
-              </v-card-title>
+               <v-app-bar
+                
+                color="#d1dbec"
+                height="50px"
+              >
+                <v-toolbar-title><span class="text-h6">{{ formTitle }}</span></v-toolbar-title>
+              </v-app-bar>
+              
 
-              <v-card-text>
+
+
+            
                 <v-container>
                   <v-row>
-                    <v-col cols="12" >
+                    <v-col 
+                    cols="12"
+                    md="8"
+                     >
                       <v-text-field
+                      
                         v-model="editedItem.name"
                         label="Product name"
+                        outlined
+                        dense
+                        
                       ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" >
-                      <v-textarea
+                      <vue-editor class="pb-1" v-model="editedItem.description"></vue-editor>
+                      <!-- <v-textarea
                         clearable
                         clear-icon="mdi-close-circle"
                         v-model="editedItem.description"
                         label="Description"
                         type="text"
-                      ></v-textarea>
+                        outlined
+                        dense
+                        
+                      ></v-textarea> -->
+                      <label for="product_Image">Product Images</label>
+                      <input type="file" @change="uploadImage" class="form-control">
+                      <div class="form-group d-flex">
+                        <div v-for="(image, index) in editedItem.images" :key="index" class="pa-2">
+                        <div class="img-wrapp">
+                          <img :src="image" alt="" width="80px" >
+                          <span class="delete-img" @click="deleteImage(image,index)">X</span>
+                        </div>
+                      </div>
+                      </div>
                     </v-col>
-
                     <v-col
                       cols="12"
+                      md="4"
 
                     >
                       <v-select
                         :items="['Rwf', 'SSD']"
                         label="Currency*"
                         v-model="editedItem.currency"
+                        outlined
+                        dense
+                        
                       ></v-select>
-                    </v-col>
-
-                    <v-col
-                      cols="12"
-
-                    >
                       <v-select
                         :items="['Limited', 'Unlimited']"
                         label="Quantity*"
                         v-model="editedItem.quantity"
+                        outlined
+                        dense
+                        
                       ></v-select>
+                      <v-text-field
+                          label="Price*"
+                          v-model="editedItem.price"
+                          type="number"
+                          outlined
+                          dense
+                          
+                        ></v-text-field>
+                        <v-text-field
+                          label="Category*"
+                          v-model="editedItem.category"
+                          outlined
+                          dense
+                          
+                          
+                        ></v-text-field>
+                        
                     </v-col>
+
+                    
 
                     <!-- <v-col
                       cols="12"
@@ -77,45 +122,12 @@
                       ></v-select>
                     </v-col> -->
 
-                    <v-col
-                    cols="12"
-                      >
-                        <v-text-field
-                          label="Price*"
-                          v-model="editedItem.price"
-                          type="number"
-                        ></v-text-field>
-                      </v-col>
+                    
 
-                    <v-col
-                    cols="12"
-                      >
-                        <v-text-field
-                          label="Category*"
-                          v-model="editedItem.category"
-                          
-                        ></v-text-field>
-                      </v-col>
+                   
 
-                    <v-col
-                    cols="12"
-                      >
-                        <label for="product_Image">Product Images</label>
-                        <input type="file" @change="uploadImage" class="form-control">
-                      </v-col>
-                    <v-col
-
-                    cols="12"
-                    class="form-group d-flex"
-                      >
-                      <div v-for="(image, index) in editedItem.images" :key="index" class="pa-2">
-                        <div class="img-wrapp">
-                          <img :src="image" alt="" width="80px" >
-                          <span class="delete-img" @click="deleteImage(image,index)">X</span>
-                        </div>
-                      </div>
-                        
-                      </v-col>
+                    
+                    
                     <!-- <v-col
                     cols="12"
                       >
@@ -156,15 +168,25 @@
                     </v-col> -->
                   </v-row>
                 </v-container>
-              </v-card-text>
+              
+            
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">
-                  Cancel
+                <v-btn color=""  @click="close">
+                  <v-icon left>
+                      mdi-close
+                  </v-icon>Close
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="update"> Edit </v-btn>
-                <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+                <v-btn color=""    @click="update">
+                  <v-icon left>
+                      mdi-pencil
+                  </v-icon>Edit </v-btn>
+        
+                <v-btn color=""  @click="save">
+                  <v-icon left>
+                      mdi-upload
+                  </v-icon> Save </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -224,6 +246,7 @@
 </template>
 
 <script>
+import { VueEditor } from "vue2-editor";
 import { doc, deleteDoc } from "firebase/firestore";
 
 import firebase from "firebase/compat/app";
@@ -238,6 +261,7 @@ export default {
     dialogDelete: false,
     snackbar: false,
     text: '',
+    content: "<h1>Some initial content</h1>",
     icon: "mdi-checkbox-marked-circle",
     headers: [
       {
@@ -258,6 +282,7 @@ export default {
       { text: "Actions", value: "actions", sortable: false },
     ],
     products: [],
+    myproducts: [],
     editedIndex: -1,
     editedItem: {
       name: "",
@@ -289,6 +314,10 @@ export default {
     activeItem: null
   }),
 
+  components: {
+    VueEditor
+  },
+
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
@@ -317,6 +346,7 @@ export default {
   methods: {
     initialize() {
       this.products = [];
+      this.myproducts = [];
     },
 
     uploadImage(e){
@@ -378,6 +408,17 @@ export default {
           this.products.push(product);
         });
       });
+
+      var myproductsRef = await firebase.firestore().collection("published").where("userId", "==", firebase.auth().currentUser.uid );
+
+      myproductsRef.onSnapshot((snap) => {
+        this.myproducts = [];
+        snap.forEach((doc) => {
+          var myproduct = doc.data();
+          myproduct.id = doc.id;
+          this.myproducts.push(myproduct);
+        });
+      });
     },
 
     editItem(item) {
@@ -413,10 +454,25 @@ export default {
 
     deleteItemConfirm() {
       const itemID = this.products[this.editedIndex].id;
+      const itemID2 = this.myproducts[this.editedIndex].id;
       this.products.splice(this.editedIndex, 1);
+      this.myproducts.splice(this.editedIndex, 1);
 
       db.collection("products")
         .doc(itemID)
+        .delete()
+        .then(function () {
+          
+          console.log("Document successfully deleted!");
+          $nuxt.$emit('my-custom-event')
+          
+        })
+        .catch(function (error) {
+          console.error("Error removing document: ", error);
+        });
+        
+      db.collection("published")
+        .doc(itemID2)
         .delete()
         .then(function () {
           
@@ -452,8 +508,33 @@ export default {
     update() {
       const product = {}
       const itemID = this.products[this.editedIndex].id;
+      const itemID2 = this.myproducts[this.editedIndex].id;
 
         db.collection("products").doc(itemID).update({
+        name: this.editedItem.name,
+        description: this.editedItem.description,
+        currency: this.editedItem.currency,
+        quantity: this.editedItem.quantity,
+        price: this.editedItem.price,
+        category: this.editedItem.category,
+        images: this.editedItem.images,
+        // calories: this.editedItem.calories,
+        // fat: this.editedItem.fat,
+        // carbs: this.editedItem.carbs,
+        // protein: this.editedItem.protein,
+        })
+        .then(() => {
+            console.log("Document successfully updated!");
+            this.text = "Document successfully updated!"
+            this.snackbar = true
+        })
+        .catch((error) => {
+            
+            console.error("Error updating document: ", error);
+        });
+
+        //update to its shop name
+        db.collection("published").doc(itemID2).update({
         name: this.editedItem.name,
         description: this.editedItem.description,
         currency: this.editedItem.currency,
@@ -545,6 +626,7 @@ export default {
         product.category = this.editedItem.category
         product.images = this.editedItem.images
         product.userId = firebase.auth().currentUser.uid
+        product.shopname = firebase.auth().currentUser.displayName
 
         
        
@@ -566,6 +648,17 @@ export default {
             
           });
         this.products.push(this.editedItem)
+        // adding to its shop
+        db.collection("published")
+          .add(product)
+          .then(() => {
+
+            console.log("added to db");
+            this.text = "sucessfully added to db"
+            this.snackbar = true
+            
+          });
+
       }
 
         

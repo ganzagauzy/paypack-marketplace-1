@@ -14,16 +14,19 @@
                 </v-toolbar>
 
                 <v-card-text>
-                <v-text-field
-                      
-                      label="Name"
+                <v-form ref="form">
+                  <v-text-field
+                      v-model="shopname"
+                      label="ShopName"
                       type="text"
+                      :rules="inputRules"
                     ></v-text-field>
                 
                 <v-text-field
                       v-model="email"
                       label="Email"
                       type="email"
+                      :rules="inputRules"
                     ></v-text-field>
                 
 
@@ -31,7 +34,10 @@
                       v-model="password"
                       label="Password"
                       type="password"
+                      required
+                      :rules="inputRules"
                     ></v-text-field>
+                </v-form>
                 </v-card-text>
 
                 <v-divider></v-divider>
@@ -66,15 +72,29 @@ import 'firebase/compat/firestore';
       email: '',
       password: '',
       name: '',
-      errors: ''
+      shopname: '',
+      errors: '',
+      inputRules: [
+        v => v.length >=3 || 'fill all'
+      ],
     }),
     components: {},
 
     methods: {
         submit(){
-            firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(user => {
+            if(this.$refs.form.validate()) {
+              firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(user => {
 
                 console.log(user.user.uid);
+                if (firebase.auth().currentUser != null) {
+                    firebase.auth().currentUser.updateProfile({
+                        displayName: this.shopname
+                    }).then(function () {
+                        console.log("Updated");
+                    }, function (error) {
+                        console.log("Error happened");
+                    });
+                }
 
                 db.collection("users").doc(user.user.uid).set({
                   name: user.user.uid
@@ -90,6 +110,7 @@ import 'firebase/compat/firestore';
                 this.errors = error
 
             })
+            }
         }
     },
     

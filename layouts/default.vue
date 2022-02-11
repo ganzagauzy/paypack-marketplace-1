@@ -160,6 +160,11 @@ export default {
           to: "/products",
         },
         {
+          icon: "mdi-dropbox",
+          title: "Published",
+          to: "/published",
+        },
+        {
           icon: "mdi-plus",
           title: "New Product",
           to: "/newproducts",
