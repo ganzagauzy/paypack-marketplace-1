@@ -86,7 +86,7 @@
         <v-col
         md="">
             <div v-for="(product, index) in products" :key="index" class="movie d-flex">
-            {{product.shopname}}'s Shop
+            <h6 href="">{{product.shopname}}'s Shop</h6>
             <v-spacer></v-spacer>
         </div>
         </v-col>
@@ -100,23 +100,39 @@
 
     
         <v-card flat>
-          <div class="home">
+          <div  class="home">
 
               
-            <div class="menu px-3">
-                <div class="nav">
-                   <ul>
+         <v-row >
+              <div  class="menu px-3">
+                <div  class="nav py-3">
+                   <ul >
                         <li>
-                            <a href="#">li</a>
-                            <ul>
-                                <li>1</li>
-                                <li>2</li>
-                                <li>3</li>
+                            <p >Choose Shop</p>
+                            <ul >
+                                <li v-for="(product, index) in myproducts" :key="index">
+                                  <v-btn @click="readDataByShop(product)"  text>{{ product.shopname }}</v-btn>
+                                </li>
                             </ul>
                         </li>
                    </ul>
                 </div>
             </div>
+              <!-- <div  class="menu px-3">
+                <div  class="nav py-3">
+                   <ul >
+                        <li>
+                            <p >Category</p>
+                            <ul >
+                                <li v-for="(product, index) in myproducts" :key="index">
+                                  <v-btn @click="readDataByCategory(product)"  text>{{ product.category }}</v-btn>
+                                </li>
+                            </ul>
+                        </li>
+                   </ul>
+                </div>
+            </div> -->
+         </v-row>
               <!-- Hero -->
               <!-- <Hero /> -->
 
@@ -167,6 +183,7 @@
                     <div class="">
                       <!-- <p class="title h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
                       </p> -->
+                      
                       <!-- <p class="release">
                         Released:
                         {{
@@ -192,7 +209,7 @@
                 <!-- Now streaming -->
                 <div v-else id="movie-grid" class="movies-grid">
                   <div v-for="(product, index) in products" :key="index" class="movie">
-                    <NuxtLink  :to="{ name: 'products-movieid', params: {movieid: product.id} }">
+                    <NuxtLink  :to="{ name: 'published-id', params: {id: product.id} }">
                       <v-hover v-slot="{ hover }">
                         <v-card
                       class="mx-auto"
@@ -267,6 +284,7 @@ import "firebase/compat/firestore";
 export default {
   data() {
     return {
+      selectedItem: null,
       movies: [],
       searchedMovies: [],
       searchProducts: [],
@@ -275,8 +293,11 @@ export default {
       images: [],
       show: false,
       products: [],
+      myproducts: [],
       size: '',
       user: "",
+      shopname: 'Crush',
+      editedIndex: -1,
       // product: {
       //   name: '',
       //   description: '',
@@ -290,14 +311,18 @@ export default {
     ProductTable
   },
  
-//   created() {
-//     this.readData();
-//   },
+  created() {
+    this.readData();
+    this.readDataByShop();
+    this.readDataByCategory();
+    
+  },
 
   methods: {
 
     initialize() {
       this.products = [];
+      this.myproducts = [];
     },
     
     // async getProducts() {
@@ -352,12 +377,79 @@ export default {
     //   })
     // })
 
-    var productsRef = await firebase.firestore().collection("published");
+    var myproductsRef = await firebase.firestore().collection("published");
 
     // const uid = sessionStorage.getItem("user_id")
 
        
-      productsRef.onSnapshot((snap) => {
+      myproductsRef.onSnapshot((snap) => {
+      // this.size = snap.size
+      this.myproducts = [];
+      snap.forEach((doc) => {
+        var myproduct = doc.data();
+        myproduct.id = doc.id;
+        this.myproducts.push(myproduct);
+      });
+    });
+
+  
+
+  },
+
+
+    async readDataByShop(product) {
+      console.log(product);
+    //   db.collection("desserts2").get().then((querySnapshot) =>{
+    //   querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, "=>",doc.data());
+    //     this.products = doc.data();
+    //     this.products.push(doc.data())
+    //   })
+    // })
+    
+
+
+    var productsRef = await firebase.firestore().collection("published");
+
+    // const uid = sessionStorage.getItem("user_id")
+    // const my_shop = this.myproducts[0].shopname
+    // console.log(my_shop);
+
+       
+      productsRef.where("shopname", "==", product.shopname).onSnapshot((snap) => {
+      this.size = snap.size
+      this.products = [];
+      snap.forEach((doc) => {
+        var product = doc.data();
+        product.id = doc.id;
+        this.products.push(product);
+      });
+    });
+
+  
+
+  },
+
+    async readDataByCategory(product) {
+      console.log(product);
+    //   db.collection("desserts2").get().then((querySnapshot) =>{
+    //   querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, "=>",doc.data());
+    //     this.products = doc.data();
+    //     this.products.push(doc.data())
+    //   })
+    // })
+    
+
+
+    var productsRef = await firebase.firestore().collection("published");
+
+    // const uid = sessionStorage.getItem("user_id")
+    // const my_shop = this.myproducts[0].shopname
+    // console.log(my_shop);
+
+       
+      productsRef.where("shopname", "==", product.shopname).where("category", "==", product.category).onSnapshot((snap) => {
       this.size = snap.size
       this.products = [];
       snap.forEach((doc) => {
@@ -435,6 +527,7 @@ export default {
         grid-template-columns: repeat(4, 1fr);
       }
       .movie {
+        z-index: 1;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -528,14 +621,14 @@ export default {
 .nav ul li {
     list-style: none;
 }
-.nav ul li a:hover {
+.nav ul li p:hover {
     background: #184771;
     color: #fff;
 }
 .nav ul li ul {
     display: block;
     background:  rgba(255, 255, 255, 255.5);
-    min-width: 250px;
+    min-width: 150px;
     position: absolute;
     margin-top: 1px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
@@ -547,7 +640,9 @@ export default {
 }
 
 .nav ul li:hover ul {
+    top: 35px;
     opacity: 1;
+    z-index: 10000;
     visibility: visible;
     transform: translateY(0);
 }
