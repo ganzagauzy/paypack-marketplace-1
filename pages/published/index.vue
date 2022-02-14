@@ -86,7 +86,7 @@
         <v-col
         md="">
             <div v-for="(product, index) in products" :key="index" class="movie d-flex">
-            <h6 href="">{{product.shopname}}'s Shop</h6>
+            <h6 href=""  >{{product.shopname}}'s Shop</h6>
             <v-spacer></v-spacer>
         </div>
         </v-col>
@@ -133,6 +133,7 @@
                 </div>
             </div> -->
          </v-row>
+        
               <!-- Hero -->
               <!-- <Hero /> -->
 
@@ -616,10 +617,12 @@ export default {
 .nav ul  {
     margin: 0;
     padding: 0;
+    cursor: pointer;
     
 }
 .nav ul li {
     list-style: none;
+    cursor: pointer;
 }
 .nav ul li p:hover {
     background: #184771;

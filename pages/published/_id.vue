@@ -92,7 +92,7 @@
       md="3"
       cols="12">
       <div v-for="(product, index) in products" :key="index" class="">
-        <p>{{ product.description}}</p>
+        <p> {{ product.description}} </p>
       </div>
       <v-btn
       :style="{
