@@ -214,5 +214,6 @@ export default {
 .carousel {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 </style>
