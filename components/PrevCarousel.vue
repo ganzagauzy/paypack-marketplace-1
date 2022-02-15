@@ -50,7 +50,8 @@
                     ></v-carousel-item>
                   </v-carousel> -->
 
-                  <v-carousel :show-arrows="true" hide-delimiters
+                  <v-container>
+                    <v-carousel :show-arrows="true" hide-delimiters
                     v-for="(product, index) in products" :key="index"
                     >
                     <v-carousel-item
@@ -63,6 +64,7 @@
                       cover
                     ></v-carousel-item>
                   </v-carousel>
+                  </v-container>
 
 
 

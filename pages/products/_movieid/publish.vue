@@ -1,5 +1,7 @@
 <template>
   <div>
+    <v-container>
+      <div>
 
     <p class="py-3"> This is a published page for <span class="h4 text-decoration-underline">{{$route.params.movieid}}</span></p> 
 
@@ -7,6 +9,8 @@
     <PrevCarousel />
 
 
+  </div>
+    </v-container>
   </div>
 
 

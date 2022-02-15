@@ -1,12 +1,22 @@
 <template>
   <div class="container">
-    <NuxtLink class="button button-light py-3" to= "/published">
+    <v-btn class="py-3"
+        color=""
+        :style="{
+          backgroundColor: prodBackgroundColor,
+        }"
+        dark
+        :to="{ name: 'published', params: {published: published} }" nuxt>
+          Back
+      </v-btn>
+    <!-- <NuxtLink class="button button-light py-3" to= "/published">
         Back
-      </NuxtLink>
+      </NuxtLink> -->
+      
       
      <!-- {{$route.params.movieid}} -->
 
-    <v-row>
+    <v-row class="py-3">
 
            <v-col cols="" sm="12" md="9">
                 <v-card id="app" :style="{
@@ -54,7 +64,8 @@
                     ></v-carousel-item>
                   </v-carousel> -->
 
-                  <v-carousel :show-arrows="true" hide-delimiters
+                  <v-container>
+                    <v-carousel :show-arrows="true" hide-delimiters
                     v-for="(product, index) in products" :key="index"
                     >
                     <v-carousel-item
@@ -67,6 +78,7 @@
                       cover
                     ></v-carousel-item>
                   </v-carousel>
+                  </v-container>
 
 
 
@@ -96,8 +108,9 @@
       </div>
       <v-btn
       :style="{
-                    backgroundColor: prodBackgroundColor,
-                  }"
+        backgroundColor: prodBackgroundColor,
+      }"
+      dark
       class="px-16 ">Buy Now</v-btn>
       </v-col>
     </v-row>
@@ -160,10 +173,7 @@ export default {
 
 
   methods: {
-    switchTheme(theme) {
-      localStorage.setItem("theme-color", theme);
-      this.currentTheme = localStorage.getItem("theme-color");
-    },
+    
 
      async readSingleData() {
       //   db.collection("desserts2").get().then((querySnapshot) =>{
