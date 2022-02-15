@@ -226,4 +226,18 @@ export default {
   align-items: center;
  
 }
+.bottom {
+  padding-top: 55%;
+}
+.rounded-circle {
+  padding: 3px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: #111;
+}
 </style>

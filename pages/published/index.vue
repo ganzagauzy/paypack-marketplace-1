@@ -86,7 +86,7 @@
         <v-col
         md="">
             <div v-for="(product, index) in products" :key="index" class="movie d-flex">
-            <h6 href=""  >{{product.shopname}}'s Shop</h6>
+            <h6   >{{product.shopname}}'s Shop</h6>
             <v-spacer></v-spacer>
         </div>
         </v-col>
@@ -476,8 +476,7 @@ export default {
 
 </script>
 
-<style lang="scss" >
-
+<style lang="scss" scoped>
 .fixed-bar {
   position: sticky;
   position: -webkit-sticky; /* for Safari */
@@ -648,6 +647,10 @@ export default {
     z-index: 10000;
     visibility: visible;
     transform: translateY(0);
+}
+a {
+  text-decoration: none;
+  color: #111;
 }
 
 </style>

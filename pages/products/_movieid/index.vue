@@ -76,7 +76,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .single-movie {
   color: #fff;
   min-height: 100vh;

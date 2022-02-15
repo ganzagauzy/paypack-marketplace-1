@@ -989,7 +989,8 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
 .fixed-bar {
   position: sticky;
   position: -webkit-sticky; /* for Safari */

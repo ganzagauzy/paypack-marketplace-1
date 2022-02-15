@@ -439,7 +439,7 @@ export default {
 
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 
 .fixed-bar {
   position: sticky;
@@ -549,6 +549,9 @@ export default {
       }
     }
   }
+}
+a {
+  text-decoration: none;
 }
 .v-card--reveal {
   align-items: center;

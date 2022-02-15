@@ -292,7 +292,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 
 .fixed-bar {
   position: sticky;
