@@ -18,12 +18,12 @@
 
     <v-row class="py-3">
 
-           <v-col cols="" sm="12" md="9">
+           <v-col cols="" sm="12" md="7">
                 <v-card id="app" :style="{
                     backgroundColor: prodBackgroundColor,
                   }">
                 <!-- <v-card id="app" v-bind:class="currentTheme"> -->
-                  <div class="py-2 px-3 ">
+                  <div class="py-2 pb-5 px-3 ">
 
                     <div class="rounded-circle">
                     <v-btn >
@@ -64,15 +64,15 @@
                     ></v-carousel-item>
                   </v-carousel> -->
 
-                  <v-container>
-                    <v-layout>
+                 
+                    
                       <v-carousel :show-arrows="true" hide-delimiters
                     v-for="(product, index) in products" :key="index"
                     class=""
                     
                     >
                     <v-carousel-item
-                      class=" d-flex justify-center"
+                      class=" carousel"
                       v-for="(image, i) in product.images"
                       :key="i"
                       :src="`${image}`"
@@ -81,8 +81,8 @@
                       cover
                     ></v-carousel-item>
                   </v-carousel>
-                    </v-layout>
-                  </v-container>
+                    
+                 
 
 
 
@@ -105,7 +105,7 @@
       </v-card>
       </v-col> -->
       <v-col
-      md="3"
+      md="5"
       cols="12">
       <div v-for="(product, index) in products" :key="index" class="">
         <p> {{ product.description}} </p>
@@ -241,5 +241,9 @@ export default {
 a {
   text-decoration: none;
   color: #111;
+}
+.carousel {
+  display: flex;
+  justify-content: center;
 }
 </style>
