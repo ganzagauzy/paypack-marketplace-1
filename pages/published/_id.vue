@@ -6,7 +6,7 @@
           backgroundColor: prodBackgroundColor,
         }"
         dark
-        :to="{ name: 'published', params: {published: published} }" nuxt>
+        to="/published" nuxt>
           Back
       </v-btn>
     <!-- <NuxtLink class="button button-light py-3" to= "/published">
@@ -72,7 +72,7 @@
                     
                     >
                     <v-carousel-item
-                      class="center d-flex justify-center"
+                      class=" d-flex justify-center"
                       v-for="(image, i) in product.images"
                       :key="i"
                       :src="`${image}`"
