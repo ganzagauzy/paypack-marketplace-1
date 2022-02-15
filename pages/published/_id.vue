@@ -23,7 +23,7 @@
                     backgroundColor: prodBackgroundColor,
                   }">
                 <!-- <v-card id="app" v-bind:class="currentTheme"> -->
-                  <div class="py-2 px-3">
+                  <div class="py-2 px-3 ">
 
                     <div class="rounded-circle">
                     <v-btn >
@@ -68,9 +68,11 @@
                     <v-layout>
                       <v-carousel :show-arrows="true" hide-delimiters
                     v-for="(product, index) in products" :key="index"
+                    class=""
+                    
                     >
                     <v-carousel-item
-                      class="center"
+                      class="center d-flex justify-center"
                       v-for="(image, i) in product.images"
                       :key="i"
                       :src="`${image}`"

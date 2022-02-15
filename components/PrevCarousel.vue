@@ -56,7 +56,7 @@
                     v-for="(product, index) in products" :key="index"
                     >
                     <v-carousel-item
-                      class="center"
+                      class="center d-flex justify-center"
                       v-for="(image, i) in product.images"
                       :key="i"
                       :src="`${image}`"
