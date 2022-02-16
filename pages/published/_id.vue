@@ -72,7 +72,7 @@
                     
                     >
                     <v-carousel-item
-                      class=" carousel"
+                      class=" carousel justify-center py-5"
                       v-for="(image, i) in product.images"
                       :key="i"
                       :src="`${image}`"
@@ -244,7 +244,6 @@ a {
 }
 .carousel {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  
 }
 </style>
