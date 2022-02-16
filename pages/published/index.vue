@@ -108,7 +108,13 @@
                 <div  class="nav py-3">
                    <ul >
                         <li>
-                            <p >Choose Shop</p>
+                             <v-btn
+                                class="ma-2"
+                                outlined
+                                color=""
+                              >
+                                Choose Shop
+                              </v-btn>
                             <ul >
                                 <li v-for="(product, index) in myproducts" :key="index">
                                   <v-btn @click="readDataByShop(product)"  text>{{ product.shopname }}</v-btn>
@@ -642,7 +648,7 @@ export default {
 }
 
 .nav ul li:hover ul {
-    top: 35px;
+    top: 60px;
     opacity: 1;
     z-index: 10000;
     visibility: visible;
