@@ -78,6 +78,9 @@
       <v-card flat>
         <div class="home">
           <v-row>
+            <v-col>
+
+            
             <div class="menu px-3">
               <div class="nav py-3">
                 <ul>
@@ -94,6 +97,26 @@
                 </ul>
               </div>
             </div>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-col>
+            <div class="menu px-3">
+              <div class="nav py-3">
+                <ul>
+                  <li>
+                    <v-btn class="ma-2" outlined color=""> Filter Products</v-btn>
+                    <ul>
+                      <li v-for="(product, index) in shopproducts" :key="index">
+                        <v-btn @click="readDataByCategory(product)"  text>{{
+                          product.category
+                        }}</v-btn>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            </v-col>
             <!-- <div  class="menu px-3">
                 <div  class="nav py-3">
                    <ul >
@@ -272,6 +295,7 @@ export default {
       show: false,
       products: [],
       myproducts: [],
+      shopproducts: [],
       size: "",
       user: "",
       shop: "",
@@ -293,12 +317,14 @@ export default {
     this.readData();
     this.readDataByShop();
     this.readDataByCategory();
+    this.readDataFilter();
   },
 
   methods: {
     initialize() {
       this.products = [];
       this.myproducts = [];
+      this.shopproducts = [];
     },
 
     // async getProducts() {
@@ -371,6 +397,36 @@ export default {
         });
       });
     },
+
+    async readDataFilter() {
+      //   db.collection("desserts2").get().then((querySnapshot) =>{
+      //   querySnapshot.forEach((doc) => {
+      //     console.log(doc.id, "=>",doc.data());
+      //     this.products = doc.data();
+      //     this.products.push(doc.data())
+      //   })
+      // })
+
+      var shopproductsRef = await firebase.firestore().collection("published");
+
+      // const uid = sessionStorage.getItem("user_id")
+
+      shopproductsRef.onSnapshot((snap) => {
+        // this.size = snap.size
+        this.shopproducts = [];
+        this.shopproducts = snap.docs.map((doc) => {
+          var shopproduct = doc.data();
+          shopproduct.id = doc.id;
+          return shopproduct;
+        });
+
+        this.shopproducts = this.shopproducts.filter((product, i) => {
+          return i == this.shopproducts.findIndex(
+            (p) => p.category == product.category
+          );
+        });
+      });
+    },
     
   
 
@@ -422,7 +478,6 @@ export default {
       // console.log(my_shop);
 
       productsRef
-        .where("shopname", "==", product.shopname)
         .where("category", "==", product.category)
         .onSnapshot((snap) => {
           this.size = snap.size;

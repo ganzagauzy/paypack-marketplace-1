@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-    <v-btn class="py-3"
+
+    <div v-for="(product, index) in products" :key="index" class="d-flex justify-center">
+        
+        <v-btn class="ma-2 px-16 py-5" outlined color=""> {{product.shopname}}'Shop </v-btn>
+      </div>
+    
+    <v-btn class="py-5"
         color=""
         :style="{
           backgroundColor: prodBackgroundColor,
