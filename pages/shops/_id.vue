@@ -6,7 +6,7 @@
           backgroundColor: prodBackgroundColor,
         }"
         dark
-        to="/published" nuxt>
+        to="/shops" nuxt>
           Back
       </v-btn>
     <!-- <NuxtLink class="button button-light py-3" to= "/published">

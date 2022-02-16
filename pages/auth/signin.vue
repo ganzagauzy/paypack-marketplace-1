@@ -66,7 +66,7 @@ export default {
         .then((user) => {
           console.log(user);
           sessionStorage.setItem("user_id", user.user.uid);
-          this.$router.push("/");
+          this.$router.push("/products");
         })
         .catch((error) => {
           this.errors = error;
