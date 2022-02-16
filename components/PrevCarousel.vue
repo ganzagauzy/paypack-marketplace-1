@@ -53,19 +53,23 @@
 
                   
                     
-                      <v-carousel :show-arrows="true" hide-delimiters
+                     <div class=" carousel  d-flex justify-center py-5 move-right">
+                        <v-carousel :show-arrows="true" hide-delimiters
+                      
                     v-for="(product, index) in products" :key="index"
                     >
                     <v-carousel-item
-                      class=" carousel justify-center py-5 move-right"
+                      
                       v-for="(image, i) in product.images"
                       :key="i"
                       :src="`${image}`"
                       max-height="400"
                       max-width="400"
+                      class="move-right"
                       cover
                     ></v-carousel-item>
                   </v-carousel>
+                     </div>
                    
                   
 
@@ -213,9 +217,12 @@ export default {
 
 .carousel {
   display: flex;
+  flex-direction: row;
  
 }
 .move-right {
-  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
