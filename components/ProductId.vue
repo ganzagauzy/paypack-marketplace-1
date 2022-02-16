@@ -896,7 +896,7 @@ export default {
       const share_link = link + "/publish"
       console.log(share_link);
       this.$copyText(share_link).then(() => {
-        this.text = "URL successfully copied!"
+        this.text = "URL successfully copied to clipboard!"
         this.snackbar = true
       })
     },

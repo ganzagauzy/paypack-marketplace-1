@@ -53,7 +53,7 @@
 
                   
                     
-                     <div class="  py-5">
+                     <div class=" py-5 carousel ">
                         <v-carousel :show-arrows="true" hide-delimiters
                       
                     v-for="(product, index) in products" :key="index"
@@ -215,14 +215,8 @@ export default {
 
 <style lang="scss" scoped>
 
-.carousel {
-  display: flex;
-  flex-direction: row;
- 
-}
-.move-right {
-  display: flex;
-}
+
+
 .carousel {
     
     .move-right {
