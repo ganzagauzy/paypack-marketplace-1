@@ -213,7 +213,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 .carousel {
   display: flex;
@@ -222,5 +222,21 @@ export default {
 }
 .move-right {
   display: flex;
+}
+.carousel {
+    
+    .move-right {
+      display: flex;
+      @media (min-width: 500px) {
+        
+      }
+      @media (min-width: 750px) {
+        padding-left: 10px;
+      }
+      @media (min-width: 1100px) {
+        padding-left: 5px;
+      }
+     
+    }
 }
 </style>

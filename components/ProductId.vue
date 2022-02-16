@@ -675,6 +675,26 @@
         </v-tabs>
       </v-card>
     </div>
+    <v-snackbar
+      v-model="snackbar"
+      shaped
+      color="success"
+      right
+      top
+    >
+      <v-icon>{{ icon }}</v-icon> {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="success"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -694,6 +714,7 @@ export default {
     snackbar: false,
     snack: "Url  copied.",
     timeout: 2000,
+    icon: "mdi-checkbox-marked-circle",
 
     prodBackgroundColor: "#111",
     urlToCopy: '',
@@ -784,6 +805,8 @@ export default {
     menu: false,
     message: false,
     hints: true,
+    snackbar: false,
+    text: '',
 
     states: ["Alabama", "Alaska"],
 
@@ -872,7 +895,10 @@ export default {
       console.log(link);
       const share_link = link + "/publish"
       console.log(share_link);
-      this.$copyText(share_link);
+      this.$copyText(share_link).then(() => {
+        this.text = "URL successfully copied!"
+        this.snackbar = true
+      })
     },
     
     // get url to copy

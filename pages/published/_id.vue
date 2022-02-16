@@ -66,7 +66,7 @@
 
                  
                     
-                       <div class=" py-5 ">
+                       <div class=" py-5 carousel">
                         <v-carousel :show-arrows="true" hide-delimiters
                       
                     v-for="(product, index) in products" :key="index"
@@ -110,14 +110,15 @@
       md="5"
       cols="12">
       <div v-for="(product, index) in products" :key="index" class="">
-        <p> {{ product.description}} </p>
+        <h4>Description</h4>
+        {{ product.description}} 
       </div>
       <v-btn
       :style="{
         backgroundColor: prodBackgroundColor,
       }"
       dark
-      class="px-16 ">Buy Now</v-btn>
+      class="px-16 py-3 ">Buy Now</v-btn>
       </v-col>
     </v-row>
 
@@ -223,7 +224,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .center {
   display: flex;
   justify-content: center;
@@ -244,12 +245,22 @@ a {
   text-decoration: none;
   color: #111;
 }
+
+
 .carousel {
-  display: flex;
-  
-}
-.move-right {
-  display: flex;
-  
+    
+    .move-right {
+      display: flex;
+      @media (min-width: 500px) {
+        
+      }
+      @media (min-width: 750px) {
+        padding-left: 10px;
+      }
+      @media (min-width: 1100px) {
+        padding-left: 5px;
+      }
+     
+    }
 }
 </style>
