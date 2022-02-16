@@ -1,6 +1,6 @@
 <template>
   <div>
-      <v-container>
+      <v-container class="align">
         <div class="center">
           <v-card width="500"
             class="">
@@ -16,6 +16,7 @@
                 <v-card-text>
                 <v-form ref="form">
                   <v-text-field
+                        outlined
                       v-model="shopname"
                       label="ShopName"
                       type="text"
@@ -23,6 +24,7 @@
                     ></v-text-field>
                 
                 <v-text-field
+                      outlined
                       v-model="email"
                       label="Email"
                       type="email"
@@ -31,6 +33,7 @@
                 
 
                 <v-text-field
+                      outlined
                       v-model="password"
                       label="Password"
                       type="password"
@@ -52,7 +55,7 @@
                     Signup
                 </v-btn>
                 </v-card-actions>
-                <p class="py-3">Already have account? <NuxtLink to="/auth/signin">Sign in</NuxtLink></p>
+                <p class="py-3 px-2">Already have account? <NuxtLink to="/auth/signin">Sign in</NuxtLink></p>
             </v-card>
       </div>
       </v-container>
@@ -117,10 +120,28 @@ import 'firebase/compat/firestore';
     layout: "empty",
   }
 </script>
-<style scoped>
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+
+
+<style lang="scss" scoped>
+  
+  .align {
+    
+    .center {
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 80px;
+      @media (min-width: 500px) {
+        padding-top: 80px;
+      }
+      @media (min-width: 750px) {
+        padding-top: 80px;
+      }
+      @media (min-width: 1100px) {
+        padding-top: 100px;
+      }
+     
+    }
+}
 </style>

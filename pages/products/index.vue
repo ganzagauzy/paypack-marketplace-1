@@ -324,6 +324,7 @@ export default {
   //     }
   //   })
   // },
+  middleware: 'auth',
 
 
   methods: {
