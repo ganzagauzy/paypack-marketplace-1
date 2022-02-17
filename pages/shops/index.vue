@@ -59,21 +59,21 @@
           <h6 class="d-flex justify-center pt-15">
             <v-row>
               <v-col>
-                <marquee behavior="scroll" width="100%" direction="left" scrollamount="3" height="100px">
+                <marquee behavior="scroll" width="100%" direction="left" scrollamount="1" height="100px">
                 Buy All You Want No Limits !!!!!!
                 </marquee>
             
               </v-col>
               <v-spacer></v-spacer>
               <v-col>
-                <marquee behavior="scroll" width="100%" direction="left" scrollamount="3" height="100px">
+                <marquee behavior="scroll" width="100%" direction="left" scrollamount="1" height="100px">
                 You Can Get Your Own Shop!!
                 </marquee>
             
               </v-col>
               <v-spacer></v-spacer>
               <v-col>
-                <marquee behavior="scroll" width="100%" direction="left" scrollamount="3" height="100px">
+                <marquee behavior="scroll" width="100%" direction="left" scrollamount="1" height="100px">
                 Call 0788888888 For More Details!!
                 </marquee>
             
@@ -234,10 +234,11 @@
                 :key="index"
                 class="movie"
               >
-                <NuxtLink
+                
+                  <v-hover v-slot="{ hover }">
+                    <NuxtLink
                   :to="{ name: 'shops-id', params: { id: product.id } }"
                 >
-                  <v-hover v-slot="{ hover }">
                     <v-card
                       class="mx-auto"
                       color="grey lighten-4"
@@ -284,8 +285,10 @@
                         <span v-if="product.name.length > 25">...</span>
                       </p>
                     </v-card>
+                    </NuxtLink>
+                    
                   </v-hover>
-                </NuxtLink>
+                
               </div>
             </div>
           </div>

@@ -56,11 +56,11 @@
     <v-card>
       <v-toolbar fixed color="#d1dbec">
         <v-toolbar-title>
-          <h6 class="d-flex justify-center pt-15">
+          <!-- <h6 class="d-flex justify-center pt-15">
             <marquee width="100%" direction="right" height="100px">
           Buy All You Want No Limits !!!!!!
           </marquee>
-          </h6>
+          </h6> -->
         </v-toolbar-title>
       </v-toolbar>
 

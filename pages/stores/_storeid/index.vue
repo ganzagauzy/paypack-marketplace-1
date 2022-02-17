@@ -89,12 +89,7 @@
         </v-icon>
         
       </v-tab>
-      <v-tab>
-        <v-icon left>
-          mdi-playlist-edit
-        </v-icon>
-        
-      </v-tab>
+      
     
       <v-tab-item>
         <v-card flat>
@@ -138,43 +133,11 @@
               <!-- Movies -->
               <div  class="container movies">
                 <!-- Searched movies -->
-                <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
-                  <div v-for="(product, index) in searchProducts" :key="index" class="movie">
-                    <div class="movie-img">
-                      <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
-                      <img :src="product.images[0]" alt="">
-                      <!-- <p class="review">{{ movie.vote_average }}</p> -->
-                      <!-- <p class="overview">{{ movie.overview }}</p> -->
-                    </div>
-                    <div class="">
-                      <!-- <p class="title h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
-                      </p> -->
-                      <!-- <p class="release">
-                        Released:
-                        {{
-                          new Date(movie.release_date).toLocaleString('en-us', {
-                            month: 'long',
-                            day: 'numeric',
-                            year: 'numeric',
-                          })
-                        }}
-                      </p> -->
-                      <!-- <v-btn class="py-3"
-                          color=""
-                          width="100%"
-                          :to="{ name: 'products-movieid', params: {movieid: movie.id} }" nuxt>
-                            Read More
-                        </v-btn> -->
-                      <!-- <NuxtLink class="button button-light" :to= "`/products/${movie.id}`">
-                        Get More Info
-                      </NuxtLink> -->
-                    </div>
-                  </div>
-                </div>
+                
                 <!-- Now streaming -->
-                <div v-else id="movie-grid" class="movies-grid">
+                <div  id="movie-grid" class="movies-grid">
                   <div v-for="(product, index) in products" :key="index" class="movie">
-                    <NuxtLink  :to="{ name: 'products-movieid', params: {movieid: product.id} }">
+                    <NuxtLink  :to="{ name: 'stores-storeid-id', params: {id: product.id} }">
                       <v-hover v-slot="{ hover }">
                         <v-card
                       class="mx-auto"
@@ -222,11 +185,7 @@
             </div>
         </v-card>
       </v-tab-item>
-      <v-tab-item>
-        <v-card flat>
-          <product-table/>
-        </v-card>
-      </v-tab-item>
+      
      
     </v-tabs>
   </v-card>
@@ -240,209 +199,45 @@
   </div>
 </template>
 
-
 <script>
-import VueUploadMultipleImage from 'vue-upload-multiple-image'
-import axios from 'axios'
-import {mapState} from 'vuex'
-import ProductTable from '../../components/ProductTable.vue'
-
 import firebase from "firebase/compat/app";
-import 'firebase/compat/auth';
+import "firebase/compat/auth";
 import "firebase/compat/firestore";
-// import db from "../plugins/firebase";
-
-
 export default {
   data() {
     return {
-      movies: [],
-      searchedMovies: [],
-      searchProducts: [],
-      searchInput: '',
-      dialog: false,
-      images: [],
-      show: false,
       products: [],
-      size: '',
-      user: "",
-      // product: {
-      //   name: '',
-      //   description: '',
-      // },
-
-    }
+      size:'',
+    };
   },
-
-  components: {
-    VueUploadMultipleImage,
-    ProductTable
+  computed: {
+    id() {
+      return this.$route.params.storeid;
+    },
   },
-  // computed: {
-  //   products() {
-  //     return this.$store.getters.products;
-  //   },
-  // },
-
   mounted() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.user = user
-      // window.localStorage.setItem('userId', user.uid)
-      // console.log(user.uid);
-      if(!this.user) 
-      this.$router.push("/auth/signin");
-      
-    })
+    this.fetchProducts();
   },
-
- 
-
-
- 
-
-
-  // async fetch() {
-  //   if(this.searchInput === ''){
-  //     await this.getMovies();
-  //     await this.getProducts();
-  //     return
-  //   }
-  //   await this.searchMovies()
-  //   await this.searchProducts()
-  // },
-
-  created() {
-    this.readData();
-  },
-  // mounted() {
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     console.log(user);
-  //     this.user = user
-
-  //     if(!this.user) {
-  //       this.$router.push('/auth/signin')
-  //     }
-  //   })
-  // },
-  
-  layout: "admin",
-
-
   methods: {
+    async fetchProducts() {
+      const productsRef = firebase.firestore().collection("published");
 
-    initialize() {
-      this.products = [];
-    },
-    
-    // async getProducts() {
-    //   getMovies()
-
-    //   var productsRef = await firebase.firestore().collection("products");
-
-    //     productsRef.onSnapshot((snap) => {
-    //       this.size = snap.size
-    //       console.log(this.size);
-    //       this.products = [];
-    //       snap.forEach((doc) => {
-    //         var product = doc.data();
-    //         product.id = doc.id;
-    //         this.products.push(product);
-    //       });
-    //     });
-    //   },
-
-
-    //   const data = axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1'
-    //   )
-    //   eslint-disable-next-line no-unused-vars
-    //   const result = await data
-    //   result.data.results.forEach(movie => {
-    //     this.movies.push(movie)
-
-    //   })
-    //   // eslint-disable-next-line no-console
-    //   console.log('hi')
-    // },
-    // async searchMovies() {
-    //   db.collection('products').where('name', '==', this.searchInput).get().then((snap) => {
-    //     this.products = [];
-    //     snap.forEach((doc) => {
-    //       var product = doc.data();
-    //       product.id = doc.id;
-    //       this.products.push(product);
-    //     });
-
-
-    //   })
-      
-    // },
-    
-    async readData() {
-    //   db.collection("desserts2").get().then((querySnapshot) =>{
-    //   querySnapshot.forEach((doc) => {
-    //     console.log(doc.id, "=>",doc.data());
-    //     this.products = doc.data();
-    //     this.products.push(doc.data())
-    //   })
-    // })
-
-    var productsRef = await firebase.firestore().collection("products");
-
-    const uid = sessionStorage.getItem("user_id")
-
-       
-      productsRef.where("userId", "==", uid).onSnapshot((snap) => {
-      this.size = snap.size
-      this.products = [];
-      snap.forEach((doc) => {
-        var product = doc.data();
-        product.id = doc.id;
-        this.products.push(product);
+      productsRef.where("userId", "==", this.id).onSnapshot((snap) => {
+        this.size = snap.size;
+        this.products = snap.docs.map((doc) => {
+          var product = doc.data();
+          product.id = doc.id;
+          return product;
+        });
       });
-    });
-
-  
-
+    },
   },
-
-    // async save() {
-    //     const product = {}
-    //     product.name = this.product.name
-    // },
-
-  clearSearch() {
-    this.searchInput = ''
-    this.searchedMovies = []
-  },
-
-    uploadImageSuccess(formData, index, fileList) {
-      console.log('data', formData, index, fileList)
-      // Upload image api
-      // axios.post('http://your-url-upload', formData).then(response => {
-      //   console.log(response)
-      // })
-    },
-    beforeRemove (index, done, fileList) {
-      console.log('index', index, fileList)
-      var r = confirm("remove image")
-      if (r == true) {
-        done()
-      } else {
-      }
-    },
-    editImage (formData, index, fileList) {
-      console.log('edit data', formData, index, fileList)
-    },
-  }
-
-
-}
-
-
+};
 </script>
 
-<style lang="scss" scoped>
 
+
+<style lang="scss" scoped>
 .fixed-bar {
   position: sticky;
   position: -webkit-sticky; /* for Safari */
@@ -453,7 +248,6 @@ export default {
 .home {
   .top {
     padding-top: 30px;
-    
   }
   .loading {
     padding-top: 120px;
@@ -474,7 +268,6 @@ export default {
         outline: none;
       }
     }
-
   }
   .movies {
     padding: 32px 16px;
@@ -493,6 +286,7 @@ export default {
         grid-template-columns: repeat(4, 1fr);
       }
       .movie {
+        z-index: 1;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -546,71 +340,72 @@ export default {
             margin-top: 8px;
             color: #c9c9c9;
           }
-
         }
       }
     }
   }
 }
-a {
-  text-decoration: none;
-}
 .v-card--reveal {
   align-items: center;
   bottom: 0;
   justify-content: center;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   width: 100%;
 }
+.v-card--reveal2 {
+  align-items: right;
+  bottom: 0;
+  justify-content: right;
+  opacity: 0.9;
+  position: absolute;
+  width: 100%;
+}
+.munu {
+  position: absolute;
+  width: 100%;
+  background: rgba(255, 255, 255, 255.5);
+  padding: 0 10px;
+}
+.nav {
+  position: relative;
+}
+.nav ul {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.nav ul li {
+  list-style: none;
+  cursor: pointer;
+}
+.nav ul li p:hover {
+  background: #184771;
+  color: #fff;
+}
+.nav ul li ul {
+  display: block;
+  background: rgba(255, 255, 255, 255.5);
+  min-width: 150px;
+  position: absolute;
+  margin-top: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+  transform: translateY(40px);
+}
 
+.nav ul li:hover ul {
+  top: 60px;
+  opacity: 1;
+  z-index: 10000;
+  visibility: visible;
+  transform: translateY(0);
+}
+a {
+  text-decoration: none;
+  color: #111;
+}
 </style>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // export default {
-  //   data: () => ({
-  //     isLoading: false,
-  //     items: [],
-  //     model: null,
-  //     search: null,
-  //     tab: null,
-  //   }),
-
-  //   watch: {
-  //     model (val) {
-  //       if (val != null) this.tab = 0
-  //       else this.tab = null
-  //     },
-  //     search (val) {
-  //       // Items have already been loaded
-  //       if (this.items.length > 0) return
-
-  //       this.isLoading = true
-
-  //       // Lazily load input items
-  //       fetch('https://api.coingecko.com/api/v3/coins/list')
-  //         .then(res => res.clone().json())
-  //         .then(res => {
-  //           this.items = res
-  //         })
-  //         .catch(err => {
-  //           console.log(err)
-  //         })
-  //         .finally(() => (this.isLoading = false))
-  //     },
-  //   },
-  // }

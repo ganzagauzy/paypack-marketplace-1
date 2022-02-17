@@ -1085,11 +1085,9 @@ export default {
 }
 a {
   text-decoration: none;
-  color: #111;
+ 
 }
-nuxt-link {
-  color: #111;
-}
+
 
 .search {
   display: flex;

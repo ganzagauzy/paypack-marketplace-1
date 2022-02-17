@@ -87,7 +87,7 @@
     </v-menu> -->
         <v-btn v-if="user" @click="signout" color="dark" dark>signout</v-btn>
 
-        <v-btn v-if="!user" @click="signin" color="dark" dark>signin</v-btn>
+        <!-- <v-btn v-if="!user" @click="signin" color="dark" dark>signin</v-btn> -->
       </div>
 
       <!-- <v-btn
@@ -191,9 +191,9 @@ export default {
           this.$router.push("/");
         });
     },
-    signin() {
-      this.$router.push("/auth/signin");
-    },
+    // signin() {
+    //   this.$router.push("/auth/signin");
+    // },
   },
 };
 </script>
