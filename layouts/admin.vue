@@ -16,7 +16,7 @@
           <v-list-item-content>
             <v-list-item-title class="text-h5">
               <h6>AGASOKO</h6>
-              <!-- <v-subheader v-if="user">{{ user.email }}</v-subheader> -->
+              <v-subheader v-if="user">{{ user.email }}</v-subheader>
               <!-- <p class="small">{{user.email}}</p> -->
               <!-- <small class="small">{{ user.email }}</small> -->
             </v-list-item-title>
@@ -85,11 +85,9 @@
         </v-list-item>
       </v-list>
     </v-menu> -->
-        <v-btn nuxt
-            to="/adminwelcome" color="dark" dark>Go To Admin</v-btn>
-        <!-- <v-btn v-if="user" @click="signout" color="dark" dark>signout</v-btn>
+        <v-btn v-if="user" @click="signout" color="dark" dark>signout</v-btn>
 
-        <v-btn v-if="!user" @click="signin" color="dark" dark>signin</v-btn> -->
+        <v-btn v-if="!user" @click="signin" color="dark" dark>signin</v-btn>
       </div>
 
       <!-- <v-btn
@@ -146,23 +144,24 @@ export default {
         { title: "Click Me 2" },
       ],
       items: [
+        
         {
           icon: "mdi-apps",
           title: "Welcome",
-          to: "/",
+          to: "/adminwelcome",
         },
+        
         {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire",
+          icon: "mdi-dropbox",
+          title: "Products",
+          to: "/products",
         },
-        
-        
         {
           icon: "mdi-shopping",
-          title: "Shop-Here",
-          to: "/shops",
+          title: "All Shops",
+          to: "/shop",
         },
+        
         
       ],
       miniVariant: false,
@@ -172,30 +171,30 @@ export default {
     };
   },
 
-  // mounted() {
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     // console.log(user);
-  //     this.user = user;
+  mounted() {
+    firebase.auth().onAuthStateChanged((user) => {
+      // console.log(user);
+      this.user = user;
       
-  //   });
-  // },
+    });
+  },
 
-  // methods: {
-  //   signout() {
-  //     firebase
-  //       .auth()
-  //       .signOut()
-  //       .then((res) => {
-  //         console.log(res);
-  //         this.user = "";
-  //         sessionStorage.removeItem("user_id");
-  //         this.$router.push("/");
-  //       });
-  //   },
-  //   signin() {
-  //     this.$router.push("/auth/signin");
-  //   },
-  // },
+  methods: {
+    signout() {
+      firebase
+        .auth()
+        .signOut()
+        .then((res) => {
+          console.log(res);
+          this.user = "";
+          sessionStorage.removeItem("user_id");
+          this.$router.push("/");
+        });
+    },
+    signin() {
+      this.$router.push("/auth/signin");
+    },
+  },
 };
 </script>
 

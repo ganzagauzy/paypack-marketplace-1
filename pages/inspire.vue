@@ -17,9 +17,7 @@
       </blockquote>
     </v-col>
   </v-row>
-  <div v-for="(product, index) in products" :key="index" class="movie">
-    <h2>{{ product }}</h2>
-  </div>
+  
 
   
 

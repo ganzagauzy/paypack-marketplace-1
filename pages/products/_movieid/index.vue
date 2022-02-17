@@ -72,6 +72,7 @@ export default {
   },
   fetchDelay: 1000,
   methods: {},
+  layout: "admin",
   
 }
 </script>

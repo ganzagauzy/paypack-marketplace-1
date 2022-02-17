@@ -57,30 +57,9 @@
       <v-toolbar fixed color="#d1dbec">
         <v-toolbar-title>
           <h6 class="d-flex justify-center pt-15">
-            <v-row>
-              <v-col>
-                <marquee behavior="scroll" width="100%" direction="left" scrollamount="3" height="100px">
-                Buy All You Want No Limits !!!!!!
-                </marquee>
-            
-              </v-col>
-              <v-spacer></v-spacer>
-              <v-col>
-                <marquee behavior="scroll" width="100%" direction="left" scrollamount="3" height="100px">
-                You Can Get Your Own Shop!!
-                </marquee>
-            
-              </v-col>
-              <v-spacer></v-spacer>
-              <v-col>
-                <marquee behavior="scroll" width="100%" direction="left" scrollamount="3" height="100px">
-                Call 0788888888 For More Details!!
-                </marquee>
-            
-              </v-col>
-              
-            </v-row>
-            
+            <marquee width="100%" direction="right" height="100px">
+          Buy All You Want No Limits !!!!!!
+          </marquee>
           </h6>
         </v-toolbar-title>
       </v-toolbar>
@@ -235,7 +214,7 @@
                 class="movie"
               >
                 <NuxtLink
-                  :to="{ name: 'shops-id', params: { id: product.id } }"
+                  :to="{ name: 'shop-id', params: { id: product.id } }"
                 >
                   <v-hover v-slot="{ hover }">
                     <v-card
@@ -345,6 +324,8 @@ export default {
     this.readDataByCategory();
     this.readDataFilterCategory();
   },
+
+  
 
   methods: {
     initialize() {
@@ -547,6 +528,7 @@ export default {
       this.searchedMovies = [];
     },
   },
+  layout: "admin",
 };
 </script>
 
