@@ -220,7 +220,7 @@ export default {
   },
   methods: {
     async fetchProducts() {
-      const productsRef = firebase.firestore().collection("published");
+      const productsRef = firebase.firestore().collection("products");
 
       productsRef.where("userId", "==", this.id).onSnapshot((snap) => {
         this.size = snap.size;
@@ -232,6 +232,7 @@ export default {
       });
     },
   },
+  layout: '',
 };
 </script>
 

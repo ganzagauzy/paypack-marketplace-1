@@ -196,7 +196,7 @@ export default {
       // })
       const p_id = this.$route.params.id
       console.log(p_id);
-      var docRef = await db.collection("published").doc(p_id);
+      var docRef = await db.collection("products").doc(p_id);
 
       onSnapshot(docRef, (doc) => {
           if (doc.exists) {
@@ -223,7 +223,7 @@ export default {
 
 
   },
-  
+  layout: '',
 
 
 }

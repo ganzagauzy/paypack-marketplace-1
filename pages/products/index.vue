@@ -79,7 +79,15 @@
       color="#d1dbec"
       
     >
-      <v-toolbar-title>MY PRODUCTS</v-toolbar-title>
+      <v-toolbar-title class="d-flex justify-lg-space-between">
+        <div>
+          My Products
+        </div>
+        <v-spacer></v-spacer>
+        <div class="d-flex justify-end ml-16">
+          <v-btn text  @click="shareUrl">share</v-btn>
+        </div>
+      </v-toolbar-title>
     </v-toolbar>
 
     <v-tabs >
@@ -231,6 +239,27 @@
     </v-tabs>
   </v-card>
 
+  <v-snackbar
+      v-model="snackbar"
+      shaped
+      color="success"
+      right
+      top
+    >
+      <v-icon>{{ icon }}</v-icon> {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="success"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
 
 
 
@@ -256,6 +285,10 @@ import "firebase/compat/firestore";
 export default {
   data() {
     return {
+      snackbar: false,
+    snack: "Url  copied.",
+    timeout: 2000,
+    icon: "mdi-checkbox-marked-circle",
       movies: [],
       searchedMovies: [],
       searchProducts: [],
@@ -332,6 +365,19 @@ export default {
 
     initialize() {
       this.products = [];
+    },
+    shareUrl() {
+      const uid = sessionStorage.getItem("user_id")
+      console.log(uid);
+      var link = document.location.origin + "/stores" 
+      console.log(link);
+      const share_link = link + "/ncLam6ZrRjPUIkQZ7doGZKseXLA2"
+      console.log(share_link);
+      this.$copyText(share_link).then(() => {
+        this.text = "URL successfully copied to clipboard!"
+        this.snackbar = true
+      })
+   
     },
     
     // async getProducts() {

@@ -4,30 +4,33 @@
        <v-app-bar-nav-icon @click="drawer = true" 
                            class="d-flex d-sm-none" 
                            ></v-app-bar-nav-icon>
-        <v-toolbar-title><span class="h3">PayPack</span></v-toolbar-title>
+        <v-toolbar-title>Your Dashboard</v-toolbar-title>
         <v-spacer></v-spacer>
-        <nav class=" d-none d-md-flex d-lg-flex px-5">
-            <ul v-for="(item, i) in items"
-                :key="i"
-                :to="item.to"
-                router
-                exact>
-                <li class="text-dark"> <NuxtLink :to="item.to">{{item.title}}</NuxtLink></li>
-            </ul>
-        </nav>
   
-        <v-btn @click="$vuetify.theme.dark = ! $vuetify.theme.dark" icon class="px-5" >
-          <v-icon>mdi-toggle-switch-outline</v-icon>
+        <v-btn icon>
+          <v-icon>mdi-magnify</v-icon>
         </v-btn>
   
-        <v-btn nuxt
-            to="/auth/signup" class="px-5">
-          Register
+        <v-btn icon>
+          <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
-
-        
   
-        
+        <template v-slot:extension>
+          <v-tabs
+            v-model="tab"
+            align-with-title
+            class="d-none d-sm-flex" 
+          >
+            <v-tabs-slider color="yellow"></v-tabs-slider>
+  
+            <v-tab
+              v-for="item in items"
+              :key="item"
+            >
+              {{ item }}
+            </v-tab>
+          </v-tabs>
+        </template>
     </v-app-bar>
     <!-- Add a navigation bar -->
     <v-navigation-drawer
@@ -66,18 +69,12 @@
       
     </v-navigation-drawer>
     <!-- Navigation bar ends -->
-
-    <v-main>
-      <v-container>
-        <Nuxt />
-      </v-container>
-    </v-main>
     
   </v-app>
 </template>
 <script>
 export default {
- 
+  el: '#app',
   data () {
     return {
       drawer: false,
@@ -113,13 +110,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-ul {
-  list-style: none;
-}
-a {
-  text-decoration: none;
-  font-size: 18px;
-  color: #111;
-}
-</style>
