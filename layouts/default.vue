@@ -4,25 +4,30 @@
        <v-app-bar-nav-icon @click="drawer = true" 
                            class="d-flex d-sm-none" 
                            ></v-app-bar-nav-icon>
-        <v-toolbar-title><span class="h3">PayPack</span></v-toolbar-title>
+        <v-toolbar-title><span class="text-h5">PayPack</span></v-toolbar-title>
+        
         <v-spacer></v-spacer>
         <nav class=" d-none d-md-flex d-lg-flex px-5">
             <ul v-for="(item, i) in items"
                 :key="i"
                 :to="item.to"
                 router
+                class="text--dark"
                 exact>
-                <li class="text-dark"> <NuxtLink :to="item.to">{{item.title}}</NuxtLink></li>
+                <li class=""> <NuxtLink class="text--dark" :to="item.to"><span class="t text--black">{{item.title}}</span></NuxtLink></li>
             </ul>
         </nav>
+        <v-btn class="mr-md-10" icon @click.stop="fixed = !fixed">
+        <v-icon>mdi-minus</v-icon>
+      </v-btn>
   
-        <v-btn @click="$vuetify.theme.dark = ! $vuetify.theme.dark" icon class="px-5" >
+        <v-btn @click="$vuetify.theme.dark = ! $vuetify.theme.dark" icon class="mr-md-10" >
           <v-icon>mdi-toggle-switch-outline</v-icon>
         </v-btn>
   
         <v-btn nuxt
-            to="/auth/signup" class="px-5">
-          Register
+            to="/auth/signin" class="px-5 color" outlined>
+          signin
         </v-btn>
 
         
@@ -72,7 +77,9 @@
         <Nuxt />
       </v-container>
     </v-main>
-    
+    <v-footer class="text-center" :absolute="!fixed" app color="">
+      <span class="text-center">&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
   </v-app>
 </template>
 <script>
@@ -80,6 +87,7 @@ export default {
  
   data () {
     return {
+      fixed: false,
       drawer: false,
       tab: null,
       
@@ -96,11 +104,7 @@ export default {
         },
         
         
-        {
-          icon: "mdi-shopping",
-          title: "Shop-Here",
-          to: "/shops",
-        },
+       
         {
           icon: "mdi-shopping",
           title: "Stores",
@@ -119,7 +123,14 @@ ul {
 }
 a {
   text-decoration: none;
-  font-size: 18px;
+
   color: #111;
 }
+NuxtLink  {
+  color: #111;
+}
+.color {
+  background: #DA9412;
+}
+
 </style>

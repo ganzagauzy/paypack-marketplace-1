@@ -85,7 +85,7 @@
         </div>
         <v-spacer></v-spacer>
         <div class="d-flex justify-end ml-16">
-          <v-btn text  @click="shareUrl">share</v-btn>
+          <v-btn outlined  @click="shareUrl">share-url</v-btn>
         </div>
       </v-toolbar-title>
     </v-toolbar>
@@ -369,9 +369,9 @@ export default {
     shareUrl() {
       const uid = sessionStorage.getItem("user_id")
       console.log(uid);
-      var link = document.location.origin + "/stores" 
+      var link = document.location.origin + "/stores" + `/${uid}/`
       console.log(link);
-      const share_link = link + "/ncLam6ZrRjPUIkQZ7doGZKseXLA2"
+      const share_link = link 
       console.log(share_link);
       this.$copyText(share_link).then(() => {
         this.text = "URL successfully copied to clipboard!"
