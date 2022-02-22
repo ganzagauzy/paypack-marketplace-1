@@ -1,66 +1,16 @@
 <template>
   <div>
-    <div class="fixed-bar top">
-      <div class="fixed-bar">
-        <v-system-bar class="" window dark color="">
-          <v-icon>mdi-dropbox </v-icon>
-          <span>Products &mdash;{{ size }}</span>
-          <v-spacer></v-spacer>
-          <!-- <v-icon>mdi-minus</v-icon>
-                      <v-icon>mdi-checkbox-blank-outline</v-icon>
-                      <v-icon>mdi-close</v-icon> -->
-        </v-system-bar>
-
-        <v-row class="" color="#d1dbec">
-          <v-col cols="12" sm="6" md="4"> </v-col>
-        </v-row>
-      </div>
-    </div>
-
-    <!-- <div class="pt-16">
-    <v-card>
-    <v-tabs
-        color="dark"
-        right
-      >
-        <v-tab><v-icon>mdi-grid</v-icon></v-tab>
-        <v-tab><v-icon>mdi-grid</v-icon></v-tab>
-        <v-tab><v-icon>mdi-grid</v-icon></v-tab>
-
-        <v-tab-item
-          v-for="n in 3"
-          :key="n"
-        >
-          <v-container fluid>
-            <v-row>
-              <v-col
-                v-for="i in 12"
-                :key="i"
-                cols="12"
-                md="4"
-              >
-                <v-img
-                  :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
-                  :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
-                  aspect-ratio="1"
-                ></v-img>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-tab-item>
-      </v-tabs>
-    </v-card>
-
-  </div> -->
-
-    <v-card>
-      <v-card flat>
+    
+      
+        
+        
+      
         <div class="home">
           <!-- Hero -->
           <!-- <Hero /> -->
 
           <!-- search box -->
-          <div class="container search">
+          <div class=" search">
             <!-- <input
               v-model.lazy="searchInput"
               type="text"
@@ -69,7 +19,7 @@
             /> -->
             <v-text-field 
               v-model.lazy="searchInput"
-              label="Search"
+              label="Search Here"
               type="text"
               outlined
               class="input"
@@ -86,25 +36,25 @@
             >
           </div>
 
-          <!-- <div v-for="(product, index) in products" :key="index" class="">
-                <p>{{ product.images}}</p>
-              </div> -->
+          <div class="row">
+            <div class="category">
+              <h2>Categories</h2>
+              <ul v-for="(product, index) in shopproducts" :key="index">
+                <li> <v-btn @click="readDataByCategory(product)"  text>{{
+                          product.category
+                        }}</v-btn></li>
+              </ul>
+            </div>
+            <div class="products">
 
-          <!-- <div  id="movie-grid" class="movies-grid">
-                  <div v-for="(product, index) in products" :key="index" class="movie">
-                    <div class="movie-img"> -->
-          <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
-          <!-- <img :src="product.images[0]" alt=""> -->
-          <!-- <p class="review">{{ movie.vote_average }}</p> -->
-          <!-- <p class="overview">{{ movie.overview }}</p> -->
-          <!-- </div>
-                    
-                  </div>
-              </div> -->
+            
 
-          <!-- Loading -->
+          
+          
+            
+
           <Loading v-if="$fetchState.pending" />
-
+          
           <!-- Movies -->
           <div v-else class="container movies">
             <!-- Searched movies -->
@@ -241,9 +191,13 @@
               </div>
             </div>
           </div>
+          </div>
+          </div>
+          
         </div>
-      </v-card>
-    </v-card>
+      
+    
+    
   </div>
 </template>
 
@@ -257,6 +211,7 @@ export default {
       products: [],
       size: "",
       searchedProducts: [],
+      shopproducts: [],
       searchInput: "",
       
       
@@ -278,6 +233,7 @@ export default {
   },
   mounted() {
     this.fetchProducts();
+    this.readDataFilterCategory();
     
     
   },
@@ -329,6 +285,65 @@ export default {
       });
     },
 
+    async readDataFilterCategory() {
+      //   db.collection("desserts2").get().then((querySnapshot) =>{
+      //   querySnapshot.forEach((doc) => {
+      //     console.log(doc.id, "=>",doc.data());
+      //     this.products = doc.data();
+      //     this.products.push(doc.data())
+      //   })
+      // })
+
+      var shopproductsRef = await firebase.firestore().collection("products");
+
+      // const uid = sessionStorage.getItem("user_id")
+
+      shopproductsRef.onSnapshot((snap) => {
+        // this.size = snap.size
+        this.shopproducts = [];
+        this.shopproducts = snap.docs.map((doc) => {
+          var shopproduct = doc.data();
+          shopproduct.id = doc.id;
+          return shopproduct;
+        });
+
+        this.shopproducts = this.shopproducts.filter((product, i) => {
+          return i == this.shopproducts.findIndex(
+            (p) => p.category == product.category
+          );
+        });
+      });
+    },
+
+    async readDataByCategory(product) {
+      console.log(product);
+      //   db.collection("desserts2").get().then((querySnapshot) =>{
+      //   querySnapshot.forEach((doc) => {
+      //     console.log(doc.id, "=>",doc.data());
+      //     this.products = doc.data();
+      //     this.products.push(doc.data())
+      //   })
+      // })
+
+      var productsRef = await firebase.firestore().collection("products");
+
+      // const uid = sessionStorage.getItem("user_id")
+      // const my_shop = this.myproducts[0].shopname
+      // console.log(my_shop);
+
+      productsRef
+        .where("category", "==", product.category).where("userId", "==", this.id)
+        .onSnapshot((snap) => {
+          this.size = snap.size;
+          this.products = [];
+          snap.forEach((doc) => {
+            var product = doc.data();
+            product.id = doc.id;
+            this.products.push(product);
+          });
+        });
+    },
+
     clearSearch() {
       this.searchInput = "";
       this.searchedProducts = [];
@@ -341,13 +356,25 @@ export default {
 
 
 <style lang="scss" scoped>
-.fixed-bar {
-  position: sticky;
-  position: -webkit-sticky; /* for Safari */
-  top: 3.9em;
-  z-index: 2;
-}
 
+.row {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.category {
+  flex-basis: 20%;
+  padding: 10px;
+}
+.category ul {
+  list-style: none;
+}
+.products {
+  flex-basis: 80%;
+  padding: 10px;
+}
 .home {
   .top {
     padding-top: 30px;
@@ -358,7 +385,12 @@ export default {
   }
   .search {
     display: flex;
-    padding: 32px 16px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+    padding-left:  16px;
+    padding-right:  16px;
+    
     .input {
       max-width: 350px;
       width: 100%;

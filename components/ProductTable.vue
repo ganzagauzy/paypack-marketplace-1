@@ -74,7 +74,7 @@
 
                     >
                       <v-select
-                        :items="['Rwf', 'SSD']"
+                        :items="['Rwf']"
                         label="Currency*"
                         v-model="editedItem.currency"
                         outlined

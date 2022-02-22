@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navigation />
       <v-container class="align">
         <div class="center">
           <v-card width="500"
@@ -16,7 +17,8 @@
                 <v-card-text>
                 <v-form ref="form">
                   <v-text-field
-                        outlined
+                        
+                        dense
                       v-model="shopname"
                       label="ShopName"
                       type="text"
@@ -24,7 +26,8 @@
                     ></v-text-field>
                 
                 <v-text-field
-                      outlined
+                      
+                      dense
                       v-model="email"
                       label="Email"
                       type="email"
@@ -33,7 +36,8 @@
                 
 
                 <v-text-field
-                      outlined
+                      
+                      dense
                       v-model="password"
                       label="Password"
                       type="password"
@@ -55,7 +59,7 @@
                     Signup
                 </v-btn>
                 </v-card-actions>
-                <p class="py-3 px-2">Already have account? <NuxtLink to="/auth/signin">Sign in</NuxtLink></p>
+                <p class="py-5 px-2">Already have account? <NuxtLink to="/auth/signin">Sign in</NuxtLink></p>
             </v-card>
       </div>
       </v-container>

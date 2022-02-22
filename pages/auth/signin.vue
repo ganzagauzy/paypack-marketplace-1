@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <v-container class="align">
       <div class="center">
       <v-card width="500" class="">
@@ -12,7 +13,8 @@
             v-model="email"
             label="Email"
             type="email"
-            outlined
+            
+            dense
           ></v-text-field>
           
 
@@ -20,7 +22,8 @@
             v-model="password"
             label="Password"
             type="password"
-            outlined
+            
+            dense
           ></v-text-field>
         </v-card-text>
 
@@ -36,7 +39,7 @@
         <p class="p-1 px-2">
           Don't have account? <NuxtLink to="/auth/signup">Sign up</NuxtLink>
         </p>
-        <div class="py-3 px-2">
+        <div class="py-5 px-2">
           <a @click="forgotPassword">Forgot Pasword?</a>
         </div>
       </v-card>
@@ -49,6 +52,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import Navigation from '../../components/navigation.vue';
 
 export default {
   data: () => ({
@@ -56,7 +60,7 @@ export default {
     password: "",
     errors: "",
   }),
-  components: {},
+  components: {Navigation},
 
   methods: {
     submit() {

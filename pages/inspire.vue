@@ -1,6 +1,6 @@
 <template>
- <div>
-  <v-row>
+ <div >
+  <v-row class="top">
     <v-col class="text-center">
       <!-- <img
         src="/v.png"
@@ -95,8 +95,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+
 .done {
   text-decoration: line-through;
+}
+.top {
+  padding: 100px 0;
 }
 </style>
