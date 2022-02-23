@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <navigation />
     <v-container class="align">
       <div class="center">
       <v-card width="500" class="">

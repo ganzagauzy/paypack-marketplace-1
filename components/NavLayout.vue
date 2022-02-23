@@ -15,7 +15,7 @@
                           </li>
 
                           <li class="nav_item">
-                              <NuxtLink to="/inspire" class="nav_link active_link">
+                              <NuxtLink to="/about" class="nav_link active_link">
                                   <v-icon class="nav_icon">mdi-information</v-icon>
                                   <span class="nav_name">About</span>
                               </NuxtLink>
@@ -35,8 +35,8 @@
                   
                   <div class="right">
                       
-                      <v-btn outlined nuxt
-                        to="/auth/signin" >Signin</v-btn>
+                      <v-btn class="btn" outlined nuxt 
+                        to="/auth/login_signup" >Signin</v-btn>
                   </div>
               </nav>
           </header>
@@ -84,10 +84,12 @@ ul {
 a {
     text-decoration: none;
 }
+.btn {
+    background: #DA9412;
+}
 
 //layout 
 .container {
-    max-width: 968px;
     margin-left: 1rem;
     margin-right: 1rem;
 }
@@ -120,6 +122,9 @@ a {
 //media queries
 
 @media screen and(max-width:767px) {
+    .container {
+        margin: 1rem 1rem;
+    }
     .nav_menu {
         position: fixed;
         bottom: 0;

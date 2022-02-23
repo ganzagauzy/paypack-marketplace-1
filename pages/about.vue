@@ -1,37 +1,44 @@
 <template>
   <div class="header-store"> 
    <v-container class="">
-    
       <div class="row">
         <div class="cols-2">
-        <h1>Get A <span>Market</span> <br>To Sell Your Products</h1>
+        <h1>Get To Know About <span>PayPack </span> <br>Market Place</h1>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis unde, <br> id cum dolorum natus nostrum, itaque eum ab amet modi sapiente dignissimos<br> odio  at animi, incidunt voluptatibus. Corrupti, libero iste.</p>
-        <NuxtLink to="/about" class="btn-store">Explore Now</NuxtLink>
+        <a href="#available-store" class="btn-store">Read More</a>
       </div>
       <div class="cols-2">
-        <img class="" src="~/assets/images/market.png" />
+        <img class="" src="~/assets/images/info.png" />
       </div>
       </div>
-      
-      
-
+      <div class="available-store" id="available-store">
+        <h1 class="store-title">PayPack Market Place</h1>
+        <div class="buttons">
+          
+        </div>
+      </div>
+    
     </v-container>
     
   </div>
 </template>
 
 <script>
-export default {
-  layout: '',
-}
-</script>
 
+
+
+
+export default {
+ 
+
+};
+</script>
 
 
 <style lang="scss" scoped>
 .top {
   margin-top: 100px;
- 
+  margin-bottom: 100px;
 }
 .buttons {
   min-width: 100px;
@@ -70,11 +77,28 @@ export default {
   margin: 30px 0;
   border-radius: 30px;
 }
+
+.store-title {
+  text-align: center;
+  margin: 30px auto 80px;
+  position: relative;
+  line-height: 60px;
+  color: #555;
+}
+.store-title::before {
+  content: '';
+  background: #DA9412;
+  width: 200px;
+  height: 5px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .header-store {
-  min-height: 94.5vh;
    background: radial-gradient(#fff, #d1dbec);
 }
-
 
 //media query <600
 @media only screen and (max-width:600px) {
@@ -121,5 +145,6 @@ export default {
     
   }
 }
+
 
 </style>

@@ -5,8 +5,9 @@
     <div class="text-container">
       <div class="text">
         <span class="mini-heading">Now Selling</span>
-        <h1><span>Now</span> Selling</h1>
-        <v-btn outlined dark color="dark" nuxt
+        <h1>Get A <span>Store</span> For Yourself </h1>
+        <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore similique,  <br> placeat molestiae nulla consequuntur ex id nam deserunt commodi tenetur.</p>
+        <v-btn outlined  class="btn" nuxt
             to="/auth/signup">Register Now</v-btn>
       </div>
     </div>
@@ -44,7 +45,9 @@ export default {
     object-fit: cover;
   }
 }
-
+.btn {
+  background: #DA9412;
+}
 h1 span {
   color: #DA9412;
   font-size: 55px;
@@ -93,19 +96,22 @@ h1 span {
       font-weight: 600;
       font-size: 18px;
       text-transform: uppercase;
-      color: #c92502;
+      color: #d1dbec;
       margin-bottom: 8px;
       @media (min-width: 750px) {
         font-size: 22px;
       }
     }
+    .paragraph {
+      color: #fff;
+    }
     h1 {
       color: #fff;
-      font-size: 64px;
+      font-size: 24px;
       font-weight: 200;
       margin-bottom: 8px;
       @media (min-width: 750px) {
-        font-size: 84px;
+        font-size: 44px;
       }
       span {
         font-weight: 500;

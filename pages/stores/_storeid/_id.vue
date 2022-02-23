@@ -20,7 +20,7 @@
       
      <!-- {{$route.params.movieid}} -->
 
-    <v-row class="py-3">
+    <v-row class="top">
 
            <v-col cols="" sm="12" md="7">
                 <v-card id="app" :style="{
@@ -116,6 +116,26 @@
       <div v-for="(product, index) in products" :key="index" class="">
         <h4>Description</h4>
         {{ product.description}} 
+        <br>
+        <br>
+        <v-row>
+          <v-col md="6">
+            <h4>Price</h4>
+            {{ product.price}} {{ product.currency}} 
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col md="6">
+            <h4 class="text-cnter">N.Products</h4>
+            <v-text-field
+              
+              v-model="nproducts"
+              type="number"
+              outlined
+              dense
+              
+            ></v-text-field>
+          </v-col>
+        </v-row>
       </div>
       <v-btn
       :style="{
@@ -267,5 +287,8 @@ a {
       }
      
     }
+}
+.top {
+  padding-top: 50px;
 }
 </style>

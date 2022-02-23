@@ -3,7 +3,7 @@
     <NavLayout />
     <!-- Navigation bar ends -->
 
-    <v-main>
+    <v-main class="header-store">
       
         <Nuxt />
       
@@ -18,7 +18,7 @@ export default {
  
   data () {
     return {
-      fixed: false,
+      fixed: true,
       drawer: false,
       tab: null,
       
@@ -62,6 +62,10 @@ NuxtLink  {
 }
 .color {
   background: #DA9412;
+}
+.header-store {
+    
+   background: radial-gradient(#fff, #d1dbec);
 }
 
 </style>

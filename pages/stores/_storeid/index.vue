@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header-store">
     
       
         
@@ -10,7 +10,10 @@
           <!-- <Hero /> -->
 
           <!-- search box -->
+          
+          
           <div class=" search">
+            
             <!-- <input
               v-model.lazy="searchInput"
               type="text"
@@ -34,13 +37,20 @@
               @click="clearSearch"
               ><v-icon>mdi-close</v-icon></v-btn
             >
+            
+            
           </div>
+          
+          
+          
+          
 
           <div class="row">
             <div class="category">
-              <h2>Categories</h2>
+              <h2 class="">Categories</h2>
+              <v-btn text class="text-center" @click="fetchProducts">All</v-btn>
               <ul v-for="(product, index) in shopproducts" :key="index">
-                <li> <v-btn @click="readDataByCategory(product)"  text>{{
+                <li> <v-btn @click="readDataByCategory(product), readDataFilter()"  text>{{
                           product.category
                         }}</v-btn></li>
               </ul>
@@ -55,8 +65,14 @@
 
           <Loading v-if="$fetchState.pending" />
           
+          
+          
           <!-- Movies -->
           <div v-else class="container movies">
+            <!-- <div v-for="(product, index) in filterproducts" :key="index">
+                {{product.category}}
+              </div> -->
+            
             <!-- Searched movies -->
             <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
               <div
@@ -71,7 +87,7 @@
                   }"
                 >
                   <v-hover v-slot="{ hover }">
-                    <v-card
+                    <v-card flat
                       class="mx-auto"
                       color="grey lighten-4"
                       max-width="600"
@@ -84,7 +100,7 @@
                               class="
                                 d-flex
                                 transition-fast-in-fast-out
-                                blue
+                               orange
                                 darken-2
                                 v-card--reveal
                                 text-h3
@@ -125,6 +141,7 @@
 
             <!-- Now Products -->
             <div v-else id="movie-grid" class="movies-grid">
+              
               <div
                 v-for="(product, index) in products"
                 :key="index"
@@ -150,7 +167,7 @@
                               class="
                                 d-flex
                                 transition-fast-in-fast-out
-                                blue
+                                orange
                                 darken-2
                                 v-card--reveal
                                 text-h3
@@ -212,6 +229,7 @@ export default {
       size: "",
       searchedProducts: [],
       shopproducts: [],
+      filterproducts: [],
       searchInput: "",
       
       
@@ -234,6 +252,8 @@ export default {
   mounted() {
     this.fetchProducts();
     this.readDataFilterCategory();
+    // this.readDataFilter();
+    
     
     
   },
@@ -315,6 +335,36 @@ export default {
       });
     },
 
+    async readDataFilter() {
+      //   db.collection("desserts2").get().then((querySnapshot) =>{
+      //   querySnapshot.forEach((doc) => {
+      //     console.log(doc.id, "=>",doc.data());
+      //     this.products = doc.data();
+      //     this.products.push(doc.data())
+      //   })
+      // })
+
+      var filterproductsRef = await firebase.firestore().collection("products");
+
+      // const uid = sessionStorage.getItem("user_id")
+
+      filterproductsRef.onSnapshot((snap) => {
+        // this.size = snap.size
+        this.filterproducts = [];
+        this.filterproducts = snap.docs.map((doc) => {
+          var filterproduct = doc.data();
+          filterproduct.id = doc.id;
+          return filterproduct;
+        });
+
+        this.filterproducts = this.filterproducts.filter((product, i) => {
+          return i == this.filterproducts.findIndex(
+            (p) => p.category == product.category
+          );
+        });
+      });
+    },
+
     async readDataByCategory(product) {
       console.log(product);
       //   db.collection("desserts2").get().then((querySnapshot) =>{
@@ -367,6 +417,9 @@ export default {
 .category {
   flex-basis: 20%;
   padding: 10px;
+  @media screen and (max-width:600px) {
+    flex-basis: 100%;
+  }
 }
 .category ul {
   list-style: none;
@@ -374,6 +427,9 @@ export default {
 .products {
   flex-basis: 80%;
   padding: 10px;
+  @media screen and (max-width:600px) {
+    flex-basis: 100%;
+  }
 }
 .home {
   .top {
@@ -438,31 +494,7 @@ export default {
             width: 100%;
             height: 100%;
           }
-          .review {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            background-color: #c92502;
-            color: #fff;
-            border-radius: 0 0 16px 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-              0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          }
-          .overview {
-            line-height: 1.5;
-            position: absolute;
-            bottom: 0;
-            background-color: rgba(201, 38, 2, 0.9);
-            padding: 12px;
-            color: #fff;
-            transform: translateY(100%);
-            transition: 0.3s ease-in-out all;
-          }
+         
         }
         .info1 {
           margin-top: auto;
@@ -541,6 +573,9 @@ export default {
 a {
   text-decoration: none;
   color: #111;
+}
+.header-store {
+   background: radial-gradient(#fff, #d1dbec);
 }
 </style>
 
