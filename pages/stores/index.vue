@@ -113,9 +113,15 @@ export default {
 
 
 <style lang="scss" scoped>
+.available-store {
+  margin-bottom: 100px;
+}
 .top {
   margin-top: 100px;
   margin-bottom: 100px;
+}
+.button:hover {
+  background: #DA9412;
 }
 .buttons {
   min-width: 100px;
@@ -174,7 +180,7 @@ export default {
   transform: translateX(-50%);
 }
 .header-store {
-    min-height: 100%;
+   
    background: radial-gradient(#fff, #d1dbec);
 }
 

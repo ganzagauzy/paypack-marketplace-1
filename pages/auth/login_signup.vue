@@ -44,7 +44,7 @@
 
                             </v-card-text>
                             <div class="text-center mt-3 button">
-                                <v-btn rounded @click="login" text class="btn" >Sign in</v-btn>
+                                <v-btn  @click="login" text class="btn" >Sign in</v-btn>
                             </div>
                             </v-col> 
                             <v-col cols="12" md="4" class="text--accent-3 card-color">
@@ -125,7 +125,7 @@
 
                             </v-card-text>
                             <div class="text-center mt-3 button">
-                                <v-btn rounded text @click="submit" class="btn">Sign up</v-btn>
+                                <v-btn  text @click="submit" class="btn">Sign up</v-btn>
                             </div>
                             </v-col> 
                             

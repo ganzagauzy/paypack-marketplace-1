@@ -34,9 +34,7 @@
                   
                   
                   <div class="right">
-                      
-                      <v-btn class="btn" outlined nuxt 
-                        to="/auth/login_signup" >Signin</v-btn>
+                        <NuxtLink to="/auth/login_signup" class="btn">Signin</NuxtLink>
                   </div>
               </nav>
           </header>
@@ -85,8 +83,24 @@ a {
     text-decoration: none;
 }
 .btn {
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
     background: #DA9412;
+    color: #111;
+    padding: 8px 30px;
+    margin: 30px 5px;
+    border-radius: 30px;
+    
 }
+a.nuxt-link-active {
+  font-weight: bold;
+}
+/* exact link will show the primary color for only the exact matching link */
+a.nuxt-link-exact-active {
+  color: #DA9412;
+}
+
 
 //layout 
 .container {

@@ -104,10 +104,10 @@
             Orders
           </v-tab>
 
-          <v-tab>
+          <!-- <v-tab>
             <v-icon left> </v-icon>
             Inventory
-          </v-tab>
+          </v-tab> -->
           <v-tab>
             <v-icon left> </v-icon>
             Customise
@@ -246,7 +246,7 @@
           <!-- tab1 end -->
 
           <!-- tab2 start -->
-          <v-tab-item class="py-5">
+          <!-- <v-tab-item class="py-5">
             <v-row>
               <v-col>
                 <v-card color="">
@@ -269,7 +269,7 @@
                               ></v-divider>
                               <v-spacer></v-spacer>
                               <v-dialog v-model="dialog" max-width="400px">
-                                <!-- <template v-slot:activator="{ on, attrs }">
+                                <template v-slot:activator="{ on, attrs }">
                                   <v-btn
                                     color="#d1dbec"
 
@@ -279,7 +279,7 @@
                                   >
                                     New Item
                                   </v-btn>
-                                </template> -->
+                                </template>
                                 <v-card>
                                   <v-card-title>
                                     <span class="text-h5">{{ formTitle }}</span>
@@ -445,7 +445,7 @@
                 </v-card>
               </v-col>
             </v-row>
-          </v-tab-item>
+          </v-tab-item> -->
           <!-- tab2 end -->
 
           <!-- tab3 start -->
@@ -532,7 +532,7 @@
                       color="#d1dbec"> Copy </v-btn>
                     </div>
 
-                    <div>
+                    <!-- <div>
                       <v-container class="px-0" fluid>
                         <h4>Status</h4>
 
@@ -541,7 +541,7 @@
                           :label="`Switch 1: ${switch1.toString()}`"
                         ></v-switch>
                       </v-container>
-                    </div>
+                    </div> -->
                   </v-container>
                 </v-card>
               </v-col>
@@ -891,9 +891,13 @@ export default {
 
     //Copy
     onCopy() {
-      var link = document.location.href
+      
+
+      const P_id = this.$route.params.movieid;
+      const uid = sessionStorage.getItem("user_id")
+      var link = document.location.origin + "/stores" + `/${uid}`
       console.log(link);
-      const share_link = link + "/publish"
+      const share_link = link + `/${P_id}/`
       console.log(share_link);
       this.$copyText(share_link).then(() => {
         this.text = "URL successfully copied to clipboard!"
@@ -903,9 +907,11 @@ export default {
     
     // get url to copy
     getUrl(){
-      var link = document.location.href
+      const P_id = this.$route.params.movieid;
+      const uid = sessionStorage.getItem("user_id")
+      var link = document.location.origin + "/stores" + `/${uid}`
       console.log(link);
-      const share_link = link + "/publish"
+      const share_link = link + `/${P_id}/`
       console.log(share_link);
       this.urlToCopy = share_link
     },

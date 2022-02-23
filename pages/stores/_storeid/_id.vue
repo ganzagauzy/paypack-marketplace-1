@@ -142,7 +142,7 @@
         backgroundColor: prodBackgroundColor,
       }"
       dark
-      class="px-16 py-3 ">Buy Now</v-btn>
+      class="px-16 py-3 btn-center">Buy Now</v-btn>
       </v-col>
     </v-row>
 
@@ -258,6 +258,10 @@ export default {
 }
 .bottom {
   padding-top: 55%;
+}
+.btn-center {
+  margin-left: 150px;
+  margin-top: 20px;
 }
 .rounded-circle {
   padding: 3px;

@@ -22,6 +22,36 @@
 
 <script>
 export default {
+   head() {
+      return {
+        title: "Home",
+        meta: [
+          {
+            hid: "description",
+            name: "description",
+            content: "home page for PayPack Market Place",
+          },
+        ],
+        // link: [
+        //   {
+        //     rel: "stylesheet",
+        //     href: "/style/home.css",
+        //   },
+        // ],
+        // script: [
+        //   {
+        //     src: "/js/owl-carsoul.js",
+        //     type: "text/javascript",
+        //     body: true,
+        //   },
+        //   {
+        //     src: "/js/mixItUp.js",
+        //     body: true,
+        //     type: "text/javascript",
+        //   },
+        // ],
+      };
+    },
   layout: '',
 }
 </script>

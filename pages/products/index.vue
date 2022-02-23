@@ -288,6 +288,7 @@ export default {
       snackbar: false,
     snack: "Url  copied.",
     timeout: 2000,
+    text: '',
     icon: "mdi-checkbox-marked-circle",
       movies: [],
       searchedMovies: [],
