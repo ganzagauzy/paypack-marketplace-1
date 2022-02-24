@@ -15,7 +15,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="text-h5">
-              <h6>AGASOKO</h6>
+              <h6>PayPack Market Place</h6>
               <v-subheader v-if="user">{{ user.email }}</v-subheader>
               <!-- <p class="small">{{user.email}}</p> -->
               <!-- <small class="small">{{ user.email }}</small> -->
@@ -24,9 +24,8 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <hr class="" />
 
-        <v-list-item
+        <v-list-item class="pt-5"
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
@@ -170,6 +169,36 @@ export default {
       title: "",
     };
   },
+  head() {
+      return {
+        title: "Dashboard",
+        meta: [
+          {
+            hid: "description",
+            name: "description",
+            content: "Dashboard for PayPack Market Place",
+          },
+        ],
+        // link: [
+        //   {
+        //     rel: "stylesheet",
+        //     href: "/style/home.css",
+        //   },
+        // ],
+        // script: [
+        //   {
+        //     src: "/js/owl-carsoul.js",
+        //     type: "text/javascript",
+        //     body: true,
+        //   },
+        //   {
+        //     src: "/js/mixItUp.js",
+        //     body: true,
+        //     type: "text/javascript",
+        //   },
+        // ],
+      };
+    },
 
   mounted() {
     firebase.auth().onAuthStateChanged((user) => {

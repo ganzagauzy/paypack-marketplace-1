@@ -3,11 +3,13 @@
     <navigation />
     
     <v-container class="container">
+        
         <v-row align="center" justify="center">
             <v-col
             cols="12"
             md="8"
             sm="8">
+            
             <v-card class="elevation-12 ">
                 <v-window v-model="step">
                     <v-window-item :value="1">
@@ -250,7 +252,6 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-    padding-top: 10%;
     padding-left: 20%;
     left: 50%;
     top: 50%;

@@ -1,20 +1,27 @@
 <template>
   <div class="header-store"> 
    <v-container class="">
+     
+     
       <div class="row">
+        <!-- <div class="d-flex justify-space-around">
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+        </div> -->
         <div class="cols-2"
-        v-gsap.fromTo="[
-          { opacity: 0, x: 350 },
-          { opacity: 1, x: 0, duration: 3 }
+            v-gsap.fromTo="[
+          { opacity: 0, scale:0.8 },
+          { opacity: 1, scale: 1, duration: 2 }
         ]">
         <h1>Get To Know About <span>PayPack </span> <br>Market Place</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis unde, <br> id cum dolorum natus nostrum, itaque eum ab amet modi sapiente dignissimos<br> odio  at animi, incidunt voluptatibus. Corrupti, libero iste.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.<br> Officiis unde,  id cum dolorum natus nostrum, itaque eum ab amet modi sapiente dignissimos<br> odio  at animi, incidunt voluptatibus. Corrupti, libero iste.</p>
         <a href="#available-store" class="btn-store">Read More</a>
       </div>
       <div class="cols-2"
       v-gsap.fromTo="[
-      { opacity: 0, x: 350 },
-      { opacity: 1, x: 0, duration: 3 }
+      { opacity: 0, scale:1.2 },
+      { opacity: 1, scale: 1, duration: 2 }
     ]">
         <img class="" src="~/assets/images/info.png" />
       </div>
@@ -22,7 +29,7 @@
       <div class="available-store" id="available-store">
         <h1 class="store-title"
         v-gsap.fromTo="[
-          { opacity: 0, y: 350 },
+          { opacity: 0, y: 150 },
           { opacity: 1, y: 0, duration: 5 }
         ]">PayPack Market Place</h1>
         <div class="buttons">
@@ -58,25 +65,42 @@
           </p> -->
          
         </div>
+        
+
+        
     
     </v-container>
     
   </div>
 </template>
 
+
 <script>
-
-
-
-
 export default {
- 
-
-};
+  mounted() {
+    this.staggering()
+  },
+  methods: {
+    staggering() {
+      const gsap = this.$gsap
+      gsap.to('.box', {
+        y: -20,
+        stagger: 0.5
+      })
+    }
+  }
+}
 </script>
 
 
 <style lang="scss" scoped>
+.box {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  background-color: #00c58e;
+}
 .top {
   margin-top: 100px;
   margin-bottom: 100px;

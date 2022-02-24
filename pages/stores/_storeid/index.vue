@@ -6,6 +6,7 @@
         
       
         <div class="home">
+          
           <!-- Hero -->
           <!-- <Hero /> -->
 
@@ -48,7 +49,8 @@
           
 
           <div class="row">
-            <div class="category">
+            <div class="category" 
+                  >
               <h2 class="">Categories</h2>
               <v-btn text class="text-center" @click="fetchProducts">All</v-btn>
               <ul v-for="(product, index) in shopproducts" :key="index">
@@ -77,6 +79,7 @@
             
             <!-- Searched movies -->
             <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
+              
               <div
                 v-for="(product, index) in searchedProducts"
                 :key="index"
@@ -142,12 +145,19 @@
             </div>
 
             <!-- Now Products -->
-            <div v-else id="movie-grid" class="movies-grid">
+            <div v-else id="movie-grid" class="movies-grid "
+                 >
               
               <div
                 v-for="(product, index) in products"
                 :key="index"
-                class="movie"
+                class="movie "
+                 v-gsap.fromTo="[
+                { opacity: 0, y: 50 },
+                { opacity: 1, y: 0, delay: index *2, duration: 1}
+              ]"
+                 
+
                 
               >
                 <NuxtLink
@@ -155,6 +165,7 @@
                     name: 'stores-storeid-id',
                     params: { id: product.id },
                   }"
+                 
                 >
                   <v-hover v-slot="{ hover }">
                     <v-card
@@ -255,25 +266,15 @@ export default {
   mounted() {
     this.fetchProducts();
     this.readDataFilterCategory();
-    this.animateOnScroll();
-    // this.readDataFilter();
-    
-    
-    
+    this.staggering();
+
   },
   methods: {
-
-     animateOnScroll() {
-      this.$gsap.to(window, { duration: 2, scrollTo: 1000 })
-      this.$gsap.to('.movie', {
-        x: 500,
-        ease: 'Power1.easeInOut',
-        scrollTrigger: {
-          trigger: '.content',
-          pin: true,
-          end: 'bottom',
-          scrub: true
-        }
+    staggering() {
+      const gsap = this.$gsap
+      gsap.to('.box', {
+        y: 200,
+        stagger: 0.5
       })
     },
 
@@ -425,7 +426,13 @@ export default {
 
 
 <style lang="scss" scoped>
-
+// .box {
+//   width: 100px;
+//   display: flex;
+//   flex-direction: row;
+//   height: 100px;
+//   background-color: #00c58e;
+// }
 .row {
   margin: auto;
   display: flex;
