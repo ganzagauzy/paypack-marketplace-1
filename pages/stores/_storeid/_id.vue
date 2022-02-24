@@ -295,4 +295,11 @@ a {
 .top {
   padding-top: 50px;
 }
+@media screen and (max-width:600px) {
+  .btn-center {
+    margin-bottom: 100px;
+  margin-left: 100px;
+
+  }
+}
 </style>

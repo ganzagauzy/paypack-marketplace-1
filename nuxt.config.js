@@ -45,7 +45,9 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    'nuxt-gsap-module',
   ],
+  //gsap
 
   
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -86,6 +88,16 @@ export default {
           success: colors.green.accent3
         }
       }
+    }
+  },
+  //gsap
+  gsap: {
+    extraPlugins: {
+      scrollTo: true,
+      scrollTrigger: true
+    },
+    extraEases: {
+      expoScaleEase: true
     }
   },
 

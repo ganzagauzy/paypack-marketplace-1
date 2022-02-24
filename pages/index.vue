@@ -3,12 +3,20 @@
    <v-container class="">
     
       <div class="row">
-        <div class="cols-2">
+        <div class="cols-2"
+        v-gsap.fromTo="[
+          { opacity: 0, x: -350 },
+          { opacity: 1, x: 0, duration: 5 }
+        ]">
         <h1>Get A <span>Market</span> <br>To Sell Your Products</h1>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis unde, <br> id cum dolorum natus nostrum, itaque eum ab amet modi sapiente dignissimos<br> odio  at animi, incidunt voluptatibus. Corrupti, libero iste.</p>
         <NuxtLink to="/about" class="btn-store">Explore Now</NuxtLink>
       </div>
-      <div class="cols-2">
+      <div class="cols-2"
+      v-gsap.fromTo="[
+        { opacity: 0, x: -350 },
+        { opacity: 1, x: 0, duration: 3 }
+      ]">
         <img class="" src="~/assets/images/market.png" />
       </div>
       </div>

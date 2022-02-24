@@ -54,7 +54,7 @@
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
               <v-btn @click="onCopy" color="" v-bind="attrs" v-on="on" icon>
-                <v-snackbar
+                <!-- <v-snackbar
                   v-model="snackbar"
                   :timeout="timeout"
                   :value="true"
@@ -63,7 +63,7 @@
                   shaped
                 >
                   {{ snack }}
-                </v-snackbar>
+                </v-snackbar> -->
 
                 <v-icon>mdi-share-variant</v-icon>
               </v-btn>
@@ -712,7 +712,7 @@ export default {
   data: () => ({
     //snackbar
     snackbar: false,
-    snack: "Url  copied.",
+    
     timeout: 2000,
     icon: "mdi-checkbox-marked-circle",
 
@@ -806,7 +806,7 @@ export default {
     message: false,
     hints: true,
     snackbar: false,
-    text: '',
+    
 
     states: ["Alabama", "Alaska"],
 

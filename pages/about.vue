@@ -2,21 +2,62 @@
   <div class="header-store"> 
    <v-container class="">
       <div class="row">
-        <div class="cols-2">
+        <div class="cols-2"
+        v-gsap.fromTo="[
+          { opacity: 0, x: 350 },
+          { opacity: 1, x: 0, duration: 3 }
+        ]">
         <h1>Get To Know About <span>PayPack </span> <br>Market Place</h1>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis unde, <br> id cum dolorum natus nostrum, itaque eum ab amet modi sapiente dignissimos<br> odio  at animi, incidunt voluptatibus. Corrupti, libero iste.</p>
         <a href="#available-store" class="btn-store">Read More</a>
       </div>
-      <div class="cols-2">
+      <div class="cols-2"
+      v-gsap.fromTo="[
+      { opacity: 0, x: 350 },
+      { opacity: 1, x: 0, duration: 3 }
+    ]">
         <img class="" src="~/assets/images/info.png" />
       </div>
       </div>
       <div class="available-store" id="available-store">
-        <h1 class="store-title">PayPack Market Place</h1>
+        <h1 class="store-title"
+        v-gsap.fromTo="[
+          { opacity: 0, y: 350 },
+          { opacity: 1, y: 0, duration: 5 }
+        ]">PayPack Market Place</h1>
         <div class="buttons">
           
         </div>
       </div>
+       <div>
+          <!-- <h1
+            v-gsap.to="{
+              rotation: 360,
+              x: 150,
+              duration: 2
+            }"
+          >
+            NUXT GSAP
+          </h1> -->
+          <!-- <span
+            v-gsap.from="{
+              opacity: 0,
+              x: -200,
+              duration: 1
+            }"
+          >
+            NUXT GSAP
+          </span> -->
+          <!-- <p
+            v-gsap.fromTo="[
+              { opacity: 0, x: -350 },
+              { opacity: 1, x: 0, duration: 3 }
+            ]"
+          >
+            NUXT GSAP
+          </p> -->
+         
+        </div>
     
     </v-container>
     

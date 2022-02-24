@@ -2,12 +2,20 @@
   <div class="header-store"> 
    <v-container class="">
       <div class="row">
-        <div class="cols-2">
+        <div class="cols-2"
+        v-gsap.fromTo="[
+          { opacity: 0, y: -250 },
+          { opacity: 1, y: 0, duration: 3 }
+        ]">
         <h1>Get A <span>Store</span> <br>For Your Self</h1>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis unde, <br> id cum dolorum natus nostrum, itaque eum ab amet modi sapiente dignissimos<br> odio  at animi, incidunt voluptatibus. Corrupti, libero iste.</p>
         <a href="#available-store" class="btn-store">Available Stores</a>
       </div>
-      <div class="cols-2">
+      <div class="cols-2"
+      v-gsap.fromTo="[
+          { opacity: 0, y: 250 },
+          { opacity: 1, y: 0, duration: 3 }
+        ]">
         <img class="" src="~/assets/images/cart1.png" />
       </div>
       </div>
@@ -58,7 +66,9 @@ export default {
       // },
     };
   },
-
+  // mounted() {
+  //   this.animateOnScroll()
+  // },
  
 
   created() {
@@ -72,6 +82,19 @@ export default {
       this.myproducts = [];
       this.shopproducts = [];
     },
+    //  animateOnScroll() {
+    //   this.$gsap.to(window, { duration: 2, scrollTo: 1000 })
+    //   this.$gsap.to('.box', {
+    //     x: 500,
+    //     ease: 'Power1.easeInOut',
+    //     scrollTrigger: {
+    //       trigger: '.content',
+    //       pin: true,
+    //       end: 'bottom',
+    //       scrub: true
+    //     }
+    //   })
+    // },
 
     async readData() {
       //   db.collection("desserts2").get().then((querySnapshot) =>{

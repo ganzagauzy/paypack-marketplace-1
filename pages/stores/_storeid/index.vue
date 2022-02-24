@@ -28,6 +28,8 @@
               class="input"
               dense
               @keyup.enter="$fetch"
+              @keypress.enter="$fetch"
+
               
             ></v-text-field>
             <v-btn
@@ -146,6 +148,7 @@
                 v-for="(product, index) in products"
                 :key="index"
                 class="movie"
+                
               >
                 <NuxtLink
                   :to="{
@@ -252,12 +255,28 @@ export default {
   mounted() {
     this.fetchProducts();
     this.readDataFilterCategory();
+    this.animateOnScroll();
     // this.readDataFilter();
     
     
     
   },
   methods: {
+
+     animateOnScroll() {
+      this.$gsap.to(window, { duration: 2, scrollTo: 1000 })
+      this.$gsap.to('.movie', {
+        x: 500,
+        ease: 'Power1.easeInOut',
+        scrollTrigger: {
+          trigger: '.content',
+          pin: true,
+          end: 'bottom',
+          scrub: true
+        }
+      })
+    },
+
     async fetchProducts() {
       const productsRef = firebase.firestore().collection("products");
 
