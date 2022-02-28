@@ -4,9 +4,7 @@
     <!-- Navigation bar ends -->
 
     <v-main class="header-store">
-      
-        <Nuxt />
-      
+      <Nuxt />
     </v-main>
     <v-footer class="text-center" :absolute="!fixed" app color="">
       <span class="text-center">&copy; {{ new Date().getFullYear() }}</span>
@@ -15,13 +13,12 @@
 </template>
 <script>
 export default {
- 
-  data () {
+  data() {
     return {
       fixed: true,
       drawer: false,
       tab: null,
-      
+
       items: [
         {
           icon: "mdi-apps",
@@ -33,20 +30,16 @@ export default {
           title: "Inspire",
           to: "/inspire",
         },
-        
-        
-       
+
         {
           icon: "mdi-shopping",
           title: "Stores",
           to: "/stores",
         },
-       
-        
       ],
-    }
-  }
-}
+    };
+  },
+};
 </script>
 <style lang="scss" scoped>
 ul {
@@ -57,14 +50,14 @@ a {
 
   color: #111;
 }
-NuxtLink  {
+NuxtLink {
   color: #111;
 }
 .color {
-  background: #DA9412;
+  background: #da9412;
 }
 // .header-store {
-    
+
 //   background: radial-gradient(rgb(241, 241, 241), #d1dbec);
 // }
 a.nuxt-link-active {
@@ -74,5 +67,4 @@ a.nuxt-link-active {
 a.nuxt-link-exact-active {
   color: #00c58e;
 }
-
 </style>

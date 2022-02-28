@@ -1,40 +1,23 @@
 <template>
   <div>
-
-  <div class="fixed-bar top">
-    <div class="fixed-bar">
-            <v-system-bar  class=""
-                      window
-                      dark
-                      color=""
-                    >
-                      <v-icon>mdi-dropbox </v-icon>
-                      <span>Products &mdash;{{ size }}</span>
-                      <v-spacer></v-spacer>
-                      <!-- <v-icon>mdi-minus</v-icon>
+    <div class="fixed-bar top">
+      <div class="fixed-bar">
+        <v-system-bar class="" window dark color="">
+          <v-icon>mdi-dropbox </v-icon>
+          <span>Products &mdash;{{ size }}</span>
+          <v-spacer></v-spacer>
+          <!-- <v-icon>mdi-minus</v-icon>
                       <v-icon>mdi-checkbox-blank-outline</v-icon>
                       <v-icon>mdi-close</v-icon> -->
-                    </v-system-bar>
+        </v-system-bar>
 
-                    <v-row class=""
-                   
-                    color="#d1dbec"
-                    >
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-
-                      </v-col>
-                      
-                    </v-row>
+        <v-row class="" color="#d1dbec">
+          <v-col cols="12" sm="6" md="4"> </v-col>
+        </v-row>
+      </div>
     </div>
 
-  </div>
-
-  
-
-  <!-- <div class="pt-16">
+    <!-- <div class="pt-16">
     <v-card>
     <v-tabs
         color="dark"
@@ -70,47 +53,30 @@
 
   </div> -->
 
-  
+    <v-card>
+      <v-toolbar fixed color="#d1dbec">
+        <v-toolbar-title class="d-flex justify-lg-space-between">
+          <div>My Products</div>
+          <v-spacer></v-spacer>
+          <div class="d-flex justify-end ml-16">
+            <v-btn outlined @click="shareUrl">share-url</v-btn>
+          </div>
+        </v-toolbar-title>
+      </v-toolbar>
 
-  <v-card>
-    <v-toolbar
-      
-      fixed
-      color="#d1dbec"
-      
-    >
-      <v-toolbar-title class="d-flex justify-lg-space-between">
-        <div>
-          My Products
-        </div>
-        <v-spacer></v-spacer>
-        <div class="d-flex justify-end ml-16">
-          <v-btn outlined  @click="shareUrl">share-url</v-btn>
-        </div>
-      </v-toolbar-title>
-    </v-toolbar>
+      <v-tabs>
+        <v-tab>
+          <v-icon left> mdi-grid </v-icon>
+        </v-tab>
+        <v-tab>
+          <v-icon left> mdi-playlist-edit </v-icon>
+        </v-tab>
 
-    <v-tabs >
-      <v-tab>
-        <v-icon left>
-          mdi-grid
-        </v-icon>
-        
-      </v-tab>
-      <v-tab>
-        <v-icon left>
-          mdi-playlist-edit
-        </v-icon>
-        
-      </v-tab>
-    
-      <v-tab-item>
-        <v-card flat>
-          <div class="home">
+        <v-tab-item>
+          <v-card flat>
+            <div class="home">
               <!-- Hero -->
               <!-- <Hero /> -->
-
-
 
               <!-- search box -->
               <!-- <div class="container search">
@@ -122,209 +88,160 @@
                 <p>{{ product.images}}</p>
               </div> -->
 
-              <!-- <div  id="movie-grid" class="movies-grid">
-                  <div v-for="(product, index) in products" :key="index" class="movie">
-                    <div class="movie-img"> -->
-                      <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
-                      <!-- <img :src="product.images[0]" alt=""> -->
-                      <!-- <p class="review">{{ movie.vote_average }}</p> -->
-                      <!-- <p class="overview">{{ movie.overview }}</p> -->
-                    <!-- </div>
+              <!-- <div  id="product-grid" class="products-grid">
+                  <div v-for="(product, index) in products" :key="index" class="product">
+                    <div class="product-img"> -->
+              <!-- <img src="`https://image.tmdb.org/t/p/w500/${ product.poster_path }`" alt=""> -->
+              <!-- <img :src="product.images[0]" alt=""> -->
+              <!-- <p class="review">{{ product.vote_average }}</p> -->
+              <!-- <p class="overview">{{ product.overview }}</p> -->
+              <!-- </div>
                     
                   </div>
               </div> -->
 
-
-
-     
-
               <!-- Loading -->
               <!-- <Loading v-if="$fetchState.pending" /> -->
 
-              
-
               <!-- Movies -->
-              <div  class="container movies">
-                <!-- Searched movies -->
-                <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
-                  <div v-for="(product, index) in searchProducts" :key="index" class="movie">
-                    <div class="movie-img">
-                      <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
-                      <img :src="product.images[0]" alt="">
-                      <!-- <p class="review">{{ movie.vote_average }}</p> -->
-                      <!-- <p class="overview">{{ movie.overview }}</p> -->
-                    </div>
-                    <div class="">
-                      <!-- <p class="title h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
-                      </p> -->
-                      <!-- <p class="release">
-                        Released:
-                        {{
-                          new Date(movie.release_date).toLocaleString('en-us', {
-                            month: 'long',
-                            day: 'numeric',
-                            year: 'numeric',
-                          })
-                        }}
-                      </p> -->
-                      <!-- <v-btn class="py-3"
-                          color=""
-                          width="100%"
-                          :to="{ name: 'products-movieid', params: {movieid: movie.id} }" nuxt>
-                            Read More
-                        </v-btn> -->
-                      <!-- <NuxtLink class="button button-light" :to= "`/products/${movie.id}`">
-                        Get More Info
-                      </NuxtLink> -->
-                    </div>
-                  </div>
-                </div>
+              <div class="container products">
                 <!-- Now streaming -->
-                <div v-else id="movie-grid" class="movies-grid">
-                  <div v-for="(product, index) in products" :key="index" class="movie">
-                    <NuxtLink  :to="{ name: 'products-productid', params: {productid: product.id} }">
+                <div id="product-grid" class="products-grid">
+                  <div
+                    v-for="(product, index) in products"
+                    :key="index"
+                    class="product"
+                  >
+                    <NuxtLink
+                      :to="{
+                        name: 'products-productid',
+                        params: { productid: product.id },
+                      }"
+                    >
                       <v-hover v-slot="{ hover }">
                         <v-card
-                      class="mx-auto"
-                      color="grey lighten-4"
-                      max-width="600"
-                    >
-                      <div class="movie-img">
-                        <v-img
-                        :aspect-ratio="16/14"
-                        :src="product.images[0]"
-                      >
-                        <v-expand-transition>
-                          <div
-                            v-if="hover"
-                            class="d-flex transition-fast-in-fast-out blue darken-2 v-card--reveal text-h3 white--text"
-                            style="height: 100%;"
-                          >
-                            More
+                          class="mx-auto"
+                          color="grey lighten-4"
+                          max-width="600"
+                        >
+                          <div class="product-img">
+                            <v-img
+                              :aspect-ratio="16 / 14"
+                              :src="product.images[0]"
+                            >
+                              <v-expand-transition>
+                                <div
+                                  v-if="hover"
+                                  class="
+                                    d-flex
+                                    transition-fast-in-fast-out
+                                    blue
+                                    darken-2
+                                    v-card--reveal
+                                    text-h3
+                                    white--text
+                                  "
+                                  style="height: 100%"
+                                >
+                                  More
+                                </div>
+                              </v-expand-transition>
+                            </v-img>
                           </div>
-                        </v-expand-transition>
-                      </v-img>
-                      </div>
-                      
-                          
-                          <!-- <p class="text-h5 font-weight-light orange--text mb-2 title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span></p> -->
-                      <div class="info1 py-1 px-2">
-                        <!-- <p class="title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
-                        </p> -->
-                      </div>
-                      <p class="text-h6 px-2 py-1 font-weight-light blue--text mb-2">
-                        {{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
-                      </p>
-                          
-                          
-                       
 
-                    </v-card>
-                  </v-hover>
+                          <!-- <p class="text-h5 font-weight-light orange--text mb-2 title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span></p> -->
+                          <div class="info1 py-1 px-2">
+                            <!-- <p class="title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
+                        </p> -->
+                          </div>
+                          <p
+                            class="
+                              text-h6
+                              px-2
+                              py-1
+                              font-weight-light
+                              blue--text
+                              mb-2
+                            "
+                          >
+                            {{ product.name.slice(0, 25) }}
+                            <span v-if="product.name.length > 25">...</span>
+                          </p>
+                        </v-card>
+                      </v-hover>
                     </NuxtLink>
                   </div>
                 </div>
               </div>
-              
-
             </div>
-        </v-card>
-      </v-tab-item>
-      <v-tab-item>
-        <v-card flat>
-          <product-table/>
-        </v-card>
-      </v-tab-item>
-     
-    </v-tabs>
-  </v-card>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <product-table />
+          </v-card>
+        </v-tab-item>
+      </v-tabs>
+    </v-card>
 
-  <v-snackbar
-      v-model="snackbar"
-      shaped
-      color="success"
-      right
-      top
-    >
+    <v-snackbar v-model="snackbar" shaped color="success" right top>
       <v-icon>{{ icon }}</v-icon> {{ text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn
-          color="success"
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
+        <v-btn color="success" text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>
     </v-snackbar>
-
-
-
-
-
-
-
   </div>
 </template>
 
 
 <script>
-import VueUploadMultipleImage from 'vue-upload-multiple-image'
-import axios from 'axios'
-import {mapState} from 'vuex'
-import ProductTable from '../../components/ProductTable.vue'
+import VueUploadMultipleImage from "vue-upload-multiple-image";
+import axios from "axios";
+import { mapState } from "vuex";
+import ProductTable from "../../components/ProductTable.vue";
 
 import firebase from "firebase/compat/app";
-import 'firebase/compat/auth';
+import "firebase/compat/auth";
 import "firebase/compat/firestore";
 // import db from "../plugins/firebase";
-
 
 export default {
   data() {
     return {
       snackbar: false,
-    snack: "Url  copied.",
-    timeout: 2000,
-    text: '',
-    icon: "mdi-checkbox-marked-circle",
-      movies: [],
+      snack: "Url  copied.",
+      timeout: 2000,
+      text: "",
+      icon: "mdi-checkbox-marked-circle",
       searchedMovies: [],
       searchProducts: [],
-      searchInput: '',
+      searchInput: "",
       dialog: false,
       images: [],
       show: false,
       products: [],
-      size: '',
+      size: "",
       user: "",
       // product: {
       //   name: '',
       //   description: '',
       // },
-
-    }
+    };
   },
 
   components: {
     VueUploadMultipleImage,
-    ProductTable
+    ProductTable,
   },
   // computed: {
   //   products() {
   //     return this.$store.getters.products;
   //   },
   // },
-  middleware: 'auth',
-
- 
- 
-
-
- 
-
+  middleware: "auth",
 
   // async fetch() {
   //   if(this.searchInput === ''){
@@ -349,29 +266,26 @@ export default {
   //     }
   //   })
   // },
-  
+
   layout: "admin",
 
-
   methods: {
-
     initialize() {
       this.products = [];
     },
     shareUrl() {
-      const uid = sessionStorage.getItem("user_id")
+      const uid = sessionStorage.getItem("user_id");
       console.log(uid);
-      var link = document.location.origin + "/stores" + `/${uid}/`
+      var link = document.location.origin + "/stores" + `/${uid}/`;
       console.log(link);
-      const share_link = link 
+      const share_link = link;
       console.log(share_link);
       this.$copyText(share_link).then(() => {
-        this.text = "URL successfully copied to clipboard!"
-        this.snackbar = true
-      })
-   
+        this.text = "URL successfully copied to clipboard!";
+        this.snackbar = true;
+      });
     },
-    
+
     // async getProducts() {
     //   getMovies()
 
@@ -389,13 +303,12 @@ export default {
     //     });
     //   },
 
-
-    //   const data = axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1'
+    //   const data = axios.get('https://api.themoviedb.org/3/product/now_playing?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1'
     //   )
     //   eslint-disable-next-line no-unused-vars
     //   const result = await data
-    //   result.data.results.forEach(movie => {
-    //     this.movies.push(movie)
+    //   result.data.results.forEach(product => {
+    //     this.products.push(product)
 
     //   })
     //   // eslint-disable-next-line no-console
@@ -410,77 +323,67 @@ export default {
     //       this.products.push(product);
     //     });
 
-
     //   })
-      
+
     // },
-    
+
     async readData() {
-    //   db.collection("desserts2").get().then((querySnapshot) =>{
-    //   querySnapshot.forEach((doc) => {
-    //     console.log(doc.id, "=>",doc.data());
-    //     this.products = doc.data();
-    //     this.products.push(doc.data())
-    //   })
-    // })
+      //   db.collection("desserts2").get().then((querySnapshot) =>{
+      //   querySnapshot.forEach((doc) => {
+      //     console.log(doc.id, "=>",doc.data());
+      //     this.products = doc.data();
+      //     this.products.push(doc.data())
+      //   })
+      // })
 
-    var productsRef = await firebase.firestore().collection("products");
+      var productsRef = await firebase.firestore().collection("products");
 
-    const uid = sessionStorage.getItem("user_id")
+      const uid = sessionStorage.getItem("user_id");
 
-       
       productsRef.where("userId", "==", uid).onSnapshot((snap) => {
-      this.size = snap.size
-      this.products = [];
-      snap.forEach((doc) => {
-        var product = doc.data();
-        product.id = doc.id;
-        this.products.push(product);
+        this.size = snap.size;
+        this.products = [];
+        snap.forEach((doc) => {
+          var product = doc.data();
+          product.id = doc.id;
+          this.products.push(product);
+        });
       });
-    });
-
-  
-
-  },
+    },
 
     // async save() {
     //     const product = {}
     //     product.name = this.product.name
     // },
 
-  clearSearch() {
-    this.searchInput = ''
-    this.searchedMovies = []
-  },
+    clearSearch() {
+      this.searchInput = "";
+      this.searchedMovies = [];
+    },
 
     uploadImageSuccess(formData, index, fileList) {
-      console.log('data', formData, index, fileList)
+      console.log("data", formData, index, fileList);
       // Upload image api
       // axios.post('http://your-url-upload', formData).then(response => {
       //   console.log(response)
       // })
     },
-    beforeRemove (index, done, fileList) {
-      console.log('index', index, fileList)
-      var r = confirm("remove image")
+    beforeRemove(index, done, fileList) {
+      console.log("index", index, fileList);
+      var r = confirm("remove image");
       if (r == true) {
-        done()
+        done();
       } else {
       }
     },
-    editImage (formData, index, fileList) {
-      console.log('edit data', formData, index, fileList)
+    editImage(formData, index, fileList) {
+      console.log("edit data", formData, index, fileList);
     },
-  }
-
-
-}
-
-
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-
 .fixed-bar {
   position: sticky;
   position: -webkit-sticky; /* for Safari */
@@ -491,7 +394,6 @@ export default {
 .home {
   .top {
     padding-top: 30px;
-    
   }
   .loading {
     padding-top: 120px;
@@ -512,11 +414,10 @@ export default {
         outline: none;
       }
     }
-
   }
-  .movies {
+  .products {
     padding: 32px 16px;
-    .movies-grid {
+    .products-grid {
       display: grid;
       column-gap: 32px;
       row-gap: 64px;
@@ -530,11 +431,11 @@ export default {
       @media (min-width: 1100px) {
         grid-template-columns: repeat(4, 1fr);
       }
-      .movie {
+      .product {
         position: relative;
         display: flex;
         flex-direction: column;
-        .movie-img {
+        .product-img {
           position: relative;
           overflow: hidden;
           &:hover {
@@ -584,7 +485,6 @@ export default {
             margin-top: 8px;
             color: #c9c9c9;
           }
-
         }
       }
     }
@@ -597,58 +497,8 @@ a {
   align-items: center;
   bottom: 0;
   justify-content: center;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   width: 100%;
 }
-
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // export default {
-  //   data: () => ({
-  //     isLoading: false,
-  //     items: [],
-  //     model: null,
-  //     search: null,
-  //     tab: null,
-  //   }),
-
-  //   watch: {
-  //     model (val) {
-  //       if (val != null) this.tab = 0
-  //       else this.tab = null
-  //     },
-  //     search (val) {
-  //       // Items have already been loaded
-  //       if (this.items.length > 0) return
-
-  //       this.isLoading = true
-
-  //       // Lazily load input items
-  //       fetch('https://api.coingecko.com/api/v3/coins/list')
-  //         .then(res => res.clone().json())
-  //         .then(res => {
-  //           this.items = res
-  //         })
-  //         .catch(err => {
-  //           console.log(err)
-  //         })
-  //         .finally(() => (this.isLoading = false))
-  //     },
-  //   },
-  // }

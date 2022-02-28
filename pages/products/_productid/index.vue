@@ -78,7 +78,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.single-movie {
+.single-product {
   color: #fff;
   min-height: 100vh;
   display: flex;

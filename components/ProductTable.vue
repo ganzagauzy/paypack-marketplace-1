@@ -1,7 +1,5 @@
 <template>
   <div>
-    
-
     <v-data-table
       :headers="headers"
       :items="products"
@@ -20,173 +18,93 @@
               </v-btn>
             </template>
             <v-card>
-               <v-app-bar
-                
-                color="#d1dbec"
-                height="50px"
-              >
-                <v-toolbar-title><span class="text-h6">{{ formTitle }}</span></v-toolbar-title>
+              <v-app-bar color="#d1dbec" height="50px">
+                <v-toolbar-title
+                  ><span class="text-h6">{{ formTitle }}</span></v-toolbar-title
+                >
               </v-app-bar>
-              
 
+              <v-container>
+                <v-row>
+                  <v-col cols="12" md="8">
+                    <v-text-field
+                      v-model="editedItem.name"
+                      label="Product name"
+                      outlined
+                      dense
+                    ></v-text-field>
+                    <vue-editor
+                      class="pb-1"
+                      v-model="editedItem.description"
+                    ></vue-editor>
 
-
-            
-                <v-container>
-                  <v-row>
-                    <v-col 
-                    cols="12"
-                    md="8"
-                     >
-                      <v-text-field
-                      
-                        v-model="editedItem.name"
-                        label="Product name"
-                        outlined
-                        dense
-                        
-                      ></v-text-field>
-                      <vue-editor class="pb-1" v-model="editedItem.description"></vue-editor>
-                      <!-- <v-textarea
-                        clearable
-                        clear-icon="mdi-close-circle"
-                        v-model="editedItem.description"
-                        label="Description"
-                        type="text"
-                        outlined
-                        dense
-                        
-                      ></v-textarea> -->
-                      <label for="product_Image">Product Images</label>
-                      <input type="file" @change="uploadImage" class="form-control">
-                      <div class="form-group d-flex">
-                        <div v-for="(image, index) in editedItem.images" :key="index" class="pa-2">
+                    <label for="product_Image">Product Images</label>
+                    <input
+                      type="file"
+                      @change="uploadImage"
+                      class="form-control"
+                    />
+                    <div class="form-group d-flex">
+                      <div
+                        v-for="(image, index) in editedItem.images"
+                        :key="index"
+                        class="pa-2"
+                      >
                         <div class="img-wrapp">
-                          <img :src="image" alt="" width="80px" >
-                          <span class="delete-img" @click="deleteImage(image,index)">X</span>
+                          <img :src="image" alt="" width="80px" />
+                          <span
+                            class="delete-img"
+                            @click="deleteImage(image, index)"
+                            >X</span
+                          >
                         </div>
                       </div>
-                      </div>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="4"
-
-                    >
-                      <v-select
-                        :items="['Rwf']"
-                        label="Currency*"
-                        v-model="editedItem.currency"
-                        outlined
-                        dense
-                        
-                      ></v-select>
-                      <v-select
-                        :items="['Limited', 'Unlimited']"
-                        label="Quantity*"
-                        v-model="editedItem.quantity"
-                        outlined
-                        dense
-                        
-                      ></v-select>
-                      <v-text-field
-                          label="Price*"
-                          v-model="editedItem.price"
-                          type="number"
-                          outlined
-                          dense
-                          
-                        ></v-text-field>
-                        <v-text-field
-                          label="Category*"
-                          v-model="editedItem.category"
-                          outlined
-                          dense
-                          
-                          
-                        ></v-text-field>
-                        
-                    </v-col>
-
-                    
-
-                    <!-- <v-col
-                      cols="12"
-
-                    >
-                      <v-select
-                        :items="['Limited', 'Unlimited', ]"
-                        label="Quantity"
-                        v-model="editedItem.quantity"
-                        multiple
-                      ></v-select>
-                    </v-col> -->
-
-                    
-
-                   
-
-                    
-                    
-                    <!-- <v-col
-                    cols="12"
-                      >
-                        <v-file-input
-                          label="File input"
-                          
-                          prepend-icon="mdi-camera"
-                          type="file"
-                          @change="uploadImage"
-                        ></v-file-input>
-                      </v-col> -->
-                      
-
-
-                    <!-- <v-col cols="12" >
-                      <v-text-field
-                        v-model="editedItem.calories"
-                        label="Calories"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" >
-                      <v-text-field
-                        v-model="editedItem.fat"
-                        label="Fat (g)"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" >
-                      <v-text-field
-                        v-model="editedItem.carbs"
-                        label="Carbs (g)"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" >
-                      <v-text-field
-                        v-model="editedItem.protein"
-                        label="Protein (g)"
-                      ></v-text-field>
-                    </v-col> -->
-                  </v-row>
-                </v-container>
-              
-            
+                    </div>
+                  </v-col>
+                  <v-col cols="12" md="4">
+                    <v-select
+                      :items="['Rwf']"
+                      label="Currency*"
+                      v-model="editedItem.currency"
+                      outlined
+                      dense
+                    ></v-select>
+                    <v-select
+                      :items="['Limited', 'Unlimited']"
+                      label="Quantity*"
+                      v-model="editedItem.quantity"
+                      outlined
+                      dense
+                    ></v-select>
+                    <v-text-field
+                      label="Price*"
+                      v-model="editedItem.price"
+                      type="number"
+                      outlined
+                      dense
+                    ></v-text-field>
+                    <v-text-field
+                      label="Category*"
+                      v-model="editedItem.category"
+                      outlined
+                      dense
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color=""  @click="close">
-                  <v-icon left>
-                      mdi-close
-                  </v-icon>Close
+                <v-btn color="" @click="close">
+                  <v-icon left> mdi-close </v-icon>Close
                 </v-btn>
-                <v-btn color=""    @click="update">
-                  <v-icon left>
-                      mdi-pencil
-                  </v-icon>Edit </v-btn>
-        
-                <v-btn color=""  @click="save">
-                  <v-icon left>
-                      mdi-upload
-                  </v-icon> Save </v-btn>
+                <v-btn color="" @click="update">
+                  <v-icon left> mdi-pencil </v-icon>Edit
+                </v-btn>
+
+                <v-btn color="" @click="save">
+                  <v-icon left> mdi-upload </v-icon> Save
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -218,30 +136,15 @@
       </template>
     </v-data-table>
 
-    <v-snackbar
-      v-model="snackbar"
-      shaped
-      color="success"
-      right
-      top
-    >
+    <v-snackbar v-model="snackbar" shaped color="success" right top>
       <v-icon>{{ icon }}</v-icon> {{ text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn
-          color="success"
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
+        <v-btn color="success" text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>
     </v-snackbar>
-
-    <!-- <div v-for="(product, index) in products" :key="index" class="movie">
-      <p>{{ product}}</p>
-    </div> -->
   </div>
 </template>
 
@@ -250,17 +153,17 @@ import { VueEditor } from "vue2-editor";
 import { doc, deleteDoc } from "firebase/firestore";
 
 import firebase from "firebase/compat/app";
-import 'firebase/compat/auth';
+import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import db from "../plugins/firebase";
-import 'firebase/compat/storage'
+import "firebase/compat/storage";
 
 export default {
   data: () => ({
     dialog: false,
     dialogDelete: false,
     snackbar: false,
-    text: '',
+    text: "",
     content: "<h1>Some initial content</h1>",
     icon: "mdi-checkbox-marked-circle",
     headers: [
@@ -270,15 +173,12 @@ export default {
         sortable: false,
         value: "name",
       },
-      
+
       { text: "Currency", value: "currency" },
       { text: "Quantity", value: "quantity" },
       { text: "Price", value: "price" },
       { text: "Category", value: "category" },
-      // { text: "Calories", value: "calories" },
-      // { text: "Fat (g)", value: "fat" },
-      // { text: "Carbs (g)", value: "carbs" },
-      // { text: "Protein (g)", value: "protein" },
+
       { text: "Actions", value: "actions", sortable: false },
     ],
     products: [],
@@ -289,33 +189,24 @@ export default {
       description: "",
       currency: "",
       quantity: "",
-      price: '',
-      category: '',
+      price: "",
+      category: "",
       images: [],
-      
-      // calories: 0,
-      // fat: 0,
-      // carbs: 0,
-      // protein: 0,
     },
     defaultItem: {
-      name: '',
-      description: '',
-      currency: '',
-      quantity: '',
-      price: '',
-      category: '',
+      name: "",
+      description: "",
+      currency: "",
+      quantity: "",
+      price: "",
+      category: "",
       images: [],
-      // calories: '',
-      // fat: '',
-      // carbs: '',
-      // protein: '',
     },
-    activeItem: null
+    activeItem: null,
   }),
 
   components: {
-    VueEditor
+    VueEditor,
   },
 
   computed: {
@@ -336,12 +227,11 @@ export default {
   created() {
     this.initialize();
     this.readData();
-    this.$nuxt.$on('my-custom-event', () => {
-      this.text = "Document successfully deleted!"
-      this.snackbar = true
-   })
+    this.$nuxt.$on("my-custom-event", () => {
+      this.text = "Document successfully deleted!";
+      this.snackbar = true;
+    });
   },
- 
 
   methods: {
     initialize() {
@@ -349,26 +239,26 @@ export default {
       this.myproducts = [];
     },
 
-    uploadImage(e){
-
-      if(e.target.files[0]){
-           let file = e.target.files[0];
-          var storageRef = firebase.storage().ref('products/'+doc.id+file.name);
-          let uploadTask = storageRef.put(file);
-          uploadTask.on('state_changed', 
-          (snapshot) => {
-          
-          }, 
+    uploadImage(e) {
+      if (e.target.files[0]) {
+        let file = e.target.files[0];
+        var storageRef = firebase
+          .storage()
+          .ref("products/" + doc.id + file.name);
+        let uploadTask = storageRef.put(file);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {},
           (error) => {
             // Handle unsuccessful uploads
-          }, 
+          },
           () => {
             // Handle successful uploads on complete
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-              this.editedItem.images.push(downloadURL)
+              this.editedItem.images.push(downloadURL);
               // console.log('File available at', downloadURL);
-              console.log('File available at', this.editedItem.images);
+              console.log("File available at", this.editedItem.images);
             });
           }
         );
@@ -376,29 +266,25 @@ export default {
       // console.log(e.target.files[0]);
     },
 
-    deleteImage(img,index){
+    deleteImage(img, index) {
       let image = firebase.storage().refFromURL(img);
 
-      this.editedItem.images.splice(index,1);
-      image.delete().then( () => {
-        console.log("image deleted");
-      }).catch((error) => {
-        console.log("an error occured");
-      });
+      this.editedItem.images.splice(index, 1);
+      image
+        .delete()
+        .then(() => {
+          console.log("image deleted");
+        })
+        .catch((error) => {
+          console.log("an error occured");
+        });
     },
 
-
-
     async readData() {
-      //   db.collection("desserts2").get().then((querySnapshot) =>{
-      //   querySnapshot.forEach((doc) => {
-      //     console.log(doc.id, "=>",doc.data());
-      //     this.products = doc.data();
-      //     this.products.push(doc.data())
-      //   })
-      // })
-
-      var productsRef = await firebase.firestore().collection("products").where("userId", "==", firebase.auth().currentUser.uid );
+      var productsRef = await firebase
+        .firestore()
+        .collection("products")
+        .where("userId", "==", firebase.auth().currentUser.uid);
 
       productsRef.onSnapshot((snap) => {
         this.products = [];
@@ -409,7 +295,10 @@ export default {
         });
       });
 
-      var myproductsRef = await firebase.firestore().collection("published").where("userId", "==", firebase.auth().currentUser.uid );
+      var myproductsRef = await firebase
+        .firestore()
+        .collection("published")
+        .where("userId", "==", firebase.auth().currentUser.uid);
 
       myproductsRef.onSnapshot((snap) => {
         this.myproducts = [];
@@ -424,26 +313,8 @@ export default {
     editItem(item) {
       this.editedIndex = this.products.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      // this.product = product.data()
-      // this.activeItem = product.id
-
-    // db.collection("desserts2").doc(item.id).update({
-    //     name: this.editedItem.name,
-    //     calories: this.editedItem.calories,
-    //     fat: this.editedItem.fat,
-    //     carbs: this.editedItem.carbs,
-    //     protein: this.editedItem.protein,
-    // })
-    // .then(() => {
-    //     console.log("Document successfully updated!");
-    // })
-    // .catch((error) => {
-        
-    //     console.error("Error updating document: ", error);
-    // });
 
       this.dialog = true;
-      
     },
 
     deleteItem(item) {
@@ -462,30 +333,25 @@ export default {
         .doc(itemID)
         .delete()
         .then(function () {
-          
           console.log("Document successfully deleted!");
-          $nuxt.$emit('my-custom-event')
-          
+          $nuxt.$emit("my-custom-event");
         })
         .catch(function (error) {
           console.error("Error removing document: ", error);
         });
-        
+
       db.collection("published")
         .doc(itemID2)
         .delete()
         .then(function () {
-          
           console.log("Document successfully deleted!");
-          $nuxt.$emit('my-custom-event')
-          
+          $nuxt.$emit("my-custom-event");
         })
         .catch(function (error) {
           console.error("Error removing document: ", error);
         });
-        
+
       this.closeDelete();
-      
     },
 
     close() {
@@ -493,7 +359,6 @@ export default {
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
-        
       });
     },
 
@@ -506,168 +371,101 @@ export default {
     },
 
     update() {
-      const product = {}
+      const product = {};
       const itemID = this.products[this.editedIndex].id;
       const itemID2 = this.myproducts[this.editedIndex].id;
 
-        db.collection("products").doc(itemID).update({
-        name: this.editedItem.name,
-        description: this.editedItem.description,
-        currency: this.editedItem.currency,
-        quantity: this.editedItem.quantity,
-        price: this.editedItem.price,
-        category: this.editedItem.category,
-        images: this.editedItem.images,
-        // calories: this.editedItem.calories,
-        // fat: this.editedItem.fat,
-        // carbs: this.editedItem.carbs,
-        // protein: this.editedItem.protein,
+      db.collection("products")
+        .doc(itemID)
+        .update({
+          name: this.editedItem.name,
+          description: this.editedItem.description,
+          currency: this.editedItem.currency,
+          quantity: this.editedItem.quantity,
+          price: this.editedItem.price,
+          category: this.editedItem.category,
+          images: this.editedItem.images,
         })
         .then(() => {
-            console.log("Document successfully updated!");
-            this.text = "Document successfully updated!"
-            this.snackbar = true
+          console.log("Document successfully updated!");
+          this.text = "Document successfully updated!";
+          this.snackbar = true;
         })
         .catch((error) => {
-            
-            console.error("Error updating document: ", error);
+          console.error("Error updating document: ", error);
         });
 
-        //update to its shop name
-        db.collection("published").doc(itemID2).update({
-        name: this.editedItem.name,
-        description: this.editedItem.description,
-        currency: this.editedItem.currency,
-        quantity: this.editedItem.quantity,
-        price: this.editedItem.price,
-        category: this.editedItem.category,
-        images: this.editedItem.images,
-        // calories: this.editedItem.calories,
-        // fat: this.editedItem.fat,
-        // carbs: this.editedItem.carbs,
-        // protein: this.editedItem.protein,
+      //update to its shop name
+      db.collection("published")
+        .doc(itemID2)
+        .update({
+          name: this.editedItem.name,
+          description: this.editedItem.description,
+          currency: this.editedItem.currency,
+          quantity: this.editedItem.quantity,
+          price: this.editedItem.price,
+          category: this.editedItem.category,
+          images: this.editedItem.images,
         })
         .then(() => {
-            console.log("Document successfully updated!");
-            this.text = "Document successfully updated!"
-            this.snackbar = true
+          console.log("Document successfully updated!");
+          this.text = "Document successfully updated!";
+          this.snackbar = true;
         })
         .catch((error) => {
-            
-            console.error("Error updating document: ", error);
+          console.error("Error updating document: ", error);
         });
-      
 
+      (product.name = this.editedItem.name),
+        (product.description = this.editedItem.description),
+        (product.currency = this.editedItem.currency),
+        (product.quantity = this.editedItem.quantity),
+        (product.price = this.editedItem.price);
+      product.category = this.editedItem.category;
+      product.images = this.editedItem.images;
 
-        
-        // product.name = this.editedItem.name,
-        // product.description = this.editedItem.description,
-        // product.calories = this.editedItem.calories,
-        // product.fat = this.editedItem.fat,
-        // product.carbs = this.editedItem.carbs,
-        // product.protein= this.editedItem.protein
-        product.name = this.editedItem.name,
-        product.description = this.editedItem.description,
-        product.currency = this.editedItem.currency,
-        product.quantity = this.editedItem.quantity,
-        product.price = this.editedItem.price
-        product.category = this.editedItem.category
-        product.images = this.editedItem.images
-
-        if (this.editedIndex > -1) {
+      if (this.editedIndex > -1) {
         Object.assign(this.products[this.editedIndex], this.editedItem);
-        } else {
-        // db.collection("desserts2")
-        //   .add(product)
-        //   .then(() => {
-        //     console.log("added to db");
-        //   });
-        // this.products.push(this.editedItem)
+      } else {
       }
 
-        
-        
-        
-
-      
-
-     
       this.close();
     },
 
     save() {
-      const product = {}
-      // const itemID = this.products[this.editedIndex].id;
+      const product = {};
 
-      //   db.collection("desserts2").doc(itemID).update({
-      //   name: this.editedItem.name,
-      //   calories: this.editedItem.calories,
-      //   fat: this.editedItem.fat,
-      //   carbs: this.editedItem.carbs,
-      //   protein: this.editedItem.protein,
-      //   })
-      //   .then(() => {
-      //       console.log("Document successfully updated!");
-      //   })
-      //   .catch((error) => {
-            
-      //       console.error("Error updating document: ", error);
-      //   });
-      
+      (product.name = this.editedItem.name),
+        (product.description = this.editedItem.description),
+        (product.currency = this.editedItem.currency),
+        (product.quantity = this.editedItem.quantity),
+        (product.price = this.editedItem.price);
+      product.category = this.editedItem.category;
+      product.images = this.editedItem.images;
+      product.userId = firebase.auth().currentUser.uid;
+      product.shopname = firebase.auth().currentUser.displayName;
 
-
-        // const userId =firebase.auth().currentUser.uid
-        // console.log(userId);
-        product.name = this.editedItem.name,
-        product.description = this.editedItem.description,
-        product.currency = this.editedItem.currency,
-        product.quantity = this.editedItem.quantity,
-        product.price = this.editedItem.price
-        product.category = this.editedItem.category
-        product.images = this.editedItem.images
-        product.userId = firebase.auth().currentUser.uid
-        product.shopname = firebase.auth().currentUser.displayName
-
-        
-       
-        // product.calories = this.editedItem.calories,
-        // product.fat = this.editedItem.fat,
-        // product.carbs = this.editedItem.carbs,
-        // product.protein= this.editedItem.protein
-
-        if (this.editedIndex > -1) {
+      if (this.editedIndex > -1) {
         Object.assign(this.products[this.editedIndex], this.editedItem);
-        } else {
+      } else {
         db.collection("products")
           .add(product)
           .then(() => {
-
             console.log("added to db");
-            this.text = "sucessfully added to db"
-            this.snackbar = true
-            
+            this.text = "sucessfully added to db";
+            this.snackbar = true;
           });
-        this.products.push(this.editedItem)
+        this.products.push(this.editedItem);
         // adding to its shop
         db.collection("published")
           .add(product)
           .then(() => {
-
             console.log("added to db");
-            this.text = "sucessfully added to db"
-            this.snackbar = true
-            
+            this.text = "sucessfully added to db";
+            this.snackbar = true;
           });
-
       }
 
-        
-        
-        
-
-      
-
-     
       this.close();
     },
   },
@@ -687,5 +485,4 @@ export default {
 .img-wrapp span.delete-img {
   cursor: pointer;
 }
-
 </style>

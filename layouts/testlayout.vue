@@ -24,8 +24,6 @@
             <v-list-item-subtitle> </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        
-        
 
         <v-list-item
           v-for="(item, i) in items"
@@ -41,14 +39,16 @@
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
-        
-        
       </v-list>
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn class="mr-md-16" icon @click="$vuetify.theme.dark = ! $vuetify.theme.dark">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
+          <v-btn
+            class="mr-md-16"
+            icon
+            @click="$vuetify.theme.dark = !$vuetify.theme.dark"
+          >
+            <v-icon>mdi-minus</v-icon>
+          </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -57,11 +57,10 @@
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
       </v-btn>
-     
+
       <v-btn class="mr-md-16" icon @click.stop="fixed = !fixed">
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      
 
       <div v-text="title" class="" />
       <v-spacer />
@@ -91,8 +90,7 @@
         </v-list-item>
       </v-list>
     </v-menu> -->
-        <v-btn nuxt
-            to="/adminwelcome" color="dark" dark>Go To Admin</v-btn>
+        <v-btn nuxt to="/adminwelcome" color="dark" dark>Go To Admin</v-btn>
         <!-- <v-btn v-if="user" @click="signout" color="dark" dark>signout</v-btn>
 
         <v-btn v-if="!user" @click="signin" color="dark" dark>signin</v-btn> -->
@@ -162,8 +160,7 @@ export default {
           title: "Inspire",
           to: "/inspire",
         },
-        
-        
+
         {
           icon: "mdi-shopping",
           title: "Shop-Here",
@@ -174,8 +171,6 @@ export default {
           title: "Stores",
           to: "/stores",
         },
-       
-        
       ],
       miniVariant: false,
       right: true,
@@ -188,7 +183,7 @@ export default {
   //   firebase.auth().onAuthStateChanged((user) => {
   //     // console.log(user);
   //     this.user = user;
-      
+
   //   });
   // },
 

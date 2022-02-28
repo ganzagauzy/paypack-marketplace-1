@@ -1,100 +1,69 @@
 <template>
   <div class="header-store">
-    
-      
-        
-        
-      
-        <div class="home">
-          
-          
-          <!-- Hero -->
-          <!-- <Hero /> -->
+    <div class="home">
+      <!-- search box -->
 
-          <!-- search box -->
-          
-          <div class="store-name">
-            <div v-for="(product, index) in nameproducts" :key="index">
-              <v-btn text outlined> {{product.shopname}}'s store </v-btn>
-            </div>
-          </div>
-          <div class=" search">
-            
-            
-            <!-- <input
-              v-model.lazy="searchInput"
-              type="text"
-              placeholder="Search"
-              @keyup.enter="$fetch"
-            /> -->
-            <v-text-field 
-              v-model.lazy="searchInput"
-              label="Search Here"
-              type="text"
-              outlined
-              class="input"
-              dense
-              @keyup.enter="$fetch"
-              @keypress.enter="$fetch"
+      <div class="store-name">
+        <div v-for="(product, index) in nameproducts" :key="index">
+          <v-btn text outlined> {{ product.shopname }}'s store </v-btn>
+        </div>
+      </div>
+      <div class="search">
+        <v-text-field
+          v-model.lazy="searchInput"
+          label="Search Here"
+          type="text"
+          outlined
+          class="input"
+          dense
+          @keyup.enter="$fetch"
+          @keypress.enter="$fetch"
+        ></v-text-field>
+        <v-btn
+          icon
+          v-show="searchInput != ''"
+          class="button"
+          @click="clearSearch"
+          ><v-icon>mdi-close</v-icon></v-btn
+        >
+      </div>
 
-              
-            ></v-text-field>
-            <v-btn
-              icon
-              v-show="searchInput != ''"
-              class="button"
-              @click="clearSearch"
-              ><v-icon>mdi-close</v-icon></v-btn
-            >
-            
-            
-          </div>
-          
-          
-          
-          
-          
-
-          <div class="row">
-            <div class="category" 
-                  >
-              <h2 class="">Categories</h2>
-              <v-btn text class="text-center" @click="fetchProducts"><span class="text-big">All</span></v-btn>
-              <ul v-for="(product, index) in shopproducts" :key="index">
-                <li> <v-btn @click="readDataByCategory(product), readDataFilter()"  text>
-                  <span class="text-big">{{product.category}}</span>
-                  </v-btn></li>
-              </ul>
-            </div>
-            <div class="all-products">
-
-            
-
-          
-          
-            
-
+      <div class="row">
+        <div class="category">
+          <h2 class="">Categories</h2>
+          <v-btn text class="text-center" @click="fetchProducts"
+            ><span class="text-big">All</span></v-btn
+          >
+          <ul v-for="(product, index) in shopproducts" :key="index">
+            <li>
+              <v-btn
+                @click="readDataByCategory(product), readDataFilter()"
+                text
+              >
+                <span class="text-big">{{ product.category }}</span>
+              </v-btn>
+            </li>
+          </ul>
+        </div>
+        <div class="all-products">
           <Loading v-if="$fetchState.pending" />
-          
-          
-          
-          <!-- Movies -->
+
+          <!-- Products -->
           <div v-else class="container products">
-            <!-- <div v-for="(product, index) in filterproducts" :key="index">
-                {{product.category}}
-              </div> -->
-            
-            <!-- Searched movies -->
-            <div v-if="searchInput !== ''" id="product-grid" class="products-grid">
-              
+            <!-- Searched Products -->
+            <div
+              v-if="searchInput !== ''"
+              id="product-grid"
+              class="products-grid"
+            >
               <div
                 v-for="(product, index) in searchedProducts"
                 :key="index"
                 class="product"
-                  v-gsap.fromTo="[
-                { opacity: 0, y: 50 },
-                { opacity: 1, y: 0,  duration: 3}
-              ]"
+                v-gsap.fromTo="[
+                  { opacity: 0, y: 50 },
+                  { opacity: 1, y: 0, duration: 3 },
+                ]"
               >
                 <NuxtLink
                   :to="{
@@ -102,102 +71,66 @@
                     params: { id: product.id },
                   }"
                 >
-                  <v-card
-                flat
-                    class="mx-auto"
-                    max-width="344"
-                  >
-                    <v-img
-                      :src="product.images[0]"
-                      height="250px"
-                    ></v-img>
+                  <v-card flat class="mx-auto" max-width="344">
+                    <v-img :src="product.images[0]" height="250px"></v-img>
 
                     <div class="card-subtitle">
                       <v-card-title>
-                      {{product.name}}
-                    </v-card-title>
+                        {{ product.name }}
+                      </v-card-title>
 
-                    <v-card-subtitle >
-                      {{product.price}} {{product.currency}}
-                    </v-card-subtitle>
+                      <v-card-subtitle>
+                        {{ product.price }} {{ product.currency }}
+                      </v-card-subtitle>
                     </div>
-
-                    
                   </v-card>
-                  
                 </NuxtLink>
               </div>
             </div>
 
             <!-- Now Products -->
-            <div v-else id="product-grid" class="products-grid "
-                 >
-              
+            <div v-else id="product-grid" class="products-grid">
               <div
                 v-for="(product, index) in products"
                 :key="index"
-                class="product "
-                 v-gsap.fromTo="[
-                { opacity: 0, y: 50 },
-                { opacity: 1, y: 0,  duration: 3}
-              ]"
-                 
-
-                
+                class="product"
+                v-gsap.fromTo="[
+                  { opacity: 0, y: 50 },
+                  { opacity: 1, y: 0, duration: 3 },
+                ]"
               >
                 <NuxtLink
                   :to="{
                     name: 'stores-storeid-id',
                     params: { id: product.id },
                   }"
-                 
                 >
-                  <v-card
-                flat
-                    class="mx-auto"
-                    max-width="344"
-                  >
-                    <v-img
-                      :src="product.images[0]"
-                      height="250px"
-                    ></v-img>
+                  <v-card flat class="mx-auto" max-width="344">
+                    <v-img :src="product.images[0]" height="250px"></v-img>
 
                     <div class="card-subtitle">
                       <v-card-title>
-                      {{product.name}}
-                    </v-card-title>
+                        {{ product.name }}
+                      </v-card-title>
 
-                    <v-card-subtitle >
-                      {{product.price}} {{product.currency}}
-                    </v-card-subtitle>
+                      <v-card-subtitle>
+                        {{ product.price }} {{ product.currency }}
+                      </v-card-subtitle>
                     </div>
-
-                    
                   </v-card>
                 </NuxtLink>
               </div>
             </div>
           </div>
-          </div>
-          </div>
-          
         </div>
+      </div>
+    </div>
 
-        <div class="footer">
-          <div class="col">Name and descriotion</div>
-          <!-- <div class="col footer-category">
-            <h3 class="">Categories</h3>
-              <v-btn text class="text-center" @click="fetchProducts">All</v-btn>
-              <ul v-for="(product, index) in shopproducts" :key="index">
-                <li> <v-btn @click="readDataByCategory(product), readDataFilter()"  text>{{
-                          product.category
-                        }}</v-btn></li>
-              </ul>
-          </div> -->
-          <div class="col">contact</div>
-          <div class="col">Paypack Market Place</div>
-        </div>
-
+    <div class="footer">
+      <div class="col">Name and descriotion</div>
+      <div class="col">contact</div>
+      <div class="col">Paypack Market Place</div>
+    </div>
   </div>
 </template>
 
@@ -207,17 +140,17 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 export default {
   head() {
-      return {
-        title: "Single Store",
-        meta: [
-          {
-            hid: "description",
-            name: "description",
-            content: "Single Store page for PayPack Market Place",
-          },
-        ],
-      };
-    },
+    return {
+      title: "Single Store",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Single Store page for PayPack Market Place",
+        },
+      ],
+    };
+  },
   data() {
     return {
       products: [],
@@ -227,17 +160,14 @@ export default {
       nameproducts: [],
       filterproducts: [],
       searchInput: "",
-      
-      
     };
   },
   async fetch() {
-
     if (this.searchInput === "") {
       await this.fetchProducts();
       return;
     }
-    
+
     await this.searchProducts();
   },
   computed: {
@@ -250,15 +180,14 @@ export default {
     this.readDataFilterCategory();
     this.readDataFilterName();
     this.staggering();
-
   },
   methods: {
     staggering() {
-      const gsap = this.$gsap
-      gsap.to('.box', {
+      const gsap = this.$gsap;
+      gsap.to(".box", {
         y: 200,
-        stagger: 0.5
-      })
+        stagger: 0.5,
+      });
     },
 
     async fetchProducts() {
@@ -278,10 +207,13 @@ export default {
 
       //We define an async function
       async function getIsNameOrCategory(searchInput, id) {
-       
-        const isName = productsRef.where("name", "==", searchInput).where("userId", "==", id).get();
+        const isName = productsRef
+          .where("name", "==", searchInput)
+          .where("userId", "==", id)
+          .get();
         const isCategory = productsRef
-          .where("category", "==", searchInput).where("userId", "==", id)
+          .where("category", "==", searchInput)
+          .where("userId", "==", id)
           .get();
 
         const [nameQuerySnapshot, categoryQuerySnapshot] = await Promise.all([
@@ -298,7 +230,6 @@ export default {
 
       //We call the asychronous function
       getIsNameOrCategory(this.searchInput, this.id).then((result) => {
-        
         result.forEach((doc) => {
           var product = doc.data();
           product.id = doc.id;
@@ -331,21 +262,15 @@ export default {
         });
 
         this.shopproducts = this.shopproducts.filter((product, i) => {
-          return i == this.shopproducts.findIndex(
-            (p) => p.category == product.category
+          return (
+            i ==
+            this.shopproducts.findIndex((p) => p.category == product.category)
           );
         });
       });
     },
 
     async readDataFilterName() {
-      //   db.collection("desserts2").get().then((querySnapshot) =>{
-      //   querySnapshot.forEach((doc) => {
-      //     console.log(doc.id, "=>",doc.data());
-      //     this.products = doc.data();
-      //     this.products.push(doc.data())
-      //   })
-      // })
 
       var nameproductsRef = await firebase.firestore().collection("products");
 
@@ -361,21 +286,16 @@ export default {
         });
 
         this.nameproducts = this.nameproducts.filter((product, i) => {
-          return i == this.nameproducts.findIndex(
-            (p) => p.shopname == product.shopname
+          return (
+            i ==
+            this.nameproducts.findIndex((p) => p.shopname == product.shopname)
           );
         });
       });
     },
 
     async readDataFilter() {
-      //   db.collection("desserts2").get().then((querySnapshot) =>{
-      //   querySnapshot.forEach((doc) => {
-      //     console.log(doc.id, "=>",doc.data());
-      //     this.products = doc.data();
-      //     this.products.push(doc.data())
-      //   })
-      // })
+
 
       var filterproductsRef = await firebase.firestore().collection("products");
 
@@ -391,8 +311,9 @@ export default {
         });
 
         this.filterproducts = this.filterproducts.filter((product, i) => {
-          return i == this.filterproducts.findIndex(
-            (p) => p.category == product.category
+          return (
+            i ==
+            this.filterproducts.findIndex((p) => p.category == product.category)
           );
         });
       });
@@ -400,13 +321,7 @@ export default {
 
     async readDataByCategory(product) {
       console.log(product);
-      //   db.collection("desserts2").get().then((querySnapshot) =>{
-      //   querySnapshot.forEach((doc) => {
-      //     console.log(doc.id, "=>",doc.data());
-      //     this.products = doc.data();
-      //     this.products.push(doc.data())
-      //   })
-      // })
+
 
       var productsRef = await firebase.firestore().collection("products");
 
@@ -415,7 +330,8 @@ export default {
       // console.log(my_shop);
 
       productsRef
-        .where("category", "==", product.category).where("userId", "==", this.id)
+        .where("category", "==", product.category)
+        .where("userId", "==", this.id)
         .onSnapshot((snap) => {
           this.size = snap.size;
           this.products = [];
@@ -439,13 +355,6 @@ export default {
 
 
 <style lang="scss" scoped>
-// .box {
-//   width: 100px;
-//   display: flex;
-//   flex-direction: row;
-//   height: 100px;
-//   background-color: #00c58e;
-// }
 .row {
   margin: auto;
   display: flex;
@@ -456,7 +365,7 @@ export default {
 .category {
   flex-basis: 20%;
   padding: 10px;
-  @media screen and (max-width:600px) {
+  @media screen and (max-width: 600px) {
     flex-basis: 100%;
   }
 }
@@ -471,7 +380,7 @@ export default {
 .all-products {
   flex-basis: 80%;
   padding: 10px;
-  @media screen and (max-width:600px) {
+  @media screen and (max-width: 600px) {
     flex-basis: 100%;
   }
 }
@@ -487,8 +396,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left:  16px;
-    padding-right:  16px;
+    padding-left: 16px;
+    padding-right: 16px;
     padding-top: 100px;
   }
   .search {
@@ -496,16 +405,15 @@ export default {
     justify-content: center;
     align-items: center;
     padding-top: 20px;
-    padding-left:  16px;
-    padding-right:  16px;
-    
+    padding-left: 16px;
+    padding-right: 16px;
+
     .input {
       max-width: 350px;
       width: 100%;
 
       padding: 5px 5px;
       font-size: 14px;
-      
 
       &:focus {
         outline: none;
@@ -546,7 +454,6 @@ export default {
             width: 100%;
             height: 100%;
           }
-         
         }
         .info1 {
           margin-top: auto;
@@ -626,9 +533,9 @@ a {
   text-decoration: none;
   color: #111;
 }
-.card-subtitle{
+.card-subtitle {
   //  background: radial-gradient(#fff, #d1dbec);
-   background: radial-gradient(rgb(241, 241, 241), #d1dbec);
+  background: radial-gradient(rgb(241, 241, 241), #d1dbec);
 }
 .footer {
   display: flex;
@@ -636,18 +543,16 @@ a {
   margin: auto;
   align-items: flex-start;
   justify-content: space-between;
-  background: #DA9412;
-  @media screen and (max-width:700px) {
+  background: #da9412;
+  @media screen and (max-width: 700px) {
     padding-bottom: 100px;
   }
 }
 .footer .col {
   flex-basis: 25%;
-  @media screen and (max-width:600px) {
+  @media screen and (max-width: 600px) {
     flex-basis: 100%;
   }
 }
-
-
 </style>
 

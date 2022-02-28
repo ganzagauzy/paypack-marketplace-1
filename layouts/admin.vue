@@ -25,7 +25,8 @@
         </v-list-item>
         <v-divider></v-divider>
 
-        <v-list-item class="pt-5"
+        <v-list-item
+          class="pt-5"
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
@@ -46,12 +47,7 @@
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
       </v-btn>
-      <!-- <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn> -->
+
       <v-btn class="mr-md-16" icon @click.stop="fixed = !fixed">
         <v-icon>mdi-minus</v-icon>
       </v-btn>
@@ -61,63 +57,18 @@
 
       <div class="">
         <v-divider></v-divider>
-        <!-- <v-menu >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
 
-
-          v-bind="attrs"
-          v-on="on"
-          color="#d1dbec"
-          class="d-flex justify-end"
-        >
-          <v-icon>mdi-account</v-icon>
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item
-          v-for="(menu, index) in menus"
-          :key="index"
-          link
-        >
-        <v-list-item-title class="cursor-pointer">{{ menu.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu> -->
         <v-btn v-if="user" @click="signout" color="dark" dark>signout</v-btn>
 
         <!-- <v-btn v-if="!user" @click="signin" color="dark" dark>signin</v-btn> -->
       </div>
-
-      <!-- <v-btn
-        icon
-
-      >
-        <v-icon>mdi-account</v-icon>
-      </v-btn> -->
     </v-app-bar>
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <!-- <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer> -->
+
     <v-footer class="text-center" :absolute="!fixed" app color="">
       <span class="text-center">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -143,8 +94,6 @@ export default {
         { title: "Click Me 2" },
       ],
       items: [
-        
-        
         {
           icon: "mdi-dropbox",
           title: "Products",
@@ -155,8 +104,6 @@ export default {
           title: "All Shops",
           to: "/shop",
         },
-        
-        
       ],
       miniVariant: false,
       right: true,
@@ -165,41 +112,40 @@ export default {
     };
   },
   head() {
-      return {
-        title: "Dashboard",
-        meta: [
-          {
-            hid: "description",
-            name: "description",
-            content: "Dashboard for PayPack Market Place",
-          },
-        ],
-        // link: [
-        //   {
-        //     rel: "stylesheet",
-        //     href: "/style/home.css",
-        //   },
-        // ],
-        // script: [
-        //   {
-        //     src: "/js/owl-carsoul.js",
-        //     type: "text/javascript",
-        //     body: true,
-        //   },
-        //   {
-        //     src: "/js/mixItUp.js",
-        //     body: true,
-        //     type: "text/javascript",
-        //   },
-        // ],
-      };
-    },
+    return {
+      title: "Dashboard",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Dashboard for PayPack Market Place",
+        },
+      ],
+      // link: [
+      //   {
+      //     rel: "stylesheet",
+      //     href: "/style/home.css",
+      //   },
+      // ],
+      // script: [
+      //   {
+      //     src: "/js/owl-carsoul.js",
+      //     type: "text/javascript",
+      //     body: true,
+      //   },
+      //   {
+      //     src: "/js/mixItUp.js",
+      //     body: true,
+      //     type: "text/javascript",
+      //   },
+      // ],
+    };
+  },
 
   mounted() {
     firebase.auth().onAuthStateChanged((user) => {
       // console.log(user);
       this.user = user;
-      
     });
   },
 

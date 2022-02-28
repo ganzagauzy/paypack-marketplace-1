@@ -1,39 +1,30 @@
 <template>
   <div class="">
     <div class="hero">
-    <img class="" src="~/assets/images/movieHero.jpg" />
-    <div class="text-container">
-      <div class="text">
-        <span class="mini-heading">Now Selling</span>
-        <h1>Get A <span>Store</span> For Yourself </h1>
-        <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore similique,  <br> placeat molestiae nulla consequuntur ex id nam deserunt commodi tenetur.</p>
-        <v-btn outlined  class="btn" nuxt
-            to="/auth/signup">Register Now</v-btn>
+      <img class="" src="~/assets/images/movieHero.jpg" />
+      <div class="text-container">
+        <div class="text">
+          <span class="mini-heading">Now Selling</span>
+          <h1>Get A <span>Store</span> For Yourself</h1>
+          <p class="paragraph">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
+            similique, <br />
+            placeat molestiae nulla consequuntur ex id nam deserunt commodi
+            tenetur.
+          </p>
+          <v-btn outlined class="btn" nuxt to="/auth/signup"
+            >Register Now</v-btn
+          >
+        </div>
       </div>
     </div>
-  </div>
-    <!-- <v-row class="">
-      <v-col cols="12" md="6" class="">
-       <h1>Sell <span>Online </span> Now</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod quas error porro doloremque eius molestias, quisquam rerum itaque? Doloribus eveniet beatae voluptates, libero doloremque incidunt nulla ipsam cupiditate in molestiae?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod quas error porro doloremque eius molestias, quisquam rerum itaque? Doloribus eveniet beatae voluptates, libero doloremque incidunt nulla ipsam cupiditate in molestiae?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod quas error porro doloremque eius molestias, quisquam rerum itaque? Doloribus eveniet beatae voluptates, libero doloremque incidunt nulla ipsam cupiditate in molestiae?</p>
-        <v-btn nuxt class="color"
-            to="/auth/signup" outlined >sign up now</v-btn>
-      </v-col>
-      <v-spacer></v-spacer>
-      <v-col cols="12" md="6">
-        <img class="img" src="~/assets/images/cart1.png" />
-      </v-col>
-    </v-row> -->
-      
   </div>
 </template>
 
 <script>
 export default {
-  layout: '',
-}
+  layout: "",
+};
 </script>
 
 <style lang="scss" scoped>
@@ -46,15 +37,15 @@ export default {
   }
 }
 .btn {
-  background: #DA9412;
+  background: #da9412;
 }
 h1 span {
-  color: #DA9412;
+  color: #da9412;
   font-size: 55px;
   font-weight: 700;
 }
 .color {
-  background: #DA9412;
+  background: #da9412;
 }
 .hero {
   height: 400px;
@@ -63,7 +54,7 @@ h1 span {
     height: 500px;
   }
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;

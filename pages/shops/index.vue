@@ -6,9 +6,6 @@
           <v-icon>mdi-dropbox </v-icon>
           <span>Products &mdash;{{ size }}</span>
           <v-spacer></v-spacer>
-          <!-- <v-icon>mdi-minus</v-icon>
-                      <v-icon>mdi-checkbox-blank-outline</v-icon>
-                      <v-icon>mdi-close</v-icon> -->
         </v-system-bar>
 
         <v-row class="" color="#d1dbec">
@@ -17,70 +14,47 @@
       </div>
     </div>
 
-    <!-- <div class="pt-16">
-    <v-card>
-    <v-tabs
-        color="dark"
-        right
-      >
-        <v-tab><v-icon>mdi-grid</v-icon></v-tab>
-        <v-tab><v-icon>mdi-grid</v-icon></v-tab>
-        <v-tab><v-icon>mdi-grid</v-icon></v-tab>
-
-        <v-tab-item
-          v-for="n in 3"
-          :key="n"
-        >
-          <v-container fluid>
-            <v-row>
-              <v-col
-                v-for="i in 12"
-                :key="i"
-                cols="12"
-                md="4"
-              >
-                <v-img
-                  :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
-                  :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
-                  aspect-ratio="1"
-                ></v-img>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-tab-item>
-      </v-tabs>
-    </v-card>
-
-  </div> -->
-
     <v-card>
       <v-toolbar fixed color="#d1dbec">
         <v-toolbar-title>
           <h6 class="d-flex justify-center pt-15">
             <v-row>
               <v-col>
-                <marquee behavior="scroll" width="100%" direction="left" scrollamount="1" height="100px">
-                Buy All You Want No Limits !!!!!!
+                <marquee
+                  behavior="scroll"
+                  width="100%"
+                  direction="left"
+                  scrollamount="1"
+                  height="100px"
+                >
+                  Buy All You Want No Limits !!!!!!
                 </marquee>
-            
               </v-col>
               <v-spacer></v-spacer>
               <v-col>
-                <marquee behavior="scroll" width="100%" direction="left" scrollamount="1" height="100px">
-                You Can Get Your Own Shop!!
+                <marquee
+                  behavior="scroll"
+                  width="100%"
+                  direction="left"
+                  scrollamount="1"
+                  height="100px"
+                >
+                  You Can Get Your Own Shop!!
                 </marquee>
-            
               </v-col>
               <v-spacer></v-spacer>
               <v-col>
-                <marquee behavior="scroll" width="100%" direction="left" scrollamount="1" height="100px">
-                Call 0788888888 For More Details!!
+                <marquee
+                  behavior="scroll"
+                  width="100%"
+                  direction="left"
+                  scrollamount="1"
+                  height="100px"
+                >
+                  Call 0788888888 For More Details!!
                 </marquee>
-            
               </v-col>
-              
             </v-row>
-            
           </h6>
         </v-toolbar-title>
       </v-toolbar>
@@ -89,173 +63,107 @@
         <div class="home">
           <v-row>
             <v-col>
-
-            
-            <div class="menu px-3">
-              <div class="nav py-3">
-                <ul>
-                  <li>
-                    <v-btn @click="readData" class="ma-2" outlined color=""> All Products </v-btn>
-                    
-                  </li>
-                </ul>
-              </div>
-            </div>
-            </v-col>
-
-            <v-spacer></v-spacer>
-
-            <v-col>
-            <div class="menu px-3">
-              <div class="nav py-3">
-                <ul>
-                  <li>
-                    <v-btn class="ma-2" outlined color=""> Filter By Shop </v-btn>
-                    <ul>
-                      <li v-for="(product, index) in myproducts" :key="index">
-                        <v-btn @click="readDataByShop(product)"  text>{{
-                          product.shopname
-                        }}</v-btn>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            </v-col>
-            <v-spacer></v-spacer>
-            <v-col>
-            <div class="menu px-3">
-              <div class="nav py-3">
-                <ul>
-                  <li>
-                    <v-btn class="ma-2" outlined color="" > Filter By Category</v-btn>
-                    <ul>
-                      <li v-for="(product, index) in shopproducts" :key="index">
-                        <v-btn @click="readDataByCategory(product)"  text>{{
-                          product.category
-                        }}</v-btn>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            </v-col>
-            <!-- <div  class="menu px-3">
-                <div  class="nav py-3">
-                   <ul >
-                        <li>
-                            <p >Category</p>
-                            <ul >
-                                <li v-for="(product, index) in myproducts" :key="index">
-                                  <v-btn @click="readDataByCategory(product)"  text>{{ product.category }}</v-btn>
-                                </li>
-                            </ul>
-                        </li>
-                   </ul>
+              <div class="menu px-3">
+                <div class="nav py-3">
+                  <ul>
+                    <li>
+                      <v-btn @click="readData" class="ma-2" outlined color="">
+                        All Products
+                      </v-btn>
+                    </li>
+                  </ul>
                 </div>
-            </div> -->
+              </div>
+            </v-col>
+
+            <v-spacer></v-spacer>
+
+            <v-col>
+              <div class="menu px-3">
+                <div class="nav py-3">
+                  <ul>
+                    <li>
+                      <v-btn class="ma-2" outlined color="">
+                        Filter By Shop
+                      </v-btn>
+                      <ul>
+                        <li v-for="(product, index) in myproducts" :key="index">
+                          <v-btn @click="readDataByShop(product)" text>{{
+                            product.shopname
+                          }}</v-btn>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-col>
+              <div class="menu px-3">
+                <div class="nav py-3">
+                  <ul>
+                    <li>
+                      <v-btn class="ma-2" outlined color="">
+                        Filter By Category</v-btn
+                      >
+                      <ul>
+                        <li
+                          v-for="(product, index) in shopproducts"
+                          :key="index"
+                        >
+                          <v-btn @click="readDataByCategory(product)" text>{{
+                            product.category
+                          }}</v-btn>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </v-col>
           </v-row>
 
-          <!-- Hero -->
-          <!-- <Hero /> -->
-
-          <!-- search box -->
-          <!-- <div class="container search">
-                <input v-model.lazy="searchInput" type="text" placeholder="Search" @keyup.enter="$fetch">
-                <v-btn icon v-show="searchInput !='' " class="button" @click="clearSearch"><v-icon>mdi-close</v-icon></v-btn>
-              </div> -->
-
-          <!-- <div v-for="(product, index) in products" :key="index" class="">
-                <p>{{ product.images}}</p>
-              </div> -->
-
-          <!-- <div  id="movie-grid" class="movies-grid">
-                  <div v-for="(product, index) in products" :key="index" class="movie">
-                    <div class="movie-img"> -->
-          <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
-          <!-- <img :src="product.images[0]" alt=""> -->
-          <!-- <p class="review">{{ movie.vote_average }}</p> -->
-          <!-- <p class="overview">{{ movie.overview }}</p> -->
-          <!-- </div>
-                    
-                  </div>
-              </div> -->
-
-          <!-- Loading -->
-          <!-- <Loading v-if="$fetchState.pending" /> -->
-
-          <!-- Movies -->
-          <div class="container movies">
-            <!-- Searched movies -->
-            <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
+          <!-- Products -->
+          <div class="container products">
+            <!-- Searched products -->
+            <div
+              v-if="searchInput !== ''"
+              id="product-grid"
+              class="products-grid"
+            >
               <div
                 v-for="(product, index) in searchProducts"
                 :key="index"
-                class="movie"
+                class="product"
               >
-                <div class="movie-img">
-                  <!-- <img src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt=""> -->
+                <div class="product-img">
+                  <!-- <img src="`https://image.tmdb.org/t/p/w500/${ product.poster_path }`" alt=""> -->
                   <img :src="product.images[0]" alt="" />
-                  <!-- <p class="review">{{ movie.vote_average }}</p> -->
-                  <!-- <p class="overview">{{ movie.overview }}</p> -->
+                  <!-- <p class="review">{{ product.vote_average }}</p> -->
+                  <!-- <p class="overview">{{ product.overview }}</p> -->
                 </div>
-                <div class="">
-                  <!-- <p class="title h6">{{ movie.title.slice(0, 25) }}  <span v-if="movie.title.length >25">...</span>
-                      </p> -->
-
-                  <!-- <p class="release">
-                        Released:
-                        {{
-                          new Date(movie.release_date).toLocaleString('en-us', {
-                            month: 'long',
-                            day: 'numeric',
-                            year: 'numeric',
-                          })
-                        }}
-                      </p> -->
-                  <!-- <v-btn class="py-3"
-                          color=""
-                          width="100%"
-                          :to="{ name: 'products-movieid', params: {movieid: movie.id} }" nuxt>
-                            Read More
-                        </v-btn> -->
-                  <!-- <NuxtLink class="button button-light" :to= "`/products/${movie.id}`">
-                        Get More Info
-                      </NuxtLink> -->
-                </div>
+                <div class=""></div>
               </div>
             </div>
             <!-- Now streaming -->
-            <div v-else id="movie-grid" class="movies-grid">
+            <div v-else id="product-grid" class="products-grid">
               <div
                 v-for="(product, index) in products"
                 :key="index"
-                class="movie"
+                class="product"
               >
-                
-                <v-card
-                flat
-                    class="mx-auto"
-                    max-width="344"
-                  >
-                    <v-img
-                      :src="product.images[0]"
-                      height="250px"
-                    ></v-img>
+                <v-card flat class="mx-auto" max-width="344">
+                  <v-img :src="product.images[0]" height="250px"></v-img>
 
-                    <v-card-title>
-                      {{product.name}}
-                    </v-card-title>
+                  <v-card-title>
+                    {{ product.name }}
+                  </v-card-title>
 
-                    <v-card-subtitle>
-                      {{product.price}} {{product.currency}}
-                    </v-card-subtitle>
-
-                    
-                  </v-card>
-                
+                  <v-card-subtitle>
+                    {{ product.price }} {{ product.currency }}
+                  </v-card-subtitle>
+                </v-card>
               </div>
             </div>
           </div>
@@ -281,8 +189,6 @@ export default {
   data() {
     return {
       selectedItem: null,
-      movies: [],
-      searchedMovies: [],
       searchProducts: [],
       searchInput: "",
       dialog: false,
@@ -325,87 +231,26 @@ export default {
       this.shopproducts = [];
     },
 
-    // async getProducts() {
-    //   getMovies()
-
-    //   var productsRef = await firebase.firestore().collection("products");
-
-    //     productsRef.onSnapshot((snap) => {
-    //       this.size = snap.size
-    //       console.log(this.size);
-    //       this.products = [];
-    //       snap.forEach((doc) => {
-    //         var product = doc.data();
-    //         product.id = doc.id;
-    //         this.products.push(product);
-    //       });
-    //     });
-    //   },
-
-    //   const data = axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=f63c91664f4898d609ca0a78c351fb36&language=en-US&page=1'
-    //   )
-    //   eslint-disable-next-line no-unused-vars
-    //   const result = await data
-    //   result.data.results.forEach(movie => {
-    //     this.movies.push(movie)
-
-    //   })
-    //   // eslint-disable-next-line no-console
-    //   console.log('hi')
-    // },
-    // async searchMovies() {
-    //   db.collection('products').where('name', '==', this.searchInput).get().then((snap) => {
-    //     this.products = [];
-    //     snap.forEach((doc) => {
-    //       var product = doc.data();
-    //       product.id = doc.id;
-    //       this.products.push(product);
-    //     });
-
-    //   })
-
-    // },
-
-
-       async readData() {
-    //   db.collection("desserts2").get().then((querySnapshot) =>{
-    //   querySnapshot.forEach((doc) => {
-    //     console.log(doc.id, "=>",doc.data());
-    //     this.products = doc.data();
-    //     this.products.push(doc.data())
-    //   })
-    // })
-
-    var productsRef = await firebase.firestore().collection("published");
+    async readData() {
+      var productsRef = await firebase.firestore().collection("published");
 
       productsRef.onSnapshot((snap) => {
-      this.size = snap.size
-      this.products = [];
-      snap.forEach((doc) => {
-        var product = doc.data();
-        product.id = doc.id;
-        this.products.push(product);
+        this.size = snap.size;
+        this.products = [];
+        snap.forEach((doc) => {
+          var product = doc.data();
+          product.id = doc.id;
+          this.products.push(product);
+        });
       });
-    });
+    },
+    reserve() {
+      this.loading = true;
 
-  
-
-  },
-   reserve () {
-        this.loading = true
-
-        setTimeout(() => (this.loading = false), 2000)
-      },
+      setTimeout(() => (this.loading = false), 2000);
+    },
 
     async readDataFilterShop() {
-      //   db.collection("desserts2").get().then((querySnapshot) =>{
-      //   querySnapshot.forEach((doc) => {
-      //     console.log(doc.id, "=>",doc.data());
-      //     this.products = doc.data();
-      //     this.products.push(doc.data())
-      //   })
-      // })
-
       var myproductsRef = await firebase.firestore().collection("published");
 
       // const uid = sessionStorage.getItem("user_id")
@@ -420,22 +265,15 @@ export default {
         });
 
         this.myproducts = this.myproducts.filter((product, i) => {
-          return i == this.myproducts.findIndex(
-            (p) => p.shopname == product.shopname
+          return (
+            i ==
+            this.myproducts.findIndex((p) => p.shopname == product.shopname)
           );
         });
       });
     },
 
     async readDataFilterCategory() {
-      //   db.collection("desserts2").get().then((querySnapshot) =>{
-      //   querySnapshot.forEach((doc) => {
-      //     console.log(doc.id, "=>",doc.data());
-      //     this.products = doc.data();
-      //     this.products.push(doc.data())
-      //   })
-      // })
-
       var shopproductsRef = await firebase.firestore().collection("published");
 
       // const uid = sessionStorage.getItem("user_id")
@@ -450,30 +288,18 @@ export default {
         });
 
         this.shopproducts = this.shopproducts.filter((product, i) => {
-          return i == this.shopproducts.findIndex(
-            (p) => p.category == product.category
+          return (
+            i ==
+            this.shopproducts.findIndex((p) => p.category == product.category)
           );
         });
       });
     },
-    
-  
 
     async readDataByShop(product) {
       console.log(product);
-      //   db.collection("desserts2").get().then((querySnapshot) =>{
-      //   querySnapshot.forEach((doc) => {
-      //     console.log(doc.id, "=>",doc.data());
-      //     this.products = doc.data();
-      //     this.products.push(doc.data())
-      //   })
-      // })
 
       var productsRef = await firebase.firestore().collection("published");
-
-      // const uid = sessionStorage.getItem("user_id")
-      // const my_shop = this.myproducts[0].shopname
-      // console.log(my_shop);
 
       productsRef
         .where("shopname", "==", product.shopname)
@@ -488,17 +314,8 @@ export default {
         });
     },
 
-    
-
     async readDataByCategory(product) {
       console.log(product);
-      //   db.collection("desserts2").get().then((querySnapshot) =>{
-      //   querySnapshot.forEach((doc) => {
-      //     console.log(doc.id, "=>",doc.data());
-      //     this.products = doc.data();
-      //     this.products.push(doc.data())
-      //   })
-      // })
 
       var productsRef = await firebase.firestore().collection("published");
 
@@ -559,9 +376,9 @@ export default {
       }
     }
   }
-  .movies {
+  .products {
     padding: 32px 16px;
-    .movies-grid {
+    .products-grid {
       display: grid;
       column-gap: 32px;
       row-gap: 64px;
@@ -575,12 +392,12 @@ export default {
       @media (min-width: 1100px) {
         grid-template-columns: repeat(4, 1fr);
       }
-      .movie {
+      .product {
         z-index: 1;
         position: relative;
         display: flex;
         flex-direction: column;
-        .movie-img {
+        .product-img {
           position: relative;
           overflow: hidden;
           &:hover {
@@ -700,50 +517,3 @@ a {
 </style>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // export default {
-  //   data: () => ({
-  //     isLoading: false,
-  //     items: [],
-  //     model: null,
-  //     search: null,
-  //     tab: null,
-  //   }),
-
-  //   watch: {
-  //     model (val) {
-  //       if (val != null) this.tab = 0
-  //       else this.tab = null
-  //     },
-  //     search (val) {
-  //       // Items have already been loaded
-  //       if (this.items.length > 0) return
-
-  //       this.isLoading = true
-
-  //       // Lazily load input items
-  //       fetch('https://api.coingecko.com/api/v3/coins/list')
-  //         .then(res => res.clone().json())
-  //         .then(res => {
-  //           this.items = res
-  //         })
-  //         .catch(err => {
-  //           console.log(err)
-  //         })
-  //         .finally(() => (this.isLoading = false))
-  //     },
-  //   },
-  // }
