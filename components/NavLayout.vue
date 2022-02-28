@@ -86,12 +86,16 @@ a {
     text-transform: uppercase;
     text-decoration: none;
     display: inline-block;
-    background: #DA9412;
     color: #111;
+    border: 1px solid #DA9412;
     padding: 8px 30px;
     margin: 30px 5px;
-    border-radius: 30px;
+    border-radius: 10px;
     
+}
+.btn:hover {
+    border: none;
+    background: #DA9412;
 }
 a.nuxt-link-active {
   font-weight: bold;

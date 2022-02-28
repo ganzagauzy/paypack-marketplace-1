@@ -1,4 +1,7 @@
 <template>
+  <div>
+
+  
   <div class="container">
       Page for {{this.$route.params.id}}
 
@@ -19,8 +22,20 @@
       
       
      <!-- {{$route.params.movieid}} -->
-
-    <v-row class="top">
+    
+    <div class="top mb-5" v-for="(product, index) in products" :key="index">
+      <v-btn :style="{
+        backgroundColor: prodBackgroundColor,
+      }"
+      :to="{ name: 'stores-storeid', params: { storeid: product.userId } }"
+      dark>Back</v-btn>
+    </div>
+    <v-row >
+      <!-- <div v-for="(product, index) in products" :key="index">
+        <v-btn  :to="{ name: 'stores-storeid', params: { storeid: product.userId } }" nuxt>Back</v-btn>
+      </div> -->
+      
+       
 
            <v-col cols="" sm="12" md="7">
                 <v-card id="app" :style="{
@@ -115,7 +130,7 @@
       cols="12">
       <div v-for="(product, index) in products" :key="index" class="">
         <h4>Description</h4>
-        {{ product.description}} 
+        <p v-html=" product.description"></p>
         <br>
         <br>
         <v-row>
@@ -125,7 +140,7 @@
           </v-col>
           <v-spacer></v-spacer>
           <v-col md="6">
-            <h4 class="text-cnter">N.Products</h4>
+            <h4 class="text-cnter">Quantity</h4>
             <v-text-field
               
               v-model="nproducts"
@@ -146,14 +161,16 @@
       </v-col>
     </v-row>
 
-
-
-
+    
       </div>
 
+    <div class="footer">
+          <div class="col">Name and descriotion</div>
+          <div class="col">contact</div>
+          <div class="col">Paypack MArket Place</div>
+        </div>
 
-
-
+  </div>
 </template>
 
 <script>
@@ -167,6 +184,18 @@ import { onSnapshot } from '@firebase/firestore';
 
 import { Photoshop } from 'vue-color'
 export default {
+  head() {
+      return {
+        title: "Single product",
+        meta: [
+          {
+            hid: "description",
+            name: "description",
+            content: "Single product page for PayPack Market Place",
+          },
+        ],
+      };
+    },
 
 
   data () {
@@ -180,12 +209,7 @@ export default {
 
   prodBackgroundColor: "#111",
 
-
- 
-
-  menu:false,
-  currentTheme: localStorage.getItem("theme-color"),
-    }
+  }
   },
   components: {
     // 'material-picker': material,
@@ -239,6 +263,7 @@ export default {
 
     initialize() {
     this.products = [];
+    this.nproducts = 1;
     },
 
 
@@ -302,4 +327,25 @@ a {
 
   }
 }
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: #DA9412;
+  @media screen and (max-width:700px) {
+    padding-bottom: 100px;
+  }
+  
+}
+.footer .col {
+  flex-basis: 25%;
+  @media screen and (max-width:600px) {
+    flex-basis: 100%;
+  }
+}
+
+
 </style>

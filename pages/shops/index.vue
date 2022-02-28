@@ -235,59 +235,26 @@
                 class="movie"
               >
                 
-                  <v-hover v-slot="{ hover }">
-                    <NuxtLink
-                  :to="{ name: 'shops-id', params: { id: product.id } }"
-                >
-                    <v-card
-                      class="mx-auto"
-                      color="grey lighten-4"
-                      max-width="600"
-                    >
-                      <div class="movie-img">
-                        <v-img :aspect-ratio="16 / 14" :src="product.images[0]">
-                          <v-expand-transition>
-                            <div
-                              v-if="hover"
-                              class="
-                                d-flex
-                                transition-fast-in-fast-out
-                                blue
-                                darken-2
-                                v-card--reveal
-                                text-h3
-                                white--text
-                              "
-                              style="height: 100%"
-                            >
-                              More
-                            </div>
-                          </v-expand-transition>
-                        </v-img>
-                      </div>
+                <v-card
+                flat
+                    class="mx-auto"
+                    max-width="344"
+                  >
+                    <v-img
+                      :src="product.images[0]"
+                      height="250px"
+                    ></v-img>
 
-                      <!-- <p class="text-h5 font-weight-light orange--text mb-2 title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span></p> -->
-                      <div class="info1 py-1 px-2">
-                        <!-- <p class="title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
-                        </p> -->
-                      </div>
-                      <p
-                        class="
-                          text-h6
-                          px-2
-                          py-1
-                          font-weight-light
-                          blue--text
-                          mb-2
-                        "
-                      >
-                        {{ product.name.slice(0, 25) }}
-                        <span v-if="product.name.length > 25">...</span>
-                      </p>
-                    </v-card>
-                    </NuxtLink>
+                    <v-card-title>
+                      {{product.name}}
+                    </v-card-title>
+
+                    <v-card-subtitle>
+                      {{product.price}} {{product.currency}}
+                    </v-card-subtitle>
+
                     
-                  </v-hover>
+                  </v-card>
                 
               </div>
             </div>
@@ -329,6 +296,8 @@ export default {
       shop: "",
       shopname: "",
       editedIndex: -1,
+      loading: false,
+      selection: 1,
       // product: {
       //   name: '',
       //   description: '',
@@ -422,6 +391,11 @@ export default {
   
 
   },
+   reserve () {
+        this.loading = true
+
+        setTimeout(() => (this.loading = false), 2000)
+      },
 
     async readDataFilterShop() {
       //   db.collection("desserts2").get().then((querySnapshot) =>{
@@ -593,7 +567,7 @@ export default {
       row-gap: 64px;
       grid-template-columns: 1fr;
       @media (min-width: 500px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
       }
       @media (min-width: 750px) {
         grid-template-columns: repeat(3, 1fr);

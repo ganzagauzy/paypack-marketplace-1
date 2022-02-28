@@ -7,13 +7,19 @@
       
         <div class="home">
           
+          
           <!-- Hero -->
           <!-- <Hero /> -->
 
           <!-- search box -->
           
-          
+          <div class="store-name">
+            <div v-for="(product, index) in nameproducts" :key="index">
+              <v-btn text outlined> {{product.shopname}}'s store </v-btn>
+            </div>
+          </div>
           <div class=" search">
+            
             
             <!-- <input
               v-model.lazy="searchInput"
@@ -43,6 +49,7 @@
             
             
           </div>
+          
           
           
           
@@ -154,7 +161,7 @@
                 class="movie "
                  v-gsap.fromTo="[
                 { opacity: 0, y: 50 },
-                { opacity: 1, y: 0, delay: index *2, duration: 1}
+                { opacity: 1, y: 0,  duration: 3}
               ]"
                  
 
@@ -167,57 +174,26 @@
                   }"
                  
                 >
-                  <v-hover v-slot="{ hover }">
-                    <v-card
-                      class="mx-auto"
-                      color="grey lighten-4"
-                      max-width="600"
-                    >
-                      <div class="movie-img">
-                        <v-img :aspect-ratio="16 / 14" :src="product.images[0]">
-                          <v-expand-transition>
-                            <div
-                              v-if="hover"
-                              class="
-                                d-flex
-                                transition-fast-in-fast-out
-                                orange
-                                darken-2
-                                v-card--reveal
-                                text-h3
-                                white--text
-                              "
-                              style="height: 100%"
-                            >
-                              More
-                            </div>
-                          </v-expand-transition>
-                        </v-img>
-                      </div>
+                  <v-card
+                flat
+                    class="mx-auto"
+                    max-width="344"
+                  >
+                    <v-img
+                      :src="product.images[0]"
+                      height="250px"
+                    ></v-img>
 
-                      <!-- <p class="text-h5 font-weight-light orange--text mb-2 title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span></p> -->
-                      <div class="info1 py-1 px-2">
-                        <!-- <p class="title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
-                        </p> -->
-                      </div>
-                      <p
-                        class="
-                          text-h6
-                          px-2
-                          py-1
-                          font-weight-light
-                          d-flex
-                          justify-space-between
-                          
-                          mb-2
-                        "
-                      >
-                        {{ product.name.slice(0, 25) }}
-                        <span v-if="product.name.length > 25">...</span>
-                        <span class="">{{product.price}}{{product.currency}}</span>
-                      </p>
-                    </v-card>
-                  </v-hover>
+                    <v-card-title>
+                      {{product.name}}
+                    </v-card-title>
+
+                    <v-card-subtitle>
+                      {{product.price}} {{product.currency}}
+                    </v-card-subtitle>
+
+                    
+                  </v-card>
                 </NuxtLink>
               </div>
             </div>
@@ -226,9 +202,22 @@
           </div>
           
         </div>
-      
-    
-    
+
+        <div class="footer">
+          <div class="col">Name and descriotion</div>
+          <!-- <div class="col footer-category">
+            <h3 class="">Categories</h3>
+              <v-btn text class="text-center" @click="fetchProducts">All</v-btn>
+              <ul v-for="(product, index) in shopproducts" :key="index">
+                <li> <v-btn @click="readDataByCategory(product), readDataFilter()"  text>{{
+                          product.category
+                        }}</v-btn></li>
+              </ul>
+          </div> -->
+          <div class="col">contact</div>
+          <div class="col">Paypack Market Place</div>
+        </div>
+
   </div>
 </template>
 
@@ -237,12 +226,25 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 export default {
+  head() {
+      return {
+        title: "Single Store",
+        meta: [
+          {
+            hid: "description",
+            name: "description",
+            content: "Single Store page for PayPack Market Place",
+          },
+        ],
+      };
+    },
   data() {
     return {
       products: [],
       size: "",
       searchedProducts: [],
       shopproducts: [],
+      nameproducts: [],
       filterproducts: [],
       searchInput: "",
       
@@ -266,6 +268,7 @@ export default {
   mounted() {
     this.fetchProducts();
     this.readDataFilterCategory();
+    this.readDataFilterName();
     this.staggering();
 
   },
@@ -338,7 +341,7 @@ export default {
 
       // const uid = sessionStorage.getItem("user_id")
 
-      shopproductsRef.onSnapshot((snap) => {
+      shopproductsRef.where("userId", "==", this.id).onSnapshot((snap) => {
         // this.size = snap.size
         this.shopproducts = [];
         this.shopproducts = snap.docs.map((doc) => {
@@ -350,6 +353,36 @@ export default {
         this.shopproducts = this.shopproducts.filter((product, i) => {
           return i == this.shopproducts.findIndex(
             (p) => p.category == product.category
+          );
+        });
+      });
+    },
+
+    async readDataFilterName() {
+      //   db.collection("desserts2").get().then((querySnapshot) =>{
+      //   querySnapshot.forEach((doc) => {
+      //     console.log(doc.id, "=>",doc.data());
+      //     this.products = doc.data();
+      //     this.products.push(doc.data())
+      //   })
+      // })
+
+      var nameproductsRef = await firebase.firestore().collection("products");
+
+      // const uid = sessionStorage.getItem("user_id")
+
+      nameproductsRef.where("userId", "==", this.id).onSnapshot((snap) => {
+        // this.size = snap.size
+        this.nameproducts = [];
+        this.nameproducts = snap.docs.map((doc) => {
+          var nameproduct = doc.data();
+          nameproduct.id = doc.id;
+          return nameproduct;
+        });
+
+        this.nameproducts = this.nameproducts.filter((product, i) => {
+          return i == this.nameproducts.findIndex(
+            (p) => p.shopname == product.shopname
           );
         });
       });
@@ -368,7 +401,7 @@ export default {
 
       // const uid = sessionStorage.getItem("user_id")
 
-      filterproductsRef.onSnapshot((snap) => {
+      filterproductsRef.where("userId", "==", this.id).onSnapshot((snap) => {
         // this.size = snap.size
         this.filterproducts = [];
         this.filterproducts = snap.docs.map((doc) => {
@@ -465,11 +498,19 @@ export default {
     padding-top: 120px;
     align-items: flex-start;
   }
+  .store-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left:  16px;
+    padding-right:  16px;
+    padding-top: 100px;
+  }
   .search {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 100px;
+    padding-top: 20px;
     padding-left:  16px;
     padding-right:  16px;
     
@@ -494,13 +535,13 @@ export default {
       row-gap: 64px;
       grid-template-columns: 1fr;
       @media (min-width: 500px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
       }
       @media (min-width: 750px) {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
       @media (min-width: 1100px) {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
       .movie {
         z-index: 1;
@@ -601,7 +642,27 @@ a {
   color: #111;
 }
 .header-store {
-   background: radial-gradient(#fff, #d1dbec);
+  //  background: radial-gradient(#fff, #d1dbec);
+   background: radial-gradient(rgb(241, 241, 241), #d1dbec);
 }
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: #DA9412;
+  @media screen and (max-width:700px) {
+    padding-bottom: 100px;
+  }
+}
+.footer .col {
+  flex-basis: 25%;
+  @media screen and (max-width:600px) {
+    flex-basis: 100%;
+  }
+}
+
+
 </style>
 

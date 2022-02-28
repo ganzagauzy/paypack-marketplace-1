@@ -317,18 +317,9 @@ export default {
   //     return this.$store.getters.products;
   //   },
   // },
+  middleware: 'auth',
 
-  mounted() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.user = user
-      // window.localStorage.setItem('userId', user.uid)
-      // console.log(user.uid);
-      if(!this.user) 
-      this.$router.push("/auth/signin");
-      
-    })
-  },
-
+ 
  
 
 

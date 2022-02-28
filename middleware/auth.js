@@ -4,7 +4,7 @@ import "firebase/compat/firestore";
 
 export default function (ctx) {
   if(!isAuth()) {
-    return ctx.redirect('/auth/signin')
+    return ctx.redirect('/auth/login_signup')
   }
 }
 function isAuth() {

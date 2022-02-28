@@ -87,7 +87,8 @@ export default {
   min-width: 300px;
 }
 .cols-2 img {
-  background: radial-gradient(#fff, #d1dbec);
+  // background: radial-gradient(#fff, #d1dbec);
+     background: radial-gradient(rgb(241, 241, 241), #d1dbec);
   max-width: 100%;
   padding: 50px 0;
 }
@@ -102,15 +103,19 @@ export default {
 .btn-store {
   text-decoration: none;
   display: inline-block;
-  background: #DA9412;
   color: #111;
+  border: 1px solid #DA9412;
   padding: 8px 30px;
   margin: 30px 0;
-  border-radius: 30px;
+  border-radius: 10px;
+}
+.btn-store:hover {
+  background: #DA9412;
+  border: none;
 }
 .header-store {
   min-height: 94.5vh;
-   background: radial-gradient(#fff, #d1dbec);
+   background: radial-gradient(rgb(218, 218, 218), #d1dbec);
 }
 
 

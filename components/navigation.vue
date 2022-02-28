@@ -50,9 +50,20 @@ a {
   padding-left: 50%;
 }
 .btn span {
-  background: #DA9412;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #111;
+  
 }
-.btn span .nuxt-btn {
-  margin: 20px 20px;
+.btn span:hover {
+  border: none;
+  
 }
+
 </style>

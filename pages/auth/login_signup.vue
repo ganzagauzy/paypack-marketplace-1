@@ -14,6 +14,20 @@
                 <v-window v-model="step">
                     <v-window-item :value="1">
                         <v-row class="">
+                            <v-col cols="12" md="4" class="text--accent-3 card-color">
+                                <v-card-text class="mt-12 align">
+                                    <h3 class="text-center display-1">
+                                        Welcome BAck !!!!
+                                    </h3>
+                                    <h5 class="text-center">
+                                        Don't have acoount go to sign up
+                                    </h5>
+                                    
+                                </v-card-text>
+                                <div class="text-center button">
+                                    <v-btn rounded class="" outlined="" @click="step++">Signup</v-btn>
+                                </div>
+                            </v-col>
                             <v-col cols="12"
                             md="8">
                             <v-card-text class="mt-12">
@@ -23,6 +37,8 @@
                                 <h4></h4>
                                 <v-form>
                                     <v-text-field
+                                    cols="12"
+                                    
                                         v-model="email"
                                         label="Email"
                                         type="email"
@@ -49,24 +65,92 @@
                                 <v-btn  @click="login" text class="btn" >Sign in</v-btn>
                             </div>
                             </v-col> 
-                            <v-col cols="12" md="4" class="text--accent-3 card-color">
-                                <v-card-text class="mt-12 align">
-                                    <h3 class="text-center display-1">
-                                        Welcome BAck !!!!
-                                    </h3>
-                                    <h5 class="text-center">
-                                        Don't have acoount go to sign up
-                                    </h5>
-                                    
-                                </v-card-text>
-                                <div class="text-center button">
-                                    <v-btn rounded class="" outlined="" @click="step++">Signup</v-btn>
-                                </div>
-                            </v-col>
+                            
                         </v-row>
                     </v-window-item>
                     <v-window-item :value="2">
                         <v-row class="">
+                            
+                            <v-col cols="12"
+                            md="8">
+                            <v-card-text class="mt-12">
+                                <h3 class="text-center display-2  text--accent-3 card-height">
+                                    Create Account on PayPack MArket Place
+                                </h3>
+                                <h4></h4>
+                                <v-form ref="form">
+                                    <v-text-field
+                                            
+                                        dense
+                                        outlined
+                                        v-model="name"
+                                        label="Names"
+                                        type="text"
+                                        :rules="inputRules"
+                                        ></v-text-field>
+                                    <v-text-field
+                                            
+                                        dense
+                                        outlined
+                                        v-model="telephone"
+                                        label="Telephone"
+                                        type="tel"
+                                        :rules="inputRules"
+                                        ></v-text-field>
+                                    <v-text-field
+                                            
+                                        dense
+                                        outlined
+                                        v-model="shopname"
+                                        label="ShopName"
+                                        type="text"
+                                        :rules="inputRules"
+                                        ></v-text-field>
+                                         <v-textarea
+                                            clearable
+                                            auto-grow
+                                            rows="3"
+                                            row-height="25"
+                                            clear-icon="mdi-close-circle"
+                                            v-model="description"
+                                            label="Description"
+                                            type="text"
+                                            outlined
+                                            dense
+                                            
+                                        ></v-textarea>
+                                    
+                                    <!-- <v-text-field
+                                        
+                                        dense
+                                        outlined
+                                        v-model="email"
+                                        label="Email"
+                                        type="email"
+                                        :rules="inputRules"
+                                        ></v-text-field>
+                                    
+
+                                    <v-text-field
+                                        
+                                        dense
+                                        outlined
+                                        v-model="password"
+                                        label="Password"
+                                        type="password"
+                                        required
+                                        :rules="inputRules"
+                                        ></v-text-field>
+                                        {{errors}} -->
+                                    </v-form>
+                                
+
+
+                            </v-card-text>
+                            <div class="text-center mt-3 button">
+                                <v-btn  text @click="step++" class="btn">Next</v-btn>
+                            </div>
+                            </v-col> 
                             <v-col cols="12" md="4" class="text--accent-3 card-color">
                                 <v-card-text class="mt-12 align">
                                     <h3 class="text-center display-1">
@@ -81,6 +165,12 @@
                                     <v-btn rounded outlined="" @click="step--">Signin</v-btn>
                                 </div>
                             </v-col>
+                            
+                        </v-row>
+                    </v-window-item>
+                    <v-window-item :value="3">
+                        <v-row class="">
+                            
                             <v-col cols="12"
                             md="8">
                             <v-card-text class="mt-12">
@@ -89,6 +179,24 @@
                                 </h3>
                                 <h4></h4>
                                 <v-form ref="form">
+                                    <!-- <v-text-field
+                                            
+                                        dense
+                                        outlined
+                                        v-model="name"
+                                        label="Names"
+                                        type="text"
+                                        :rules="inputRules"
+                                        ></v-text-field>
+                                    <v-text-field
+                                            
+                                        dense
+                                        outlined
+                                        v-model="name"
+                                        label="Telephone"
+                                        type="tel"
+                                        :rules="inputRules"
+                                        ></v-text-field>
                                     <v-text-field
                                             
                                         dense
@@ -97,7 +205,17 @@
                                         label="ShopName"
                                         type="text"
                                         :rules="inputRules"
-                                        ></v-text-field>
+                                        ></v-text-field> -->
+                                         <!-- <v-textarea
+                                            clearable
+                                            clear-icon="mdi-close-circle"
+                                            v-model="description"
+                                            label="Description"
+                                            type="text"
+                                            outlined
+                                            dense
+                                            
+                                        ></v-textarea> -->
                                     
                                     <v-text-field
                                         
@@ -130,6 +248,20 @@
                                 <v-btn  text @click="submit" class="btn">Sign up</v-btn>
                             </div>
                             </v-col> 
+                            <v-col cols="12" md="4" class="text--accent-3 card-color">
+                                <v-card-text class="mt-12 align">
+                                    <h3 class="text-center display-1">
+                                        Finish  !!!!!
+                                    </h3>
+                                    <h5 class="text-center">
+                                        Signup and start your own store
+                                    </h5>
+                                    
+                                </v-card-text>
+                                <div class="text-center button">
+                                    <v-btn rounded outlined="" @click="step--">Back</v-btn>
+                                </div>
+                            </v-col>
                             
                         </v-row>
                     </v-window-item>
@@ -184,6 +316,8 @@ export default {
     icon: "mdi-checkbox-marked-circle",
     snackbar: false,
     shopname: '',
+    telephone: '',
+    description: '',
     errors: '',
     inputRules: [
     v => v.length >=3 || 'fill all'
@@ -198,7 +332,9 @@ export default {
                 console.log(user.user.uid);
                 if (firebase.auth().currentUser != null) {
                     firebase.auth().currentUser.updateProfile({
-                        displayName: this.shopname
+                        displayName: this.shopname,
+                        phoneNumber: this.telephone,
+                        email: this.email,
                     }).then(function () {
                         console.log("Updated");
                     }, function (error) {
@@ -207,8 +343,11 @@ export default {
                 }
 
                 db.collection("users").doc(user.user.uid).set({
-                  name: user.user.uid,
-                  username: this.shopname
+                  id: user.user.uid,
+                  username: this.name,
+                  shopname: this.shopname,
+                  telephone: this.telephone,
+                  description: this.description,
                 }).then(() => {
                   console.log("document written");
                   this.text = "Successfull Created Account!"
@@ -236,7 +375,7 @@ export default {
                 this.text = "Successfull Loged in!"
                     this.snackbar = true
                 sessionStorage.setItem("user_id", user.user.uid);
-                this.$router.push("/adminwelcome");
+                this.$router.push("/products");
                 })
                 .catch((error) => {
                 this.errors = error;
@@ -265,7 +404,7 @@ export default {
     }
 }
 .card-height {
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .card-color {
@@ -279,7 +418,7 @@ export default {
     background: #DA9412;
 }
 .align {
-    margin-top: 100px;
+    margin-top: 80px;
     @media screen and (max-width:600px) {
         margin-top: 10px;
     }
