@@ -184,13 +184,15 @@
                       height="250px"
                     ></v-img>
 
-                    <v-card-title>
+                    <div class="card-subtitle">
+                      <v-card-title>
                       {{product.name}}
                     </v-card-title>
 
-                    <v-card-subtitle>
+                    <v-card-subtitle >
                       {{product.price}} {{product.currency}}
                     </v-card-subtitle>
+                    </div>
 
                     
                   </v-card>
@@ -641,7 +643,7 @@ a {
   text-decoration: none;
   color: #111;
 }
-.header-store {
+.card-subtitle{
   //  background: radial-gradient(#fff, #d1dbec);
    background: radial-gradient(rgb(241, 241, 241), #d1dbec);
 }

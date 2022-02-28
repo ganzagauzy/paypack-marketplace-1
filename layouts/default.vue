@@ -65,7 +65,7 @@ NuxtLink  {
 }
 .header-store {
     
-  background: radial-gradient(rgb(241, 241, 241), #d1dbec);
+  // background: radial-gradient(rgb(241, 241, 241), #d1dbec);
 }
 a.nuxt-link-active {
   font-weight: bold;
