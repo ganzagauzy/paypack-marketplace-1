@@ -31,18 +31,17 @@
                       </h3>
                       <h4></h4>
                       <v-form>
+                        <label>Email</label>
                         <v-text-field
                           cols="12"
                           v-model="email"
-                          label="Email"
                           type="email"
                           outlined
                           dense
                         ></v-text-field>
-
+                        <label>Password</label>
                         <v-text-field
                           v-model="password"
-                          label="Password"
                           type="password"
                           outlined
                           dense
@@ -71,65 +70,30 @@
                       </h3>
                       <h4></h4>
                       <v-form ref="form">
+                        Names
                         <v-text-field
                           dense
                           outlined
                           v-model="name"
-                          label="Names"
                           type="text"
                           :rules="inputRules"
                         ></v-text-field>
+                        Telephone
                         <v-text-field
                           dense
                           outlined
                           v-model="telephone"
-                          label="Telephone"
                           type="tel"
                           :rules="inputRules"
                         ></v-text-field>
+                        Shop Name
                         <v-text-field
                           dense
                           outlined
                           v-model="shopname"
-                          label="ShopName"
                           type="text"
                           :rules="inputRules"
                         ></v-text-field>
-                        <v-textarea
-                          clearable
-                          auto-grow
-                          rows="3"
-                          row-height="25"
-                          clear-icon="mdi-close-circle"
-                          v-model="description"
-                          label="Description"
-                          type="text"
-                          outlined
-                          dense
-                        ></v-textarea>
-
-                        <!-- <v-text-field
-                                        
-                                        dense
-                                        outlined
-                                        v-model="email"
-                                        label="Email"
-                                        type="email"
-                                        :rules="inputRules"
-                                        ></v-text-field>
-                                    
-
-                                    <v-text-field
-                                        
-                                        dense
-                                        outlined
-                                        v-model="password"
-                                        label="Password"
-                                        type="password"
-                                        required
-                                        :rules="inputRules"
-                                        ></v-text-field>
-                                        {{errors}} -->
                       </v-form>
                     </v-card-text>
                     <div class="text-center mt-3 button">
@@ -160,58 +124,33 @@
                       </h3>
                       <h4></h4>
                       <v-form ref="form">
-                        <!-- <v-text-field
-                                            
-                                        dense
-                                        outlined
-                                        v-model="name"
-                                        label="Names"
-                                        type="text"
-                                        :rules="inputRules"
-                                        ></v-text-field>
-                                    <v-text-field
-                                            
-                                        dense
-                                        outlined
-                                        v-model="name"
-                                        label="Telephone"
-                                        type="tel"
-                                        :rules="inputRules"
-                                        ></v-text-field>
-                                    <v-text-field
-                                            
-                                        dense
-                                        outlined
-                                        v-model="shopname"
-                                        label="ShopName"
-                                        type="text"
-                                        :rules="inputRules"
-                                        ></v-text-field> -->
-                        <!-- <v-textarea
-                                            clearable
-                                            clear-icon="mdi-close-circle"
-                                            v-model="description"
-                                            label="Description"
-                                            type="text"
-                                            outlined
-                                            dense
-                                            
-                                        ></v-textarea> -->
-
+                        Description
+                        <v-textarea
+                          clearable
+                          auto-grow
+                          rows="3"
+                          row-height="20"
+                          clear-icon="mdi-close-circle"
+                          v-model="description"
+                          type="text"
+                          outlined
+                          required
+                          :rules="inputRules"
+                          dense
+                        ></v-textarea>
+                        Email
                         <v-text-field
                           dense
                           outlined
                           v-model="email"
-                          label="Email"
                           type="email"
                           :rules="inputRules"
                         ></v-text-field>
-
+                        Password
                         <v-text-field
                           dense
                           outlined
                           v-model="password"
-                          label="Password"
                           type="password"
                           required
                           :rules="inputRules"

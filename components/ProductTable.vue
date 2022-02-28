@@ -23,24 +23,29 @@
                   ><span class="text-h6">{{ formTitle }}</span></v-toolbar-title
                 >
               </v-app-bar>
-
+               <v-form ref="form">
               <v-container>
-                <v-row>
+                <v-row >
                   <v-col cols="12" md="8">
                     <v-text-field
                       v-model="editedItem.name"
                       label="Product name"
                       outlined
                       dense
+                      required
+                      :rules="inputRules"
                     ></v-text-field>
                     <vue-editor
                       class="pb-1"
                       v-model="editedItem.description"
+                      required
+                      :rules="inputRules"
                     ></vue-editor>
 
                     <label for="product_Image">Product Images</label>
                     <input
                       type="file"
+                      required
                       @change="uploadImage"
                       class="form-control"
                     />
@@ -67,6 +72,8 @@
                       label="Currency*"
                       v-model="editedItem.currency"
                       outlined
+                      required
+                      :rules="inputRules"
                       dense
                     ></v-select>
                     <v-select
@@ -74,12 +81,15 @@
                       label="Quantity*"
                       v-model="editedItem.quantity"
                       outlined
+                      required
+                      :rules="inputRules"
                       dense
                     ></v-select>
                     <v-text-field
                       label="Price*"
                       v-model="editedItem.price"
                       type="number"
+                      required
                       outlined
                       dense
                     ></v-text-field>
@@ -87,11 +97,14 @@
                       label="Category*"
                       v-model="editedItem.category"
                       outlined
+                      required
+                      :rules="inputRules"
                       dense
                     ></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
+              </v-form>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -166,6 +179,7 @@ export default {
     text: "",
     content: "<h1>Some initial content</h1>",
     icon: "mdi-checkbox-marked-circle",
+    inputRules: [(v) => v.length >= 3 || "fill all"],
     headers: [
       {
         text: "Product Name",
@@ -433,7 +447,9 @@ export default {
     },
 
     save() {
-      const product = {};
+      if (this.$refs.form.validate()) {
+
+        const product = {};
 
       (product.name = this.editedItem.name),
         (product.description = this.editedItem.description),
@@ -467,6 +483,8 @@ export default {
       }
 
       this.close();
+      }
+      
     },
   },
 };

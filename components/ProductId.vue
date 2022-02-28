@@ -11,56 +11,19 @@
 
           <v-spacer></v-spacer>
 
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                color=""
-                fab
-                nuxt
-                :to="{
-                  name: 'products-productid-publish',
-                }"
-                exact
-                v-bind="attrs"
-                v-on="on"
-                icon
-              >
-                <v-icon>mdi-publish</v-icon>
-              </v-btn>
-            </template>
-            <span>Publish</span>
-          </v-tooltip>
+          
+
 
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                color=""
-                fab
-                nuxt
-                :to="{
-                  name: 'products-productid-preview',
-                }"
-                exact
-                v-bind="attrs"
-                v-on="on"
-                icon
-              >
-                <v-icon>mdi-eye</v-icon>
-              </v-btn>
-            </template>
-            <span>Preview</span>
-          </v-tooltip>
-
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn @click="onCopy" color="" v-bind="attrs" v-on="on" icon>
-                <v-icon>mdi-share-variant</v-icon>
+              <v-btn @click="onCopy" color="" v-bind="attrs" v-on="on" dark>
+                Copy Url
               </v-btn>
             </template>
             <span>Copy Link</span>
           </v-tooltip>
 
-          <v-menu>
+          <!-- <v-menu>
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" v-on="on" color="" icon>
                 <v-icon>mdi-dots-vertical</v-icon>
@@ -73,7 +36,7 @@
                 }}</v-list-item-title>
               </v-list-item>
             </v-list>
-          </v-menu>
+          </v-menu> -->
         </v-toolbar>
 
         <v-tabs color="dark">
