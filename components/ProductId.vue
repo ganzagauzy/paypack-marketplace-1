@@ -5,7 +5,7 @@
         <v-toolbar flat color="#d1dbec">
           <v-toolbar-title class="">
             <nuxt-link to="/products">Product</nuxt-link>-{{
-              $route.params.movieid
+              $route.params.productid
             }}
           </v-toolbar-title>
 
@@ -18,7 +18,7 @@
                 fab
                 nuxt
                 :to="{
-                  name: 'products-movieid-publish',
+                  name: 'products-productid-publish',
                 }"
                 exact
                 v-bind="attrs"
@@ -38,7 +38,7 @@
                 fab
                 nuxt
                 :to="{
-                  name: 'products-movieid-preview',
+                  name: 'products-productid-preview',
                 }"
                 exact
                 v-bind="attrs"
@@ -866,7 +866,7 @@ export default {
       //     this.products.push(doc.data())
       //   })
       // })
-      const id = this.$route.params.movieid;
+      const id = this.$route.params.productid;
       console.log(id);
       var docRef = await db.collection("products").doc(id);
 
@@ -893,7 +893,7 @@ export default {
     onCopy() {
       
 
-      const P_id = this.$route.params.movieid;
+      const P_id = this.$route.params.productid;
       const uid = sessionStorage.getItem("user_id")
       var link = document.location.origin + "/stores" + `/${uid}`
       console.log(link);
@@ -907,7 +907,7 @@ export default {
     
     // get url to copy
     getUrl(){
-      const P_id = this.$route.params.movieid;
+      const P_id = this.$route.params.productid;
       const uid = sessionStorage.getItem("user_id")
       var link = document.location.origin + "/stores" + `/${uid}`
       console.log(link);

@@ -59,14 +59,14 @@
             <div class="category" 
                   >
               <h2 class="">Categories</h2>
-              <v-btn text class="text-center" @click="fetchProducts">All</v-btn>
+              <v-btn text class="text-center" @click="fetchProducts"><span class="text-big">All</span></v-btn>
               <ul v-for="(product, index) in shopproducts" :key="index">
-                <li> <v-btn @click="readDataByCategory(product), readDataFilter()"  text>{{
-                          product.category
-                        }}</v-btn></li>
+                <li> <v-btn @click="readDataByCategory(product), readDataFilter()"  text>
+                  <span class="text-big">{{product.category}}</span>
+                  </v-btn></li>
               </ul>
             </div>
-            <div class="products">
+            <div class="all-products">
 
             
 
@@ -79,18 +79,22 @@
           
           
           <!-- Movies -->
-          <div v-else class="container movies">
+          <div v-else class="container products">
             <!-- <div v-for="(product, index) in filterproducts" :key="index">
                 {{product.category}}
               </div> -->
             
             <!-- Searched movies -->
-            <div v-if="searchInput !== ''" id="movie-grid" class="movies-grid">
+            <div v-if="searchInput !== ''" id="product-grid" class="products-grid">
               
               <div
                 v-for="(product, index) in searchedProducts"
                 :key="index"
-                class="movie"
+                class="product"
+                  v-gsap.fromTo="[
+                { opacity: 0, y: 50 },
+                { opacity: 1, y: 0,  duration: 3}
+              ]"
               >
                 <NuxtLink
                   :to="{
@@ -98,67 +102,41 @@
                     params: { id: product.id },
                   }"
                 >
-                  <v-hover v-slot="{ hover }">
-                    <v-card flat
-                      class="mx-auto"
-                      color="grey lighten-4"
-                      max-width="600"
-                    >
-                      <div class="movie-img">
-                        <v-img :aspect-ratio="16 / 14" :src="product.images[0]">
-                          <v-expand-transition>
-                            <div
-                              v-if="hover"
-                              class="
-                                d-flex
-                                transition-fast-in-fast-out
-                               orange
-                                darken-2
-                                v-card--reveal
-                                text-h3
-                                white--text
-                              "
-                              style="height: 100%"
-                            >
-                              More
-                            </div>
-                          </v-expand-transition>
-                        </v-img>
-                      </div>
+                  <v-card
+                flat
+                    class="mx-auto"
+                    max-width="344"
+                  >
+                    <v-img
+                      :src="product.images[0]"
+                      height="250px"
+                    ></v-img>
 
-                      <!-- <p class="text-h5 font-weight-light orange--text mb-2 title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span></p> -->
-                      <div class="info1 py-1 px-2">
-                        <!-- <p class="title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
-                        </p> -->
-                      </div>
-                      <p
-                        class="
-                          text-h6
-                          px-2
-                          py-1
-                          font-weight-light
-                          blue--text
-                          mb-2
-                        "
-                      >
-                        {{ product.name.slice(0, 25) }}
-                        <span v-if="product.name.length > 25">...</span>
-                        {{product.price}}
-                      </p>
-                    </v-card>
-                  </v-hover>
+                    <div class="card-subtitle">
+                      <v-card-title>
+                      {{product.name}}
+                    </v-card-title>
+
+                    <v-card-subtitle >
+                      {{product.price}} {{product.currency}}
+                    </v-card-subtitle>
+                    </div>
+
+                    
+                  </v-card>
+                  
                 </NuxtLink>
               </div>
             </div>
 
             <!-- Now Products -->
-            <div v-else id="movie-grid" class="movies-grid "
+            <div v-else id="product-grid" class="products-grid "
                  >
               
               <div
                 v-for="(product, index) in products"
                 :key="index"
-                class="movie "
+                class="product "
                  v-gsap.fromTo="[
                 { opacity: 0, y: 50 },
                 { opacity: 1, y: 0,  duration: 3}
@@ -485,7 +463,12 @@ export default {
 .category ul {
   list-style: none;
 }
-.products {
+.text-big {
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+.all-products {
   flex-basis: 80%;
   padding: 10px;
   @media screen and (max-width:600px) {
@@ -529,9 +512,9 @@ export default {
       }
     }
   }
-  .movies {
+  .products {
     padding: 32px 16px;
-    .movies-grid {
+    .products-grid {
       display: grid;
       column-gap: 32px;
       row-gap: 64px;
@@ -545,12 +528,12 @@ export default {
       @media (min-width: 1100px) {
         grid-template-columns: repeat(3, 1fr);
       }
-      .movie {
+      .product {
         z-index: 1;
         position: relative;
         display: flex;
         flex-direction: column;
-        .movie-img {
+        .product-img {
           position: relative;
           overflow: hidden;
           &:hover {

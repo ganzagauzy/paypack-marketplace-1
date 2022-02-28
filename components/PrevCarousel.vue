@@ -179,7 +179,7 @@ export default {
       //     this.products.push(doc.data())
       //   })
       // })
-      const id = this.$route.params.movieid
+      const id = this.$route.params.productid
       console.log(id);
       var docRef = await db.collection("products").doc(id);
 

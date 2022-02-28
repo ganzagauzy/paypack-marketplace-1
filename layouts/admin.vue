@@ -144,11 +144,6 @@ export default {
       ],
       items: [
         
-        {
-          icon: "mdi-apps",
-          title: "Welcome",
-          to: "/adminwelcome",
-        },
         
         {
           icon: "mdi-dropbox",

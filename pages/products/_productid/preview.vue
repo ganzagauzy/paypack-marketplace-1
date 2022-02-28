@@ -1,16 +1,12 @@
 <template>
   <div>
-    <v-container>
-      <div>
 
-    <p class="py-3"> This is a published page for <span class="h4 text-decoration-underline">{{$route.params.movieid}}</span></p> 
+    <p class="py-3"> This is a testing page for <span class="h4 text-decoration-underline">{{$route.params.productid}}</span> before you publish</p>
 
 
     <PrevCarousel />
 
 
-  </div>
-    </v-container>
   </div>
 
 

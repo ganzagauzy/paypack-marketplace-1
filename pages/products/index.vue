@@ -182,7 +182,7 @@
                 <!-- Now streaming -->
                 <div v-else id="movie-grid" class="movies-grid">
                   <div v-for="(product, index) in products" :key="index" class="movie">
-                    <NuxtLink  :to="{ name: 'products-movieid', params: {movieid: product.id} }">
+                    <NuxtLink  :to="{ name: 'products-productid', params: {productid: product.id} }">
                       <v-hover v-slot="{ hover }">
                         <v-card
                       class="mx-auto"
