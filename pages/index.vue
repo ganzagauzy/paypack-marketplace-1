@@ -1,12 +1,12 @@
 <template>
   <div class="header-store">
-    <v-container class="">
+    <v-container>
       <div class="row">
         <div
-          class="cols-2"
+          class="cols-2 px-2"
           v-gsap.fromTo="[
             { opacity: 0, x: -350 },
-            { opacity: 1, x: 0, duration: 3 },
+            { opacity: 1, x: 0, duration: 2 },
           ]"
         >
           <h1>Get A <span>Market</span> <br />To Sell Your Products</h1>
@@ -19,13 +19,16 @@
           <NuxtLink to="/about" class="btn-store">Explore Now</NuxtLink>
         </div>
         <div
-          class="cols-2"
+          class="cols-2 px-2"
           v-gsap.fromTo="[
-            { opacity: 0, x: -350 },
-            { opacity: 1, x: 0, duration: 3 },
+            { opacity: 0, x: 350 },
+            { opacity: 1, x: 0, duration: 2 },
           ]"
         >
-          <img class="" src="~/assets/images/market.png" />
+          <img
+            class="rounded d-none d-md-block"
+            src="~/assets/images/market.png"
+          />
         </div>
       </div>
     </v-container>
@@ -89,10 +92,7 @@ export default {
   min-width: 300px;
 }
 .cols-2 img {
-  // background: radial-gradient(#fff, #d1dbec);
-  background: radial-gradient(rgb(241, 241, 241), #d1dbec);
   max-width: 100%;
-  padding: 50px 0;
 }
 .cols-2 h1 {
   font-size: 50px;
@@ -114,10 +114,6 @@ export default {
 .btn-store:hover {
   background: #da9412;
   border: none;
-}
-.header-store {
-  min-height: 94.5vh;
-  background: radial-gradient(rgb(218, 218, 218), #d1dbec);
 }
 
 //media query <600

@@ -1,41 +1,43 @@
 <template>
   <div>
-    <div>
-      <header class="header" id="header">
-        <nav class="nav container">
-          <a class="nav_logo title">PayPack Market Place</a>
+    <header class="header shadow" id="header">
+      <nav class="nav container">
+        <nuxt-link to="/" class="text--primary nav_logo title font-weight-bold">
+          Paypack MarketPlace
+        </nuxt-link>
 
-          <div class="nav_menu" id="nav_menu">
-            <ul class="nav_list">
-              <li class="nav_item">
-                <NuxtLink to="/" class="nav_link">
-                  <v-icon class="nav_icon">mdi-home</v-icon>
-                  <span class="nav_name">Home</span>
-                </NuxtLink>
-              </li>
+        <div class="nav_menu" id="nav_menu">
+          <ul class="nav_list">
+            <li class="nav_item">
+              <NuxtLink to="/" class="nav_link">
+                <v-icon class="nav_icon">mdi-home</v-icon>
+                <span class="nav_name">Home</span>
+              </NuxtLink>
+            </li>
 
-              <li class="nav_item">
-                <NuxtLink to="/about" class="nav_link active_link">
-                  <v-icon class="nav_icon">mdi-information</v-icon>
-                  <span class="nav_name">About</span>
-                </NuxtLink>
-              </li>
+            <li class="nav_item">
+              <NuxtLink to="/about" class="nav_link active_link">
+                <v-icon class="nav_icon">mdi-information</v-icon>
+                <span class="nav_name">About</span>
+              </NuxtLink>
+            </li>
 
-              <li class="nav_item">
-                <NuxtLink to="/stores" class="nav_link">
-                  <v-icon class="nav_icon">mdi-store</v-icon>
-                  <span class="nav_name">Stores</span>
-                </NuxtLink>
-              </li>
-            </ul>
-          </div>
+            <li class="nav_item">
+              <NuxtLink to="/stores" class="nav_link">
+                <v-icon class="nav_icon">mdi-store</v-icon>
+                <span class="nav_name">Stores</span>
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
 
-          <div class="right">
-            <NuxtLink to="/auth/login_signup" class="btn">Signin</NuxtLink>
-          </div>
-        </nav>
-      </header>
-    </div>
+        <div class="right">
+          <v-btn to="/auth/login_signup" elevation="0" color="primary">
+            Signin
+          </v-btn>
+        </div>
+      </nav>
+    </header>
   </div>
 </template>
 
@@ -53,20 +55,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//baseee
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-html {
-  scroll-behavior: smooth;
-}
 body {
   margin: var(--header-height) 0 0 0;
   font-size: var(--normal-font-size);
   background-color: var(--body-color);
   color: var(--text-color);
+}
+.title {
+  font-family: var(--body-font) !important;
 }
 ul {
   list-style: none;
@@ -140,10 +136,8 @@ a.nuxt-link-exact-active {
     box-shadow: 0 -1px 12px hsla(var(--hue), var(--sat), 15%, 0.15);
     width: 100%;
     height: 4rem;
-
     display: grid;
     align-content: center;
-    border-radius: 1.25rem 1.25rem 0 0;
     transition: 0.4s;
   }
 }

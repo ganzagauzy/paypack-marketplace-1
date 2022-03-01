@@ -1,137 +1,131 @@
 <template>
-  <div class="header-store">
-    <div class="home">
-      <!-- search box -->
+  <v-container>
+    <div class="header-store">
+      <div class="home">
+        <!-- search box -->
 
-      <div class="store-name">
-        <div v-for="(product, index) in nameproducts" :key="index">
-          <v-btn text outlined> {{ product.shopname }}'s store </v-btn>
+        <div class="row">
+          <div class="col">
+            <v-btn text outlined v-if="products[0]">
+              {{ products[0].shopname }}'s store
+            </v-btn>
+          </div>
+          <div class="col-auto">
+            <v-text-field
+              v-model.lazy="searchInput"
+              label="Search Here"
+              type="search"
+              class="input"
+              outlined
+              dense
+              clearable
+              @keyup.enter="$fetch"
+              @keypress.enter="$fetch"
+            ></v-text-field>
+          </div>
         </div>
-      </div>
-      <div class="search">
-        <v-text-field
-          v-model.lazy="searchInput"
-          label="Search Here"
-          type="text"
-          outlined
-          class="input"
-          dense
-          @keyup.enter="$fetch"
-          @keypress.enter="$fetch"
-        ></v-text-field>
-        <v-btn
-          icon
-          v-show="searchInput != ''"
-          class="button"
-          @click="clearSearch"
-          ><v-icon>mdi-close</v-icon></v-btn
-        >
-      </div>
 
-      <div class="row">
-        <div class="category">
-          <h2 class="">Categories</h2>
-          <v-btn text class="text-center" @click="fetchProducts"
-            ><span class="text-big">All</span></v-btn
-          >
-          <ul v-for="(product, index) in shopproducts" :key="index">
-            <li>
-              <v-btn
-                @click="readDataByCategory(product), readDataFilter()"
-                text
-              >
-                <span class="text-big">{{ product.category }}</span>
-              </v-btn>
-            </li>
-          </ul>
-        </div>
-        <div class="all-products">
-          <Loading v-if="$fetchState.pending" />
-
-          <!-- Products -->
-          <div v-else class="container products">
-            <!-- Searched Products -->
-            <div
-              v-if="searchInput !== ''"
-              id="product-grid"
-              class="products-grid"
-            >
-              <div
-                v-for="(product, index) in searchedProducts"
-                :key="index"
-                class="product"
-                v-gsap.fromTo="[
-                  { opacity: 0, y: 50 },
-                  { opacity: 1, y: 0, duration: 3 },
-                ]"
-              >
-                <NuxtLink
-                  :to="{
-                    name: 'stores-storeid-id',
-                    params: { id: product.id },
-                  }"
+        <div class="row flex-nowrap">
+          <div class="category">
+            <h4>Categories</h4>
+            <v-btn text class="text-center" @click="fetchProducts">
+              <span class="text-big">All</span>
+            </v-btn>
+            <ul v-for="(product, index) in shopproducts" :key="index">
+              <li>
+                <v-btn
+                  @click="readDataByCategory(product), readDataFilter()"
+                  text
                 >
-                  <v-card flat class="mx-auto" max-width="344">
-                    <v-img :src="product.images[0]" height="250px"></v-img>
+                  <span class="text-big">{{ product.category }}</span>
+                </v-btn>
+              </li>
+            </ul>
+          </div>
+          <div class="all-products">
+            <Loading v-if="$fetchState.pending" />
 
-                    <div class="card-subtitle">
-                      <v-card-title>
-                        {{ product.name }}
-                      </v-card-title>
+            <!-- Products -->
+            <div v-else class="container products" id="products">
+              <!-- Searched Products -->
+              <div v-if="searchInput !== ''">
+                <div
+                  v-for="(product, index) in searchedProducts"
+                  :key="index"
+                  class="product"
+                  v-gsap.fromTo="[
+                    { opacity: 0, y: 50 },
+                    { opacity: 1, y: 0, duration: 0.5 },
+                  ]"
+                >
+                  <NuxtLink
+                    :to="{
+                      name: 'stores-storeid-id',
+                      params: { id: product.id },
+                    }"
+                  >
+                    <v-card flat class="mx-auto" max-width="344">
+                      <v-img :src="product.images[0]" height="250px"></v-img>
 
-                      <v-card-subtitle>
-                        {{ product.price }} {{ product.currency }}
-                      </v-card-subtitle>
-                    </div>
-                  </v-card>
-                </NuxtLink>
+                      <div class="card-subtitle">
+                        <v-card-title>
+                          {{ product.name }}
+                        </v-card-title>
+
+                        <v-card-subtitle>
+                          {{ product.price }} {{ product.currency }}
+                        </v-card-subtitle>
+                      </div>
+                    </v-card>
+                  </NuxtLink>
+                </div>
               </div>
-            </div>
 
-            <!-- Now Products -->
-            <div v-else id="product-grid" class="products-grid">
-              <div
-                v-for="(product, index) in products"
-                :key="index"
-                class="product"
-                v-gsap.fromTo="[
-                  { opacity: 0, y: 50 },
-                  { opacity: 1, y: 0, duration: 3 },
-                ]"
-              >
-                <NuxtLink
-                  :to="{
-                    name: 'stores-storeid-id',
-                    params: { id: product.id },
-                  }"
+              <!-- Now Products -->
+              <div v-else class="d-flex flex-wrap justify-content-start">
+                <div
+                  v-for="(product, index) in products"
+                  :key="index"
+                  class="product col d-flex"
+                  v-gsap.fromTo="[
+                    { opacity: 0, y: 50 },
+                    { opacity: 1, y: 0, duration: 1 },
+                  ]"
                 >
-                  <v-card flat class="mx-auto" max-width="344">
-                    <v-img :src="product.images[0]" height="250px"></v-img>
+                  <NuxtLink
+                    :to="{
+                      name: 'stores-storeid-id',
+                      params: { id: product.id },
+                    }"
+                  >
+                    <v-card flat class="mx-auto" width="255">
+                      <v-img :src="product.images[0]" height="200px"></v-img>
 
-                    <div class="card-subtitle">
-                      <v-card-title>
-                        {{ product.name }}
-                      </v-card-title>
+                      <div class="card-subtitle">
+                        <v-card-title>
+                          {{ product.name }}
+                        </v-card-title>
 
-                      <v-card-subtitle>
-                        {{ product.price }} {{ product.currency }}
-                      </v-card-subtitle>
-                    </div>
-                  </v-card>
-                </NuxtLink>
+                        <v-card-subtitle>
+                          {{ product.price }} {{ product.currency }}
+                        </v-card-subtitle>
+                      </div>
+                    </v-card>
+                  </NuxtLink>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer">
-      <div class="col">Name and descriotion</div>
-      <div class="col">contact</div>
-      <div class="col">Paypack Market Place</div>
+      <div class="footer text-center rounded my-5">
+        <div class="col">Name and descriotion</div>
+        <div class="col">contact</div>
+        <div class="col">Paypack Market Place</div>
+      </div>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -200,8 +194,10 @@ export default {
           product.id = doc.id;
           return product;
         });
+        console.log(this.products);
       });
     },
+
     async searchProducts() {
       const productsRef = firebase.firestore().collection("products");
 
@@ -271,7 +267,6 @@ export default {
     },
 
     async readDataFilterName() {
-
       var nameproductsRef = await firebase.firestore().collection("products");
 
       // const uid = sessionStorage.getItem("user_id")
@@ -295,8 +290,6 @@ export default {
     },
 
     async readDataFilter() {
-
-
       var filterproductsRef = await firebase.firestore().collection("products");
 
       // const uid = sessionStorage.getItem("user_id")
@@ -321,7 +314,6 @@ export default {
 
     async readDataByCategory(product) {
       console.log(product);
-
 
       var productsRef = await firebase.firestore().collection("products");
 
@@ -363,26 +355,19 @@ export default {
   justify-content: space-between;
 }
 .category {
-  flex-basis: 20%;
   padding: 10px;
-  @media screen and (max-width: 600px) {
-    flex-basis: 100%;
-  }
 }
 .category ul {
   list-style: none;
 }
 .text-big {
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 2px;
   font-weight: 400;
 }
 .all-products {
-  flex-basis: 80%;
+  flex-basis: 100%;
   padding: 10px;
-  @media screen and (max-width: 600px) {
-    flex-basis: 100%;
-  }
 }
 .home {
   .top {
@@ -421,7 +406,6 @@ export default {
     }
   }
   .products {
-    padding: 32px 16px;
     .products-grid {
       display: grid;
       column-gap: 32px;

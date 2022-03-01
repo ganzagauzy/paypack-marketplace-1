@@ -1,38 +1,23 @@
 <template>
   <div>
-    <div class="container">
-      Page for {{ this.$route.params.id }}
-
-      <div class="top mb-5" v-for="(product, index) in products" :key="index">
+    <v-container class="py-10">
+      <div class="mb-8" v-for="(product, index) in products" :key="index">
         <v-btn
-          :style="{
-            backgroundColor: prodBackgroundColor,
-          }"
+          :style="{ backgroundColor: prodBackgroundColor }"
           :to="{ name: 'stores-storeid', params: { storeid: product.userId } }"
           dark
-          >Back</v-btn
         >
+          Back
+        </v-btn>
       </div>
       <v-row>
-
-
-        <v-col cols="" sm="12" md="7">
-          <v-card
-            id="app"
-            :style="{
-              backgroundColor: prodBackgroundColor,
-            }"
-          >
-            <!-- <v-card id="app" v-bind:class="currentTheme"> -->
+        <v-col cols="12" md="7">
+          <v-card id="app" :style="{ backgroundColor: prodBackgroundColor }">
             <div class="py-2 pb-5 px-3">
               <div class="rounded-circle">
                 <v-btn>
-                  <!-- <v-icon>mdi-palette</v-icon> -->
                   <input
                     type="color"
-                    name=""
-                    style="border-radius: 50%"
-                    id=""
                     class="rounded-circle"
                     v-model="prodBackgroundColor"
                   />
@@ -40,7 +25,6 @@
               </div>
             </div>
 
-           
             <div class="py-5 carousel">
               <v-carousel
                 :show-arrows="true"
@@ -59,54 +43,38 @@
                 ></v-carousel-item>
               </v-carousel>
             </div>
-
-            <!-- <div class="movie-img py-16 w-25">
-                  <img :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt="">
-                </div> -->
           </v-card>
         </v-col>
-
-        <!-- <v-col
-      md="9"
-      cols="12">
-        <v-card class="py-16 px-10">
-        <PrevCarousel />
-      </v-card>
-      </v-col> -->
         <v-col md="5" cols="12">
-          <div v-for="(product, index) in products" :key="index" class="">
-            <h4>Description</h4>
-            <p v-html="product.description"></p>
-            <br />
-            <br />
-            <v-row>
-              <v-col md="6">
-                <h4>Price</h4>
-                {{ product.price }} {{ product.currency }}
-              </v-col>
-              <v-spacer></v-spacer>
-              <v-col md="6">
-                <h4 class="text-cnter">Quantity</h4>
-                <v-text-field
-                  v-model="nproducts"
-                  type="number"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-            </v-row>
+          <div
+            v-for="(product, index) in products"
+            :key="index"
+            class="d-flex flex-column"
+          >
+            <div class="">
+              <h4>Description</h4>
+              <article class="mb-0" v-html="product.description"></article>
+            </div>
+            <div class="mb-4">
+              <h4>Price</h4>
+              {{ product.price }} {{ product.currency }}
+            </div>
+            <div class="mb-4">
+              <h4 class="mb-2">Quantity</h4>
+              <v-text-field
+                v-model="nproducts"
+                type="number"
+                outlined
+                dense
+              ></v-text-field>
+            </div>
           </div>
-          <v-btn
-            :style="{
-              backgroundColor: prodBackgroundColor,
-            }"
-            dark
-            class="px-16 py-3 btn-center"
+          <v-btn color="primary" elevation="0" block x-large class="mt-2"
             >Buy Now</v-btn
           >
         </v-col>
       </v-row>
-    </div>
+    </v-container>
 
     <div class="footer">
       <div class="col">Name and descriotion</div>

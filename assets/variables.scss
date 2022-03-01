@@ -1,70 +1,77 @@
 // Ref: https://github.com/nuxt-community/vuetify-module#customvariables
 //
 // The variables you want to modify
+$body-font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 // $font-size-root: 20px;
 :root {
-    // Header 
-    --header-height : 3rem;
+  // Header
+  --header-height: 3rem;
 
-    // Colors
-    --hue:  174%;
-    --sat: 63%;
-    --first-color: hsl(var(--hue), var(--sat), 40%);
-    // --first-color-light: hsl(var(--hue), var(--sat), 85%);
-    // --first-color-lighten: hsl(var(--hue), var(--sat), 80%);
-    --first-color-alt: hsl(var(--hue), var(--sat), 36%);
-    --title-color: hsl(var(--hue), 12%, 15%);
-    --text-color: hsl(var(--hue), 8%, 35%);
-    // --text-color-light: hsl(var(--hue), 4%, 65%);
-    --body-color: hsl(var(--hue), 100%, 99%);
-    --container-color: #fff;
-    // --scroll-bar-color: hsl(var(--hue), 4%, 85%);
-    // --scrool-thumb-color: hsl(var(--hue), 4%, 75%);
+  // Colors
+  --hue: 174%;
+  --sat: 63%;
+  --first-color: hsl(var(--hue), var(--sat), 40%);
+  // --first-color-light: hsl(var(--hue), var(--sat), 85%);
+  // --first-color-lighten: hsl(var(--hue), var(--sat), 80%);
+  --first-color-alt: hsl(var(--hue), var(--sat), 36%);
+  --title-color: hsl(var(--hue), 12%, 15%);
+  --text-color: hsl(var(--hue), 8%, 35%);
+  // --text-color-light: hsl(var(--hue), 4%, 65%);
+  --body-color: hsl(var(--hue), 100%, 99%);
+  --container-color: #fff;
+  --primary-color: #da9412;
+  // --scroll-bar-color: hsl(var(--hue), 4%, 85%);
+  // --scrool-thumb-color: hsl(var(--hue), 4%, 75%);
 
-    //Font and typography
-    --body-font: ;
-    // --biggest-font-size: 2rem;
-    --h1-font-size: 1.5rem;
-    // --h3-font-size: 1.125rem;
-    --normal-font-size: .938rem;
-    --tiny-font-size: .623rem;
-    // --smaller-font-size: .75rem;
+  //Font and typography
+  --body-font: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --font: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  // --biggest-font-size: 2rem;
+  --h1-font-size: 1.5rem;
+  // --h3-font-size: 1.125rem;
+  --normal-font-size: 0.938rem;
+  --tiny-font-size: 0.623rem;
+  // --smaller-font-size: .75rem;
 
-    // responsive typography
-    @media screen and(min-width:968px) {
-        // --biggest-font-size: 3rem;
-        --h1-font-size: 2.25rem;
-        // --h3-font-size: 1.25rem;
-        --normal-font-size: 1rem;
-        // --small-font-size: .875rem;
-        // --smaller-font-size: .813rem;
-    }
+  // responsive typography
+  @media screen and(min-width:968px) {
+    // --biggest-font-size: 3rem;
+    --h1-font-size: 2.25rem;
+    // --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    // --small-font-size: .875rem;
+    // --smaller-font-size: .813rem;
+  }
 
-    //font weight
-    --font-semi-bold: 600;
-    --font-bold: 700;
+  //font weight
+  --font-semi-bold: 600;
+  --font-bold: 700;
 
-    //margins
-    --mb-0-5: .5rem;
-    --mb-0-75: .75ren;
-    --mb-1: 1rem;
-    --mb-1-5: 1.5rem;
-    --mb-2: 2rem;
+  //margins
+  --mb-0-5: 0.5rem;
+  --mb-0-75: 0.75ren;
+  --mb-1: 1rem;
+  --mb-1-5: 1.5rem;
+  --mb-2: 2rem;
 
-    //Z-index
-    --z-tooltip: 10;
-    --z-fixed: 100;
+  //Z-index
+  --z-tooltip: 10;
+  --z-fixed: 100;
 
-    // darktheme
+  // darktheme
 
-    body.dark-theme {
-        --first-color-light: hsl(var(--hue), var(--sat), 75%);
-        --title-color: hsl(var(--hue), 4%, 95%);
-        --text-color: hsl(var(--hue), 4%, 80%);
-        --body-color: hsl(var(--hue), 8%, 13%);
-        --container-color: hsl(var(--hue), 8%, 16%);
-        --scroll-bar-color: hsl(var(--hue), 4%, 32%);
-        --scrool-thumb-color: hsl(var(--hue), 4%, 24%);
-    
-    }
+  body.dark-theme {
+    --first-color-light: hsl(var(--hue), var(--sat), 75%);
+    --title-color: hsl(var(--hue), 4%, 95%);
+    --text-color: hsl(var(--hue), 4%, 80%);
+    --body-color: hsl(var(--hue), 8%, 13%);
+    --container-color: hsl(var(--hue), 8%, 16%);
+    --scroll-bar-color: hsl(var(--hue), 4%, 32%);
+    --scrool-thumb-color: hsl(var(--hue), 4%, 24%);
+  }
 }
+
+@import "~vuetify/src/styles/styles.sass";

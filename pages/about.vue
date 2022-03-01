@@ -1,12 +1,12 @@
 <template>
   <div class="header-store">
-    <v-container class="">
+    <v-container>
       <div class="row">
         <div
-          class="cols-2"
+          class="cols-2 px-2"
           v-gsap.fromTo="[
-            { opacity: 0, scale: 0.8 },
-            { opacity: 1, scale: 1, duration: 2 },
+            { opacity: 0, x: -350 },
+            { opacity: 1, x: 0, duration: 2 },
           ]"
         >
           <h1>Get To Know About <span>PayPack </span> <br />Market Place</h1>
@@ -16,57 +16,20 @@
             sapiente dignissimos<br />
             odio at animi, incidunt voluptatibus. Corrupti, libero iste.
           </p>
-          <a href="#more" class="btn-store">Read More</a>
+          <v-btn elevation="0" color="primary" outlined> Read More </v-btn>
         </div>
         <div
-          class="cols-2"
+          class="cols-2 px-2"
           v-gsap.fromTo="[
-            { opacity: 0, scale: 1.2 },
-            { opacity: 1, scale: 1, duration: 2 },
+            { opacity: 0, x: 350 },
+            { opacity: 1, x: 0, duration: 2 },
           ]"
         >
-          <img class="" src="~/assets/images/info.png" />
+          <img
+            class="rounded d-none d-md-block"
+            src="~/assets/images/info.png"
+          />
         </div>
-      </div>
-      <div class="available-store" id="more">
-        <h1
-          class="store-title"
-          v-gsap.fromTo="[
-            { opacity: 0, y: 150 },
-            { opacity: 1, y: 0, duration: 5 },
-          ]"
-        >
-          PayPack Market Place
-        </h1>
-        <div class="buttons"></div>
-      </div>
-      <div>
-        <!-- <h1
-            v-gsap.to="{
-              rotation: 360,
-              x: 150,
-              duration: 2
-            }"
-          >
-            NUXT GSAP
-          </h1> -->
-        <!-- <span
-            v-gsap.from="{
-              opacity: 0,
-              x: -200,
-              duration: 1
-            }"
-          >
-            NUXT GSAP
-          </span> -->
-        <!-- <p
-            v-gsap.fromTo="[
-              { opacity: 0, x: -350 },
-              { opacity: 1, x: 0, duration: 3 }
-            ]"
-          >
-            NUXT GSAP
-          </p> -->
       </div>
     </v-container>
   </div>
@@ -130,10 +93,7 @@ export default {
   min-width: 300px;
 }
 .cols-2 img {
-  // background: radial-gradient(#fff, #d1dbec);
-  background: radial-gradient(rgb(218, 218, 218), #d1dbec);
   max-width: 100%;
-  padding: 50px 0;
 }
 .cols-2 h1 {
   font-size: 50px;
@@ -174,10 +134,6 @@ export default {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-}
-.header-store {
-  //  background: radial-gradient(#fff, #d1dbec);
-  background: radial-gradient(rgb(241, 241, 241), #d1dbec);
 }
 
 //media query <600

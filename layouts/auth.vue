@@ -1,26 +1,10 @@
 <template>
   <v-app app>
-    <nav-layout />
     <!-- Navigation bar ends -->
 
     <v-main class="header-store accent">
       <Nuxt />
     </v-main>
-    <v-footer
-      class="text-center text-white py-5 px-7 custom-footer"
-      dark
-      :absolute="!fixed"
-    >
-      <span class="text-center"
-        >&copy; {{ new Date().getFullYear() }}
-        <a
-          style="font-size: 20px"
-          class="font-weight-bold text-decoration-none"
-          href="https://paypack.rw/"
-          >Paypack
-        </a>
-      </span>
-    </v-footer>
   </v-app>
 </template>
 <script>
