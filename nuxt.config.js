@@ -3,6 +3,16 @@ import colors from "vuetify/es5/util/colors";
 export default {
   ssr: false,
   target: "static",
+  env: {
+    NUXT_ENV_API_KEY: process.env.NUXT_ENV_API_KEY || "",
+    NUXT_ENV_AUTH_DOMAIN: process.env.NUXT_ENV_AUTH_DOMAIN || "",
+    NUXT_ENV_PROJECT_ID: process.env.NUXT_ENV_PROJECT_ID || "",
+    NUXT_ENV_STORAGE_BUCKET: process.env.NUXT_ENV_STORAGE_BUCKET || "",
+    NUXT_ENV_MESSAGING_SENDER_ID:
+      process.env.NUXT_ENV_MESSAGING_SENDER_ID || "",
+    NUXT_ENV_APP_ID: process.env.NUXT_ENV_APP_ID || "",
+    NUXT_ENV_MEASUREMENT_ID: process.env.NUXT_ENV_MEASUREMENT_ID || "",
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: "%s - Paypack MarketPlace",
@@ -39,7 +49,7 @@ export default {
   plugins: [
     // '~/plugins/vue-upload-multiple-image.js',
     { src: "~plugins/vue-upload-multiple-image.js", ssr: false },
-    { src: "~plugins/firebase.js" },
+    { src: "~plugins/firebase.js", ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -54,7 +64,12 @@ export default {
   //gsap
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["nuxt-clipboard2", "nuxt-sweetalert2", "@nuxtjs/toast"],
+  modules: [
+    "nuxt-clipboard2",
+    "nuxt-sweetalert2",
+    "@nuxtjs/toast",
+    "@nuxtjs/dotenv",
+  ],
 
   //authentication
 

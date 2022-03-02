@@ -21,7 +21,7 @@
                       SIGN IN
                     </h5>
                     <h4></h4>
-                    <v-form class="px-4">
+                    <v-form @submit.prevent="login" class="px-4">
                       <label>Email</label>
                       <v-text-field
                         cols="12"
@@ -41,10 +41,10 @@
                       {{ errors }}
                       <div class="text-center mb-3">
                         <v-btn
+                          type="submit"
                           block
                           elevation="0"
                           color="primary"
-                          @click="login"
                         >
                           Sign in
                         </v-btn>
@@ -295,7 +295,6 @@ export default {
           });
       }
     },
-
     login() {
       firebase
         .auth()
@@ -309,6 +308,20 @@ export default {
         })
         .catch((error) => {
           this.errors = error;
+          console.log({ error });
+          if (error.code) {
+            switch (error.code) {
+              case "auth/network-request-failed":
+                this.errors = "Network error while trying to authenticate.";
+                break;
+              case "auth/user-not-found":
+                this.errors = "Email or password not found.";
+                break;
+              default:
+                this.errors = error.message;
+                break;
+            }
+          }
         });
     },
   },

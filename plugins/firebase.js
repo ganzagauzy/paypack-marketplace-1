@@ -1,11 +1,7 @@
-// import * as firebase from "firebase/app";
-// import firebase from 'firebase/app';
-// import 'firebase/firestore';
-// import "firebase/database";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-const process = require("process");
+import nuxtConfig from "../nuxt.config";
 
 const {
   NUXT_ENV_API_KEY,
@@ -15,7 +11,7 @@ const {
   NUXT_ENV_MESSAGING_SENDER_ID,
   NUXT_ENV_APP_ID,
   NUXT_ENV_MEASUREMENT_ID,
-} = process.env;
+} = nuxtConfig.env;
 
 const firebaseConfig = {
   apiKey: NUXT_ENV_API_KEY,
@@ -32,9 +28,6 @@ var app = null;
 if (!firebase.apps.length) {
   app = firebase.initializeApp(firebaseConfig);
 }
-// Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 const db = firebase.firestore();
 
 db.settings({ timestampsInSnapshots: true });

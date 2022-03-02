@@ -9,6 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/firebase": "^8.2.2",
     "@nuxtjs/toast": "^3.3.1",
     "@simonwep/pickr": "^1.8.2",
