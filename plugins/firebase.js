@@ -7,21 +7,23 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
+const { NUXT_ENV_API_KEY, NUXT_ENV_AUTH_DOMAIN, NUXT_ENV_PROJECT_ID, NUXT_ENV_STORAGE_BUCKET, NUXT_ENV_MESSAGING_SENDER_ID, NUXT_ENV_APP_ID, NUXT_ENV_MEASUREMENT_ID } = process.env;
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB1Rcnn5aDHNvKsdfhChNPxlAsrNFx7nIo",
-  authDomain: "nuxttodo-b8d04.firebaseapp.com",
-  projectId: "nuxttodo-b8d04",
-  storageBucket: "nuxttodo-b8d04.appspot.com",
-  messagingSenderId: "791473225763",
-  appId: "1:791473225763:web:92bb9ec858b4fd64473196",
-  measurementId: "G-JP2240WQFD"
+  apiKey: NUXT_ENV_API_KEY,
+  authDomain: NUXT_ENV_AUTH_DOMAIN,
+  projectId: NUXT_ENV_PROJECT_ID,
+  storageBucket: NUXT_ENV_STORAGE_BUCKET,
+  messagingSenderId: NUXT_ENV_MESSAGING_SENDER_ID,
+  appId: NUXT_ENV_APP_ID,
+  measurementId: NUXT_ENV_MEASUREMENT_ID
 };
 
 
 var app = null;
 
-if(!firebase.apps.length){
+if (!firebase.apps.length) {
   app = firebase.initializeApp(firebaseConfig);
 }
 // Initialize Firebase
@@ -29,6 +31,6 @@ if(!firebase.apps.length){
 // const analytics = getAnalytics(app);
 const db = firebase.firestore();
 
-db.settings({timestampsInSnapshots: true});
+db.settings({ timestampsInSnapshots: true });
 
 export default db;
