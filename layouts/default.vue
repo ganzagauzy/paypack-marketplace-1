@@ -1,5 +1,5 @@
 <template>
-  <v-app app>
+  <v-app app style="top: 70px">
     <nav-layout />
     <!-- Navigation bar ends -->
 
@@ -60,7 +60,7 @@ html {
   overflow-y: auto;
 }
 .v-application--wrap {
-  top: 72px;
+  top: 70px;
 }
 ul {
   list-style: none;
