@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-container>
     <div class="header-store">
       <div class="home">
@@ -10,7 +11,14 @@
               {{ products[0].shopname }}'s store
             </v-btn>
           </div>
-          <div class="col-auto">
+          
+          <div class="col-auto search-btn">
+            <v-btn
+          icon
+          v-show="searchInput != ''"
+          class="button-btn"
+          @click="clearSearch"
+          ><v-icon color="#da9412">mdi-close</v-icon></v-btn>
             <v-text-field
               v-model.lazy="searchInput"
               label="Search Here"
@@ -18,11 +26,15 @@
               class="input"
               outlined
               dense
-              clearable
               @keyup.enter="$fetch"
               @keypress.enter="$fetch"
             ></v-text-field>
+            
+            
+            
+            
           </div>
+          
         </div>
 
         <div class="row flex-nowrap">
@@ -34,7 +46,7 @@
             <ul v-for="(product, index) in shopproducts" :key="index">
               <li>
                 <v-btn
-                  @click="readDataByCategory(product), readDataFilter()"
+                  @click="readDataByCategory(product)"
                   text
                 >
                   <span class="text-big">{{ product.category }}</span>
@@ -119,13 +131,15 @@
         </div>
       </div>
 
-      <div class="footer text-center rounded my-5">
-        <div class="col">Name and descriotion</div>
-        <div class="col">contact</div>
-        <div class="col">Paypack Market Place</div>
-      </div>
+      
     </div>
   </v-container>
+  <div class="footer">
+      <div class="col">Name and descriotion</div>
+      <div class="col">contact</div>
+      <div class="col">Paypack MArket Place</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -353,9 +367,15 @@ export default {
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
+  @media screen and (max-width:500px) {
+    flex-direction: column;
+  }
 }
 .category {
   padding: 10px;
+  @media screen and (max-width:500px) {
+    flex-basis: 100%;
+  }
 }
 .category ul {
   list-style: none;
@@ -537,6 +557,14 @@ a {
   @media screen and (max-width: 600px) {
     flex-basis: 100%;
   }
+}
+.search-btn {
+  position: relative;
+}
+.button-btn {
+  position: absolute;
+  left: 95%;
+  color: #da9412;
 }
 </style>
 

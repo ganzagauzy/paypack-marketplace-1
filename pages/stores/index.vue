@@ -122,10 +122,15 @@ export default {
 }
 .button:hover {
   background: #da9412;
+  border: none;
 }
 .buttons {
   min-width: 100px;
   display: flex;
+  @media screen and (max-width:500px) {
+    flex-direction: column;
+    
+  }
 }
 .row {
   display: flex;
