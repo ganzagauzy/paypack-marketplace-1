@@ -76,11 +76,11 @@
       </v-row>
     </v-container>
 
-    <div class="footer">
+    <!-- <div class="footer">
       <div class="col">Name and descriotion</div>
       <div class="col">contact</div>
       <div class="col">Paypack MArket Place</div>
-    </div>
+    </div> -->
   </div>
 </template>
 

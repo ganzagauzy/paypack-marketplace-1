@@ -49,7 +49,7 @@
                       @change="uploadImage"
                       class="form-control"
                     />
-                    <div class="form-group d-flex">
+                    <div class="form-group  img-grid">
                       <div
                         v-for="(image, index) in editedItem.images"
                         :key="index"
@@ -225,7 +225,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "New Product" : "Edit Product";
     },
   },
 
@@ -491,6 +491,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.img-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  @media screen and( max-width: 500px ){
+  grid-template-columns: repeat(2, 1fr);
+  }
+  //  @media screen and (max-width: 500px) {
+  //       grid-template-columns: repeat(2, 1fr);
+  //     }
+  //   @media screen and (max-width: 750px) {
+  //     grid-template-columns: repeat(3, 1fr);
+  //   }
+  //   @media screen and (max-width: 1100px) {
+  //     grid-template-columns: repeat(4, 1fr);
+  //   }
+}
 .img-wrapp {
   position: relative;
 }
@@ -498,7 +515,7 @@ export default {
   font-size: 20px;
   position: absolute;
   top: -3px;
-  right: -15px;
+  left: 85px;
 }
 .img-wrapp span.delete-img {
   cursor: pointer;

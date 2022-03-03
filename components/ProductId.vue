@@ -14,14 +14,14 @@
           
 
 
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
+          
+            
               <v-btn @click="onCopy" color="" v-bind="attrs" v-on="on" dark>
                 Copy Url
               </v-btn>
-            </template>
-            <span>Copy Link</span>
-          </v-tooltip>
+            
+            
+         
 
           <!-- <v-menu>
             <template v-slot:activator="{ on, attrs }">
@@ -217,7 +217,7 @@
                       class="movie"
                     >
                       <!-- <p>{{ product.id}}</p> -->
-                      <p class="overview">{{ product.description }}</p>
+                      <article class="mb-0" v-html="product.description"></article>
                     </div>
 
                     <div class="py-5">

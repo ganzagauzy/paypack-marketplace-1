@@ -101,8 +101,8 @@ export default {
         },
         {
           icon: "mdi-shopping",
-          title: "All Shops",
-          to: "/shop",
+          title: "Stores",
+          to: "/stores",
         },
       ],
       miniVariant: false,

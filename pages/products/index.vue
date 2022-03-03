@@ -4,7 +4,7 @@
       <div class="fixed-bar">
         <v-system-bar class="" window dark color="">
           <v-icon>mdi-dropbox </v-icon>
-          <span>Products &mdash;{{ size }}</span>
+          <span>My-Products &mdash; {{ size }}</span>
           <v-spacer></v-spacer>
           <!-- <v-icon>mdi-minus</v-icon>
                       <v-icon>mdi-checkbox-blank-outline</v-icon>
@@ -56,9 +56,8 @@
     <v-card>
       <v-toolbar fixed color="#d1dbec">
         <v-toolbar-title class="d-flex justify-lg-space-between">
-          <div>My Products</div>
           <v-spacer></v-spacer>
-          <div class="d-flex justify-end ml-16">
+          <div class="d-flex justify-end ">
             <v-btn outlined @click="shareUrl">share-url</v-btn>
           </div>
         </v-toolbar-title>

@@ -39,11 +39,13 @@
 
         <div class="row flex-nowrap">
           <div class="category">
-            <h4>Categories</h4>
-            <v-btn text class="text-center" @click="fetchProducts">
+            <h3>Categories</h3>
+            <br>
+            <!-- <v-btn color="primary"
+                  dark class="text-center" @click="fetchProducts">
               <span class="text-big">All</span>
-            </v-btn>
-            <ul v-for="(product, index) in shopproducts" :key="index">
+            </v-btn> -->
+            <!-- <ul v-for="(product, index) in shopproducts" :key="index">
               <li>
                 <v-btn
                   @click="readDataByCategory(product)"
@@ -52,7 +54,45 @@
                   <span class="text-big">{{ product.category }}</span>
                 </v-btn>
               </li>
-            </ul>
+            </ul> -->
+            <v-menu offset-y  open-on-hover 
+            max-height="300px"
+            class="tile"
+            >
+              
+              <template v-slot:activator="{ on, attrs }"  > 
+                <v-btn
+                  @click="fetchProducts"
+                  outlined
+                  v-bind="attrs"
+                  v-on="on"
+                  class="tile"
+                  
+                >
+                  All<v-icon
+                      right
+                      dark
+                    >
+                      mdi-menu-down
+                    </v-icon>
+                </v-btn>
+              </template>
+              <v-list class="tile">
+                <v-list-item
+                  v-for="(product, index) in shopproducts" :key="index"
+                  class="tile"
+                  link
+                >
+                  <v-list-item-title><p
+                  @click="readDataByCategory(product)"
+                  text
+                >
+                  <span class="">{{ product.category }}</span>
+                </p></v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+            
           </div>
           <div class="all-products">
             <Loading v-if="$fetchState.pending" />
@@ -134,10 +174,24 @@
       
     </div>
   </v-container>
-  <div class="footer">
-      <div class="col">Name and descriotion</div>
-      <div class="col">contact</div>
-      <div class="col">Paypack MArket Place</div>
+  <div  class="footer" v-for="(user, index) in userinfo" :key="index">
+      <div class="col">
+        <h4>Info</h4>
+        <p class="text-small">{{user.username}}</p>
+       
+        <p class="text-small">{{user.shopname}}</p>
+        
+        <p class="text-small">{{user.description}}</p>
+      </div>
+      <div class="col">
+        <h4>Contact</h4>
+        <p class="text-small">{{user.telephone}}</p>
+        <p class="text-small">{{user.email}}</p>
+      </div>
+      <div class="col">
+        <h4>Paypack MArket Place</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae mollitia, assumenda porro sapiente esse reprehenderit aliquid asperiores enim ut veniam.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -162,6 +216,7 @@ export default {
   data() {
     return {
       products: [],
+      userinfo: [],
       size: "",
       searchedProducts: [],
       shopproducts: [],
@@ -185,6 +240,7 @@ export default {
   },
   mounted() {
     this.fetchProducts();
+    this.fetchUserInfo();
     this.readDataFilterCategory();
     this.readDataFilterName();
     this.staggering();
@@ -348,6 +404,18 @@ export default {
           });
         });
     },
+    async fetchUserInfo() {
+      const userinfoRef = firebase.firestore().collection("users");
+
+      userinfoRef.where("id", "==", this.id).onSnapshot((snap) => {
+        this.userinfo = snap.docs.map((doc) => {
+          var user = doc.data();
+          user.id = doc.id;
+          return user;
+        });
+        console.log(this.userinfo);
+      });
+    },
 
     clearSearch() {
       this.searchInput = "";
@@ -377,6 +445,16 @@ export default {
     flex-basis: 100%;
   }
 }
+.tile {
+    margin: 5px;
+    border-radius: 4px;
+  }
+  .tile:hover {
+    background: radial-gradient(rgb(241, 241, 241), #d1dbec);
+  }
+  // .tile:active {
+  //   background: yellow;
+  // }
 .category ul {
   list-style: none;
 }
@@ -384,6 +462,9 @@ export default {
   font-size: 16px;
   letter-spacing: 2px;
   font-weight: 400;
+}
+.padding-right {
+  background: #111;
 }
 .all-products {
   flex-basis: 100%;

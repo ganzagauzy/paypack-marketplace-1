@@ -276,6 +276,7 @@ export default {
                 shopname: this.shopname,
                 telephone: this.telephone,
                 description: this.description,
+                email: this.email
               })
               .then(() => {
                 console.log("document written");
