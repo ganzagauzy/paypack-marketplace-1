@@ -6,46 +6,6 @@
   <ProductId/>
 
 
-  <!-- <div v-if="$fetchState.pending" />
-  <div v-else class="container single-movie">
-    <NuxtLink class="button" :to="{ name: 'index' }">Back</NuxtLink>
-    <div class="movie-info">
-      <div class="movie-img">
-        <img :src="`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`" alt="">
-      </div>
-      <div class="movie-content">
-        <h1>Title: {{ movie.title }}</h1>
-        <p class="movie-fact tagline">
-          <span>Tagline:</span> "{{ movie.tagline }}"
-        </p>
-        <p class="movie-fact">
-          <span>Released:</span>
-              {{
-                new Date(movie.release_date).toLocaleString('en-us', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })
-              }}
-        </p>
-        <p class="movie-fact">
-          <span>Duration:</span> {{ movie.runtime }} minutes
-        </p>
-        <p class="movie-fact">
-          <span>Revenue:</span>
-          {{
-            movie.revenue.toLocaleString('en-us', {
-              style: 'currency',
-              currency: 'USD',
-            })
-          }}
-        </p>
-        <p class="movie-fact">
-          <span>Overview:</span> {{ movie.overview }}
-        </p>
-      </div>
-    </div>
-  </div> -->
 </div>
 </template>
 
@@ -53,7 +13,7 @@
 import axios from 'axios'
 // import loading from '../../components/loading.vue'
 export default {
-  name : 'SingleMovie',
+  name : 'Single Product',
   // components: { loading },
   data() {
     return {
@@ -62,7 +22,6 @@ export default {
     }
   },
   async fetch() {
-    // await this.getSingleMovie()
   },
   head() {
     return {

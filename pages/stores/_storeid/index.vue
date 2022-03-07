@@ -39,22 +39,10 @@
 
         <div class="row flex-nowrap">
           <div class="category">
-            <h3>Categories</h3>
-            <br>
-            <!-- <v-btn color="primary"
-                  dark class="text-center" @click="fetchProducts">
-              <span class="text-big">All</span>
-            </v-btn> -->
-            <!-- <ul v-for="(product, index) in shopproducts" :key="index">
-              <li>
-                <v-btn
-                  @click="readDataByCategory(product)"
-                  text
-                >
-                  <span class="text-big">{{ product.category }}</span>
-                </v-btn>
-              </li>
-            </ul> -->
+            
+            <!-- <p class="text-h6">{{categoryName}}</p> -->
+            
+            
             <v-menu offset-y  open-on-hover 
             max-height="300px"
             class="tile"
@@ -62,14 +50,14 @@
               
               <template v-slot:activator="{ on, attrs }"  > 
                 <v-btn
-                  @click="fetchProducts"
+                  text
                   outlined
                   v-bind="attrs"
                   v-on="on"
                   class="tile"
                   
                 >
-                  All<v-icon
+                  Categories<v-icon
                       right
                       dark
                     >
@@ -78,6 +66,15 @@
                 </v-btn>
               </template>
               <v-list class="tile">
+                <v-list-item
+                link>
+                  <v-list-item-title><p
+                  @click="fetchProducts"
+                  text
+                >
+                  <span class="">All</span>
+                </p></v-list-item-title>
+                </v-list-item>
                 <v-list-item
                   v-for="(product, index) in shopproducts" :key="index"
                   class="tile"
@@ -90,24 +87,28 @@
                   <span class="">{{ product.category }}</span>
                 </p></v-list-item-title>
                 </v-list-item>
+                
               </v-list>
             </v-menu>
             
+            
           </div>
           <div class="all-products">
+            <p class="text-center text-h6 text-capitalize">{{categoryName}}</p>
             <Loading v-if="$fetchState.pending" />
 
             <!-- Products -->
             <div v-else class="container products" id="products">
               <!-- Searched Products -->
               <div v-if="searchInput !== ''">
+                <div  class="d-flex flex-wrap justify-content-start">
                 <div
                   v-for="(product, index) in searchedProducts"
                   :key="index"
-                  class="product"
+                  class="product col d-flex"
                   v-gsap.fromTo="[
                     { opacity: 0, y: 50 },
-                    { opacity: 1, y: 0, duration: 0.5 },
+                    { opacity: 1, y: 0, duration: 1 },
                   ]"
                 >
                   <NuxtLink
@@ -116,8 +117,8 @@
                       params: { id: product.id },
                     }"
                   >
-                    <v-card flat class="mx-auto" max-width="344">
-                      <v-img :src="product.images[0]" height="250px"></v-img>
+                    <v-card flat class="mx-auto" width="255">
+                      <v-img :src="product.images[0]" contain height="200px" class="imgBox"></v-img>
 
                       <div class="card-subtitle">
                         <v-card-title>
@@ -131,6 +132,7 @@
                     </v-card>
                   </NuxtLink>
                 </div>
+              </div>
               </div>
 
               <!-- Now Products -->
@@ -150,8 +152,8 @@
                       params: { id: product.id },
                     }"
                   >
-                    <v-card flat class="mx-auto" width="255">
-                      <v-img :src="product.images[0]" height="200px"></v-img>
+                    <v-card flat class="mx-auto imgBox" width="205" >
+                      <v-img :src="product.images[0]" contain height="205px" ></v-img>
 
                       <div class="card-subtitle">
                         <v-card-title>
@@ -223,6 +225,7 @@ export default {
       nameproducts: [],
       filterproducts: [],
       searchInput: "",
+      categoryName: "",
     };
   },
   async fetch() {
@@ -257,13 +260,14 @@ export default {
     async fetchProducts() {
       const productsRef = firebase.firestore().collection("products");
 
-      productsRef.where("userId", "==", this.id).onSnapshot((snap) => {
+      productsRef.where("shopname", "==", this.id).onSnapshot((snap) => {
         this.size = snap.size;
         this.products = snap.docs.map((doc) => {
           var product = doc.data();
           product.id = doc.id;
           return product;
         });
+        this.categoryName = ""
         console.log(this.products);
       });
     },
@@ -275,11 +279,11 @@ export default {
       async function getIsNameOrCategory(searchInput, id) {
         const isName = productsRef
           .where("name", "==", searchInput)
-          .where("userId", "==", id)
+          .where("shopname", "==", id)
           .get();
         const isCategory = productsRef
           .where("category", "==", searchInput)
-          .where("userId", "==", id)
+          .where("shopname", "==", id)
           .get();
 
         const [nameQuerySnapshot, categoryQuerySnapshot] = await Promise.all([
@@ -318,7 +322,7 @@ export default {
 
       // const uid = sessionStorage.getItem("user_id")
 
-      shopproductsRef.where("userId", "==", this.id).onSnapshot((snap) => {
+      shopproductsRef.where("shopname", "==", this.id).onSnapshot((snap) => {
         // this.size = snap.size
         this.shopproducts = [];
         this.shopproducts = snap.docs.map((doc) => {
@@ -341,7 +345,7 @@ export default {
 
       // const uid = sessionStorage.getItem("user_id")
 
-      nameproductsRef.where("userId", "==", this.id).onSnapshot((snap) => {
+      nameproductsRef.where("shopname", "==", this.id).onSnapshot((snap) => {
         // this.size = snap.size
         this.nameproducts = [];
         this.nameproducts = snap.docs.map((doc) => {
@@ -364,7 +368,7 @@ export default {
 
       // const uid = sessionStorage.getItem("user_id")
 
-      filterproductsRef.where("userId", "==", this.id).onSnapshot((snap) => {
+      filterproductsRef.where("shopname", "==", this.id).onSnapshot((snap) => {
         // this.size = snap.size
         this.filterproducts = [];
         this.filterproducts = snap.docs.map((doc) => {
@@ -384,6 +388,8 @@ export default {
 
     async readDataByCategory(product) {
       console.log(product);
+      this.categoryName = product.category
+      console.log(this.categoryName);
 
       var productsRef = await firebase.firestore().collection("products");
 
@@ -393,7 +399,7 @@ export default {
 
       productsRef
         .where("category", "==", product.category)
-        .where("userId", "==", this.id)
+        .where("shopname", "==", this.id)
         .onSnapshot((snap) => {
           this.size = snap.size;
           this.products = [];
@@ -403,11 +409,12 @@ export default {
             this.products.push(product);
           });
         });
+
     },
     async fetchUserInfo() {
       const userinfoRef = firebase.firestore().collection("users");
 
-      userinfoRef.where("id", "==", this.id).onSnapshot((snap) => {
+      userinfoRef.where("shopname", "==", this.id).onSnapshot((snap) => {
         this.userinfo = snap.docs.map((doc) => {
           var user = doc.data();
           user.id = doc.id;
@@ -556,6 +563,7 @@ export default {
     }
   }
 }
+
 .v-card--reveal {
   align-items: center;
   bottom: 0;

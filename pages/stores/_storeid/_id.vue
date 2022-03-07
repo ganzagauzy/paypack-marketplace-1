@@ -4,7 +4,7 @@
       <div class="mb-8" v-for="(product, index) in products" :key="index">
         <v-btn
           :style="{ backgroundColor: prodBackgroundColor }"
-          :to="{ name: 'stores-storeid', params: { storeid: product.userId } }"
+          :to="{ name: 'stores-storeid', params: { storeid: product.shopname } }"
           dark
         >
           Back
@@ -36,10 +36,10 @@
                   v-for="(image, i) in product.images"
                   :key="i"
                   :src="`${image}`"
-                  max-height="400"
-                  max-width="400"
+                  max-height="600"
+                  max-width="600"
                   class="move-right justify-center"
-                  cover
+                  contain
                 ></v-carousel-item>
               </v-carousel>
             </div>

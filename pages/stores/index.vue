@@ -41,7 +41,7 @@
             <v-btn
               :to="{
                 name: 'stores-storeid',
-                params: { storeid: store.userId },
+                params: { storeid: store.shopname },
               }"
               class="ma-2 d-flex button"
               outlined

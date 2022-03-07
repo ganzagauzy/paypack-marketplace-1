@@ -56,6 +56,15 @@
                       class="text-center"
                       style="font-size: 15px; font-weight: 600"
                     >
+                      Forgot Password?
+                      <span class="text-link" @click="step+=3"
+                        >Reset</span
+                      >
+                    </p>
+                    <p
+                      class="text-center"
+                      style="font-size: 15px; font-weight: 600"
+                    >
                       Don't have an account?
                       <span class="text-link" @click="step++"
                         >Register Here</span
@@ -194,6 +203,56 @@
                 </p>
               </v-card-text>
             </v-window-item>
+            <v-window-item :value="4">
+              <v-row>
+                <v-col cols="12">
+                  <v-card-text>
+                    <h5
+                      class="
+                        text-center text-h6
+                        font-weight-bold
+                        text--accent-3
+                        card-height
+                        font-primary
+                      "
+                    >
+                      Reset Password
+                    </h5>
+                    <h4></h4>
+                    <v-form @submit.prevent="reset" class="px-4">
+                      <label>Email</label>
+                      <v-text-field
+                        cols="12"
+                        v-model="email"
+                        type="email"
+                        outlined
+                        dense
+                      ></v-text-field>
+                      <p>{{ errors }}</p>
+                      <div class="text-center mb-3">
+                        <v-btn
+                          type="submit"
+                          block
+                          elevation="0"
+                          color="primary"
+                        >
+                          Reset
+                        </v-btn>
+                      </div>
+                    </v-form>
+                  </v-card-text>
+                  <v-card-text>
+                    <p
+                  class="text-center"
+                  style="font-size: 15px; font-weight: 600"
+                >
+                  Remember Password?
+                  <span class="text-link" @click="step -= 3">Sign In</span>
+                </p>
+                  </v-card-text>
+                </v-col>
+              </v-row>
+            </v-window-item>
           </v-window>
         </v-card>
 
@@ -267,7 +326,7 @@ export default {
                   }
                 );
             }
-
+            user.user.sendEmailVerification()
             db.collection("users")
               .doc(user.user.uid)
               .set({
@@ -280,7 +339,7 @@ export default {
               })
               .then(() => {
                 console.log("document written");
-                this.text = "Successfull Created Account!";
+                this.text = "Successfull Created Account!go to your email to verify your email";
                 this.snackbar = true;
               })
               .catch((error) => {
@@ -305,6 +364,7 @@ export default {
           this.text = "Successfull Loged in!";
           this.snackbar = true;
           sessionStorage.setItem("user_id", user.user.uid);
+          sessionStorage.setItem("shop_name", user.user.displayName);
           this.$router.push("/products");
         })
         .catch((error) => {
@@ -325,6 +385,21 @@ export default {
           }
         });
     },
+    
+   reset() {
+      var auth = firebase.auth();
+      var emailAdress = this.email
+
+      auth.sendPasswordResetEmail(emailAdress).then(() => {
+        this.step = 1
+        this.text = "Email sent!";
+        this.snackbar = true;
+      }).catch(error => {
+        console.log(error);
+        this.errors = error
+      });
+    
+      },
   },
 };
 </script>

@@ -35,7 +35,7 @@
                       required
                       :rules="inputRules"
                     ></v-text-field>
-                    <vue-editor
+                    <vue-editor 
                       class="pb-1"
                       v-model="editedItem.description"
                       required
@@ -105,6 +105,7 @@
                 </v-row>
               </v-container>
               </v-form>
+              {{error}}
 
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -158,6 +159,17 @@
         </v-btn>
       </template>
     </v-snackbar>
+
+    <v-snackbar v-model="snackbar2" shaped color="pink darken-1"
+      dark right top>
+      <v-icon>{{ icon }}</v-icon> {{ text2 }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="" text v-bind="attrs" @click="snackbar2 = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -176,7 +188,10 @@ export default {
     dialog: false,
     dialogDelete: false,
     snackbar: false,
+    snackbar2: false,
     text: "",
+    error: "",
+    text2: "",
     content: "<h1>Some initial content</h1>",
     icon: "mdi-checkbox-marked-circle",
     inputRules: [(v) => v.length >= 3 || "fill all"],
@@ -188,6 +203,7 @@ export default {
         value: "name",
       },
 
+      { text: "Images", value: `images.length` },
       { text: "Currency", value: "currency" },
       { text: "Quantity", value: "quantity" },
       { text: "Price", value: "price" },
@@ -206,6 +222,7 @@ export default {
       price: "",
       category: "",
       images: [],
+      
     },
     defaultItem: {
       name: "",
@@ -217,6 +234,7 @@ export default {
       images: [],
     },
     activeItem: null,
+    imageSize: '',
   }),
 
   components: {
@@ -265,6 +283,9 @@ export default {
           (snapshot) => {},
           (error) => {
             // Handle unsuccessful uploads
+            console.log("Failed to Add Image!");
+            this.text = "Failed to Add Image!";
+            this.snackbar = true;
           },
           () => {
             // Handle successful uploads on complete
@@ -273,6 +294,9 @@ export default {
               this.editedItem.images.push(downloadURL);
               // console.log('File available at', downloadURL);
               console.log("File available at", this.editedItem.images);
+              console.log("Image successfully Added!");
+              this.text = "Image successfully Added!";
+              this.snackbar = true;
             });
           }
         );
@@ -464,7 +488,9 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.products[this.editedIndex], this.editedItem);
       } else {
-        db.collection("products")
+        if(firebase.auth().currentUser.emailVerified ) {
+          if(this.editedItem.images.length) {
+            db.collection("products")
           .add(product)
           .then(() => {
             console.log("added to db");
@@ -480,7 +506,17 @@ export default {
             this.text = "sucessfully added to db";
             this.snackbar = true;
           });
+          }
+          else {
+            this.text2 = "Add atleast one image";
+            this.snackbar2 = true;
+          }
       }
+      else {
+        this.text2 = "Failed to create product, Verify Your email first";
+        this.snackbar2 = true;
+      }
+        }
 
       this.close();
       }

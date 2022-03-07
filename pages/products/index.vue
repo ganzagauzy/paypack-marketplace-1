@@ -274,8 +274,9 @@ export default {
     },
     shareUrl() {
       const uid = sessionStorage.getItem("user_id");
+      const name = sessionStorage.getItem("shop_name");
       console.log(uid);
-      var link = document.location.origin + "/stores" + `/${uid}/`;
+      var link = document.location.origin + "/stores" + `/${name}/`;
       console.log(link);
       const share_link = link;
       console.log(share_link);
