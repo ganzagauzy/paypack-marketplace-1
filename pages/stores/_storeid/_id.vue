@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container class="py-10">
-      <div class="mb-8" v-for="(product, index) in products" :key="index">
+      <div class="" v-for="(product, index) in products" :key="index">
         <v-btn
           :style="{ backgroundColor: prodBackgroundColor }"
           :to="{ name: 'stores-storeid', params: { storeid: product.shopname } }"
@@ -9,6 +9,7 @@
         >
           Back
         </v-btn>
+        <h2 class="py-1">{{product.name}}</h2>
       </div>
       <v-row>
         <v-col cols="12" md="7">
@@ -60,6 +61,10 @@
               {{ product.price }} {{ product.currency }}
             </div>
             <div class="mb-4">
+              <h4>Size</h4>
+              {{ product.size }} 
+            </div>
+            <div class="mb-1">
               <h4 class="mb-2">Quantity</h4>
               <v-text-field
                 v-model="nproducts"
@@ -69,7 +74,7 @@
               ></v-text-field>
             </div>
           </div>
-          <v-btn color="primary" elevation="0" block x-large class="mt-2"
+          <v-btn color="primary" elevation="0" block x-large class="mt-1"
             >Buy Now</v-btn
           >
         </v-col>

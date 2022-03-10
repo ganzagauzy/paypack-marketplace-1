@@ -117,7 +117,7 @@
                       params: { id: product.id },
                     }"
                   >
-                    <v-card flat class="mx-auto" width="255">
+                    <v-card flat class="mx-auto" width="205">
                       <v-img :src="product.images[0]" contain height="200px" class="imgBox"></v-img>
 
                       <div class="card-subtitle">

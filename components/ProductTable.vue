@@ -94,6 +94,13 @@
                       dense
                     ></v-text-field>
                     <v-text-field
+                      label="Size*"
+                      v-model="editedItem.size"
+                      type="number"
+                      outlined
+                      dense
+                    ></v-text-field>
+                    <v-text-field
                       label="Category*"
                       v-model="editedItem.category"
                       outlined
@@ -207,6 +214,7 @@ export default {
       { text: "Currency", value: "currency" },
       { text: "Quantity", value: "quantity" },
       { text: "Price", value: "price" },
+      { text: "Size", value: "size" },
       { text: "Category", value: "category" },
 
       { text: "Actions", value: "actions", sortable: false },
@@ -220,6 +228,7 @@ export default {
       currency: "",
       quantity: "",
       price: "",
+      size: "",
       category: "",
       images: [],
       
@@ -230,6 +239,7 @@ export default {
       currency: "",
       quantity: "",
       price: "",
+      size: "",
       category: "",
       images: [],
     },
@@ -421,6 +431,7 @@ export default {
           currency: this.editedItem.currency,
           quantity: this.editedItem.quantity,
           price: this.editedItem.price,
+          size: this.editedItem.size,
           category: this.editedItem.category,
           images: this.editedItem.images,
         })
@@ -442,6 +453,7 @@ export default {
           currency: this.editedItem.currency,
           quantity: this.editedItem.quantity,
           price: this.editedItem.price,
+          size: this.editedItem.size,
           category: this.editedItem.category,
           images: this.editedItem.images,
         })
@@ -459,6 +471,7 @@ export default {
         (product.currency = this.editedItem.currency),
         (product.quantity = this.editedItem.quantity),
         (product.price = this.editedItem.price);
+        (product.size = this.editedItem.size);
       product.category = this.editedItem.category;
       product.images = this.editedItem.images;
 
@@ -480,6 +493,7 @@ export default {
         (product.currency = this.editedItem.currency),
         (product.quantity = this.editedItem.quantity),
         (product.price = this.editedItem.price);
+        (product.size = this.editedItem.size);
       product.category = this.editedItem.category;
       product.images = this.editedItem.images;
       product.userId = firebase.auth().currentUser.uid;
