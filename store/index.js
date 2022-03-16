@@ -1,9 +1,11 @@
+let cart = window.localStorage.getItem('mycart')
+
 export const state = () => ({
 
   // auth
   user: null,
-  
-  products: [],
+  orders: [],
+  Cart: cart ? JSON.parse(cart) :[] ,
   
 })
 
@@ -15,8 +17,8 @@ export const getters = {
     return state.user
   },
   
-  products(state) {
-    return state.products
+  orders(state) {
+    return state.Cart
   },
 
   
@@ -30,8 +32,23 @@ export const mutations = {
     state.user = user
   },
   
-  setProducts(state, data) {
-    state.products = data
+  fecthProduct(state, product) {
+    let found = state.Cart.find(item => item.id == product.id)
+    if(found) {
+    }
+    else {
+      state.Cart.push(product)
+    }
+    this.commit('saveData');
+    
+  },
+  saveData (state) {
+    window.localStorage.setItem('mycart', JSON.stringify(state.Cart))
+  },
+  removeData (state,product) {
+    let index = state.Cart.indexOf(product);
+    state.Cart.splice(index,1);
+    this.commit('saveData');
   },
 
  
@@ -60,12 +77,8 @@ export const actions = {
       })
     }
   },
-
-
-
-  
-  fetchProducts(vuexContext, products) {
-    vuexContext.commit('setProducts', products)
-  },
+  // fetchProduct(vuexContext, product) {
+  //   vuexContext.commit('setProduct', product)
+  // },
 
 }

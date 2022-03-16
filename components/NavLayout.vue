@@ -28,6 +28,22 @@
                 <span class="nav_name">Stores</span>
               </NuxtLink>
             </li>
+            <!-- <li class="nav_item">
+              <v-btn text @click.stop="rightDrawer = !rightDrawer" class="nav_link">
+                <v-icon class="nav_icon">mdi-cart</v-icon>
+                <span class="nav_name"><v-icon>mdi-cart</v-icon></span>
+              </v-btn>
+            </li> -->
+            <!-- <li>
+              <v-btn
+                color=""
+                text
+                dark
+                @click.stop="drawer = !drawer"
+              >
+                Toggle
+              </v-btn>
+            </li> -->
           </ul>
         </div>
 
@@ -38,11 +54,66 @@
         </div>
       </nav>
     </header>
+     <div>
+       <v-navigation-drawer
+      v-model="rightDrawer"
+      :right="right"
+      color="#d1dbec"
+      temporary
+      fixed
+      class="pt-16"
+    >
+      <v-list class="">
+        <v-list-item @click.native="right = !right">
+          <v-list-item-action>
+            <v-icon light>
+              mdi-repeat
+            </v-icon>
+          </v-list-item-action>
+          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
+        </v-list-item>
+        <v-list-item v-for="(product, index) in this.$store.state.Cart" :key="index">
+            <v-list-item-avatar>
+              <v-img :src="product.images[0]"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>{{product.name}}     <v-btn text 
+              @click="$store.commit('removeData', product)"><v-icon>mdi-delete</v-icon></v-btn> </v-list-item-title>
+              {{product.id}}
+              {{product.price}} <br>
+              {{product.nproducts}} <br>
+              {{product.price * product.nproducts}}
+            </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-divider></v-divider>
+        
+        <v-divider></v-divider>
+        <div class="checkout-button">
+          <v-list-item-action>
+            <v-btn color="primary" class="">Checkout</v-btn>
+        </v-list-item-action>
+        </div>
+
+      </v-list>
+    </v-navigation-drawer>
+     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+      return {
+        rightDrawer: false,
+        right: true,
+        items: [
+          { title: 'Home', icon: 'mdi-view-dashboard' },
+          { title: 'About', icon: 'mdi-forum' },
+        ],
+      }
+    },
   methods: {
     scrollHeader() {
       const header = document.querySelector("#header");
@@ -225,6 +296,20 @@ a.nuxt-link-exact-active {
     bottom: -0.75rem;
   }
 }
+.checkout-button {
+  padding-top: 50px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+// .checkout-btn {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background: #da9412;
+//   padding: 10px 0;
+// }
 
 // larger device
 @media screen and(min-width:1024px) {

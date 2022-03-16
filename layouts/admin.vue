@@ -100,6 +100,11 @@ export default {
           to: "/products",
         },
         {
+          icon: "mdi-cart-variant",
+          title: "Orders",
+          to: "/orders",
+        },
+        {
           icon: "mdi-shopping",
           title: "Stores",
           to: "/stores",

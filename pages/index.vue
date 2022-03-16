@@ -9,12 +9,12 @@
             { opacity: 1, x: 0, duration: 2 },
           ]"
         >
-          <h1>You bring <span>your merch</span> <br />we bring the platform</h1>
+          <h1>You bring <span>your merch</span> <br />we provide the platform</h1>
           <p>
             Paypack marketplace is paypack’s answer to the current e-commerce chaos. 
             It gives you all the advantages of selling online without the hassle of 
             putting up a new domain and all the marketing that goes into it. 
-            You bring your merch we bring the platform
+            
           </p>
           <NuxtLink to="/about" class="btn-store">Explore Now</NuxtLink>
         </div>

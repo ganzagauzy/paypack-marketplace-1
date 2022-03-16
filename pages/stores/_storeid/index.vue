@@ -4,21 +4,29 @@
     <div class="header-store">
       <div class="home">
         <!-- search box -->
+        
 
         <div class="row">
+          
           <div class="col">
+            
             <v-btn text outlined v-if="products[0]">
               {{ products[0].shopname }}'s store
             </v-btn>
+            
           </div>
           
           <div class="col-auto search-btn">
-            <v-btn
+            <div class="row">
+            <div class="col-auto ">
+              <v-btn
           icon
           v-show="searchInput != ''"
           class="button-btn"
           @click="clearSearch"
           ><v-icon color="#da9412">mdi-close</v-icon></v-btn>
+          
+          
             <v-text-field
               v-model.lazy="searchInput"
               label="Search Here"
@@ -29,10 +37,15 @@
               @keyup.enter="$fetch"
               @keypress.enter="$fetch"
             ></v-text-field>
-            
-            
-            
-            
+            </div>
+            <div class="col right">
+              <v-btn icon text  @click.stop="rightDrawer = !rightDrawer" v-show="this.$store.state.Cart.length>0">
+                <!-- <v-icon class="nav_icon">mdi-cart</v-icon> -->
+                <v-icon outlined class="text-h3 " color="#da9412">mdi-cart</v-icon>
+                <span  class=" text-color"> {{this.$store.state.Cart.length}} </span>
+              </v-btn>
+            </div>
+            </div>
           </div>
           
         </div>
@@ -118,7 +131,7 @@
                     }"
                   >
                     <v-card flat class="mx-auto" width="205">
-                      <v-img :src="product.images[0]" contain height="200px" class="imgBox"></v-img>
+                      <v-img :src="product.images[0]"  height="205px" class="imgBox"></v-img>
 
                       <div class="card-subtitle">
                         <v-card-title>
@@ -153,7 +166,7 @@
                     }"
                   >
                     <v-card flat class="mx-auto imgBox" width="205" >
-                      <v-img :src="product.images[0]" contain height="205px" ></v-img>
+                      <v-img :src="product.images[0]" cover height="205px" ></v-img>
 
                       <div class="card-subtitle">
                         <v-card-title>
@@ -195,6 +208,60 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae mollitia, assumenda porro sapiente esse reprehenderit aliquid asperiores enim ut veniam.</p>
       </div>
     </div>
+    <div>
+       <v-navigation-drawer
+      v-model="rightDrawer"
+      :right="right"
+      color="#d1dbec"
+      temporary
+      fixed
+      class="pt-16"
+    >
+      <v-list class="">
+        <v-list-item @click.stop="rightDrawer = !rightDrawer">
+          <v-list-item-action>
+            <v-icon light>
+              mdi-close
+            </v-icon>
+          </v-list-item-action>
+          <v-list-item-title>Leave drawer (click me)</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click.native="right = !right">
+          <v-list-item-action>
+            <v-icon light>
+              mdi-repeat
+            </v-icon>
+          </v-list-item-action>
+          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
+        </v-list-item>
+        <v-list-item v-for="(product, index) in this.$store.state.Cart" :key="index">
+            <v-list-item-avatar>
+              <v-img :src="product.images[0]"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title class="">{{product.name}}     <v-btn text 
+              @click="$store.commit('removeData', product)"><v-icon>mdi-delete</v-icon></v-btn> </v-list-item-title>
+              
+              <small><strong>Price: </strong>{{product.price}}</small>
+              <small><strong>Quantity: </strong>{{product.nproducts}}</small>
+              <small><strong>Total Price: </strong>{{product.price*product.nproducts}}</small>
+            </v-list-item-content>
+               
+        </v-list-item>
+        
+        <v-divider></v-divider>
+        
+        <v-divider></v-divider>
+        <div class="checkout-button">
+          <v-list-item-action>
+            <v-btn color="primary" >Checkout</v-btn>
+        </v-list-item-action>
+        </div>
+
+      </v-list>
+    </v-navigation-drawer>
+     </div>
   </div>
 </template>
 
@@ -205,6 +272,7 @@ import "firebase/compat/firestore";
 export default {
   head() {
     return {
+      
       title: "Single Store",
       meta: [
         {
@@ -217,6 +285,8 @@ export default {
   },
   data() {
     return {
+      rightDrawer: false,
+      right: true,
       products: [],
       userinfo: [],
       size: "",
@@ -652,8 +722,24 @@ a {
 }
 .button-btn {
   position: absolute;
-  left: 95%;
+  left: 64%;
+  
   color: #da9412;
 }
+.checkout-button {
+  padding-top: 50px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.text-color {
+  position: absolute;
+  padding-bottom: 15px;
+}
+.right {
+  padding-left: 50px;
+}
+
 </style>
 
