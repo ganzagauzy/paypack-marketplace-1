@@ -15,12 +15,7 @@
               </NuxtLink>
             </li>
 
-            <li class="nav_item">
-              <NuxtLink to="/about" class="nav_link active_link">
-                <v-icon class="nav_icon">mdi-information</v-icon>
-                <span class="nav_name">About</span>
-              </NuxtLink>
-            </li>
+            
 
             <li class="nav_item">
               <NuxtLink to="/stores" class="nav_link">
@@ -48,7 +43,7 @@
         </div>
 
         <div class="right">
-          <v-btn to="/auth/login_signup" elevation="0" color="primary">
+          <v-btn to="/auth/login_signup"  elevation="0" color="primary">
             Signin
           </v-btn>
         </div>

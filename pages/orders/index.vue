@@ -1,10 +1,6 @@
 <template>
   <div>
-      <ul>
-        <li v-for="order in Myorders" :key="order.id">
-          <p>{{order}} {{order.userId}}</p>
-        </li>
-      </ul>
+      
       <div>
         <orders />
       </div>
@@ -26,7 +22,9 @@ export default {
   },
 
 
-    layout: "admin",
+  layout: "admin",
+  middleware: "auth",
+
   //   computed: {
   //   orders() {
   //     return this.$store.getters.orders;

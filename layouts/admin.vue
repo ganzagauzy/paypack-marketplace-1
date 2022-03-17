@@ -48,9 +48,9 @@
         <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
       </v-btn>
 
-      <v-btn class="mr-md-16" icon @click.stop="fixed = !fixed">
+      <!-- <v-btn class="mr-md-16" icon @click.stop="fixed = !fixed">
         <v-icon>mdi-minus</v-icon>
-      </v-btn>
+      </v-btn> -->
 
       <div v-text="title" class="" />
       <v-spacer />
@@ -58,20 +58,31 @@
       <div class="">
         <v-divider></v-divider>
 
-        <v-btn v-if="user" @click="signout" color="dark" dark>signout</v-btn>
+        <v-btn v-if="user" @click="signout" color="" dark>signout</v-btn>
 
         <!-- <v-btn v-if="!user" @click="signin" color="dark" dark>signin</v-btn> -->
       </div>
     </v-app-bar>
-    <v-main>
-      <v-container>
+    <v-main class="header-store accent">
+      <v-container class="header-store accent">
         <Nuxt />
       </v-container>
     </v-main>
 
-    <v-footer class="text-center" :absolute="!fixed" app color="">
-      <span class="text-center">&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer class="text-center text-white py-5 px-7 custom-footer" :absolute="!fixed" app dark color="">
+      <span class="text-center">&copy; {{ new Date().getFullYear() }}
+         <a
+          style="font-size: 20px"
+          class="font-weight-bold text-decoration-none"
+          href="https://paypack.rw/"
+          target="_blank"
+          >Paypack
+        </a>
+      </span>
     </v-footer>
+    
+    
+    
   </v-app>
 </template>
 

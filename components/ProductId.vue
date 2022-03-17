@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div class="py-5">
-      <v-card>
+  <div class="header-store accent">
+    <div class="py-5 header-store accent">
+      <v-card class="header-store accent" color="#111">
         <v-toolbar flat color="#d1dbec">
           <v-toolbar-title class="">
             <nuxt-link to="/products">Product</nuxt-link>-{{
@@ -21,120 +21,19 @@
               </v-btn>
         </v-toolbar>
 
-        <v-tabs color="dark">
-          <v-tab>
-            <v-icon left> </v-icon>
-            Orders
-          </v-tab>
+        <v-tabs class="header-store accent" color="#111" >
+          
 
-          <v-tab>
+          <v-tab class="">
             <v-icon left> </v-icon>
             Customise
           </v-tab>
-          <v-tab>
+          <v-tab class="">
             <v-icon left> </v-icon>
             Delivery
           </v-tab>
-          <v-tab>
-            <v-icon left> </v-icon>
-            After Purchase
-          </v-tab>
-
-          <!-- tab1 start -->
-          <v-tab-item class="py-5">
-            <v-row>
-              <v-col>
-                <v-row>
-                  <v-col md="">
-                    <div class="text-cetern">
-                      <v-menu
-                        v-model="menu5"
-                        :close-on-content-click="false"
-                        :nudge-width="200"
-                        offset-y
-                      >
-                        <template v-slot:activator="{ on , attrs }">
-                          <v-btn
-                            color=""
-                            style="text-transform: none"
-                            right
-                            v-bind="attrs"
-                            v-on="on"
-                          >
-                            Filter
-                          </v-btn>
-                        </template>
-
-                        <v-card>
-                          <div class="py-5 px-5">
-                            Status
-                            <v-select
-                              :items="items"
-                              label=""
-                              dense
-                              outlined
-                            ></v-select>
-                            Order Date Delivery Date
-                            <v-select
-                              :items="items1"
-                              label=""
-                              dense
-                              outlined
-                            ></v-select>
-                          </div>
-
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-
-                            <v-btn text @click="menu = false"> Reset </v-btn>
-                            <v-btn
-                              color="#d1dbec"
-                              style="text-transform: none"
-                              @click="menu = false"
-                            >
-                              Filter
-                            </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-menu>
-                    </div>
-                  </v-col>
-                  <v-col md="6" cols="12"> </v-col>
-                  <v-spacer></v-spacer>
-                  <v-col md="">
-                    <v-btn style="text-transform: none">Export</v-btn>
-                  </v-col>
-                </v-row>
-                <div class="bottom">
-                  <h4 class="text-center">No orders yet</h4>
-                  <p class="px-5">
-                    This is where you'll see and manage orders as they come in.
-                  </p>
-                </div>
-              </v-col>
-
-              <v-col cols="12" md="6" class="bg-dark">
-                <div class="px-5 py-16">
-                  <p>Unit solid</p>
-                  {{ movie.vote_average }}
-                  <p class="py-5">Revenue</p>
-                  RWF {{ movie.revenue }}
-
-                  <div
-                    v-for="(product, index) in products"
-                    :key="index"
-                    class="movie"
-                  >
-                    <p>{{ product.id }}</p>
-                  </div>
-                </div>
-              </v-col>
-            </v-row>
-          </v-tab-item>
-          <!-- tab1 end -->
-
-          <!-- tab3 start -->
-          <v-tab-item class="py-5">
+          
+          <v-tab-item class="py-5 header-store accent">
             <v-row>
               <v-col cols="12" sm="6" md="7">
                 <v-card
@@ -179,7 +78,7 @@
                       :src="`${image}`"
                       max-height="400"
                       max-width="400"
-                      cover
+                      contain
                     ></v-carousel-item>
                   </v-carousel>
 
@@ -188,8 +87,8 @@
                 </div> -->
                 </v-card>
               </v-col>
-              <v-col cols="12" sm="6" md="5">
-                <v-card>
+              <v-col cols="12" sm="6" md="5 header-store accent">
+                <v-card class="header-store accent">
                   <v-container>
                     <h4>Description</h4>
                     <br />
@@ -228,9 +127,9 @@
           <!-- tab3 end -->
 
           <!-- tab4 start -->
-          <v-tab-item class="py-5">
-            <v-row class="py-5">
-              <v-card class="py-5 px-5">
+          <v-tab-item class="py-5 header-store accent">
+            <v-row class="py-5 header-store accent">
+              <v-card class="py-5 px-5 header-store accent">
                 <v-container>
                   <h4>Delivery Fields</h4>
                   <v-container fluid>
@@ -275,80 +174,7 @@
           <!-- tab4 end -->
 
           <!-- tab5 start -->
-          <v-tab-item class="py-5">
-            <v-row class="py-5">
-              <v-card class="py-5 px-5">
-                <v-row>
-                  <v-col cols="12" sm="10" md="10">
-                    <h4>Lorem ipsum dolor sit.</h4>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-                  </v-col>
-                  <v-spacer />
-                  <v-col cols="12" sm="2" md="2">
-                    <v-tooltip top>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon color="" v-bind="attrs" v-on="on">
-                          mdi-map
-                        </v-icon>
-                      </template>
-                      <span>Tooltip11</span>
-                    </v-tooltip>
-                  </v-col>
-                </v-row>
-
-                <v-row>
-                  <v-col cols="12" sm="10" md="10">
-                    <h4>Lorem ipsum dolor sit.</h4>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-                  </v-col>
-                  <v-spacer />
-                  <v-col cols="12" sm="2" md="2">
-                    <v-tooltip top>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon color="" v-bind="attrs" v-on="on">
-                          mdi-map
-                        </v-icon>
-                      </template>
-                      <span>Tooltip2222</span>
-                    </v-tooltip>
-                  </v-col>
-                </v-row>
-
-                <v-row>
-                  <v-col cols="12" sm="10" md="10">
-                    <h4>Lorem ipsum dolor sit.</h4>
-                    <div
-                      v-for="(product, index) in products"
-                      :key="index"
-                      class="movie"
-                    >
-                      <p>{{ product.id }}</p>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-                  </v-col>
-                  <v-spacer />
-                  <v-col cols="12" sm="2" md="2">
-                    <v-tooltip top>
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-icon color="" v-bind="attrs" v-on="on">
-                          mdi-map
-                        </v-icon>
-                      </template>
-                      <span>Tooltip333</span>
-                    </v-tooltip>
-                  </v-col>
-                </v-row>
-
-                <v-btn class="py-5" color="#d1dbec"> Edit </v-btn>
-              </v-card>
-            </v-row>
-          </v-tab-item>
+         
           <!-- tab5 end -->
         </v-tabs>
       </v-card>
@@ -638,6 +464,9 @@ a {
   width: 30px;
   border-radius: 50%;
   cursor: pointer;
+}
+a {
+  color: #111;
 }
 </style>
 

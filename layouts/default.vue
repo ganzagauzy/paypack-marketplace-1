@@ -17,6 +17,7 @@
           style="font-size: 20px"
           class="font-weight-bold text-decoration-none"
           href="https://paypack.rw/"
+          target="_blank"
           >Paypack
         </a>
       </span>
@@ -93,4 +94,5 @@ a.nuxt-link-exact-active {
     margin-bottom: 64px;
   }
 }
+
 </style>

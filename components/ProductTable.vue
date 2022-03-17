@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="header-store accent">
     <v-data-table
       :headers="headers"
       :items="products"
       sort-by="price"
-      class="elevation-1 py-5"
+      class="elevation-1 py-5 header-store accent"
     >
       <template v-slot:top>
-        <v-toolbar flat>
+        <v-toolbar flat class="header-store accent">
           <v-toolbar-title></v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
@@ -157,17 +157,19 @@
       </template>
     </v-data-table>
 
-    <v-snackbar v-model="snackbar" shaped color="success" right top>
+ 
+
+    <v-snackbar v-model="snackbar" shaped color="primary"
+      dark right top>
       <v-icon>{{ icon }}</v-icon> {{ text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn color="success" text v-bind="attrs" @click="snackbar = false">
+        <v-btn color="" text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>
     </v-snackbar>
-
-    <v-snackbar v-model="snackbar2" shaped color="pink darken-1"
+    <v-snackbar v-model="snackbar2" shaped color="primary"
       dark right top>
       <v-icon>{{ icon }}</v-icon> {{ text2 }}
 

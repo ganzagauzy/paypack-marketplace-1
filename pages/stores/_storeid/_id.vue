@@ -149,7 +149,7 @@ export default {
       nproducts: "",
       product: "",
 
-      prodBackgroundColor: "#111",
+      prodBackgroundColor: "#da9412",
     };
   },
   components: {},

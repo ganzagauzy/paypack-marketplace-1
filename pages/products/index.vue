@@ -52,7 +52,7 @@
     </v-card>
 
   </div> -->
-
+    <div class="header-store accent">
     <v-card>
       <v-toolbar fixed color="#d1dbec">
         <v-toolbar-title class="d-flex justify-lg-space-between">
@@ -63,7 +63,7 @@
         </v-toolbar-title>
       </v-toolbar>
 
-      <v-tabs>
+      <v-tabs color="">
         <v-tab>
           <v-icon left> mdi-grid </v-icon>
         </v-tab>
@@ -71,9 +71,9 @@
           <v-icon left> mdi-playlist-edit </v-icon>
         </v-tab>
 
-        <v-tab-item>
+        <v-tab-item class="header-store accent">
           <v-card flat>
-            <div class="home">
+            <div class="home header-store accent">
               <!-- Hero -->
               <!-- <Hero /> -->
 
@@ -104,90 +104,60 @@
 
               <!-- Movies -->
               <div class="container products">
-                <!-- Now streaming -->
-                <div id="product-grid" class="products-grid">
-                  <div
-                    v-for="(product, index) in products"
-                    :key="index"
-                    class="product"
-                  >
-                    <NuxtLink
-                      :to="{
+
+                <div  class="d-flex flex-wrap justify-content-start">
+                <div
+                  v-for="(product, index) in products"
+                  :key="index"
+                  class="product col d-flex"
+                  v-gsap.fromTo="[
+                    { opacity: 0, y: 50 },
+                    { opacity: 1, y: 0, duration: 1 },
+                  ]"
+                >
+                  <NuxtLink
+                    :to="{
                         name: 'products-productid',
                         params: { productid: product.id },
                       }"
-                    >
-                      <v-hover v-slot="{ hover }">
-                        <v-card
-                          class="mx-auto"
-                          color="grey lighten-4"
-                          max-width="600"
-                        >
-                          <div class="product-img">
-                            <v-img
-                              :aspect-ratio="16 / 14"
-                              :src="product.images[0]"
-                            >
-                              <v-expand-transition>
-                                <div
-                                  v-if="hover"
-                                  class="
-                                    d-flex
-                                    transition-fast-in-fast-out
-                                    blue
-                                    darken-2
-                                    v-card--reveal
-                                    text-h3
-                                    white--text
-                                  "
-                                  style="height: 100%"
-                                >
-                                  More
-                                </div>
-                              </v-expand-transition>
-                            </v-img>
-                          </div>
+                  >
+                    <v-card flat class="mx-auto imgBox" width="220" >
+                      <v-img :src="product.images[0]" cover height="205px" ></v-img>
 
-                          <!-- <p class="text-h5 font-weight-light orange--text mb-2 title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span></p> -->
-                          <div class="info1 py-1 px-2">
-                            <!-- <p class="title text-sm-h6">{{ product.name.slice(0, 25) }}  <span v-if="product.name.length >25">...</span>
-                        </p> -->
-                          </div>
-                          <p
-                            class="
-                              text-h6
-                              px-2
-                              py-1
-                              font-weight-light
-                              blue--text
-                              mb-2
-                            "
-                          >
-                            {{ product.name.slice(0, 25) }}
-                            <span v-if="product.name.length > 25">...</span>
-                          </p>
-                        </v-card>
-                      </v-hover>
-                    </NuxtLink>
-                  </div>
+                      <div class="card-subtitle">
+                        <v-card-title>
+                          {{ product.name }}
+                        </v-card-title>
+
+                        <v-card-subtitle>
+                          {{ product.price }} {{ product.currency }}
+                        </v-card-subtitle>
+                      </div>
+                    </v-card>
+                  </NuxtLink>
                 </div>
+              </div>
+
+                <!-- Now streaming -->
+                
               </div>
             </div>
           </v-card>
         </v-tab-item>
-        <v-tab-item>
-          <v-card flat>
+        <v-tab-item class="header-store accent">
+          <v-card flat class="header-store accent">
             <product-table />
           </v-card>
         </v-tab-item>
       </v-tabs>
     </v-card>
+    </div>
 
-    <v-snackbar v-model="snackbar" shaped color="success" right top>
+    <v-snackbar v-model="snackbar" shaped color="primary" right top>
       <v-icon>{{ icon }}</v-icon> {{ text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn color="success" text v-bind="attrs" @click="snackbar = false">
+        <v-btn color="s" text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>
@@ -399,96 +369,10 @@ export default {
     padding-top: 120px;
     align-items: flex-start;
   }
-  .search {
-    display: flex;
-    padding: 32px 16px;
-    input {
-      max-width: 350px;
-      width: 100%;
-      color: #111;
-      padding: 5px 5px;
-      font-size: 14px;
-      border-bottom: 1px solid #111;
-
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-  .products {
-    padding: 32px 16px;
-    .products-grid {
-      display: grid;
-      column-gap: 32px;
-      row-gap: 64px;
-      grid-template-columns: 1fr;
-      @media (min-width: 500px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @media (min-width: 750px) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      @media (min-width: 1100px) {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .product {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        .product-img {
-          position: relative;
-          overflow: hidden;
-          &:hover {
-            .overview {
-              transform: translateY(0);
-            }
-          }
-          img {
-            display: block;
-            width: 100%;
-            height: 100%;
-          }
-          .review {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            background-color: #c92502;
-            color: #fff;
-            border-radius: 0 0 16px 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-              0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          }
-          .overview {
-            line-height: 1.5;
-            position: absolute;
-            bottom: 0;
-            background-color: rgba(201, 38, 2, 0.9);
-            padding: 12px;
-            color: #fff;
-            transform: translateY(100%);
-            transition: 0.3s ease-in-out all;
-          }
-        }
-        .info1 {
-          margin-top: auto;
-          .title {
-            margin-top: 8px;
-            color: #111;
-            font-size: 20px;
-          }
-          .release {
-            margin-top: 8px;
-            color: #c9c9c9;
-          }
-        }
-      }
-    }
-  }
+}
+.card-subtitle {
+  //  background: radial-gradient(#fff, #d1dbec);
+  background: radial-gradient(rgb(241, 241, 241), #d1dbec);
 }
 a {
   text-decoration: none;

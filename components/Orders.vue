@@ -3,11 +3,12 @@
     :headers="headers"
     :items="orders"
     sort-by="calories"
-    class="elevation-1"
+    class="elevation-1 header-store accent"
   >
     <template v-slot:top>
       <v-toolbar
         flat
+        class="header-store accent"
       >
         <v-toolbar-title>Requested Orders</v-toolbar-title>
         <v-divider
@@ -131,13 +132,13 @@
         class="mr-2"
         @click="editItem(item)"
       >
-        mdi-pencil
+        mdi-check-circle-outline
       </v-icon>
       <v-icon
         small
         @click="deleteItem(item)"
       >
-        mdi-delete
+        mdi-cancel
       </v-icon>
     </template>
     
@@ -157,7 +158,7 @@
         },
         { text: 'Quantity', value: 'nproducts' },
         { text: 'Price', value: 'price' },
-        { text: 'Total Price', value: `price*nproducts` },
+        { text: 'Total Price', value: 'total' },
         { text: 'Status', value: '' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
@@ -169,6 +170,7 @@
         currency: "",
         quantity: "",
         nproducts: "",
+        total: "",
         price: "",
         size: "",
         category: "",
@@ -180,6 +182,7 @@
         currency: "",
         quantity: "",
         nproducts: "",
+        total: "",
         price: "",
         size: "",
         category: "",
@@ -205,19 +208,21 @@
     created () {
       this.initialize();
       this.getOrders();
+      
+      
     },
 
     methods: {
         getOrders () {
         const uid = sessionStorage.getItem("user_id");
         console.log(uid);
-        this.orders = this.$store.getters.orders
-        this.orders = this.orders.filter((product, i) => {
-            return (
-                i ==
-                this.orders.findIndex((p) => p.userId == uid)
-            );
-            });
+
+        const items = this.$store.getters.orders;
+           this.orders = items.filter(checkOwner);
+          console.log(this.orders);
+          function checkOwner(item) {
+            return item.userId == uid;
+          }
     },
       initialize () {
         this.orders = []

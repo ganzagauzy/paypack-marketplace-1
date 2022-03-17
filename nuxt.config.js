@@ -122,6 +122,10 @@ export default {
       expoScaleEase: true,
     },
   },
+  loading: {
+    color: '#da9412',
+    height: '3px'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

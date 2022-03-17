@@ -256,12 +256,12 @@
           </v-window>
         </v-card>
 
-        <v-snackbar v-model="snackbar" shaped color="success" right top>
+        <v-snackbar v-model="snackbar" shaped color="primary" right top>
           <v-icon>{{ icon }}</v-icon> {{ text }}
 
           <template v-slot:action="{ attrs }">
             <v-btn
-              color="#DA9412"
+              color=""
               text
               v-bind="attrs"
               @click="snackbar = false"

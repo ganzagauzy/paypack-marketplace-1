@@ -9,17 +9,20 @@
             { opacity: 1, x: 0, duration: 2 },
           ]"
         >
-          <h1>Get A <span>Store</span> <br />For Your Self</h1>
+          <h1>The Simplest WAy <br><span> To Sell</span> <br />Your Products</h1>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis
-            unde, <br />
-            id cum dolorum natus nostrum, itaque eum ab amet modi sapiente
-            dignissimos<br />
-            odio at animi, incidunt voluptatibus. Corrupti, libero iste.
+            Set up your online store now and start selling your products. <br> It is that simple
           </p>
-          <v-btn href="#available-store" elevation="0" color="primary" outlined>
+          <div class="button-nav">
+            <div class="pr-5 pb-5">
+              <v-btn href="#available-store" elevation="0" color="primary" outlined>
             Available Stores
           </v-btn>
+            </div>
+          <div><v-btn nutx to="/auth/login_signup" target=_blank elevation="0" color="primary" outlined>
+            Register Now
+          </v-btn></div>
+          </div>
         </div>
         <div
           class="cols-2 px-2"
@@ -224,5 +227,9 @@ export default {
     padding-top: 50px;
     flex-basis: 100%;
   }
+}
+.button-nav {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
