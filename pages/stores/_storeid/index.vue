@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-container>
+  <v-container class="container">
     <div class="header-store">
       <div class="home">
         <!-- search box -->
@@ -255,7 +255,7 @@
         <v-divider></v-divider>
         <div class="checkout-button">
           <v-list-item-action>
-            <v-btn color="primary" >Checkout</v-btn>
+            <v-btn color="primary" >Buy Nows</v-btn>
         </v-list-item-action>
         </div>
 
@@ -722,7 +722,7 @@ a {
 }
 .button-btn {
   position: absolute;
-  left: 64%;
+  left: 70%;
   
   color: #da9412;
 }
@@ -740,6 +740,13 @@ a {
 .right {
   padding-left: 50px;
 }
+.container{
+@media (min-width: 960px) {
+  max-width: 100%;
+}
+
+}
+
 
 </style>
 
