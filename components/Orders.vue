@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="orders"
-    sort-by="calories"
+    sort-by="price"
     class="elevation-1 header-store accent"
   >
     <template v-slot:top>
@@ -113,9 +113,20 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogDelete1" max-width="500px">
+          <v-card color="#d1dbec">
+            <v-card-title class="">Are you sure you want to approve this item?</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card>
-            <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
+          <v-card color="#d1dbec">
+            <v-card-title class="">Are you sure you want to decline this item?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
@@ -127,10 +138,16 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon
+      <!-- <v-icon
         small
         class="mr-2"
         @click="editItem(item)"
+      >
+        mdi-check-circle-outline
+      </v-icon> -->
+      <v-icon
+        small
+        @click="deleteItem1(item)"
       >
         mdi-check-circle-outline
       </v-icon>
@@ -148,6 +165,7 @@
   export default {
     data: () => ({
       dialog: false,
+      dialogDelete1: false,
       dialogDelete: false,
       headers: [
         {
@@ -159,7 +177,7 @@
         { text: 'Quantity', value: 'nproducts' },
         { text: 'Price', value: 'price' },
         { text: 'Total Price', value: 'total' },
-        { text: 'Status', value: '' },
+        { text: 'Status', value: 'status' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       orders: [],
@@ -171,6 +189,7 @@
         quantity: "",
         nproducts: "",
         total: "",
+        status: "",
         price: "",
         size: "",
         category: "",
@@ -183,6 +202,7 @@
         quantity: "",
         nproducts: "",
         total: "",
+        status: "",
         price: "",
         size: "",
         category: "",
@@ -199,6 +219,9 @@
     watch: {
       dialog (val) {
         val || this.close()
+      },
+      dialogDelete1 (val) {
+        val || this.closeDelete()
       },
       dialogDelete (val) {
         val || this.closeDelete()
@@ -228,12 +251,13 @@
         this.orders = []
       },
 
-      editItem (item) {
+      
+
+      deleteItem1 (item) {
         this.editedIndex = this.orders.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        this.dialog = true
+        this.dialogDelete1 = true
       },
-
       deleteItem (item) {
         this.editedIndex = this.orders.indexOf(item)
         this.editedItem = Object.assign({}, item)
@@ -241,11 +265,12 @@
       },
 
       deleteItemConfirm () {
-        this.orders.splice(this.editedIndex, 1)
+        // this.orders.splice(this.editedIndex, 1)
         this.closeDelete()
       },
 
       close () {
+        this.dialog1 = false
         this.dialog = false
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
@@ -254,6 +279,7 @@
       },
 
       closeDelete () {
+        this.dialogDelete1 = false
         this.dialogDelete = false
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)

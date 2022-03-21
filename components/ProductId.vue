@@ -21,7 +21,7 @@
               </v-btn>
         </v-toolbar>
 
-        <v-tabs class="header-store accent" color="#111" >
+        <v-tabs class="header-store accent" color="" >
           
 
           <v-tab class="">
@@ -179,11 +179,11 @@
         </v-tabs>
       </v-card>
     </div>
-    <v-snackbar v-model="snackbar" shaped color="success" right top>
+    <v-snackbar v-model="snackbar" shaped color="primary" right top>
       <v-icon>{{ icon }}</v-icon> {{ text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn color="success" text v-bind="attrs" @click="snackbar = false">
+        <v-btn color="" text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>

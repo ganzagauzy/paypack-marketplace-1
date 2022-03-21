@@ -210,7 +210,7 @@ export default {
   //     return this.$store.getters.products;
   //   },
   // },
-  middleware: "auth",
+  // middleware: "auth",
 
   // async fetch() {
   //   if(this.searchInput === ''){

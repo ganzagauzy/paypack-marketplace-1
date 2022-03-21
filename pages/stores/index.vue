@@ -1,7 +1,7 @@
 <template>
   <div class="header-store">
-    <v-container>
-      <div class="row">
+    
+      <div class="row px-10">
         <div
           class="cols-2 px-2"
           v-gsap.fromTo="[
@@ -37,7 +37,7 @@
           />
         </div>
       </div>
-      <div class="available-store" id="available-store">
+      <div class="available-store px-10" id="available-store">
         <h1 class="store-title">Available Stores</h1>
         <div class="buttons">
           <div v-for="(store, i) in stores" :key="i">
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-    </v-container>
+    
   </div>
 </template>
 
@@ -117,12 +117,9 @@ export default {
 
 <style lang="scss" scoped>
 .available-store {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
-.top {
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
+
 .button:hover {
   background: #da9412;
   border: none;

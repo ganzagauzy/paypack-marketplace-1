@@ -94,7 +94,7 @@
                       dense
                     ></v-text-field>
                     <v-text-field
-                      label="Size*"
+                      label="Size"
                       v-model="editedItem.size"
                       type="number"
                       outlined
@@ -160,7 +160,7 @@
  
 
     <v-snackbar v-model="snackbar" shaped color="primary"
-      dark right top>
+      dark right top >
       <v-icon>{{ icon }}</v-icon> {{ text }}
 
       <template v-slot:action="{ attrs }">
@@ -345,19 +345,19 @@ export default {
         });
       });
 
-      var myproductsRef = await firebase
-        .firestore()
-        .collection("published")
-        .where("userId", "==", firebase.auth().currentUser.uid);
+      // var myproductsRef = await firebase
+      //   .firestore()
+      //   .collection("published")
+      //   .where("userId", "==", firebase.auth().currentUser.uid);
 
-      myproductsRef.onSnapshot((snap) => {
-        this.myproducts = [];
-        snap.forEach((doc) => {
-          var myproduct = doc.data();
-          myproduct.id = doc.id;
-          this.myproducts.push(myproduct);
-        });
-      });
+      // myproductsRef.onSnapshot((snap) => {
+      //   this.myproducts = [];
+      //   snap.forEach((doc) => {
+      //     var myproduct = doc.data();
+      //     myproduct.id = doc.id;
+      //     this.myproducts.push(myproduct);
+      //   });
+      // });
     },
 
     editItem(item) {
@@ -375,7 +375,7 @@ export default {
 
     deleteItemConfirm() {
       const itemID = this.products[this.editedIndex].id;
-      const itemID2 = this.myproducts[this.editedIndex].id;
+      // const itemID2 = this.myproducts[this.editedIndex].id;
       this.products.splice(this.editedIndex, 1);
       this.myproducts.splice(this.editedIndex, 1);
 
@@ -390,16 +390,16 @@ export default {
           console.error("Error removing document: ", error);
         });
 
-      db.collection("published")
-        .doc(itemID2)
-        .delete()
-        .then(function () {
-          console.log("Document successfully deleted!");
-          $nuxt.$emit("my-custom-event");
-        })
-        .catch(function (error) {
-          console.error("Error removing document: ", error);
-        });
+      // db.collection("published")
+      //   .doc(itemID2)
+      //   .delete()
+      //   .then(function () {
+      //     console.log("Document successfully deleted!");
+      //     $nuxt.$emit("my-custom-event");
+      //   })
+      //   .catch(function (error) {
+      //     console.error("Error removing document: ", error);
+      //   });
 
       this.closeDelete();
     },
@@ -423,7 +423,7 @@ export default {
     update() {
       const product = {};
       const itemID = this.products[this.editedIndex].id;
-      const itemID2 = this.myproducts[this.editedIndex].id;
+      // const itemID2 = this.myproducts[this.editedIndex].id;
 
       db.collection("products")
         .doc(itemID)
@@ -447,26 +447,26 @@ export default {
         });
 
       //update to its shop name
-      db.collection("published")
-        .doc(itemID2)
-        .update({
-          name: this.editedItem.name,
-          description: this.editedItem.description,
-          currency: this.editedItem.currency,
-          quantity: this.editedItem.quantity,
-          price: this.editedItem.price,
-          size: this.editedItem.size,
-          category: this.editedItem.category,
-          images: this.editedItem.images,
-        })
-        .then(() => {
-          console.log("Document successfully updated!");
-          this.text = "Document successfully updated!";
-          this.snackbar = true;
-        })
-        .catch((error) => {
-          console.error("Error updating document: ", error);
-        });
+      // db.collection("published")
+      //   .doc(itemID2)
+      //   .update({
+      //     name: this.editedItem.name,
+      //     description: this.editedItem.description,
+      //     currency: this.editedItem.currency,
+      //     quantity: this.editedItem.quantity,
+      //     price: this.editedItem.price,
+      //     size: this.editedItem.size,
+      //     category: this.editedItem.category,
+      //     images: this.editedItem.images,
+      //   })
+      //   .then(() => {
+      //     console.log("Document successfully updated!");
+      //     this.text = "Document successfully updated!";
+      //     this.snackbar = true;
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error updating document: ", error);
+      //   });
 
       (product.name = this.editedItem.name),
         (product.description = this.editedItem.description),

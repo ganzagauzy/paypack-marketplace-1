@@ -198,6 +198,13 @@
                   class="text-center"
                   style="font-size: 15px; font-weight: 600"
                 >
+                  *After registering go to your email and verify your email
+                  
+                </p>
+                <p
+                  class="text-center"
+                  style="font-size: 15px; font-weight: 600"
+                >
                   Already have an account?
                   <span class="text-link" @click="step -= 2">Sign In</span>
                 </p>
@@ -360,12 +367,21 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((user) => {
-          console.log(user);
-          this.text = "Successfull Loged in!";
-          this.snackbar = true;
-          sessionStorage.setItem("user_id", user.user.uid);
-          sessionStorage.setItem("shop_name", user.user.displayName);
-          this.$router.push("/products");
+          if (!firebase.auth().currentUser.emailVerified) {
+              //resend verification email
+              user.user.sendEmailVerification()
+              
+              console.log(user);
+              this.text = "Successfull Loged in and email verification is sent to your email!";
+              this.snackbar = true;
+              sessionStorage.setItem("user_id", user.user.uid);
+              sessionStorage.setItem("shop_name", user.user.displayName);
+              this.$router.push("/products");
+          } else {
+              //login
+              
+          }
+          
         })
         .catch((error) => {
           this.errors = error;

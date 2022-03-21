@@ -1,7 +1,7 @@
 <template>
   <div class="header-store">
-    <v-container>
-      <div class="row">
+    
+      <div class="row px-10">
         <div
           class="cols-2 px-2"
           v-gsap.fromTo="[
@@ -9,13 +9,15 @@
             { opacity: 1, x: 0, duration: 2 },
           ]"
         >
-          <h1>You bring <br><span>your merch</span> <br />we provide the platform</h1>
-          <p>
+          <div class="">
+            <h1 class="">You bring <br><span>your merch</span> <br />we provide the platform</h1>
+          <p class="px-2">
             Paypack marketplace is paypack’s answer to the current e-commerce chaos. 
             It gives you all the advantages of selling online without the hassle of 
             putting up a new domain and all the marketing that goes into it. 
             
           </p>
+          </div>
           <NuxtLink to="/stores" class="btn-store">Explore Now</NuxtLink>
         </div>
         <div
@@ -31,7 +33,7 @@
           />
         </div>
       </div>
-    </v-container>
+  
   </div>
 </template>
 

@@ -23,7 +23,7 @@ export default {
 
 
   layout: "admin",
-  middleware: "auth",
+  // middleware: "auth",
 
   //   computed: {
   //   orders() {

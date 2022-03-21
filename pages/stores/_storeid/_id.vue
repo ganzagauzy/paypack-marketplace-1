@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="py-10">
+    <v-container class=" container">
       <div class="" v-for="(product, index) in products" :key="index">
         <v-btn
           :style="{ backgroundColor: prodBackgroundColor }"
@@ -11,7 +11,7 @@
         </v-btn>
         <h2 class="py-1">{{product.name}}</h2>
       </div>
-      <v-row>
+      <v-row class="pb-10">
         <v-col cols="12" md="7">
           <v-card id="app" :style="{ backgroundColor: prodBackgroundColor }">
             <div class="py-2 pb-5 px-3">
@@ -38,8 +38,8 @@
                   :key="i"
                   :src="`${image}`"
                   max-height="600"
-                  max-width="600"
-                  class="move-right justify-center"
+                  max-width="500"
+                  class="move-right justify-center px-4"
                   contain
                 ></v-carousel-item>
               </v-carousel>
@@ -56,19 +56,19 @@
               <h4>Description</h4>
               <article class="mb-0" v-html="product.description"></article>
             </div>
-            <div class="mb-4">
+            <div class="">
               <h4>Price</h4>
               {{ product.price }} {{ product.currency }}
             </div>
-            <div class="mb-4">
+            <div class="">
               <h4>Size</h4>
               {{ product.size }} 
             </div>
-            <div class="mb-4">
+            <div class="">
               <h4>Color</h4>
               {{ prodBackgroundColor }} 
             </div>
-            <div class="mb-4">
+            <div class="">
               <h4>Quantity</h4>
               <small class="text-small"><v-icon @click="decrement" class="pb-1">mdi-minus</v-icon> <span class="text-h6">{{ nproducts }}</span>
                <v-icon @click="increment" class="pb-1">mdi-plus</v-icon></small> 
@@ -183,6 +183,8 @@ export default {
     },
     addtocart(product) {
       product.nproducts  = this.nproducts
+      product.total = product.price*this.nproducts
+      product.status = "Pending"
       this.$store.commit("fecthProduct", product);
       this.text = "Successfull Added to cart";
       this.snackbar = true;
@@ -209,6 +211,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  padding-top: 80px;
+}
 .center {
   display: flex;
   justify-content: center;

@@ -15,8 +15,8 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="text-h5">
-              <h6>PayPack Market Place</h6>
-              <v-subheader v-if="user">{{ user.email }}</v-subheader>
+              <h6>PayPack<br>Market Place</h6>
+              <small v-if="user" class="text-small">{{ user.email }}</small>
               <!-- <p class="small">{{user.email}}</p> -->
               <!-- <small class="small">{{ user.email }}</small> -->
             </v-list-item-title>
@@ -30,6 +30,7 @@
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
+          :target="item.target"
           router
           exact
         >
@@ -109,17 +110,20 @@ export default {
           icon: "mdi-dropbox",
           title: "Products",
           to: "/products",
+          target:""
         },
         {
           icon: "mdi-cart-variant",
           title: "Orders",
           to: "/orders",
+          target:""
         },
-        {
-          icon: "mdi-shopping",
-          title: "Stores",
-          to: "/stores",
-        },
+        // {
+        //   icon: "mdi-shopping",
+        //   title: "Stores",
+        //   to: "/stores",
+        //   target:"_blank"
+        // },
       ],
       miniVariant: false,
       right: true,
@@ -157,6 +161,7 @@ export default {
       // ],
     };
   },
+  middleware: "auth",
 
   mounted() {
     firebase.auth().onAuthStateChanged((user) => {
@@ -185,5 +190,9 @@ export default {
 };
 </script>
 
-
+<style lang="scss" scoped>
+.text-small {
+  font-size: 12px;
+}
+</style>
 

@@ -5,7 +5,7 @@
       <div class="home">
         <!-- search box -->
         
-
+      
         <div class="row">
           
           <div class="col">
@@ -205,7 +205,11 @@
       </div>
       <div class="col">
         <h4>Paypack MArket Place</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae mollitia, assumenda porro sapiente esse reprehenderit aliquid asperiores enim ut veniam.</p>
+        <p>
+          Paypack marketplace is paypack’s answer to the current e-commerce chaos. 
+            It gives you all the advantages of selling online without the hassle of 
+            putting up a new domain and all the marketing that goes into it.
+        </p>
       </div>
     </div>
     <div>
@@ -255,7 +259,7 @@
         <v-divider></v-divider>
         <div class="checkout-button">
           <v-list-item-action>
-            <v-btn color="primary" >Buy Nows</v-btn>
+            <v-btn color="primary" >Buy Now</v-btn>
         </v-list-item-action>
         </div>
 
@@ -506,6 +510,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.container {
+  padding-top: 70px;
+}
 .row {
   margin: auto;
   display: flex;
@@ -583,73 +590,9 @@ export default {
       }
     }
   }
-  .products {
-    .products-grid {
-      display: grid;
-      column-gap: 32px;
-      row-gap: 64px;
-      grid-template-columns: 1fr;
-      @media (min-width: 500px) {
-        grid-template-columns: repeat(1, 1fr);
-      }
-      @media (min-width: 750px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @media (min-width: 1100px) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .product {
-        z-index: 1;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        .product-img {
-          position: relative;
-          overflow: hidden;
-          &:hover {
-            .overview {
-              transform: translateY(0);
-            }
-          }
-          img {
-            display: block;
-            width: 100%;
-            height: 100%;
-          }
-        }
-        .info1 {
-          margin-top: auto;
-          .title {
-            margin-top: 8px;
-            color: #111;
-            font-size: 20px;
-          }
-          .release {
-            margin-top: 8px;
-            color: #c9c9c9;
-          }
-        }
-      }
-    }
-  }
+  
 }
 
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.5;
-  position: absolute;
-  width: 100%;
-}
-.v-card--reveal2 {
-  align-items: right;
-  bottom: 0;
-  justify-content: right;
-  opacity: 0.9;
-  position: absolute;
-  width: 100%;
-}
 .munu {
   position: absolute;
   width: 100%;
@@ -708,7 +651,7 @@ a {
   justify-content: space-between;
   background: #da9412;
   @media screen and (max-width: 700px) {
-    padding-bottom: 100px;
+    padding-bottom: 10px;
   }
 }
 .footer .col {
@@ -723,6 +666,9 @@ a {
 .button-btn {
   position: absolute;
   left: 70%;
+  @media screen and(max-width:500px) {
+    left: 90%;
+  }
   
   color: #da9412;
 }
@@ -742,7 +688,7 @@ a {
 }
 .container{
 @media (min-width: 960px) {
-  max-width: 100%;
+  max-width: 1200px;
 }
 
 }
