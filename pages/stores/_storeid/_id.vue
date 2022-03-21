@@ -37,8 +37,8 @@
                   v-for="(image, i) in product.images"
                   :key="i"
                   :src="`${image}`"
-                  max-height="600"
-                  max-width="500"
+                  max-height="500"
+                  max-width="400"
                   class="move-right justify-center px-4"
                   contain
                 ></v-carousel-item>
