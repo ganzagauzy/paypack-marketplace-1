@@ -43,8 +43,11 @@
         </div>
 
         <div class="right">
-          <v-btn to="/auth/login_signup"  elevation="0" color="primary">
-            Signin
+          <v-btn v-if="!user"  @click="signin"  elevation="0" color="primary">
+            Sigin
+          </v-btn>
+          <v-btn v-if="user" @click="signout"  elevation="0" color="primary">
+            signout
           </v-btn>
         </div>
       </nav>
@@ -94,10 +97,15 @@
       </v-list>
     </v-navigation-drawer>
      </div>
+     <div></div>
   </div>
 </template>
 
 <script>
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+
 export default {
   data () {
       return {
@@ -107,8 +115,17 @@ export default {
           { title: 'Home', icon: 'mdi-view-dashboard' },
           { title: 'About', icon: 'mdi-forum' },
         ],
+        user: "",
       }
     },
+    mounted() {
+    firebase.auth().onAuthStateChanged((user) => {
+      console.log(user);
+      this.user = user;
+    });
+  },
+
+
   methods: {
     scrollHeader() {
       const header = document.querySelector("#header");
@@ -116,6 +133,23 @@ export default {
       else header.classList.remove("scroll-header");
       window.addEventListener("scroll", this.scrollHeader);
     },
+
+    signout() {
+      firebase
+        .auth()
+        .signOut()
+        .then((res) => {
+          console.log(res);
+          this.user = "";
+          
+          this.$router.push("/");
+        });
+    },
+    signin() {
+        this.$router.push("/auth/customerlogin");
+    },
+
+
   },
 };
 </script>
