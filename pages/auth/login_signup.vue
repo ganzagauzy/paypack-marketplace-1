@@ -337,6 +337,7 @@ export default {
             db.collection("users")
               .doc(user.user.uid)
               .set({
+                userId: user.user.uid,
                 id: user.user.uid,
                 username: this.name,
                 shopname: this.shopname,
