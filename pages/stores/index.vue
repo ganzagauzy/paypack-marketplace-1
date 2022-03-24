@@ -19,7 +19,7 @@
             Available Stores
           </v-btn>
             </div>
-          <div><v-btn nutx to="/auth/login_signup" target=_blank elevation="0" color="primary" outlined>
+          <div><v-btn nutx to="/auth/login_signup"  elevation="0" color="primary" outlined>
             Register Now
           </v-btn></div>
           </div>

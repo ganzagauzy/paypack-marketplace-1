@@ -343,20 +343,13 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((user) => {
-          if (!firebase.auth().currentUser.emailVerified) {
-              //resend verification email
-              user.user.sendEmailVerification()
-              
               console.log(user);
               this.text = "Successfull Loged in and email verification is sent to your email!";
               this.snackbar = true;
             //   sessionStorage.setItem("user_id", user.user.uid);
             //   sessionStorage.setItem("shop_name", user.user.displayName);
               this.$router.push("/");
-          } else {
-              //login
-              
-          }
+          
           
         })
         .catch((error) => {

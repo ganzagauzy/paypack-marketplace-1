@@ -371,14 +371,22 @@ export default {
               //resend verification email
               user.user.sendEmailVerification()
               
-              console.log(user);
+              firebase
+              .auth()
+              .signOut()
+              .then((res) => {
+                console.log(res);
+                this.user = "";
+                this.$router.push("/auth/verify");
+              });
+              
+          } else {
+              //login
               this.text = "Successfull Loged in and email verification is sent to your email!";
               this.snackbar = true;
               sessionStorage.setItem("user_id", user.user.uid);
               sessionStorage.setItem("shop_name", user.user.displayName);
               this.$router.push("/products");
-          } else {
-              //login
               
           }
           

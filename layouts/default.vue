@@ -1,5 +1,5 @@
 <template>
-  <v-app app style="top: 13px">
+  <v-app app style="top: 50px">
     <nav-layout />
     <!-- Navigation bar ends -->
 

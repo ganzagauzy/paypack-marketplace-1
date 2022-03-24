@@ -3,7 +3,7 @@
 
     
     <div class="d-flex justify-space-between flex-wrap py-5">
-          <div><v-btn text> {{size}} Clients</v-btn></div>
+          <div><v-btn text> {{size}} Users</v-btn></div>
           <div><v-btn text>20 Sales</v-btn></div>
           <div>
               <div class="text-center">
@@ -80,7 +80,7 @@
       <v-btn
         small
         color="#d1dbec"
-        class="mr-4 mb-2"
+        class="mr-4 margin-bottom"
         @click="activate(item)"
       >
         Activate
@@ -88,7 +88,7 @@
       <v-btn
         small
         color="#d1dbec"
-        class="mb-2"
+        class="margin-bottom"
         @click="deactivate(item)"
       >
         Deactivate
@@ -235,3 +235,11 @@ import "firebase/compat/firestore";
     },
   }
 </script>
+
+<style lang="scss" scoped>
+.margin-bottom {
+  @media screen and (max-width:500px) {
+    margin-bottom: 5px;
+  }
+}
+</style>

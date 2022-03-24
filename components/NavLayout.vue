@@ -44,10 +44,10 @@
 
         <div class="right">
           <v-btn v-if="!user"  @click="signin"  elevation="0" color="primary">
-            Sigin
+            Sign in
           </v-btn>
           <v-btn v-if="user" @click="signout"  elevation="0" color="primary">
-            signout
+            sign out
           </v-btn>
         </div>
       </nav>
