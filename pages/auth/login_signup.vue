@@ -382,7 +382,7 @@ export default {
               
           } else {
               //login
-              this.text = "Successfull Loged in and email verification is sent to your email!";
+              this.text = "Successfull Loged in !!!";
               this.snackbar = true;
               sessionStorage.setItem("user_id", user.user.uid);
               sessionStorage.setItem("shop_name", user.user.displayName);

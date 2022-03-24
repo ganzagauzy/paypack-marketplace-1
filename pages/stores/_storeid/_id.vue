@@ -52,7 +52,7 @@
             :key="index"
             class="d-flex flex-column"
           >
-            <div class="">
+            <div class="mb-2">
               <h4>Description</h4>
               <article class="mb-0" v-html="product.description"></article>
             </div>
@@ -60,15 +60,15 @@
               <h4>Price</h4>
               {{ product.price }} {{ product.currency }}
             </div>
-            <div class="">
-              <h4>Size</h4>
+            <div class="mb-2" v-if='product.size != ""'>
+              <h4 >Size</h4>
               {{ product.size }} 
             </div>
-            <div class="">
+            <!-- <div class="">
               <h4>Color</h4>
               {{ prodBackgroundColor }} 
-            </div>
-            <div class="">
+            </div> -->
+            <div class="mb-2">
               <h4>Quantity</h4>
               <small class="text-small"><v-icon @click="decrement" class="pb-1">mdi-minus</v-icon> <span class="text-h6">{{ nproducts }}</span>
                <v-icon @click="increment" class="pb-1">mdi-plus</v-icon></small> 
