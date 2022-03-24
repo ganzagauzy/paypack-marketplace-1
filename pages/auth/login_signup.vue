@@ -316,7 +316,7 @@ export default {
           .createUserWithEmailAndPassword(this.email, this.password)
           .then((user) => {
             console.log(user.user.uid);
-            if (firebase.auth().currentUser != null) {
+          
               firebase
                 .auth()
                 .currentUser.updateProfile({
@@ -332,7 +332,7 @@ export default {
                     console.log("Error happened");
                   }
                 );
-            }
+            
             user.user.sendEmailVerification()
             db.collection("users")
               .doc(user.user.uid)
