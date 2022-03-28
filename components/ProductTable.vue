@@ -291,10 +291,10 @@ export default {
     uploadImage(e) {
       if (e.target.files[0]) {
         let file = e.target.files[0];
-        const name = firebase.auth().currentUser.displayName
+        const store = firebase.auth().currentUser.displayName
         var storageRef = firebase
           .storage()
-          .ref("products/" + name + "/" + this.name + file.name);
+          .ref("products/" + store + "/" + this.editedItem.name + "/" + file.name);
         let uploadTask = storageRef.put(file);
         uploadTask.on(
           "state_changed",
