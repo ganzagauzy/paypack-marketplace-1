@@ -27,16 +27,15 @@
         search: '',
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            text: 'Name (Product)',
             align: 'start',
             sortable: false,
             value: 'name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { text: 'Store', value: 'name' },
+          { text: 'Status', value: 'name' },
+          { text: 'Quantity', value: 'fat' },
+          { text: 'Price', value: 'carbs' },
         ],
         desserts: [
           {

@@ -57,6 +57,8 @@
                       >
                         <div class="img-wrapp">
                           <img :src="image" alt="" width="80px" />
+                          {{imgerror}}
+                          {{imgerror2}}
                           <span
                             class="delete-img"
                             @click="deleteImage(image, index)"
@@ -76,7 +78,7 @@
                       :rules="inputRules"
                       dense
                     ></v-select>
-                    <v-select
+                    <!-- <v-select
                       :items="['Limited', 'Unlimited']"
                       label="Quantity*"
                       v-model="editedItem.quantity"
@@ -84,7 +86,7 @@
                       required
                       :rules="inputRules"
                       dense
-                    ></v-select>
+                    ></v-select> -->
                     <v-text-field
                       label="Price*"
                       v-model="editedItem.price"
@@ -200,6 +202,8 @@ export default {
     snackbar2: false,
     text: "",
     error: "",
+    imgerror: "",
+    imgerror2: "",
     text2: "",
     content: "<h1>Some initial content</h1>",
     icon: "mdi-checkbox-marked-circle",
@@ -286,14 +290,16 @@ export default {
     uploadImage(e) {
       if (e.target.files[0]) {
         let file = e.target.files[0];
+        const name = firebase.auth().currentUser.displayName
         var storageRef = firebase
           .storage()
-          .ref("products/" + doc.id + file.name);
+          .ref("products/" + name + "/" + file.name);
         let uploadTask = storageRef.put(file);
         uploadTask.on(
           "state_changed",
           (snapshot) => {},
           (error) => {
+            this.imgerror = error
             // Handle unsuccessful uploads
             console.log("Failed to Add Image!");
             this.text = "Failed to Add Image!";
@@ -307,9 +313,18 @@ export default {
               // console.log('File available at', downloadURL);
               console.log("File available at", this.editedItem.images);
               console.log("Image successfully Added!");
-              this.text = "Image successfully Added!";
+              
+            }).then(() => {
+              console.log("File available at", this.editedItem.images);
+              console.log("Image successfully Added!");
+              
+            }).catch(error => {
+              this.imgerror = error
+              this.imgerror2 = "Failed to add image, please remove the image and add it again"
+              this.text = "Failed to add image, please remove the image and add it again";
               this.snackbar = true;
-            });
+            })
+            
           }
         );
       }
@@ -515,13 +530,13 @@ export default {
           });
         this.products.push(this.editedItem);
         // adding to its shop
-        db.collection("published")
-          .add(product)
-          .then(() => {
-            console.log("added to db");
-            this.text = "sucessfully added to db";
-            this.snackbar = true;
-          });
+        // db.collection("published")
+        //   .add(product)
+        //   .then(() => {
+        //     console.log("added to db");
+        //     this.text = "sucessfully added to db";
+        //     this.snackbar = true;
+        //   });
           }
           else {
             this.text2 = "Add atleast one image";

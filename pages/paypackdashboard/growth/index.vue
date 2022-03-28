@@ -50,7 +50,6 @@
                     <revenuechart 
                       :chartData="chartData"
                       :options="chartOptions"
-                      class="line-chart"
                        />
                   </div>
                 </v-card-text>
@@ -84,7 +83,7 @@ export default {
   data() {
     return {
       chartData: {
-        labels: ["jan", "feb", "mar"],
+        labels: ["jan", "feb", "mar", "apr"],
         datasets: [
         {
           label:"Number",
@@ -96,7 +95,7 @@ export default {
           pointerHoverBackgroundColor: "303030",
           borderWidth: 4,
           fill: false, 
-          data: [100,150,5]
+          data: [100,150,5,50]
         },
         ]
       },

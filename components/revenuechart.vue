@@ -1,9 +1,9 @@
 
 
 <script>
-import {Line} from "vue-chartjs"
+import {Pie} from "vue-chartjs"
 export default {
-extends: Line,
+extends: Pie,
 props: ["chartData", "options"],
 
 mounted() {
