@@ -176,7 +176,7 @@ export default {
         .auth()
         .signOut()
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           this.user = "";
           sessionStorage.removeItem("user_id");
           sessionStorage.removeItem("shop_name");

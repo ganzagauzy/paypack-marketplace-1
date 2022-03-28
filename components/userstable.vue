@@ -238,6 +238,9 @@ import "firebase/compat/firestore";
 
 <style lang="scss" scoped>
 .margin-bottom {
+  @media screen and (max-width:968px) {
+    margin-bottom: 5px;
+  }
   @media screen and (max-width:500px) {
     margin-bottom: 5px;
   }

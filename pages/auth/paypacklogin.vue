@@ -126,20 +126,15 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then((user) => {
             if (user.user.email == "paypack@me.com") {
-                if (!firebase.auth().currentUser.emailVerified) {
-              //resend verification email
-              user.user.sendEmailVerification()
+                
               
-              console.log(user);
+              // console.log(user);
               this.text = "Successfull Loged in and email verification is sent to your email!";
               this.snackbar = true;
               // sessionStorage.setItem("user_id", user.user.uid);
               // sessionStorage.setItem("shop_name", user.user.displayName);
               this.$router.push("/paypackdashboard");
-          } else {
-              //login
-              
-          }
+          
             }
             else {
                 this.errors = "you have no  access";

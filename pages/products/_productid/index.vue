@@ -13,24 +13,7 @@
 import axios from 'axios'
 // import loading from '../../components/loading.vue'
 export default {
-  name : 'Single Product',
-  // components: { loading },
-  data() {
-    return {
-      movie: '',
-
-    }
-  },
-  async fetch() {
-  },
-  head() {
-    return {
-      title: this.movie.title
-
-    }
-  },
-  fetchDelay: 1000,
-  methods: {},
+ 
   layout: "admin",
   
 }

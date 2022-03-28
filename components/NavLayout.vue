@@ -120,7 +120,7 @@ export default {
     },
     mounted() {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
+      // console.log(user);
       this.user = user;
     });
   },

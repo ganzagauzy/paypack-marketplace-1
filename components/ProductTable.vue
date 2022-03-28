@@ -205,6 +205,7 @@ export default {
     error: "",
     imgerror: "",
     imgerror2: "",
+    imgeprogress: "",
     text2: "",
     content: "<h1>Some initial content</h1>",
     icon: "mdi-checkbox-marked-circle",
@@ -289,16 +290,32 @@ export default {
     },
 
     uploadImage(e) {
-      if (e.target.files[0]) {
+      if (e.target.files[0]) { 
         let file = e.target.files[0];
         const store = firebase.auth().currentUser.displayName
+        
         var storageRef = firebase
           .storage()
-          .ref("products/" + store + "/" + this.editedItem.name + "/" + file.name);
+          .ref("products/" + store + "/" + this.editedItem.name  + "/" + file.name);
         let uploadTask = storageRef.put(file);
+        
         uploadTask.on(
           "state_changed",
-          (snapshot) => {},
+          (snapshot) => {
+             // Observe state change events such as progress, pause, and resume
+              // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+              var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log('Upload is ' + progress + '% done');
+              this.imgeprogress = progress
+              switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                  console.log('Upload is paused');
+                  break;
+                case firebase.storage.TaskState.RUNNING: // or 'running'
+                  console.log('Upload is running');
+                  break;
+              }
+          },
           (error) => {
             this.imgerror = error
             // Handle unsuccessful uploads
@@ -320,6 +337,7 @@ export default {
               console.log("Image successfully Added!");
               
             }).catch(error => {
+              this.deleteImage(img, index);
               this.imgerror = error
               this.imgerror2 = "Failed to add image, please remove the image and add it again"
               this.text = "Failed to add image, please remove the image and add it again";

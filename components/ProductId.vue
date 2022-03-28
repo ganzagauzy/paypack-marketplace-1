@@ -16,7 +16,7 @@
 
           
             
-              <v-btn @click="onCopy" color="" v-bind="attrs" v-on="on" dark>
+              <v-btn @click="onCopy" color=""  dark>
                 Copy Url
               </v-btn>
         </v-toolbar>
@@ -252,46 +252,9 @@ export default {
     menu: false,
     message: false,
     hints: true,
-
-    headers: [
-      {
-        text: "Product",
-        align: "start",
-        sortable: false,
-        value: "name",
-      },
-      { text: "Price(Rwf)", value: "calories" },
-      { text: "In Stock", value: "fat" },
-      { text: "Min Order", value: "carbs" },
-      { text: "Max Order", value: "protein" },
-      { text: "Actions", value: "actions", sortable: false },
-    ],
-
-    desserts: [],
-    editedIndex: -1,
-    editedItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
-      images_url: [],
-    },
-    defaultItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
-      images_url: [],
-    },
-
     switch1: true,
 
     width: 100,
-
-    currentTheme: localStorage.getItem("theme-color"),
-
     menus: [{ title: "Copy" }, { title: "Archive" }, { title: "Delete" }],
 
     fav: true,
@@ -321,15 +284,7 @@ export default {
   },
 
   //date mounted
-  mounted() {
-    const today = new Date();
-    this.formData.eventtimeSpecific.setHours(
-      today.getHours(),
-      today.getMinutes(),
-      0,
-      0
-    );
-  },
+ 
 
   watch: {
     dialog(val) {
@@ -348,7 +303,7 @@ export default {
   methods: {
     async readSingleData() {
       const id = this.$route.params.productid;
-      console.log(id);
+      // console.log(id);
       var docRef = await db.collection("products").doc(id);
 
       onSnapshot(docRef, (doc) => {
@@ -359,15 +314,13 @@ export default {
           this.products.push(product);
           console.log(product);
 
-          console.log("Document data:", doc.data());
-          console.log("Document data:", doc.id);
+          // console.log("Document data:", doc.data());
+          // console.log("Document data:", doc.id);
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
         }
-      }).catch((error) => {
-        onsole.log("Error getting document:", error);
-      });
+      })
     },
 
     //Copy
@@ -395,9 +348,7 @@ export default {
       this.urlToCopy = share_link;
     },
 
-    colorChanged(e) {
-      console.log(e);
-    },
+    
     initialize() {
       this.products = [];
     },

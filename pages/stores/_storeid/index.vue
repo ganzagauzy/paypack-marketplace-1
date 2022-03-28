@@ -170,7 +170,7 @@
 
                       <div class="card-subtitle">
                         <v-card-title>
-                          {{ product.name.slice(0, 15) }} <span v-if="product.name.length > 15"> ...</span>
+                          {{ product.name.slice(0, 12) }} <span v-if="product.name.length > 12"> ...</span>
                         </v-card-title>
 
                         <v-card-subtitle>
