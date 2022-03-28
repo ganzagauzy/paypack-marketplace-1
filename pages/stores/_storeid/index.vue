@@ -135,7 +135,8 @@
 
                       <div class="card-subtitle">
                         <v-card-title>
-                          {{ product.name }}
+                          <!-- {{ product.name }} -->
+                          {{ product.name.slice(0, 12) }} <span v-if="product.name.length > 12"> ...</span>
                         </v-card-title>
 
                         <v-card-subtitle>

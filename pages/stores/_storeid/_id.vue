@@ -9,7 +9,11 @@
         >
           Back
         </v-btn>
-        <h2 class="py-1">{{product.name}}</h2>
+        <v-row>
+          <v-col cols="12" md="6">
+            <h3 class="py-1">{{product.name}}</h3>
+          </v-col>
+        </v-row>
       </div>
       <v-row class="pb-10">
         <v-col cols="12" md="7">
