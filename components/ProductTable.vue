@@ -57,6 +57,7 @@
                       >
                         <div class="img-wrapp">
                           <img v-if="image" :src="image" alt="" width="80px" />
+                          <p v-else>Failed to add image, please remove it and add it again</p>
                           {{imgerror}}
                           {{imgerror2}}
                           <span
