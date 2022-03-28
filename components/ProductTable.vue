@@ -56,7 +56,7 @@
                         class="pa-2"
                       >
                         <div class="img-wrapp">
-                          <img :src="image" alt="" width="80px" />
+                          <img v-if="image" :src="image" alt="" width="80px" />
                           {{imgerror}}
                           {{imgerror2}}
                           <span
@@ -293,7 +293,7 @@ export default {
         const name = firebase.auth().currentUser.displayName
         var storageRef = firebase
           .storage()
-          .ref("products/" + name + "/" + file.name);
+          .ref("products/" + name + "/" + this.name + file.name);
         let uploadTask = storageRef.put(file);
         uploadTask.on(
           "state_changed",

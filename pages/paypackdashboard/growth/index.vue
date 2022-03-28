@@ -87,15 +87,22 @@ export default {
         datasets: [
         {
           label:"Number",
-          borderColor: "#4bcc96",
+          // borderColor: "#4bcc96",
+          backgroundColor:[
+            '#555358',
+            '#da9412',
+            '#C6CA53',
+            '#7B7263',
+            
+          ] ,
           pointBackgroundColor: "000",
           pointRadius: 4,
           pointHoverRadius: 8,
           pointRadius: 4,
           pointerHoverBackgroundColor: "303030",
           borderWidth: 4,
-          fill: false, 
-          data: [100,150,5,50]
+          // fill: false, 
+          data: [100,150,90,80]
         },
         ]
       },
