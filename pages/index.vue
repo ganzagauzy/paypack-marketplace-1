@@ -1,39 +1,40 @@
 <template>
   <div class="header-store">
-    
-      <div class="row px-10">
-        <div
-          class="cols-2 px-2"
-          v-gsap.fromTo="[
-            { opacity: 0, x: -350 },
-            { opacity: 1, x: 0, duration: 2 },
-          ]"
-        >
-          <div class="">
-            <h1 class="">You bring <br><span>your merch</span> <br />we provide the platform</h1>
+    <div class="row px-10">
+      <div
+        class="cols-2 px-2"
+        v-gsap.fromTo="[
+          { opacity: 0, x: -350 },
+          { opacity: 1, x: 0, duration: 2 },
+        ]"
+      >
+        <div class="">
+          <h1 class="">
+            You bring <br /><span>your merch</span> <br />we provide the
+            platform
+          </h1>
           <p class="px-2">
-            Paypack marketplace is paypack’s answer to the current e-commerce chaos. 
-            It gives you all the advantages of selling online without the hassle of 
-            putting up a new domain and all the marketing that goes into it. 
-            
+            Paypack marketplace is paypack’s answer to the current e-commerce
+            chaos. It gives you all the advantages of selling online without the
+            hassle of putting up a new domain and all the marketing that goes
+            into it.
           </p>
-          </div>
-          <NuxtLink to="/stores" class="btn-store">Explore Now</NuxtLink>
         </div>
-        <div
-          class="cols-2 px-2"
-          v-gsap.fromTo="[
-            { opacity: 0, x: 350 },
-            { opacity: 1, x: 0, duration: 2 },
-          ]"
-        >
-          <img
-            class="rounded d-none d-md-block"
-            src="~/assets/images/market.png"
-          />
-        </div>
+        <NuxtLink to="/stores" class="btn-store">Explore Now</NuxtLink>
       </div>
-  
+      <div
+        class="cols-2 px-2"
+        v-gsap.fromTo="[
+          { opacity: 0, x: 350 },
+          { opacity: 1, x: 0, duration: 2 },
+        ]"
+      >
+        <img
+          class="rounded d-none d-md-block"
+          src="~/assets/images/market.png"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,24 +50,6 @@ export default {
           content: "home page for PayPack Market Place",
         },
       ],
-      // link: [
-      //   {
-      //     rel: "stylesheet",
-      //     href: "/style/home.css",
-      //   },
-      // ],
-      // script: [
-      //   {
-      //     src: "/js/owl-carsoul.js",
-      //     type: "text/javascript",
-      //     body: true,
-      //   },
-      //   {
-      //     src: "/js/mixItUp.js",
-      //     body: true,
-      //     type: "text/javascript",
-      //   },
-      // ],
     };
   },
   layout: "",
@@ -111,11 +94,12 @@ export default {
   border: 1px solid #da9412;
   padding: 8px 30px;
   margin: 30px 0;
-  border-radius: 10px;
+  border-radius: 5px;
+  transition: 250ms ease-in-out;
 }
 .btn-store:hover {
   background: #da9412;
-  border: none;
+  color: #ffffff;
 }
 
 //media query <600

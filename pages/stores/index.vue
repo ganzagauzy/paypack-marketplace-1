@@ -1,61 +1,84 @@
 <template>
   <div class="header-store">
-    
-      <div class="row px-10">
-        <div
-          class="cols-2 px-2"
-          v-gsap.fromTo="[
-            { opacity: 0, x: -350 },
-            { opacity: 1, x: 0, duration: 2 },
-          ]"
-        >
-          <h1>The Simplest WAy <br><span> To Sell</span> <br />Your Products</h1>
-          <p>
-            Set up your online store now and start selling your products. <br> It is that simple
-          </p>
-          <div class="button-nav">
-            <div class="pr-5 pb-5">
-              <v-btn href="#available-store" elevation="0" color="primary" outlined>
-            Available Stores
-          </v-btn>
-            </div>
-          <div><v-btn nutx to="/auth/login_signup"  elevation="0" color="primary" outlined>
-            Register Now
-          </v-btn></div>
-          </div>
-        </div>
-        <div
-          class="cols-2 px-2"
-          v-gsap.fromTo="[
-            { opacity: 0, x: 350 },
-            { opacity: 1, x: 0, duration: 2 },
-          ]"
-        >
-          <img
-            class="rounded d-none d-md-block"
-            src="~/assets/images/cart1.png"
-          />
-        </div>
-      </div>
-      <div class="available-store px-10" id="available-store">
-        <h1 class="store-title">Available Stores</h1>
-        <div class="buttons">
-          <div v-for="(store, i) in stores" :key="i">
+    <div class="row px-10">
+      <div
+        class="cols-2 px-2"
+        v-gsap.fromTo="[
+          { opacity: 0, x: -350 },
+          { opacity: 1, x: 0, duration: 2 },
+        ]"
+      >
+        <h1>
+          The Simplest Way <br /><span> To Sell</span> <br />Your Products
+        </h1>
+        <p>
+          Set up your online store now and start selling your products. <br />
+          It is that simple
+        </p>
+        <div class="button-nav">
+          <div class="pr-5 pb-5">
             <v-btn
-              :to="{
-                name: 'stores-storeid',
-                params: { storeid: store.shopname },
-              }"
-              class="ma-2 d-flex button"
+              href="#available-store"
+              elevation="0"
+              color="primary"
               outlined
-              color=""
             >
-              {{ store.shopname }}'store
+              Available Stores
+            </v-btn>
+          </div>
+          <div>
+            <v-btn
+              to="/auth/login_signup"
+              elevation="0"
+              color="primary"
+              outlined
+            >
+              Register Now
             </v-btn>
           </div>
         </div>
       </div>
-    
+      <div
+        class="cols-2 px-2"
+        v-gsap.fromTo="[
+          { opacity: 0, x: 350 },
+          { opacity: 1, x: 0, duration: 2 },
+        ]"
+      >
+        <img
+          class="rounded d-none d-md-block"
+          src="~/assets/images/cart1.png"
+        />
+      </div>
+    </div>
+    <div class="available-store px-10" id="available-store">
+      <h1 class="store-title mb-5">Available Stores</h1>
+      <div class="container">
+        <div class="loading mt-5" v-if="state.loading">
+          <h4 class="font-weight-medium text-center">Loading Stores...</h4>
+        </div>
+        <div v-else>
+          <div class="row" v-if="stores.length < 1">
+            <h1>No Stores available</h1>
+          </div>
+          <div class="buttons" v-else>
+            <div v-for="(store, i) in stores" :key="i">
+              <v-btn
+                :to="{
+                  name: 'stores-storeid',
+                  params: { storeid: store.shopname },
+                }"
+                class="ma-2 d-flex button"
+                outlined
+                color=""
+              >
+                {{ store.shopname }}
+              </v-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -63,7 +86,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-// import db from "../plugins/firebase";
+import db from "../../plugins/firebase";
 
 export default {
   head() {
@@ -81,9 +104,10 @@ export default {
   data() {
     return {
       stores: [],
+      state: { loading: false },
     };
   },
-  created() {
+  mounted() {
     this.readData();
   },
 
@@ -91,45 +115,48 @@ export default {
     initialize() {
       this.stores = [];
     },
-
     async readData() {
-      var storesRef = await firebase.firestore().collection("products");
-
-      storesRef.onSnapshot((snap) => {
-        this.stores = [];
-        this.stores = snap.docs.map((doc) => {
-          var store = doc.data();
-          store.id = doc.id;
-          return store;
-        });
-
-        this.stores = this.stores.filter((product, i) => {
-          return (
-            i == this.stores.findIndex((p) => p.shopname == product.shopname)
-          );
-        });
-      });
+      try {
+        this.state.loading = true;
+        var snapshot = await db.collection("products").get();
+        const uniqueStores = new Set();
+        this.stores = snapshot.docs
+          .map((doc) => {
+            if (!uniqueStores.has(doc.data().shopname)) {
+              uniqueStores.add(doc.data().shopname);
+              return doc.data();
+            }
+          })
+          .filter((doc) => !!doc);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.state.loading = false;
+      }
     },
   },
 };
 </script>
-
 
 <style lang="scss" scoped>
 .available-store {
   margin-bottom: 50px;
 }
 
+.button {
+  transition: 250ms ease-in-out;
+}
+
 .button:hover {
   background: #da9412;
-  border: none;
+  color: #ffffff;
+  border-color: #da9412;
 }
 .buttons {
   min-width: 100px;
   display: flex;
-  @media screen and (max-width:500px) {
+  @media screen and (max-width: 500px) {
     flex-direction: column;
-    
   }
 }
 .row {
@@ -160,11 +187,11 @@ export default {
   border: 1px solid #da9412;
   padding: 8px 30px;
   margin: 30px 0;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .btn-store:hover {
   background: #da9412;
-  border: none;
+  color: #ffffff;
 }
 
 .store-title {

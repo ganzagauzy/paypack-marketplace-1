@@ -15,13 +15,14 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - Paypack MarketPlace",
-    title: "Paypack MarketPlace",
+    title: "Loading...",
     htmlAttrs: {
       lang: "en",
     },
     titleTemplate(titleChunk) {
-      return titleChunk ? `${titleChunk}` : "Welcome";
+      return titleChunk
+        ? `${titleChunk}  | Paypack MarketPlace`
+        : "Paypack MarketPlace";
     },
     meta: [
       { charset: "utf-8" },
@@ -34,7 +35,33 @@ export default {
       { name: "format-detection", content: "telephone=no" },
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon1.ico" },
+      {
+        rel: "apple-touch-icon",
+        type: "image/png",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon-16x16.png",
+      },
+      {
+        rel: "manifest",
+        href: "/site.webmanifest",
+      },
+      {
+        rel: "mask-icon",
+        color: "#da9412",
+        href: "/safari-pinned-tab.svg",
+      },
       {
         rel: "stylesheet",
         href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
@@ -123,8 +150,8 @@ export default {
     },
   },
   loading: {
-    color: '#da9412',
-    height: '3px'
+    color: "#da9412",
+    height: "3px",
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
