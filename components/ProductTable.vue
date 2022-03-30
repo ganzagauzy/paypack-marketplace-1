@@ -42,11 +42,11 @@
                       :rules="inputRules"
                     ></vue-editor>
 
-                    <label for="product_Image">Product Images</label>
+                    <!-- <label for="product_Image">Product Images</label>
                     <input
                       type="file"
                       required
-                      @change="uploadImage"
+                      @change="saveImage"
                       class="form-control"
                     />
                     <div class="form-group  img-grid">
@@ -62,13 +62,33 @@
                           {{imgerror2}}
                           <span
                             class="delete-img"
-                            @click="deleteImage(image, index)"
+                            @click="dropImage(image, index)"
                             >X</span
                           >
                         </div>
                       </div>
+                    </div> -->
+
+                    <div class="form-group col-lg-12">
+                      
+                      <div class="d-flex">
+                        <input type="file" accept="image/*" @change="saveImage($event)" class="cursor-pointer">
+                      </div>
                     </div>
+                    <div class="col-lg-12 mb-4" v-if="images && images.length>0">
+                      <ul class="attached-photos p-30 bg-gray d-table list-unstyled lis ul d-flex flex-wrap">
+                        <li class="attached-photo mt-sm-30 d-flex mr-2  " v-for="image in images" :key="image.id">
+                          <img :src="image.image" alt="image"
+                               style="height: 80px;min-width: 60px;"
+                               class="mr-1 mb-2">
+                          <span style="cursor: pointer;"
+                                @click="removeImage(image.id)"><i class="fa fa-times text-danger"></i></span>
+                        </li>
+                      </ul>
+                    </div>
+
                   </v-col>
+                  
                   <v-col cols="12" md="4">
                     <v-select
                       :items="['Rwf']"
@@ -122,11 +142,11 @@
                 <v-btn color="" @click="close">
                   <v-icon left> mdi-close </v-icon>Close
                 </v-btn>
-                <v-btn color="" @click="update">
+                <v-btn color="" @click="update" :loading="loading">
                   <v-icon left> mdi-pencil </v-icon>Edit
                 </v-btn>
 
-                <v-btn color="" @click="save">
+                <v-btn color="" @click="save" :loading="loading1">
                   <v-icon left> mdi-upload </v-icon> Save
                 </v-btn>
               </v-card-actions>
@@ -186,6 +206,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { VueEditor } from "vue2-editor";
 import { doc, deleteDoc } from "firebase/firestore";
 
@@ -197,6 +218,9 @@ import "firebase/compat/storage";
 
 export default {
   data: () => ({
+    image: null,
+    images: [],
+    is_submitting: false,
     dialog: false,
     dialogDelete: false,
     snackbar: false,
@@ -210,6 +234,8 @@ export default {
     content: "<h1>Some initial content</h1>",
     icon: "mdi-checkbox-marked-circle",
     inputRules: [(v) => v.length >= 3 || "fill all"],
+    loading: false,
+    loading1: false,
     headers: [
       {
         text: "Product Name",
@@ -284,10 +310,7 @@ export default {
   },
 
   methods: {
-    initialize() {
-      this.products = [];
-      this.myproducts = [];
-    },
+    
 
     uploadImage(e) {
       if (e.target.files[0]) { 
@@ -350,19 +373,51 @@ export default {
       // console.log(e.target.files[0]);
     },
 
-    deleteImage(img, index) {
-      let image = firebase.storage().refFromURL(img);
+    saveImage(e) {
+        const image = e.target.files[0];
+        this.image_name = image.name;
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = e => {
+          e.target.result;
+          this.images.push({image: e.target.result, id: Date.now(), old: false, data: image})
+        }
+      },
+      removeImage(imageID) {
+        const index = this.images.findIndex(data => data.id === imageID);
+        this.images.splice(index, 1);
+        this.editedItem.images.splice(index, 1);
+      },
 
-      this.editedItem.images.splice(index, 1);
-      image
-        .delete()
-        .then(() => {
-          console.log("image deleted");
-        })
-        .catch((error) => {
-          console.log("an error occured");
-        });
+      initialize() {
+      this.products = [];
+      this.myproducts = [];
     },
+
+    // saveImage(e) {
+    //   var CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/guazy/auto/upload`";
+    //   var CLOUDINARY_UPLOAD_PRESET = "tk04yktc";
+
+    //   var file = e.target.files[0];
+    //   var fd = new FormData();
+    //   fd.append('file', file);
+    //   fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+    //   axios({
+    //     url: CLOUDINARY_URL,
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded',
+    //       "X-Requested-With": "XMLHttpRequest",
+    //     },
+    //     data: fd
+    //   }).then((res) => {
+    //     console.log(res);
+    //   }).catch(error => {
+    //     console.log(error);
+    //   })
+    // },
+    // dropImage(img, index) {},
 
     async readData() {
       var productsRef = await firebase
@@ -395,6 +450,17 @@ export default {
     },
 
     editItem(item) {
+      if (item.images.length > 0) {
+          const imagesUrls = item.images.map(i => {
+            return {
+              id: i,
+              image: i,
+              old: true
+            }
+          })
+          this.images = [...imagesUrls]
+          this.editedItem.images = [...imagesUrls]
+        }
       this.editedIndex = this.products.indexOf(item);
       this.editedItem = Object.assign({}, item);
 
@@ -454,10 +520,49 @@ export default {
       });
     },
 
-    update() {
+    async update() {
+      this.loading = true
       const product = {};
       const itemID = this.products[this.editedIndex].id;
       // const itemID2 = this.myproducts[this.editedIndex].id;
+
+      let uploadedImage = []
+        const imagesLen = this.images.length
+        let imageArray = this.images
+        this.is_submitting = true
+        if (imagesLen) {
+          let i;
+          for (i = 0; i < imagesLen; i++) {
+            if (!imageArray[i].old) {
+              this.uploading = true
+              var url = `https://api.cloudinary.com/v1_1/guazy/upload`;
+              var fd = new FormData();
+              fd.append("upload_preset", 'tk04yktc');
+              fd.append("tags", "browser_upload");
+              fd.append("file", imageArray[i].image);
+              const configs = {
+                headers: {"X-Requested-With": "XMLHttpRequest"},
+              };
+              await axios.post(url, fd, configs).then(data => {
+                uploadedImage.push(`${data.data.secure_url}`)
+                this.editedItem.images.push(`${data.data.secure_url}`);
+                this.uploading = false
+              }).catch(e => {
+               this.is_submitting = false
+                this.uploading = false
+                alert("Please check your internet")
+              })
+            } else {
+              await uploadedImage.push(imageArray[i].image)
+            }
+          }
+        } else {
+          this.is_submitting = false
+          alert("Please Upload at least one image")
+        }
+
+
+
 
       db.collection("products")
         .doc(itemID)
@@ -472,9 +577,12 @@ export default {
           images: this.editedItem.images,
         })
         .then(() => {
-          console.log("Document successfully updated!");
-          this.text = "Document successfully updated!";
-          this.snackbar = true;
+          this.loading = false
+          if(this.loading == false) {
+            console.log("Document successfully updated!");
+            this.text = "Document successfully updated!";
+            this.snackbar = true;
+          }
         })
         .catch((error) => {
           console.error("Error updating document: ", error);
@@ -519,8 +627,9 @@ export default {
       this.close();
     },
 
-    save() {
+    async save() {
       if (this.$refs.form.validate()) {
+        this.loading1 = true
 
         const product = {};
 
@@ -535,6 +644,43 @@ export default {
       product.userId = firebase.auth().currentUser.uid;
       product.shopname = firebase.auth().currentUser.displayName;
 
+       let uploadedImage = []
+        const imagesLen = this.images.length
+        let imageArray = this.images
+        this.is_submitting = true
+        if (imagesLen) {
+          let i;
+          for (i = 0; i < imagesLen; i++) {
+            if (!imageArray[i].old) {
+              this.uploading = true
+              var url = `https://api.cloudinary.com/v1_1/guazy/upload`;
+              var fd = new FormData();
+              fd.append("upload_preset", 'tk04yktc');
+              fd.append("tags", "browser_upload");
+              fd.append("file", imageArray[i].image);
+              const configs = {
+                headers: {"X-Requested-With": "XMLHttpRequest"},
+              };
+              await axios.post(url, fd, configs).then(data => {
+                uploadedImage.push(`${data.data.secure_url}`)
+                this.editedItem.images.push(`${data.data.secure_url}`);
+                this.uploading = false
+              }).catch(e => {
+               this.is_submitting = false
+                this.uploading = false
+                alert("Please check your internet")
+              })
+            } else {
+              await uploadedImage.push(imageArray[i].image)
+            }
+          }
+        } else {
+          this.is_submitting = false
+          alert("Please Upload at least one image")
+        }
+
+
+
       if (this.editedIndex > -1) {
         Object.assign(this.products[this.editedIndex], this.editedItem);
       } else {
@@ -544,8 +690,12 @@ export default {
           .add(product)
           .then(() => {
             console.log("added to db");
-            this.text = "sucessfully added to db";
-            this.snackbar = true;
+            this.loading1 = false
+            if(this.loading1 == false) {
+               this.text = "sucessfully added to db";
+              this.snackbar = true;
+            }
+  
           });
         this.products.push(this.editedItem);
         // adding to its shop
@@ -605,5 +755,10 @@ export default {
 }
 .img-wrapp span.delete-img {
   cursor: pointer;
+}
+.ul {
+  list-style: none;
+  display: flex;
+  
 }
 </style>

@@ -9,6 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/cloudinary": "^1.0.3",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/firebase": "^8.2.2",
     "@nuxtjs/toast": "^3.3.1",

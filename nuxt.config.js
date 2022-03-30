@@ -96,7 +96,14 @@ export default {
     "nuxt-sweetalert2",
     "@nuxtjs/toast",
     "@nuxtjs/dotenv",
+    "@nuxtjs/cloudinary",
   ],
+
+  cloudinary: {
+    cloudName: "guazy",
+    apiKey: "474688784847277",
+    apiSecret: "ka5XPFfz5NUtIET_s5HTbYVx_d4"
+  },
 
   //authentication
 
