@@ -12,6 +12,10 @@ export default {
       process.env.NUXT_ENV_MESSAGING_SENDER_ID || "",
     NUXT_ENV_APP_ID: process.env.NUXT_ENV_APP_ID || "",
     NUXT_ENV_MEASUREMENT_ID: process.env.NUXT_ENV_MEASUREMENT_ID || "",
+
+    NUXT_ENV_CLOUDINARY_CLOUDNAME: process.env.NUXT_ENV_CLOUDINARY_CLOUDNAME || "",
+    NUXT_ENV_CLOUDINARY_API_KEY: process.env.NUXT_ENV_CLOUDINARY_API_KEY || "",
+    NUXT_ENV_CLOUDINARY_API_SECRETE: process.env.NUXT_ENV_CLOUDINARY_API_SECRETE || "",
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -100,9 +104,9 @@ export default {
   ],
 
   cloudinary: {
-    cloudName: "guazy",
-    apiKey: "474688784847277",
-    apiSecret: "ka5XPFfz5NUtIET_s5HTbYVx_d4"
+    cloudName:  process.env.NUXT_ENV_CLOUDINARY_CLOUDNAME,
+    apiKey: process.env.NUXT_ENV_CLOUDINARY_API_KEY,
+    apiSecret: process.env.NUXT_ENV_CLOUDINARY_API_SECRETE,
   },
 
   //authentication
