@@ -348,7 +348,7 @@ export default {
               this.snackbar = true;
             //   sessionStorage.setItem("user_id", user.user.uid);
             //   sessionStorage.setItem("shop_name", user.user.displayName);
-              this.$router.push("/");
+              this.$router.push("/checkout");
           
           
         })

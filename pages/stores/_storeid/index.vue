@@ -58,6 +58,7 @@
             
             <v-menu offset-y  open-on-hover 
             max-height="300px"
+            max-width="195px"
             class="tile"
             >
               
@@ -97,7 +98,7 @@
                   @click="readDataByCategory(product)"
                   text
                 >
-                  <span class="">{{ product.category }}</span>
+                  <span class="">{{ product.category.slice(0, 15) }}</span><span v-if="product.name.length > 15"> ...</span>
                 </p></v-list-item-title>
                 </v-list-item>
                 
@@ -260,7 +261,7 @@
         <v-divider></v-divider>
         <div class="checkout-button">
           <v-list-item-action>
-            <v-btn color="primary" >Buy Now</v-btn>
+            <v-btn color="primary" nuxt to="/checkout" >Buy Now</v-btn>
         </v-list-item-action>
         </div>
 

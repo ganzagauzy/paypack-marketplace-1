@@ -20,6 +20,13 @@ export const getters = {
   orders(state) {
     return state.Cart
   },
+  ordersTotal(state, getters) {
+    let total = 0
+    getters.orders.forEach(order => {
+      total+= order.price * order.nproducts
+    });
+    return total
+  },
 
   
 }

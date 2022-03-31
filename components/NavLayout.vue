@@ -146,7 +146,7 @@ export default {
         });
     },
     signin() {
-        this.$router.push("/auth/customerlogin");
+        this.$router.push("/auth/login_signup");
     },
 
 
