@@ -14,16 +14,16 @@
 
                         <v-list-item-content>
                         <v-list-item-title class="">
-                            <v-row>
-                                <v-col cols="12" md="7">
+                            <div class="row-flex">
+                                <div class="col" >
                                     <p class="">{{product.name}} </p>
-                                </v-col>
-                                <v-col cols="12" md="5">
+                                </div >
+                                <div class="col" >
                                     <v-btn text 
                                         @click="$store.commit('removeData', product)"><v-icon>mdi-delete</v-icon>
                                     </v-btn>
-                                </v-col>
-                            </v-row>
+                                </div >
+                            </div >
                             
                            
                         </v-list-item-title>
@@ -77,5 +77,11 @@ export default {
 }
 .line-heigh {
     line-height: 100px;
+}
+.row-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 </style>

@@ -575,6 +575,7 @@ export default {
           size: this.editedItem.size,
           category: this.editedItem.category,
           images: this.editedItem.images,
+          timestamp : firebase.firestore.FieldValue.serverTimestamp()
         })
         .then(() => {
           this.loading = false
@@ -643,6 +644,7 @@ export default {
       product.images = this.editedItem.images;
       product.userId = firebase.auth().currentUser.uid;
       product.shopname = firebase.auth().currentUser.displayName;
+      product.timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
        let uploadedImage = []
         const imagesLen = this.images.length

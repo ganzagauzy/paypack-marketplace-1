@@ -343,7 +343,8 @@ export default {
                 shopname: this.shopname,
                 telephone: this.telephone,
                 description: this.description,
-                email: this.email
+                email: this.email,
+                timestamp : firebase.firestore.FieldValue.serverTimestamp(),
               })
               .then(() => {
                 console.log("document written");
