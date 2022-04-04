@@ -49,55 +49,78 @@
           <v-btn v-if="user" @click="signout"  elevation="0" color="primary">
             sign out
           </v-btn>
+          <v-btn class="ml-2 margin-top" icon text  @click.stop="rightDrawer = !rightDrawer" v-show="this.$store.state.Cart.length>0">
+                <!-- <v-icon class="nav_icon">mdi-cart</v-icon> -->
+                <v-icon outlined class="text-h3 " color="#da9412">mdi-cart</v-icon>
+                <span  class=" text-color"> {{this.$store.state.Cart.length}} </span>
+              </v-btn>
         </div>
       </nav>
     </header>
-     <div>
+    
+
+    <div>
        <v-navigation-drawer
       v-model="rightDrawer"
       :right="right"
       color="#d1dbec"
+      width="350"
       temporary
       fixed
       class="pt-16"
     >
       <v-list class="">
-        <v-list-item @click.native="right = !right">
+        <v-list-item @click.stop="rightDrawer = !rightDrawer">
+          <v-list-item-action>
+            <v-icon light>
+              mdi-close
+            </v-icon>
+          </v-list-item-action>
+          <!-- <v-list-item-title>Leave drawer (click me)</v-list-item-title> -->
+        </v-list-item>
+        <!-- <v-list-item @click.native="right = !right">
           <v-list-item-action>
             <v-icon light>
               mdi-repeat
             </v-icon>
           </v-list-item-action>
           <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
+        </v-list-item> -->
         <v-list-item v-for="(product, index) in this.$store.state.Cart" :key="index">
-            <v-list-item-avatar>
-              <v-img :src="product.images[0]"></v-img>
-            </v-list-item-avatar>
+            <div>
+              <div class="fluid">
+              <v-img :src="product.images[0]" ></v-img>
 
-            <v-list-item-content>
-              <v-list-item-title>{{product.name}}     <v-btn text 
-              @click="$store.commit('removeData', product)"><v-icon>mdi-delete</v-icon></v-btn> </v-list-item-title>
-              {{product.id}}
-              {{product.price}} <br>
-              {{product.nproducts}} <br>
-              {{product.price * product.nproducts}}
+              </div>
+            </div>
+
+            <v-list-item-content class="pl-5">
+              <v-list-item-title class="d-flex justify-space-between">
+                {{product.name}}     <v-btn text 
+              @click="$store.commit('removeData', product)"><v-icon>mdi-delete</v-icon></v-btn> 
+              </v-list-item-title>
+              
+              <small><strong>Price: </strong>{{product.price}}</small>
+              <small><strong>Quantity: </strong>{{product.nproducts}}</small>
+              <small><strong>Total Price: </strong>{{product.price*product.nproducts}}</small>
             </v-list-item-content>
+               
         </v-list-item>
-        <v-divider></v-divider>
+        
         <v-divider></v-divider>
         
         <v-divider></v-divider>
         <div class="checkout-button">
           <v-list-item-action>
-            <v-btn color="primary" class="">Checkout</v-btn>
+            <v-btn color="primary " nuxt to="/checkout" >Buy Now</v-btn>
         </v-list-item-action>
         </div>
 
       </v-list>
     </v-navigation-drawer>
      </div>
-     <div></div>
+     
+     
   </div>
 </template>
 
@@ -111,10 +134,10 @@ export default {
       return {
         rightDrawer: false,
         right: true,
-        items: [
-          { title: 'Home', icon: 'mdi-view-dashboard' },
-          { title: 'About', icon: 'mdi-forum' },
-        ],
+        // items: [
+        //   { title: 'Home', icon: 'mdi-view-dashboard' },
+        //   { title: 'About', icon: 'mdi-forum' },
+        // ],
         user: "",
       }
     },
@@ -345,6 +368,25 @@ a.nuxt-link-exact-active {
   .container {
     margin-left: auto;
     margin-right: auto;
+  }
+}
+.text-color {
+  position: absolute;
+  padding-bottom: 15px;
+}
+.fluid {
+  max-height: 150px;
+  max-width: 90px;
+}
+.fluid img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+@media screen and (max-width:425px) {
+  margin-top {
+    padding-top: 15px;
+    margin-top: 15px;
   }
 }
 </style>
