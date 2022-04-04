@@ -326,8 +326,9 @@ export default {
     //Copy
     onCopy() {
       const P_id = this.$route.params.productid;
+      const store = this.products[0].storeId
       const name = sessionStorage.getItem("shop_name");
-      var link = document.location.origin + "/stores" + `/${name}`;
+      var link = document.location.origin + "/stores" + `/${store}`;
       console.log(link);
       const share_link = link + `/${P_id}/`;
       console.log(share_link);

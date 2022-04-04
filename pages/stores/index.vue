@@ -66,7 +66,7 @@
               <v-btn
                 :to="{
                   name: 'stores-storeid',
-                  params: { storeid: store.shopname },
+                  params: { storeid: store.id },
                 }"
                 class="ma-2 d-flex button"
                 outlined
@@ -116,23 +116,33 @@ export default {
       this.stores = [];
     },
     async readData() {
-      try {
-        this.state.loading = true;
-        var snapshot = await db.collection("products").get();
-        const uniqueStores = new Set();
-        this.stores = snapshot.docs
-          .map((doc) => {
-            if (!uniqueStores.has(doc.data().shopname)) {
-              uniqueStores.add(doc.data().shopname);
-              return doc.data();
-            }
-          })
-          .filter((doc) => !!doc);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.state.loading = false;
-      }
+      // try {
+      //   this.state.loading = true;
+      //   var snapshot = await db.collection("products").get();
+      //   const uniqueStores = new Set();
+      //   this.stores = snapshot.docs
+      //     .map((doc) => {
+      //       if (!uniqueStores.has(doc.data().shopname)) {
+      //         uniqueStores.add(doc.data().shopname);
+      //         return doc.data();
+      //       }
+      //     })
+      //     .filter((doc) => !!doc);
+      // } catch (error) {
+      //   console.log(error);
+      // } finally {
+      //   this.state.loading = false;
+      // }
+
+            var productsRef = await firebase.firestore().collection("stores");
+            productsRef.onSnapshot((snap) => {
+              this.stores = [];
+              snap.forEach((doc) => {
+                var store = doc.data();
+                store.id = doc.id;
+                this.stores.push(store);
+              });
+            });
     },
   },
 };

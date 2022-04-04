@@ -114,8 +114,8 @@ export default {
       ],
       items: [
           {
-          icon: "mdi-home",
-          title: "Index",
+          icon: "mdi-graph",
+          title: "Dashboard",
           to: "/paypackdashboard",
           target:""
         },
@@ -126,10 +126,11 @@ export default {
         //   to: "/paypackdashboard/products",
         //   target:""
         // },
+        
         {
-          icon: "mdi-graph",
-          title: "Growth",
-          to: "/paypackdashboard/growth",
+          icon: "mdi-account-multiple",
+          title: "Users",
+          to: "/paypackdashboard/users",
           target:""
         },
         {

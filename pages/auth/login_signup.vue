@@ -294,6 +294,7 @@ export default {
   components: { navigation },
   data: () => ({
     email: "",
+    storeid: "",
     password: "",
     errors: "",
     step: "",
@@ -338,7 +339,6 @@ export default {
               .doc(user.user.uid)
               .set({
                 userId: user.user.uid,
-                id: user.user.uid,
                 username: this.name,
                 shopname: this.shopname,
                 telephone: this.telephone,
@@ -354,6 +354,41 @@ export default {
               .catch((error) => {
                 console.log("error", error);
               });
+
+
+              const store = {};
+
+              (store.name = this.name),
+              (store.shopname = this.shopname),
+              (store.userId = user.user.uid),
+              store.timestamp = firebase.firestore.FieldValue.serverTimestamp(),
+            
+
+               db.collection("stores")
+              .add(store)
+              .then((docRef) => {
+                const store = docRef.id
+                this.storeid = store
+                db.collection("users")
+                  .doc(user.user.uid)
+                  .update({
+                    storeid: docRef.id,
+                    timestamp : firebase.firestore.FieldValue.serverTimestamp()
+                  })
+                  .then(() => {
+                    this.loading = false
+                    if(this.loading == false) {
+                      console.log("Document successfully updated!");
+                      
+                    }
+                  })
+                  .catch((error) => {
+                    console.error("Error updating document: ", error);
+                  });
+
+                console.log("added to db");
+              });
+
             // alert(user)
 
             // this.$router.push('/auth/login_signup')
@@ -389,6 +424,7 @@ export default {
               sessionStorage.setItem("user_id", user.user.uid);
               sessionStorage.setItem("shop_name", user.user.displayName);
               this.$router.push("/products");
+              console.log(user);
               
           }
           

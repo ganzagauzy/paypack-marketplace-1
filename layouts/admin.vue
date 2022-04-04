@@ -179,6 +179,7 @@ export default {
           // console.log(res);
           this.user = "";
           sessionStorage.removeItem("user_id");
+          sessionStorage.removeItem("store_id");
           sessionStorage.removeItem("shop_name");
           this.$router.push("/");
         });

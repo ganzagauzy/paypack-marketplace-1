@@ -4,7 +4,7 @@
       <div class="" v-for="(product, index) in products" :key="index">
         <v-btn
           :style="{ backgroundColor: prodBackgroundColor }"
-          :to="{ name: 'stores-storeid', params: { storeid: product.shopname } }"
+          :to="{ name: 'stores-storeid', params: { storeid: product.storeId } }"
           dark
         >
           Back

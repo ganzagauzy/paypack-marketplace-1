@@ -138,6 +138,13 @@ export default {
             }
             else {
                 this.errors = "you have no  access";
+                firebase
+              .auth()
+              .signOut()
+              .then((res) => {
+                console.log(res);
+                this.user = "";
+              });
             }
           
           

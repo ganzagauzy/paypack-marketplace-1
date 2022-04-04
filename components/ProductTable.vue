@@ -254,6 +254,7 @@ export default {
       { text: "Actions", value: "actions", sortable: false },
     ],
     products: [],
+    stores: [],
     myproducts: [],
     editedIndex: -1,
     editedItem: {
@@ -312,66 +313,7 @@ export default {
   methods: {
     
 
-    uploadImage(e) {
-      if (e.target.files[0]) { 
-        let file = e.target.files[0];
-        const store = firebase.auth().currentUser.displayName
-        
-        var storageRef = firebase
-          .storage()
-          .ref("products/" + store + "/" + this.editedItem.name  + "/" + file.name);
-        let uploadTask = storageRef.put(file);
-        
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-             // Observe state change events such as progress, pause, and resume
-              // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-              var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              console.log('Upload is ' + progress + '% done');
-              this.imgeprogress = progress
-              switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED: // or 'paused'
-                  console.log('Upload is paused');
-                  break;
-                case firebase.storage.TaskState.RUNNING: // or 'running'
-                  console.log('Upload is running');
-                  break;
-              }
-          },
-          (error) => {
-            this.imgerror = error
-            // Handle unsuccessful uploads
-            console.log("Failed to Add Image!");
-            this.text = "Failed to Add Image!";
-            this.snackbar = true;
-          },
-          () => {
-            // Handle successful uploads on complete
-            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-              this.editedItem.images.push(downloadURL);
-              // console.log('File available at', downloadURL);
-              console.log("File available at", this.editedItem.images);
-              console.log("Image successfully Added!");
-              
-            }).then(() => {
-              console.log("File available at", this.editedItem.images);
-              console.log("Image successfully Added!");
-              
-            }).catch(error => {
-              this.deleteImage(img, index);
-              this.imgerror = error
-              this.imgerror2 = "Failed to add image, please remove the image and add it again"
-              this.text = "Failed to add image, please remove the image and add it again";
-              this.snackbar = true;
-            })
-            
-          }
-        );
-      }
-      // console.log(e.target.files[0]);
-    },
+   
 
     saveImage(e) {
         const image = e.target.files[0];
@@ -431,6 +373,23 @@ export default {
           var product = doc.data();
           product.id = doc.id;
           this.products.push(product);
+        });
+      });
+
+
+      var storesRef = await firebase
+        .firestore()
+        .collection("stores")
+        .where("userId", "==", firebase.auth().currentUser.uid);
+
+      storesRef.onSnapshot((snap) => {
+        this.stores = [];
+        snap.forEach((doc) => {
+          var store = doc.data();
+          store.id = doc.id;
+          console.log("Store id is",store.id);
+          this.stores.push(store);
+          console.log(this.stores[0].id);
         });
       });
 
@@ -633,6 +592,7 @@ export default {
         this.loading1 = true
 
         const product = {};
+        console.log(this.stores);
 
       (product.name = this.editedItem.name),
         (product.description = this.editedItem.description),
@@ -643,6 +603,7 @@ export default {
       product.category = this.editedItem.category;
       product.images = this.editedItem.images;
       product.userId = firebase.auth().currentUser.uid;
+      product.storeId = this.stores[0].id;
       product.shopname = firebase.auth().currentUser.displayName;
       product.timestamp = firebase.firestore.FieldValue.serverTimestamp();
 

@@ -192,6 +192,7 @@ export default {
       images: [],
       show: false,
       products: [],
+      stores: [],
       size: "",
       user: "",
       // product: {
@@ -244,9 +245,10 @@ export default {
     },
     shareUrl() {
       const uid = sessionStorage.getItem("user_id");
+      const store = this.stores[0].id
       const name = sessionStorage.getItem("shop_name");
       console.log(uid);
-      var link = document.location.origin + "/stores" + `/${name}/`;
+      var link = document.location.origin + "/stores" + `/${store}/`;
       console.log(link);
       const share_link = link;
       console.log(share_link);
@@ -305,10 +307,11 @@ export default {
       //     this.products.push(doc.data())
       //   })
       // })
+      const uid = sessionStorage.getItem("user_id");
 
       var productsRef = await firebase.firestore().collection("products");
 
-      const uid = sessionStorage.getItem("user_id");
+      
 
       productsRef.where("userId", "==", uid).onSnapshot((snap) => {
         this.size = snap.size;
@@ -317,6 +320,19 @@ export default {
           var product = doc.data();
           product.id = doc.id;
           this.products.push(product);
+        });
+      });
+
+      var storesRef = await firebase.firestore().collection("stores");
+
+      
+
+      storesRef.where("userId", "==", uid).onSnapshot((snap) => {
+        this.stores = [];
+        snap.forEach((doc) => {
+          var store = doc.data();
+          store.id = doc.id;
+          this.stores.push(store);
         });
       });
     },

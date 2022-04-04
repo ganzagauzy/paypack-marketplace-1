@@ -336,7 +336,7 @@ export default {
     async fetchProducts() {
       const productsRef = firebase.firestore().collection("products");
 
-      productsRef.where("shopname", "==", this.id).onSnapshot((snap) => {
+      productsRef.where("storeId", "==", this.id).onSnapshot((snap) => {
         this.size = snap.size;
         this.products = snap.docs.map((doc) => {
           var product = doc.data();
@@ -398,7 +398,7 @@ export default {
 
       // const uid = sessionStorage.getItem("user_id")
 
-      shopproductsRef.where("shopname", "==", this.id).onSnapshot((snap) => {
+      shopproductsRef.where("storeId", "==", this.id).onSnapshot((snap) => {
         // this.size = snap.size
         this.shopproducts = [];
         this.shopproducts = snap.docs.map((doc) => {
@@ -475,7 +475,7 @@ export default {
 
       productsRef
         .where("category", "==", product.category)
-        .where("shopname", "==", this.id)
+        .where("shopname", "==", product.shopname)
         .onSnapshot((snap) => {
           this.size = snap.size;
           this.products = [];
