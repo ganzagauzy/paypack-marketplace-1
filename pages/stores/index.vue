@@ -61,7 +61,7 @@
           <div class="row" v-if="stores.length < 1">
             <h1>No Stores available</h1>
           </div>
-          <div class="buttons" v-else>
+          <!-- <div class="buttons" v-else>
             <div v-for="(store, i) in stores" :key="i">
               <v-btn
                 :to="{
@@ -74,6 +74,25 @@
               >
                 {{ store.shopname }}
               </v-btn>
+            </div>
+          </div> -->
+          <div v-else class="d-flex flex-wrap justify-space-around mb-6">
+            <div class="card" v-for="(store, i) in stores" :key="i">
+              <div class="icon header-store accent">
+                <v-icon class="icon-icon">mdi-store</v-icon>
+              </div>
+              <div class="content">
+                <v-btn
+                :to="{
+                  name: 'stores-storeid',
+                  params: { storeid: store.id },
+                }"
+                text
+                
+              >
+                {{ store.shopname }}
+              </v-btn>
+              </div>
             </div>
           </div>
         </div>
@@ -266,4 +285,81 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
+
+.card {
+  position: relative;
+  width: 220px;
+  height: 250px;
+  margin: 30px;
+  background: rgb(5, 109, 134);
+  border-radius: 30px;
+  border-bottom-left-radius: 140px;
+  border-bottom-right-radius: 140px;
+  box-shadow: 0 15px 0 #da9412;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: -105px;
+  left: -40px;
+  width: 100%;
+  height: 120%;
+  // background: linear-gradient(90deg,transparent, rgba(255,255,255,0.16));
+  transform: rotate(35deg);
+  pointer-events: none;
+  filter: blur(5px);
+}
+.icon {
+  position: relative;
+  width: 120px;
+  height: 100px;
+  background: #ffffff;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  box-shadow: 0 10px 0 #da9412;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  
+}
+.icon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -30px;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border-top-right-radius: 50px;
+    box-shadow: 15px -15px 0 15px #d1dbec;
+  }
+
+.icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -30px;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border-top-left-radius: 50px;
+    box-shadow: -15px -15px 0 15px #d1dbec;
+  }
+  .icon .icon-icon {
+    position: relative;
+    font-size: 5em;
+    z-index: 10000;
+  }
+  .content {
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+    padding-top: 130px;
+  }
+  
 </style>

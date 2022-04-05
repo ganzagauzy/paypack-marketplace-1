@@ -355,17 +355,18 @@ export default {
     },
 
     async searchProducts() {
+      
       const productsRef = firebase.firestore().collection("products");
 
       //We define an async function
       async function getIsNameOrCategory(searchInput, id) {
         const isName = productsRef
           .where("name", "==", searchInput)
-          .where("shopname", "==", id)
+          .where("storeId", "==", id)
           .get();
         const isCategory = productsRef
           .where("category", "==", searchInput)
-          .where("shopname", "==", id)
+          .where("storeId", "==", id)
           .get();
 
         const [nameQuerySnapshot, categoryQuerySnapshot] = await Promise.all([
@@ -387,6 +388,19 @@ export default {
           product.id = doc.id;
           this.searchedProducts.push(product);
           console.log(doc.data());
+        //   this.searchedProducts = result.docs.map((doc) => {
+        //   var searchproduct = doc.data();
+        //   searchproduct.id = doc.id;
+        //   return searchproduct;
+        // });
+
+        this.searchedProducts = this.searchedProducts.filter((product, i) => {
+          return (
+            i ==
+            this.searchedProducts.findIndex((p) => p.category == product.category)
+          );
+        });
+
         });
       });
     },
