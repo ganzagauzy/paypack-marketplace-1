@@ -61,7 +61,7 @@
           <div class="row" v-if="stores.length < 1">
             <h1>No Stores available</h1>
           </div>
-          <!-- <div class="buttons" v-else>
+          <div class="buttons" v-else>
             <div v-for="(store, i) in stores" :key="i">
               <v-btn
                 :to="{
@@ -75,26 +75,8 @@
                 {{ store.shopname }}
               </v-btn>
             </div>
-          </div> -->
-          <div v-else class="d-flex flex-wrap justify-space-around mb-6">
-            <div class="card" v-for="(store, i) in stores" :key="i">
-              <div class="icon header-store accent">
-                <v-icon class="icon-icon">mdi-store</v-icon>
-              </div>
-              <div class="content">
-                <v-btn
-                :to="{
-                  name: 'stores-storeid',
-                  params: { storeid: store.id },
-                }"
-                text
-                
-              >
-                {{ store.shopname }}
-              </v-btn>
-              </div>
-            </div>
           </div>
+          
         </div>
       </div>
     </div>
