@@ -1,6 +1,6 @@
 <template>
   <v-app app class="header-store accent">
-    <navigation />
+    <newnav />
     <v-main>
       <v-container class="py-10">
         <v-card class="shadow mx-auto" max-width="400">
@@ -272,6 +272,7 @@
         </v-snackbar>
       </v-container>
     </v-main>
+    <newfooter />
   </v-app>
 </template>
 
@@ -281,10 +282,11 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import navigation from "../../components/navigation.vue";
+import Newfooter from "../../components/newfooter.vue";
 
 export default {
   layout: "auth",
-  components: { navigation },
+  components: { navigation,Newfooter },
   data: () => ({
     email: "",
     password: "",

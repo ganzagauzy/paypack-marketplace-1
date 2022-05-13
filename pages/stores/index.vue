@@ -21,7 +21,7 @@
             Available Stores
           </v-btn>
         </div>
-        <div
+        <!-- <div
           class="cols-2 px-2"
           v-gsap.fromTo="[
             { opacity: 0, x: 350 },
@@ -32,7 +32,7 @@
             class="rounded d-none d-md-block"
             src="~/assets/images/cart1.png"
           />
-        </div>
+        </div> -->
       </div>
       <div class="available-store" id="available-store">
         <h1 class="store-title">Available Stores</h1>

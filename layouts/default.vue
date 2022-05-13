@@ -1,12 +1,15 @@
 <template>
-  <v-app app style="top: 70px">
-    <nav-layout />
+  <!-- <v-app app style="top: 70px"> -->
+  <v-app >
+    <!-- <nav-layout /> -->
+    <newnav />
     <!-- Navigation bar ends -->
 
     <v-main class="header-store accent">
       <Nuxt />
     </v-main>
-    <v-footer
+    <newfooter />
+    <!-- <v-footer
       class="text-center text-white py-5 px-7 custom-footer"
       dark
       :absolute="!fixed"
@@ -20,13 +23,15 @@
           >Paypack
         </a>
       </span>
-    </v-footer>
+    </v-footer> -->
   </v-app>
 </template>
 <script>
 import NavLayout from "../components/NavLayout.vue";
+import Newfooter from '../components/newfooter.vue';
+import Newnav from '../components/newnav.vue';
 export default {
-  components: { NavLayout },
+  components: { NavLayout, Newfooter, Newnav },
   data() {
     return {
       fixed: true,

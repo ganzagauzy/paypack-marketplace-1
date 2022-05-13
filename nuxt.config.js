@@ -98,11 +98,12 @@ export default {
       themes: {
         light: {
           primary: "#da9412",
-          accent: "#d1dbec",
+          accent: "#fff",
+          accent: "##E5E5E5",
         },
         dark: {
           primary: "#da9412",
-          accent: "#d1dbec",
+          accent: "##E5E5E5",
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
