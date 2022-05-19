@@ -15,7 +15,7 @@
         :key="n"
         v-slot="{ active, }"
       >
-        <v-card
+        <div
           :color="active ? 'primary' : '#fff'"
           class="ma-4"
           height="100"
@@ -35,7 +35,7 @@
                 </v-avatar>
             </div>
           </v-row>
-        </v-card>
+        </div>
       </v-slide-item>
     </v-slide-group>
   </v-sheet>

@@ -1,5 +1,6 @@
 <template>
 <div>
+  <storeHero />
   <v-container>
     <div class="header-store">
       <div class="home">

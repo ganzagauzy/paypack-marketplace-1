@@ -23,7 +23,12 @@
               </v-col>
               <v-col>
                 <div class="image">
-                  image
+                  <div>
+                    <img
+                      class=" d-none d-md-block"
+                      src="~/assets/images/homebg.png"
+                    />
+                  </div>
                 </div>
               </v-col>
             </v-row>
@@ -41,7 +46,30 @@
               <div class="underline"> <span></span> </div>
             </h2>
             <div class="top-stores">
-              stores
+              <div class="d-flex justify-space-around flex-wrap">
+                <div v-for="n in 8"
+                  :key="n"
+                  class="store-card"> 
+                  <v-card width="300" class="store-card-card">
+                    <div class="store-header">
+                      <h4>Jay Shop</h4>
+                      <v-icon class="store-icon">mdi-store-outline</v-icon>
+                    </div>
+                    <div class="store-logo text-center">
+                      <v-avatar size="82" >
+                        <img 
+                            src="https://cdna.artstation.com/p/assets/images/images/013/667/868/large/soni-graphics-img-20180617-wa0024.jpg?1540617113"
+                            alt="logo"
+                        >
+                        </v-avatar>
+                    </div>
+                    <div class="store-text">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur laboriosam optio voluptatibus quis. Et hic molestias animi amet itaque doloribus?</p>
+                    </div>
+                  </v-card>
+
+                </div>
+              </div>
             </div>
             </div>
             <div class="choose-us">
@@ -184,6 +212,7 @@ export default {
 }
 .sub-text {
   margin: 5px 20px;
+  margin-right: 40px;
 }
 .nuxt-main-button {
   display: flex;
@@ -212,6 +241,30 @@ export default {
   left: 5px;
   bottom: 1;
 }
+.top-stores {
+  margin: 50px 0;
+}
+.store-card {
+  margin-bottom: 20px;
+}
+.store-card-card {
+  margin-right: -40px;
+}
+.store-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.store-icon {
+  color: #153A5B;
+  font-size: 45px;
+}
+.store-text {
+  padding: 20px;
+  font-size: 14px;
+}
+
 
 // section one
 .section-title  {
@@ -244,12 +297,11 @@ export default {
 }
 
 .card-row {
-  width: 85%;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-around;
   color: #153A5B;
   
   
@@ -311,7 +363,7 @@ export default {
   border-radius: 5px;
   content: '';
   position: absolute;
-  width: 165px;
+  width: 162px;
   height: 35px;
   left: 5px;
   bottom: 1;
