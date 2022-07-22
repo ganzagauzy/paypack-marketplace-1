@@ -2,10 +2,10 @@
   <div class="header-store">
     <div class="hero">
       <div>
-        <v-container>
+        
           <div>
-            <v-row>
-              <v-col>
+            <v-row class="px-10">
+              <v-col cols="12" md="6">
                 <div class="text">
                   <h1 class="main-text">
                     You Bring Your <span class="main-text-strong">Merch</span> <br> We provide the platform
@@ -21,7 +21,7 @@
                   </div>
                 </div>
               </v-col>
-              <v-col>
+              <v-col cols="12" md="6">
                 <div class="image">
                   <div>
                     <img
@@ -33,12 +33,12 @@
               </v-col>
             </v-row>
           </div>
-        </v-container>
+        
       </div>
     </div>
     <div class="section-one">
       <div>
-        <v-container>
+        <div class="px-16">
           <div>
             <div class="stores">
               <h2 class="section-title text-center pt-5">
@@ -149,7 +149,7 @@
             </div>
             </div>
           </div>
-        </v-container>
+        </div>
       </div>
     </div>
   </div>
@@ -201,6 +201,7 @@ export default {
 <style lang="scss" scoped>
 .hero {
   background: #E5E5E5;
+  padding-top: 100px;
 }
 .text {
   margin-top: 50px;
@@ -272,13 +273,13 @@ export default {
   position: relative;
 }
 .underline {
-  width: 50px;
+  width: 70px;
   height: 3px;
   background: #da9412;
   border-radius: 3px;
   position: absolute;
   top: 60px;
-  right: 530px;
+  right: 490px;
 }
 
 // choose us

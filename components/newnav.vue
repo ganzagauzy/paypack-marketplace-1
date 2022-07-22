@@ -1,6 +1,7 @@
 <template>
+<v-app>
   <div>
-      <v-card>
+      <v-card class="fixed">
 
       
       <div class="sub-nav">
@@ -19,10 +20,10 @@
           <div class="logo"><nuxt-link class="nuxt-logo" to=""><span class="logo-title">Paypack</span> <br>Market Place</nuxt-link></div>
           <div class="nav-link">
               <div @click="Clickhome" class="text-link">
-              <nuxt-link  v-bind:class="{ active1: isActive1 }" class="nav-item  " id="home" to="/">Home <div class="underline"></div> <span></span> </nuxt-link>
+              <nuxt-link   class="nav-item  " id="home" to="/">Home <div class="underline"></div> <span></span> </nuxt-link>
               </div>
               <div @click="Clickstores" class="text-link">
-              <nuxt-link  v-bind:class="{ active2: isActive2 }" class="nav-item " id="stores" to="/stores" >Stores <div class="underline"></div> <span></span> </nuxt-link>
+              <nuxt-link   class="nav-item " id="stores" to="/stores" >Stores <div class="underline"></div> <span></span> </nuxt-link>
               </div>
           </div>
           <div class="search-main">
@@ -69,6 +70,7 @@
       </div>
     </v-card>
   </div>
+  </v-app>
 </template>
 
 <script>
@@ -97,6 +99,7 @@ export default {
         }
         ],
     },
+   
     methods: {
         Clickhome() {
             console.log("clicked");
@@ -113,6 +116,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 10000000000000000;
+}
 .sub-nav {
     display: flex;
     flex-wrap: wrap;
@@ -160,40 +168,60 @@ a {
 } 
 .nav-link {
     display: flex;
-    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
+
 .nav-item {
     color: #153A5B;
-    margin-right: 60px;
+    margin-left: 20px;
 }
-.text-link {
-    margin-top: 15px;
-}
-.nav-item.active1 {
+.main-nav .nav-link .text-link a.nuxt-link-exact-active   {
+    border-bottom: 2px solid #da9412;
+    border-block-start-color:  #da9412;
     color: #da9412;
+    height: 10px;
+    width: 10px;
+    // width: 30px;
+    // height: 2px;
+    // border-radius: 5px;
+    // background: #da9412;
+    // position: absolute;
+    // top: 1;
+    // left: 15px;
 }
-.nav-item.active1 .underline{
-    width: 30px;
-    height: 2px;
-    background: #da9412;
-    position: absolute;
-    top: 75px;
-    left: 220px;
 
-}
-.nav-item.active2 {
-    color: #da9412;
-}
-.nav-item.active2 .underline{
-    width: 30px;
-    height: 2px;
-    background: #da9412;
-    position: absolute;
-    top: 75px;
-    left: 280px;
+// .text-link {
+//     margin-top: 15px;
+// }
+// .nav-item.active1 {
+//     position: relative;
+//     color: #da9412;
+// }
+// .nav-item.active1 .underline{
+//     width: 30px;
+//     height: 2px;
+//     border-radius: 5px;
+//     background: #da9412;
+//     position: absolute;
+//     top: 25px;
+//     left: 15px;
 
-}
+// }
+// .nav-item.active2 {
+//     color: #da9412;
+//     position: relative;
+// }
+// .nav-item.active2 .underline{
+//     width: 30px;
+//     height: 2px;
+//     border-radius: 5px;
+//     background: #da9412;
+//     position: absolute;
+//     top: 25px;
+//     left: 15px;
+
+// }
 
 // a.nuxt-link-active {
 //   font-weight: bold;
@@ -204,16 +232,16 @@ a {
 // }
 
 
-a,
-a:visited {
-  text-decoration: none;
-  color: inherit;
-}
+// a,
+// a:visited {
+//   text-decoration: none;
+//   color: inherit;
+// }
 
 
-a.active {
-    color: #da9412;
-}
+// a.active {
+//     color: #da9412;
+// }
 
 
 

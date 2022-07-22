@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <div class="bg">
       <newnav />
       <div class="main"> 
@@ -13,20 +14,26 @@
                                        <br>
                                         <h4>Reset Password</h4>
                                         <br>
-                                        <p>Reset  password link will be sent to your email</p>
-                                        <br>
+                                        
                                         <p>Your new password must be different from previously used passwords</p>
                                         <br>
                                         <div class="form">
                                             <v-text-field
-                                                label="Emal"
+                                                label="Email"
+                                                v-model="email"
                                                 outlined
+                                                dense
+                                            ></v-text-field>
+                                            <v-text-field
+                                                label="Password"
+                                                outlined
+                                                v-model="password"
                                                 dense
                                             ></v-text-field>
                                             
                                             
                                             <v-card-actions>
-                                                <v-btn block dark color="#153A5B" class="form-btn">Continue</v-btn>
+                                                <v-btn block dark color="#153A5B" class="form-btn">set new password</v-btn>
                                             </v-card-actions>
                                             <div class="end-text">
                                                 
@@ -43,6 +50,7 @@
       </div>
       
   </div>
+  </v-app>
 </template>
 
 <script>
@@ -52,6 +60,8 @@ export default {
   data () {
       return {
         checkbox: true,
+        email: '',
+        password: '',
       }
     },
 layout: "empty"
@@ -59,8 +69,12 @@ layout: "empty"
 </script>
 
 <style lang="scss" scoped>
+::v-deep .v-application--wrap {
+    min-height: fit-content;
+  }
 .main {
     background: #E5E5E5;
+    padding: 50px 0;
 }
 .content {
     display: flex;

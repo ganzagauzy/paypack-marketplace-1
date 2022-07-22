@@ -39,42 +39,8 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-html {
-  overflow-y: auto;
-}
-.v-application--wrap {
-  top: 72px;
-}
-ul {
-  list-style: none;
-}
-a {
-  text-decoration: none;
-
-  color: #111;
-}
-NuxtLink {
-  color: #111;
-}
-.color {
-  background: #da9412;
-}
-// .header-store {
-
-//   background: radial-gradient(rgb(241, 241, 241), #d1dbec);
-// }
-a.nuxt-link-active {
-  font-weight: bold;
-}
-/* exact link will show the primary color for only the exact matching link */
-a.nuxt-link-exact-active {
-  color: #00c58e;
-}
-
-@media screen and(max-width:767px) {
-  .v-footer {
-    margin-bottom: 64px;
+<style scoped lang="scss">
+ ::v-deep .v-application--wrap {
+    min-height: fit-content;
   }
-}
 </style>

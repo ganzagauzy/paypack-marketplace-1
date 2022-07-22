@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <div class="bg">
       <newnav />
       <div class="main"> 
@@ -59,6 +60,7 @@
       </div>
       
   </div>
+  </v-app>
 </template>
 
 <script>
@@ -75,8 +77,12 @@ layout: "empty"
 </script>
 
 <style lang="scss" scoped>
+::v-deep .v-application--wrap {
+    min-height: fit-content;
+  }
 .main {
     background: #E5E5E5;
+    padding: 150px 0;
 }
 .content {
     display: flex;
